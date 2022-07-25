@@ -1,0 +1,6 @@
+framework module Pods_GoodListener {
+  umbrella header "Pods-GoodListener-umbrella.h"
+
+  export *
+  module * { export * }
+}
