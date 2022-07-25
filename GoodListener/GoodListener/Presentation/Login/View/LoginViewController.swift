@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import AuthenticationServices
 
 class LoginViewController: UIViewController, SnapKitType {
     
@@ -25,11 +26,7 @@ class LoginViewController: UIViewController, SnapKitType {
         $0.text = "내 마음 건강을 위한 매일 3분 보이스 루틴"
     }
     
-    let appleLoginButton = UIButton().then {
-        $0.setTitle("Apple로 계속하기", for: .normal)
-        $0.layer.cornerRadius = 10
-        $0.backgroundColor = .lightGray
-    }
+    let appleLoginButton = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
     
 
     override func viewDidLoad() {
@@ -37,6 +34,7 @@ class LoginViewController: UIViewController, SnapKitType {
         // Do any additional setup after loading the view.
         addComponents()
         setConstraints()
+        appleLoginButton.addTarget(self, action: #selector(loginHandler), for: .touchUpInside)
     }
 
     func addComponents() {
@@ -57,10 +55,34 @@ class LoginViewController: UIViewController, SnapKitType {
         appleLoginButton.snp.makeConstraints {
             $0.top.equalTo(subtitleLabel.snp.bottom).offset(200)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(300)
-            $0.height.equalTo(75)
+            $0.width.equalTo(200)
+            $0.height.equalTo(55)
         }
     }
+    
+    @objc func loginHandler() {
+            let request = ASAuthorizationAppleIDProvider().createRequest()
+            request.requestedScopes = [.fullName, .email]
+            let controller = ASAuthorizationController(authorizationRequests: [request])
+            controller.delegate = self
+            controller.presentationContextProvider = self as? ASAuthorizationControllerPresentationContextProviding
+            controller.performRequests()
+        }
+}
 
+extension LoginViewController : ASAuthorizationControllerDelegate  {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            let user = credential.user
+            Log.d("👨‍🍳 \(user)")
+            if let email = credential.email {
+                Log.d("✉️ \(email)")
+            }
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        Log.e("\(error)")
+    }
 }
 
