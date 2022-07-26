@@ -57,10 +57,12 @@ class MainCoordinator: CoordinatorType {
         // coordinating의존성을 주입해 주세요!
         let home = HomeCoordinator(coordinating: self)
         let myPage = MyPageCoordinator(coordinating: self)
+        let applicant = ApplicantCoordinator(coordinating: self)
         
         // 2️⃣ 탭바 컨트롤러에 하위 뷰컨트롤러를 추가해주세요!
         home.start()
         myPage.start()
+        applicant.start()
         
         // 3️⃣ MainCoordrinator - childCoordinators 에 각각의 코디네이터를 추가해주세요!
         // 추가하지 않으면 메모리에 남지않고 사라져버립니다
@@ -68,12 +70,14 @@ class MainCoordinator: CoordinatorType {
         // CoordinatorType.childDidFinish(child: CoordinatorType) 함수를 사용하면 childCoordinators에서 원하는 Coodinator만 제거가 가능합니다!
         childCoordinators.append(home)
         childCoordinators.append(myPage)
+        childCoordinators.append(applicant)
         
         home.navigationController.tabBarItem = UITabBarItem(title: "홈", image: nil, tag: 0)
         myPage.navigationController.tabBarItem = UITabBarItem(title: "마이 페이지", image: nil, tag: 1)
+        applicant.navigationController.tabBarItem = UITabBarItem(title: "대화 신청자", image: nil, tag: 2)
         
         // 4️⃣ TabBarController.viewControllers에 각각코디네이터의 navigationController을 추가해주세요!
-        tabBarController.viewControllers = [home.navigationController, myPage.navigationController]
+        tabBarController.viewControllers = [home.navigationController, myPage.navigationController, applicant.navigationController]
         
         tabBarController.modalPresentationStyle = .fullScreen
         navigationController.present(tabBarController, animated: true)
