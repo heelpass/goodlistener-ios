@@ -58,11 +58,13 @@ class MainCoordinator: CoordinatorType {
         let home = HomeCoordinator(coordinating: self)
         let myPage = MyPageCoordinator(coordinating: self)
         let applicant = ApplicantCoordinator(coordinating: self)
+        let record = RecordCoordinator(coordinating: self)
         
         // 2️⃣ 탭바 컨트롤러에 하위 뷰컨트롤러를 추가해주세요!
         home.start()
         myPage.start()
         applicant.start()
+        record.start()
         
         // 3️⃣ MainCoordrinator - childCoordinators 에 각각의 코디네이터를 추가해주세요!
         // 추가하지 않으면 메모리에 남지않고 사라져버립니다
@@ -71,13 +73,15 @@ class MainCoordinator: CoordinatorType {
         childCoordinators.append(home)
         childCoordinators.append(myPage)
         childCoordinators.append(applicant)
+        childCoordinators.append(record)
         
         home.navigationController.tabBarItem = UITabBarItem(title: "홈", image: nil, tag: 0)
         myPage.navigationController.tabBarItem = UITabBarItem(title: "마이 페이지", image: nil, tag: 1)
         applicant.navigationController.tabBarItem = UITabBarItem(title: "대화 신청자", image: nil, tag: 2)
+        record.navigationController.tabBarItem = UITabBarItem(title: "통화 기록", image: nil, tag: 3)
         
         // 4️⃣ TabBarController.viewControllers에 각각코디네이터의 navigationController을 추가해주세요!
-        tabBarController.viewControllers = [home.navigationController, myPage.navigationController, applicant.navigationController]
+        tabBarController.viewControllers = [home.navigationController, myPage.navigationController, applicant.navigationController, record.navigationController]
         
         tabBarController.modalPresentationStyle = .fullScreen
         navigationController.present(tabBarController, animated: true)
