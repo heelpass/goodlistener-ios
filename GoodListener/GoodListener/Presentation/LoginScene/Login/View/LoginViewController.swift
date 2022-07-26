@@ -12,7 +12,7 @@ import AuthenticationServices
 
 class LoginViewController: UIViewController, SnapKitType {
     
-    
+    weak var coordinator: LoginCoordinating?
     
     let titleLabel = UILabel().then {
         $0.text = "우리, 같이 마음 편히\n얘기해볼까요?"
@@ -35,6 +35,7 @@ class LoginViewController: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         appleLoginButton.addTarget(self, action: #selector(loginHandler), for: .touchUpInside)
+        view.backgroundColor = .white
     }
 
     func addComponents() {
@@ -71,6 +72,7 @@ class LoginViewController: UIViewController, SnapKitType {
 }
 
 extension LoginViewController : ASAuthorizationControllerDelegate  {
+    // 애플 로그인 성공
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             let user = credential.user
@@ -78,11 +80,14 @@ extension LoginViewController : ASAuthorizationControllerDelegate  {
             if let email = credential.email {
                 Log.d("✉️ \(email)")
             }
+            
+            coordinator?.loginSuccess()
         }
     }
     
+    // 애플 로그인 실패
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         Log.e("\(error)")
+        coordinator?.moveToAuthCheck()
     }
 }
-

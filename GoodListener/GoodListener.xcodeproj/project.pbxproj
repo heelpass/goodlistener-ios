@@ -17,6 +17,15 @@
 		E8CB6566288E35090076E254 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6565288E35090076E254 /* Log.swift */; };
 		E8CB6568288E359A0076E254 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6567288E359A0076E254 /* ViewModelType.swift */; };
 		E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6573288E6B130076E254 /* SnapKitType.swift */; };
+		E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCC3288F6DA000D63B07 /* CoordinatorType.swift */; };
+		E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCC6288F6DE900D63B07 /* LoginCoordinator.swift */; };
+		E8CFBCCD288F710300D63B07 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCCC288F710300D63B07 /* AuthViewController.swift */; };
+		E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCCE288F73AB00D63B07 /* AppCoordinator.swift */; };
+		E8CFBCD8288F7A9C00D63B07 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCD7288F7A9C00D63B07 /* HomeCoordinator.swift */; };
+		E8CFBCDA288F7B4800D63B07 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCD9288F7B4800D63B07 /* HomeViewController.swift */; };
+		E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCDB288F7D0900D63B07 /* MainCoordinator.swift */; };
+		E8CFBCE1288F874C00D63B07 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */; };
+		E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +44,15 @@
 		E8CB6567288E359A0076E254 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		E8CB6573288E6B130076E254 /* SnapKitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKitType.swift; sourceTree = "<group>"; };
 		E8CFBCC2288E8F1F00D63B07 /* GoodListener.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoodListener.entitlements; sourceTree = "<group>"; };
+		E8CFBCC3288F6DA000D63B07 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
+		E8CFBCC6288F6DE900D63B07 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		E8CFBCCC288F710300D63B07 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		E8CFBCCE288F73AB00D63B07 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		E8CFBCD7288F7A9C00D63B07 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		E8CFBCD9288F7B4800D63B07 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		E8CFBCDB288F7D0900D63B07 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +112,7 @@
 			children = (
 				0ABA2820288D5B55000D889B /* AppDelegate.swift */,
 				0ABA2822288D5B55000D889B /* SceneDelegate.swift */,
+				E8CFBCCE288F73AB00D63B07 /* AppCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -111,6 +130,7 @@
 			children = (
 				E8CB6567288E359A0076E254 /* ViewModelType.swift */,
 				E8CB6573288E6B130076E254 /* SnapKitType.swift */,
+				E8CFBCC3288F6DA000D63B07 /* CoordinatorType.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -118,7 +138,6 @@
 		E8CB656C288E66780076E254 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				E8CFBCBF288E74E100D63B07 /* UseCases */,
 				E8CB656E288E66C30076E254 /* Entities */,
 				E8CB656B288E36420076E254 /* Interface */,
 			);
@@ -128,7 +147,8 @@
 		E8CB656D288E667F0076E254 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				E8CB656F288E67150076E254 /* Login */,
+				E8CFBCD0288F79B700D63B07 /* MainScene */,
+				E8CB656F288E67150076E254 /* LoginScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -140,13 +160,14 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		E8CB656F288E67150076E254 /* Login */ = {
+		E8CB656F288E67150076E254 /* LoginScene */ = {
 			isa = PBXGroup;
 			children = (
-				E8CB6572288E67B80076E254 /* ViewModel */,
-				E8CB6571288E67B30076E254 /* View */,
+				E8CFBCC5288F6DE100D63B07 /* Flow */,
+				E8CFBCC8288F704D00D63B07 /* Login */,
+				E8CFBCC9288F705600D63B07 /* Auth */,
 			);
-			path = Login;
+			path = LoginScene;
 			sourceTree = "<group>";
 		};
 		E8CB6570288E67610076E254 /* Resources */ = {
@@ -184,13 +205,6 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		E8CFBCBF288E74E100D63B07 /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UseCases;
-			sourceTree = "<group>";
-		};
 		E8CFBCC0288E74EA00D63B07 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +217,115 @@
 			children = (
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		E8CFBCC5288F6DE100D63B07 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				E8CFBCC6288F6DE900D63B07 /* LoginCoordinator.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		E8CFBCC8288F704D00D63B07 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E8CB6571288E67B30076E254 /* View */,
+				E8CB6572288E67B80076E254 /* ViewModel */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		E8CFBCC9288F705600D63B07 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				E8CFBCCA288F70C000D63B07 /* View */,
+				E8CFBCCB288F70CB00D63B07 /* ViewModel */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		E8CFBCCA288F70C000D63B07 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E8CFBCCC288F710300D63B07 /* AuthViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E8CFBCCB288F70CB00D63B07 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E8CFBCD0288F79B700D63B07 /* MainScene */ = {
+			isa = PBXGroup;
+			children = (
+				E8CFBCD1288F79C300D63B07 /* Flow */,
+				E8CFBCDD288F873300D63B07 /* MyPage */,
+				E8CFBCD2288F79E000D63B07 /* Home */,
+			);
+			path = MainScene;
+			sourceTree = "<group>";
+		};
+		E8CFBCD1288F79C300D63B07 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				E8CFBCDB288F7D0900D63B07 /* MainCoordinator.swift */,
+				E8CFBCD7288F7A9C00D63B07 /* HomeCoordinator.swift */,
+				E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
+		E8CFBCD2288F79E000D63B07 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E8CFBCD4288F7A0400D63B07 /* View */,
+				E8CFBCD3288F79FD00D63B07 /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E8CFBCD3288F79FD00D63B07 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E8CFBCD4288F7A0400D63B07 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E8CFBCD9288F7B4800D63B07 /* HomeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E8CFBCDD288F873300D63B07 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				E8CFBCDF288F874000D63B07 /* View */,
+				E8CFBCDE288F873C00D63B07 /* ViewModel */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		E8CFBCDE288F873C00D63B07 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E8CFBCDF288F874000D63B07 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		EFE54EE7D3D04F3932FBA642 /* Pods */ = {
@@ -329,11 +452,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */,
 				0ABA2825288D5B55000D889B /* LoginViewController.swift in Sources */,
+				E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */,
 				0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */,
+				E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */,
 				E8CB6566288E35090076E254 /* Log.swift in Sources */,
+				E8CFBCD8288F7A9C00D63B07 /* HomeCoordinator.swift in Sources */,
 				E8CB6568288E359A0076E254 /* ViewModelType.swift in Sources */,
 				E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */,
+				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
+				E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */,
+				E8CFBCE1288F874C00D63B07 /* MyPageViewController.swift in Sources */,
+				E8CFBCCD288F710300D63B07 /* AuthViewController.swift in Sources */,
+				E8CFBCDA288F7B4800D63B07 /* HomeViewController.swift in Sources */,
 				0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

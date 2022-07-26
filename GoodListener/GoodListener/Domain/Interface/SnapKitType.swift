@@ -8,6 +8,8 @@
 import Foundation
 
 protocol SnapKitType {
+    // addSubview
     func addComponents()
+    // snp
     func setConstraints()
 }
