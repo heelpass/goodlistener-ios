@@ -26,6 +26,7 @@
 		E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCDB288F7D0900D63B07 /* MainCoordinator.swift */; };
 		E8CFBCE1288F874C00D63B07 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */; };
 		E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */; };
+		E8CFBCEA288FDB9C00D63B07 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE9288FDB9C00D63B07 /* UIView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		E8CFBCDB288F7D0900D63B07 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
+		E8CFBCE9288FDB9C00D63B07 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 		E8CB656A288E35D40076E254 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				E8CFBCE6288FCF4900D63B07 /* Extension */,
 				E8CB6565288E35090076E254 /* Log.swift */,
 			);
 			path = Support;
@@ -328,6 +331,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		E8CFBCE6288FCF4900D63B07 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E8CFBCE9288FDB9C00D63B07 /* UIView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		EFE54EE7D3D04F3932FBA642 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,6 +465,7 @@
 			files = (
 				E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */,
 				0ABA2825288D5B55000D889B /* LoginViewController.swift in Sources */,
+				E8CFBCEA288FDB9C00D63B07 /* UIView+Extension.swift in Sources */,
 				E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */,
 				0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */,
 				E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */,
