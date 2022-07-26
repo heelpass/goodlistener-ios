@@ -56,32 +56,35 @@ class MainCoordinator: CoordinatorType {
         // navigationController는 새로운 인스턴스로 생성해주세요
         // coordinating의존성을 주입해 주세요!
         let home = HomeCoordinator(coordinating: self)
-        let myPage = MyPageCoordinator(coordinating: self)
         let applicant = ApplicantCoordinator(coordinating: self)
         let record = RecordCoordinator(coordinating: self)
+        let myPage = MyPageCoordinator(coordinating: self)
+
         
         // 2️⃣ 탭바 컨트롤러에 하위 뷰컨트롤러를 추가해주세요!
         home.start()
-        myPage.start()
         applicant.start()
         record.start()
+        myPage.start()
+
         
         // 3️⃣ MainCoordrinator - childCoordinators 에 각각의 코디네이터를 추가해주세요!
         // 추가하지 않으면 메모리에 남지않고 사라져버립니다
         // ❗️주의 : 뷰컨을 내려주기전에 childCoordinators에서 해당 코디네이터를 remove 시켜주세요 remove 시키지 않으면 메모리 누수가 발생합니다!
         // CoordinatorType.childDidFinish(child: CoordinatorType) 함수를 사용하면 childCoordinators에서 원하는 Coodinator만 제거가 가능합니다!
         childCoordinators.append(home)
-        childCoordinators.append(myPage)
         childCoordinators.append(applicant)
         childCoordinators.append(record)
+        childCoordinators.append(myPage)
+
         
         home.navigationController.tabBarItem = UITabBarItem(title: "홈", image: nil, tag: 0)
-        myPage.navigationController.tabBarItem = UITabBarItem(title: "마이 페이지", image: nil, tag: 1)
-        applicant.navigationController.tabBarItem = UITabBarItem(title: "대화 신청자", image: nil, tag: 2)
-        record.navigationController.tabBarItem = UITabBarItem(title: "통화 기록", image: nil, tag: 3)
-        
+        applicant.navigationController.tabBarItem = UITabBarItem(title: "대화 신청자", image: nil, tag: 1)
+        record.navigationController.tabBarItem = UITabBarItem(title: "통화 기록", image: nil, tag: 2)
+        myPage.navigationController.tabBarItem = UITabBarItem(title: "마이 페이지", image: nil, tag: 3)
+
         // 4️⃣ TabBarController.viewControllers에 각각코디네이터의 navigationController을 추가해주세요!
-        tabBarController.viewControllers = [home.navigationController, myPage.navigationController, applicant.navigationController, record.navigationController]
+        tabBarController.viewControllers = [home.navigationController, applicant.navigationController, record.navigationController, myPage.navigationController]
         
         tabBarController.modalPresentationStyle = .fullScreen
         navigationController.present(tabBarController, animated: true)

@@ -320,10 +320,10 @@
 			isa = PBXGroup;
 			children = (
 				E8CFBCD1288F79C300D63B07 /* Flow */,
-				E8CFBCDD288F873300D63B07 /* MyPage */,
 				E8CFBCD2288F79E000D63B07 /* Home */,
 				0AF43086288FD82F0078B2D5 /* Applicant */,
 				0AF4308F288FDC5B0078B2D5 /* Record */,
+				E8CFBCDD288F873300D63B07 /* MyPage */,
 			);
 			path = MainScene;
 			sourceTree = "<group>";
@@ -333,9 +333,9 @@
 			children = (
 				E8CFBCDB288F7D0900D63B07 /* MainCoordinator.swift */,
 				E8CFBCD7288F7A9C00D63B07 /* HomeCoordinator.swift */,
-				E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */,
 				0AF43089288FD8800078B2D5 /* ApplicantCoordinator.swift */,
 				0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */,
+				E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
