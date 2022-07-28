@@ -18,6 +18,8 @@
 		0AF4308E288FDC230078B2D5 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */; };
 		0AF43093288FDC850078B2D5 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF43092288FDC850078B2D5 /* RecordViewController.swift */; };
 		73B35A699773E2A2848FCE3D /* Pods_GoodListener.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5450741D5E8F8D9D306A0E69 /* Pods_GoodListener.framework */; };
+		E8C3320928925F3400ECE59C /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallViewController.swift */; };
+		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8CB6566288E35090076E254 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6565288E35090076E254 /* Log.swift */; };
 		E8CB6568288E359A0076E254 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6567288E359A0076E254 /* ViewModelType.swift */; };
 		E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6573288E6B130076E254 /* SnapKitType.swift */; };
@@ -49,6 +51,8 @@
 		47C5C925F8CF8A111AFD7E1E /* Pods-GoodListener.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodListener.debug.xcconfig"; path = "Target Support Files/Pods-GoodListener/Pods-GoodListener.debug.xcconfig"; sourceTree = "<group>"; };
 		5450741D5E8F8D9D306A0E69 /* Pods_GoodListener.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodListener.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83BD7FD288E7165006B98B2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8C3320828925F3400ECE59C /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
+		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8CB6565288E35090076E254 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		E8CB6567288E359A0076E254 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		E8CB6573288E6B130076E254 /* SnapKitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKitType.swift; sourceTree = "<group>"; };
@@ -166,6 +170,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E8C3320428925EFC00ECE59C /* CallScene */ = {
+			isa = PBXGroup;
+			children = (
+				E8C3320728925F1900ECE59C /* Flow */,
+				E8C3320528925F0600ECE59C /* View */,
+				E8C3320628925F1300ECE59C /* ViewModel */,
+			);
+			path = CallScene;
+			sourceTree = "<group>";
+		};
+		E8C3320528925F0600ECE59C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E8C3320828925F3400ECE59C /* CallViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E8C3320628925F1300ECE59C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E8C3320728925F1900ECE59C /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				E8C3320A289265F400ECE59C /* CallManager.swift */,
+			);
+			path = Flow;
+			sourceTree = "<group>";
+		};
 		E8CB6569288E35CB0076E254 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +244,7 @@
 		E8CB656D288E667F0076E254 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E8C3320428925EFC00ECE59C /* CallScene */,
 				E8CFBCD0288F79B700D63B07 /* MainScene */,
 				E8CB656F288E67150076E254 /* LoginScene */,
 			);
@@ -529,12 +567,14 @@
 				E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */,
 				0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */,
 				E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */,
+				E8C3320928925F3400ECE59C /* CallViewController.swift in Sources */,
 				0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */,
 				0AF43093288FDC850078B2D5 /* RecordViewController.swift in Sources */,
 				E8CB6566288E35090076E254 /* Log.swift in Sources */,
 				0AF4308E288FDC230078B2D5 /* RecordCoordinator.swift in Sources */,
 				E8CFBCD8288F7A9C00D63B07 /* HomeCoordinator.swift in Sources */,
 				0AF4308C288FD8E90078B2D5 /* ApplicantViewController.swift in Sources */,
+				E8C3320B289265F400ECE59C /* CallManager.swift in Sources */,
 				E8CB6568288E359A0076E254 /* ViewModelType.swift in Sources */,
 				E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */,
 				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
