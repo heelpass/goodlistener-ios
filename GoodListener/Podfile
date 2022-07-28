@@ -23,6 +23,6 @@ target 'GoodListener' do
   pod 'SwiftyJSON'
 
 # Agora
-  pod 'AgoraRtcEngine_iOS'
+#  pod 'AgoraRtcEngine_iOS'
 
 end
