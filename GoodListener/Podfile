@@ -22,4 +22,7 @@ target 'GoodListener' do
 # Decoding
   pod 'SwiftyJSON'
 
+# Agora
+  pod 'AgoraAudio_iOS'
+
 end
