@@ -1,7 +1,0 @@
-${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraAudio_iOS/AINS/AgoraAIDenoiseExtension.framework
-${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraAudio_iOS/FullAudioFormat/AgoraFullAudioFormatExtension.framework
-${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraAudio_iOS/RtcBasic/AgoraCore.framework
-${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraAudio_iOS/RtcBasic/AgoraRtcKit.framework
-${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraAudio_iOS/RtcBasic/AgoraSoundTouch.framework
-${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraAudio_iOS/RtcBasic/Agorafdkaac.framework
-${PODS_XCFRAMEWORKS_BUILD_DIR}/AgoraAudio_iOS/SpatialAudio/AgoraSpatialAudioExtension.framework

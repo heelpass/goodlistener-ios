@@ -45,7 +45,7 @@ extension CallManager: AgoraRtcEngineDelegate {
     /// cn: https://docs.agora.io/cn/Voice/API%20Reference/oc/Constants/AgoraWarningCode.html
     /// @param warningCode warning code of the problem
     func rtcEngine(_ engine: AgoraRtcEngineKit, didOccurWarning warningCode: AgoraWarningCode) {
-        Log.d("agora :: warning: \(warningCode)")
+        Log.d("agora :: warning: \(warningCode.rawValue)")
     }
     
     func rtcEngine(_ engine: AgoraRtcEngineKit, connectionChangedTo state: AgoraConnectionStateType, reason: AgoraConnectionChangedReason) {

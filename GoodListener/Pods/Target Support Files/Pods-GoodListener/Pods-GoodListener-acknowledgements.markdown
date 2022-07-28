@@ -1,7 +1,7 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## AgoraAudio_iOS
+## AgoraRtcEngine_iOS
 
 Copyright 2018 agora.io. All rights reserved.
 

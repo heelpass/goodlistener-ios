@@ -19,7 +19,7 @@
 			<key>License</key>
 			<string>Copyright</string>
 			<key>Title</key>
-			<string>AgoraAudio_iOS</string>
+			<string>AgoraRtcEngine_iOS</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

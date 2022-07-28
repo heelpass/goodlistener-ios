@@ -1,13 +1,27 @@
 PODS:
-  - AgoraAudio_iOS (3.7.0.3):
-    - AgoraAudio_iOS/AINS (= 3.7.0.3)
-    - AgoraAudio_iOS/FullAudioFormat (= 3.7.0.3)
-    - AgoraAudio_iOS/RtcBasic (= 3.7.0.3)
-    - AgoraAudio_iOS/SpatialAudio (= 3.7.0.3)
-  - AgoraAudio_iOS/AINS (3.7.0.3)
-  - AgoraAudio_iOS/FullAudioFormat (3.7.0.3)
-  - AgoraAudio_iOS/RtcBasic (3.7.0.3)
-  - AgoraAudio_iOS/SpatialAudio (3.7.0.3)
+  - AgoraRtcEngine_iOS (3.7.0.2):
+    - AgoraRtcEngine_iOS/AINS (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/AV1Dec (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/ContentInspect (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/FullAudioFormat (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/ReplayKit (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/ROIEnc (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/RtcBasic (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/SpatialAudio (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/SuperResolution (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/VideoPreprocess (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/VirtualBackground (= 3.7.0.2)
+  - AgoraRtcEngine_iOS/AINS (3.7.0.2)
+  - AgoraRtcEngine_iOS/AV1Dec (3.7.0.2)
+  - AgoraRtcEngine_iOS/ContentInspect (3.7.0.2)
+  - AgoraRtcEngine_iOS/FullAudioFormat (3.7.0.2)
+  - AgoraRtcEngine_iOS/ReplayKit (3.7.0.2)
+  - AgoraRtcEngine_iOS/ROIEnc (3.7.0.2)
+  - AgoraRtcEngine_iOS/RtcBasic (3.7.0.2)
+  - AgoraRtcEngine_iOS/SpatialAudio (3.7.0.2)
+  - AgoraRtcEngine_iOS/SuperResolution (3.7.0.2)
+  - AgoraRtcEngine_iOS/VideoPreprocess (3.7.0.2)
+  - AgoraRtcEngine_iOS/VirtualBackground (3.7.0.2)
   - Alamofire (5.6.2)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
@@ -23,7 +37,7 @@ PODS:
   - Then (3.0.0)
 
 DEPENDENCIES:
-  - AgoraAudio_iOS
+  - AgoraRtcEngine_iOS
   - Alamofire
   - RxCocoa (= 6.5.0)
   - RxGesture
@@ -34,7 +48,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - AgoraAudio_iOS
+    - AgoraRtcEngine_iOS
     - Alamofire
     - RxCocoa
     - RxGesture
@@ -45,7 +59,7 @@ SPEC REPOS:
     - Then
 
 SPEC CHECKSUMS:
-  AgoraAudio_iOS: 0bdacafbe54a65ddb2f4d9b59945d145c0db86a5
+  AgoraRtcEngine_iOS: e39e5b31eab3eadaae6316a042b0edf71a30f894
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
@@ -55,6 +69,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 2c4339c37e0e07b7bf591e15cbaf649ce526a749
+PODFILE CHECKSUM: 27650e36967303e4cb3db16b02955cd7d5e0c61a
 
 COCOAPODS: 1.11.3
