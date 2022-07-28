@@ -13,6 +13,7 @@ import UIKit
 // 뷰컨트롤러는 Coordinating을 통해 화면전환을 시도하게 되고, 뷰는 어떤식으로 화면전환이 일어나는지 알 수 없습니다!
 protocol MainCoordinating: AnyObject {
     func logout()
+    func call()
 }
 
 enum UserType {
@@ -125,6 +126,12 @@ extension MainCoordinator: MainCoordinating {
         childCoordinators.removeAll()
         parentCoordinator?.childDidFinish(self)
         tabBarController.dismiss(animated: true)
+    }
+    
+    func call() {
+        let callVC = CallViewController()
+        callVC.modalPresentationStyle = .fullScreen
+        self.tabBarController.present(callVC, animated: true)
     }
 }
 

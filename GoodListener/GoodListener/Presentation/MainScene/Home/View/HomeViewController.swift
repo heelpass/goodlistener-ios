@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import RxSwift
 
 class HomeViewController: UIViewController {
     
     weak var coordinator: HomeCoordinating?
-
+    let disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,8 +22,24 @@ class HomeViewController: UIViewController {
             $0.center.equalToSuperview()
         }
         
+        let button = UIButton()
+        button.setTitle("전화", for: .normal)
+        button.backgroundColor = .black
+        view.addSubview(button)
+        button.snp.makeConstraints {
+            $0.top.equalTo(label.snp.bottom)
+            $0.size.equalTo(200)
+            $0.centerX.equalToSuperview()
+        }
+        
         view.backgroundColor = .white
         // Do any additional setup after loading the view.
+        
+        button.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.call()
+            })
+            .disposed(by: disposeBag)
     }
     
 

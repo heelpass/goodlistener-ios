@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol HomeCoordinating: AnyObject {
-    
+    func call()
 }
 
 class HomeCoordinator: CoordinatorType {
@@ -32,5 +32,7 @@ class HomeCoordinator: CoordinatorType {
 }
 
 extension HomeCoordinator: HomeCoordinating {
-    
+    func call() {
+        parentCoordinator?.call()
+    }
 }

@@ -1,0 +1,8 @@
+${PODS_ROOT}/Target Support Files/AgoraAudio_iOS/AgoraAudio_iOS-xcframeworks.sh
+${PODS_ROOT}/AgoraAudio_iOS/AgoraAIDenoiseExtension.xcframework
+${PODS_ROOT}/AgoraAudio_iOS/AgoraFullAudioFormatExtension.xcframework
+${PODS_ROOT}/AgoraAudio_iOS/AgoraCore.xcframework
+${PODS_ROOT}/AgoraAudio_iOS/AgoraRtcKit.xcframework
+${PODS_ROOT}/AgoraAudio_iOS/AgoraSoundTouch.xcframework
+${PODS_ROOT}/AgoraAudio_iOS/Agorafdkaac.xcframework
+${PODS_ROOT}/AgoraAudio_iOS/AgoraSpatialAudioExtension.xcframework
