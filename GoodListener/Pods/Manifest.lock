@@ -1,4 +1,27 @@
 PODS:
+  - AgoraRtcEngine_iOS (3.7.0.2):
+    - AgoraRtcEngine_iOS/AINS (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/AV1Dec (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/ContentInspect (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/FullAudioFormat (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/ReplayKit (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/ROIEnc (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/RtcBasic (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/SpatialAudio (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/SuperResolution (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/VideoPreprocess (= 3.7.0.2)
+    - AgoraRtcEngine_iOS/VirtualBackground (= 3.7.0.2)
+  - AgoraRtcEngine_iOS/AINS (3.7.0.2)
+  - AgoraRtcEngine_iOS/AV1Dec (3.7.0.2)
+  - AgoraRtcEngine_iOS/ContentInspect (3.7.0.2)
+  - AgoraRtcEngine_iOS/FullAudioFormat (3.7.0.2)
+  - AgoraRtcEngine_iOS/ReplayKit (3.7.0.2)
+  - AgoraRtcEngine_iOS/ROIEnc (3.7.0.2)
+  - AgoraRtcEngine_iOS/RtcBasic (3.7.0.2)
+  - AgoraRtcEngine_iOS/SpatialAudio (3.7.0.2)
+  - AgoraRtcEngine_iOS/SuperResolution (3.7.0.2)
+  - AgoraRtcEngine_iOS/VideoPreprocess (3.7.0.2)
+  - AgoraRtcEngine_iOS/VirtualBackground (3.7.0.2)
   - Alamofire (5.6.2)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
@@ -14,6 +37,7 @@ PODS:
   - Then (3.0.0)
 
 DEPENDENCIES:
+  - AgoraRtcEngine_iOS (= 3.7.0.2)
   - Alamofire
   - RxCocoa (= 6.5.0)
   - RxGesture
@@ -24,6 +48,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AgoraRtcEngine_iOS
     - Alamofire
     - RxCocoa
     - RxGesture
@@ -34,6 +59,7 @@ SPEC REPOS:
     - Then
 
 SPEC CHECKSUMS:
+  AgoraRtcEngine_iOS: e39e5b31eab3eadaae6316a042b0edf71a30f894
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
@@ -43,6 +69,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: e8afda08d0caeaf76a6b8dfbbcedbd54b8f4e007
+PODFILE CHECKSUM: 2d401884fa9997a168275df69e556782fe515be9
 
 COCOAPODS: 1.11.3
