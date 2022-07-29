@@ -57,6 +57,23 @@ class LoginViewModel: NSObject, ViewModelType {
         controller.performRequests()
     }
     
+    // Token을 서버사이드에 전달
+    // Moya로 API부분 설계완료되면 수정 필요
+    private func send(token: String) {
+        guard let authData = try? JSONEncoder().encode(["token": token]) else {
+            return
+        }
+        guard let url = URL(string: "URL 입력 필요!!") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.uploadTask(with: request, from: authData) { data, response, error in
+            // Handle response from your backend.
+        }
+        task.resume()
+    }
+    
 }
 
 extension LoginViewModel : ASAuthorizationControllerDelegate  {
@@ -70,7 +87,7 @@ extension LoginViewModel : ASAuthorizationControllerDelegate  {
                 return
             }
             Log.d("Token:: \(token)")
-//            send(token: token)
+            send(token: token)
         }
     }
     
