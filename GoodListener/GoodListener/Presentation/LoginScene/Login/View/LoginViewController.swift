@@ -9,10 +9,14 @@ import UIKit
 import SnapKit
 import Then
 import AuthenticationServices
+import RxSwift
+import RxCocoa
 
 class LoginViewController: UIViewController, SnapKitType {
     
     weak var coordinator: LoginCoordinating?
+    var viewModel = LoginViewModel()
+    var disposeBag = DisposeBag()
     
     let titleLabel = UILabel().then {
         $0.text = "우리, 같이 마음 편히\n얘기해볼까요?"
@@ -34,7 +38,7 @@ class LoginViewController: UIViewController, SnapKitType {
         // Do any additional setup after loading the view.
         addComponents()
         setConstraints()
-        appleLoginButton.addTarget(self, action: #selector(loginHandler), for: .touchUpInside)
+        bind()
         view.backgroundColor = .white
     }
 
@@ -61,33 +65,19 @@ class LoginViewController: UIViewController, SnapKitType {
         }
     }
     
-    @objc func loginHandler() {
-            let request = ASAuthorizationAppleIDProvider().createRequest()
-            request.requestedScopes = [.fullName, .email]
-            let controller = ASAuthorizationController(authorizationRequests: [request])
-            controller.delegate = self
-            controller.presentationContextProvider = self as? ASAuthorizationControllerPresentationContextProviding
-            controller.performRequests()
-        }
-}
-
-extension LoginViewController : ASAuthorizationControllerDelegate  {
-    // 애플 로그인 성공
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            let user = credential.user
-            Log.d("👨‍🍳 \(user)")
-            if let email = credential.email {
-                Log.d("✉️ \(email)")
-            }
-            
-            coordinator?.loginSuccess()
-        }
-    }
-    
-    // 애플 로그인 실패
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        Log.e("\(error)")
-        coordinator?.moveToAuthCheck()
+    func bind() {
+        let output = viewModel.transform(input: LoginViewModel.Input(appleLoginBtnTap: appleLoginButton.tapGesture))
+        
+        output.appleLoginResult
+            .emit(onNext: { [weak self] (result) in
+                guard let self = self else { return }
+                
+                if result {
+                    self.coordinator?.loginSuccess()
+                } else {
+                    self.coordinator?.moveToAuthCheck()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }

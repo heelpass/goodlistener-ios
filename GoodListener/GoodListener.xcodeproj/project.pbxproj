@@ -20,6 +20,7 @@
 		73B35A699773E2A2848FCE3D /* Pods_GoodListener.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5450741D5E8F8D9D306A0E69 /* Pods_GoodListener.framework */; };
 		E8C3320928925F3400ECE59C /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallViewController.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
+		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
 		E8CB6566288E35090076E254 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6565288E35090076E254 /* Log.swift */; };
 		E8CB6568288E359A0076E254 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6567288E359A0076E254 /* ViewModelType.swift */; };
 		E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6573288E6B130076E254 /* SnapKitType.swift */; };
@@ -53,6 +54,7 @@
 		E83BD7FD288E7165006B98B2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
+		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E8CB6565288E35090076E254 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		E8CB6567288E359A0076E254 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		E8CB6573288E6B130076E254 /* SnapKitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKitType.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 		E8CB6572288E67B80076E254 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E8C3320C289366DF00ECE59C /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */,
 				E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */,
 				0ABA2825288D5B55000D889B /* LoginViewController.swift in Sources */,
 				E8CFBCEA288FDB9C00D63B07 /* UIView+Extension.swift in Sources */,
