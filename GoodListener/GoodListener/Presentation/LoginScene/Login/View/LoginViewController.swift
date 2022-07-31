@@ -11,10 +11,12 @@ import Then
 import AuthenticationServices
 import RxSwift
 import RxCocoa
-
 import KakaoSDKCommon
+import RxKakaoSDKCommon
 import KakaoSDKAuth
+import RxKakaoSDKAuth
 import KakaoSDKUser
+import RxKakaoSDKUser
 
 class LoginViewController: UIViewController, SnapKitType {
     
@@ -104,17 +106,18 @@ class LoginViewController: UIViewController, SnapKitType {
         print("Hello, kakao")
         
         if (UserApi.isKakaoTalkLoginAvailable()) {
-            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
-                if let error = error {
-                    print(error)
-                }
-                else {
-                    print("loginWithKakaoTalk() success.")
-
+            UserApi.shared.rx.loginWithKakaoTalk()
+                .subscribe(onNext:{ (oauthToken) in
+                    print("loginWithKakaoTalk+RX()+++ success.")
+                
                     //do something
                     _ = oauthToken
-                }
-            }
+                }, onError: {error in
+                    print(error)
+                })
+            .disposed(by: disposeBag)
         }
+        
+        
     }
 }
