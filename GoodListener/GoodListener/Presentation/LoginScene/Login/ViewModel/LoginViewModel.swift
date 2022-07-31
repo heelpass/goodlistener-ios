@@ -77,8 +77,12 @@ class LoginViewModel: NSObject, ViewModelType {
     }
     
     private func practiceMoya(){
+        //private func practiveMoya(token: String)
+        // ex) 만일 'ABC/DEF'에 token을 post로 보내야 한다고 가정 -> LoginAPI.swift 참고
+     
         let moyaProvider = MoyaProvider<LoginAPI>()
         
+        //moyaProvider.rx.request(.signIn(path: DEF, token: token))
         moyaProvider.rx.request(.signIn)
             .map(WeatherInfo.self)
             .observe(on: MainScheduler.instance)
