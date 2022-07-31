@@ -11,12 +11,7 @@ import Then
 import AuthenticationServices
 import RxSwift
 import RxCocoa
-import KakaoSDKCommon
-import RxKakaoSDKCommon
-import KakaoSDKAuth
-import RxKakaoSDKAuth
-import KakaoSDKUser
-import RxKakaoSDKUser
+
 
 class LoginViewController: UIViewController, SnapKitType {
     
@@ -85,7 +80,7 @@ class LoginViewController: UIViewController, SnapKitType {
     }
     
     func bind() {
-        let output = viewModel.transform(input: LoginViewModel.Input(appleLoginBtnTap: appleLoginButton.tapGesture))
+        let output = viewModel.transform(input: LoginViewModel.Input(appleLoginBtnTap: appleLoginButton.tapGesture, kakaoLoginBtnTap: kakaoLoginButton.tapGesture))
         
         output.appleLoginResult
             .emit(onNext: { [weak self] (result) in
@@ -99,25 +94,16 @@ class LoginViewController: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
         
-        kakaoLoginButton.addTarget(self, action: #selector(didTapKakao), for: .touchUpInside)
+        output.kakaoLoginResult
+            .emit(onNext: { [weak self] (result) in
+                guard let self = self else {return}
+                if result {
+                    self.coordinator?.loginSuccess()
+                } else {
+                    self.coordinator?.moveToAuthCheck()
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
-    @objc func didTapKakao(){
-        print("Hello, kakao")
-        
-        if (UserApi.isKakaoTalkLoginAvailable()) {
-            UserApi.shared.rx.loginWithKakaoTalk()
-                .subscribe(onNext:{ (oauthToken) in
-                    print("loginWithKakaoTalk+RX()+++ success.")
-                
-                    //do something
-                    _ = oauthToken
-                }, onError: {error in
-                    print(error)
-                })
-            .disposed(by: disposeBag)
-        }
-        
-        
-    }
 }
