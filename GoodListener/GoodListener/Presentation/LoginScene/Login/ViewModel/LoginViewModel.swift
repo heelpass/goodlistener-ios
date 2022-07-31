@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import RxGesture
 import AuthenticationServices
+import Moya
 
 class LoginViewModel: NSObject, ViewModelType {
     
@@ -67,13 +68,30 @@ class LoginViewModel: NSObject, ViewModelType {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         let task = URLSession.shared.uploadTask(with: request, from: authData) { data, response, error in
             // Handle response from your backend.
         }
         task.resume()
+        
     }
     
+    private func practiceMoya(){
+        let moyaProvider = MoyaProvider<LoginAPI>()
+        
+        moyaProvider.rx.request(.signIn)
+            .map(WeatherInfo.self)
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] result in
+                switch result {
+                case .success(let response):
+                    print("지역은 \(response.name ?? "")입니다")
+                    print("위도는\(response.coord.lat ?? 0.0)이고, 경도는\(response.coord.lon ?? 0.0)")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }.disposed(by: disposeBag)
+    }
 }
 
 extension LoginViewModel : ASAuthorizationControllerDelegate  {
@@ -81,6 +99,7 @@ extension LoginViewModel : ASAuthorizationControllerDelegate  {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             loginResult.onNext(true)
+            practiceMoya()
             guard let tokenData = credential.authorizationCode,
                   let token = String(data: tokenData, encoding: .utf8) else {
                 Log.e("AuthToken Error")
