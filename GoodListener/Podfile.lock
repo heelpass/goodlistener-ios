@@ -41,34 +41,12 @@ PODS:
   - Moya/RxSwift (15.0.0):
     - Moya/Core
     - RxSwift (~> 6.0)
-  - RxAlamofire (6.1.1):
-    - RxAlamofire/Core (= 6.1.1)
-  - RxAlamofire/Core (6.1.1):
-    - Alamofire (~> 5.4)
-    - RxSwift (~> 6.0)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
   - RxGesture (4.0.4):
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
-  - RxKakaoSDKAuth (2.11.0):
-    - KakaoSDKAuth (= 2.11.0)
-    - RxKakaoSDKCommon (= 2.11.0)
-  - RxKakaoSDKCommon (2.11.0):
-    - RxKakaoSDKCommon/Common (= 2.11.0)
-    - RxKakaoSDKCommon/Network (= 2.11.0)
-  - RxKakaoSDKCommon/Common (2.11.0):
-    - KakaoSDKCommon/Common (= 2.11.0)
-    - RxCocoa
-    - RxSwift (~> 6.0)
-  - RxKakaoSDKCommon/Network (2.11.0):
-    - KakaoSDKCommon/Network (= 2.11.0)
-    - RxAlamofire (~> 6.0)
-    - RxKakaoSDKCommon/Common (= 2.11.0)
-  - RxKakaoSDKUser (2.11.0):
-    - KakaoSDKUser (= 2.11.0)
-    - RxKakaoSDKAuth (= 2.11.0)
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
@@ -84,13 +62,13 @@ PODS:
 
 DEPENDENCIES:
   - AgoraRtcEngine_iOS (= 3.7.0.2)
+  - KakaoSDKAuth
+  - KakaoSDKCommon
+  - KakaoSDKUser
   - Moya (~> 15.0)
   - Moya/RxSwift (~> 15.0)
   - RxCocoa (= 6.5.0)
   - RxGesture
-  - RxKakaoSDKAuth
-  - RxKakaoSDKCommon
-  - RxKakaoSDKUser
   - RxSwift (= 6.5.0)
   - SDWebImage (~> 5.0)
   - SnapKit
@@ -106,12 +84,8 @@ SPEC REPOS:
     - KakaoSDKCommon
     - KakaoSDKUser
     - Moya
-    - RxAlamofire
     - RxCocoa
     - RxGesture
-    - RxKakaoSDKAuth
-    - RxKakaoSDKCommon
-    - RxKakaoSDKUser
     - RxRelay
     - RxSwift
     - SDWebImage
@@ -128,12 +102,8 @@ SPEC CHECKSUMS:
   KakaoSDKCommon: 0f59f2c1aead6012d92758e8ca46b63ea11c408b
   KakaoSDKUser: 5dbefe494c50dfdc87e4072710e503d39b41a609
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
-  RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
-  RxKakaoSDKAuth: 00f307b1b976e22938bcee49dba346ddf6c5fadf
-  RxKakaoSDKCommon: 2ff962e0420f32dec6e5deefec0f35ca6b0a104e
-  RxKakaoSDKUser: b04ef02748f9498340f4c8deb8c3d1100b8109cf
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SDWebImage: 72f86271a6f3139cc7e4a89220946489d4b9a866
@@ -143,6 +113,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 90e787244b602059de4852be7007a41476f95b2b
+PODFILE CHECKSUM: 84e1a7e24f7fcf49f839b08c43b5b806979932dc
 
 COCOAPODS: 1.11.3

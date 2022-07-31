@@ -12,6 +12,10 @@ import AuthenticationServices
 import RxSwift
 import RxCocoa
 
+import KakaoSDKCommon
+import KakaoSDKAuth
+import KakaoSDKUser
+
 class LoginViewController: UIViewController, SnapKitType {
     
     weak var coordinator: LoginCoordinating?
@@ -98,5 +102,19 @@ class LoginViewController: UIViewController, SnapKitType {
     
     @objc func didTapKakao(){
         print("Hello, kakao")
+        
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("loginWithKakaoTalk() success.")
+
+                    //do something
+                    _ = oauthToken
+                }
+            }
+        }
     }
 }

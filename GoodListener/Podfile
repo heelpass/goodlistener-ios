@@ -18,9 +18,12 @@ target 'GoodListener' do
   pod "RxGesture"
 
 # Login
-  pod 'RxKakaoSDKCommon' 
-  pod 'RxKakaoSDKAuth'
-  pod 'RxKakaoSDKUser'
+#  pod 'RxKakaoSDKCommon' 
+#  pod 'RxKakaoSDKAuth'
+#  pod 'RxKakaoSDKUser'
+   pod 'KakaoSDKCommon'
+   pod 'KakaoSDKAuth'
+   pod 'KakaoSDKUser' 
 
 # Firebase
 
