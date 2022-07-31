@@ -10,14 +10,24 @@ target 'GoodListener' do
 # UI
   pod 'SnapKit'
   pod 'Then'
+  pod 'SDWebImage', '~> 5.0'
 
 # ReactiveX
   pod 'RxSwift', '6.5.0'
   pod 'RxCocoa', '6.5.0'
   pod "RxGesture"
 
-# API
-  pod 'Alamofire'
+# Login
+  pod 'RxKakaoSDKCommon' 
+  pod 'RxKakaoSDKAuth'
+  pod 'RxKakaoSDKUser'
+
+# Firebase
+
+# Networking
+  pod 'Moya', '~> 15.0'
+  pod 'Moya/RxSwift', '~> 15.0'
+  pod 'Socket.IO-Client-Swift', '~> 15.2.0'
 
 # Decoding
   pod 'SwiftyJSON'
