@@ -21,11 +21,11 @@ target 'GoodListener' do
   pod 'RxKakaoSDKCommon' 
   pod 'RxKakaoSDKAuth'
   pod 'RxKakaoSDKUser'
-#   pod 'KakaoSDKCommon'
-#   pod 'KakaoSDKAuth'
-#   pod 'KakaoSDKUser' 
 
 # Firebase
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
 
 # Networking
   pod 'Moya', '~> 15.0'

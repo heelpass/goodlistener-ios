@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0DD12C28976BA200EC4D3C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A0DD12B28976BA200EC4D3C /* GoogleService-Info.plist */; };
 		0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B522896AB8300A05124 /* LoginAPI.swift */; };
 		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
 		0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B582896BC5E00A05124 /* WeatherInfo.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A0DD12B28976BA200EC4D3C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A703B522896AB8300A05124 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginAPI.swift; path = Network/LoginAPI.swift; sourceTree = SOURCE_ROOT; };
 		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
 		0A703B582896BC5E00A05124 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherInfo.swift; path = GoodListener/Domain/Entities/WeatherInfo.swift; sourceTree = SOURCE_ROOT; };
@@ -282,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				E83BD7FD288E7165006B98B2 /* Info.plist */,
+				0A0DD12B28976BA200EC4D3C /* GoogleService-Info.plist */,
 				0ABA2829288D5B56000D889B /* Assets.xcassets */,
 				0ABA282B288D5B56000D889B /* LaunchScreen.storyboard */,
 			);
@@ -519,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ABA282D288D5B56000D889B /* LaunchScreen.storyboard in Resources */,
+				0A0DD12C28976BA200EC4D3C /* GoogleService-Info.plist in Resources */,
 				0ABA282A288D5B56000D889B /* Assets.xcassets in Resources */,
 				0ABA2828288D5B55000D889B /* Main.storyboard in Resources */,
 			);
