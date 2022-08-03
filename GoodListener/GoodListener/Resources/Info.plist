@@ -18,6 +18,8 @@
 		<string>kakaokompassauth</string>
 		<string>kakaolink</string>
 	</array>
+	<key>KAKAO_APP_KEY</key>
+	<string>0ce47869c8fa8cc3d53bcff52d5f4ce0</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

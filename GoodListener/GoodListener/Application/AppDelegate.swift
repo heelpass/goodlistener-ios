@@ -16,8 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        RxKakaoSDK.initSDK(appKey: "0ce47869c8fa8cc3d53bcff52d5f4ce0")
+        let KAKAO_APP_KEY: String = Bundle.main.infoDictionary?["KAKAO_APP_KEY"] as? String ?? "KAKAO_APP_KEY is nil"
+        RxKakaoSDK.initSDK(appKey: KAKAO_APP_KEY)
         FirebaseApp.configure()
+        
         return true
     }
 
