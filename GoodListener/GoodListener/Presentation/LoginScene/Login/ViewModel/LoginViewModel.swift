@@ -22,8 +22,7 @@ import RxKakaoSDKUser
 class LoginViewModel: NSObject, ViewModelType {
     
     var disposeBag: DisposeBag = .init()
-    var loginResult = PublishSubject<Bool>()    // AppleLogin의 경우 델리게잇을 통해 성공여부를 받기때문에 결과값을 저장할 전역변수를 선언
-    var kakaoLoginResult = PublishSubject<Bool>() //kakaoLogin 성공 여부 저장
+    var loginResult = PublishSubject<Bool>()    // AppleLogin, kakaoLogin의 결과값을 저장하기 위해 전역 변수를 선언함
     
     struct Input {
         var appleLoginBtnTap: Observable<UITapGestureRecognizer>
@@ -63,7 +62,7 @@ class LoginViewModel: NSObject, ViewModelType {
             .disposed(by: disposeBag)
         
         
-        return Output(appleLoginResult: appleLoginResult.asSignal(onErrorJustReturn: false), kakaoLoginResult: kakaoLoginResult.asSignal(onErrorJustReturn: false))
+        return Output(appleLoginResult: appleLoginResult.asSignal(onErrorJustReturn: false), kakaoLoginResult: loginResult.asSignal(onErrorJustReturn: false))
     }
     
     // Apple 로그인 핸들러
@@ -85,10 +84,11 @@ class LoginViewModel: NSObject, ViewModelType {
                 .subscribe(onNext:{ (oauthToken) in
                     Log.i("KakaoLogin Succeed")
                     Log.d("Token:: \(oauthToken)")
-                    self.kakaoLoginResult.onNext(true)
+                    self.loginResult.onNext(true)
+                    self.practiceMoya()
                 }, onError: { [self] error in
                     Log.e("\(error)")
-                    self.kakaoLoginResult.onNext(false)
+                    self.loginResult.onNext(false)
                 })
             .disposed(by: disposeBag)
         }
