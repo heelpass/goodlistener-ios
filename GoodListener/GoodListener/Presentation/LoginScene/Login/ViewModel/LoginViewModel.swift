@@ -86,6 +86,7 @@ class LoginViewModel: NSObject, ViewModelType {
                     Log.i("KakaoLogin Succeed")
                     Log.d("Token:: \(oauthToken)")
                     self.kakaoLoginResult.onNext(true)
+                    self.practiceMoya()
                 }, onError: { [self] error in
                     Log.e("\(error)")
                     self.kakaoLoginResult.onNext(false)
