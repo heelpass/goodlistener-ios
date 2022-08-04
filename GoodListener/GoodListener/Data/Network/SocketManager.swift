@@ -10,21 +10,23 @@ import SocketIO
 import RxSwift
 import RxCocoa
 
+// MARK: 1. 소켓으로 받을 이벤트 추가!!
 enum SocketEvents: String {
-    // 사용자의 상태가 변경된 경우 -> Ex) 유저 닉네임 변경
     case userUpdates
-    // 액션에 따른 UI 변경 및 기능 실행이 필요한 경우 -> Ex) 전화가 걸려온 상황에 전화 뷰를 올려줘야한다
     case userActivities
+    case another
 }
 
 final class GLSocketManager: NSObject {
+    
+    // MARK: 2. 소켓으로 받을 이벤트를 넘겨줄 PublishRelay 선언
+    // relay안에 [Any]는 데이터에 맞게끔 수정하면 됩니다!
     struct Relays {
-        // Custom events:
-        /// User properties updated
-        let user = PublishRelay<[Any]>()
         
-        /// User activities added
+        // Custom events:
+        let user = PublishRelay<[Any]>()
         let activities = PublishRelay<[Any]>()
+        let another = PublishRelay<[Any]>()
         
         // Socket events:
         /// Listen for socket connection changes.
@@ -35,12 +37,8 @@ final class GLSocketManager: NSObject {
     static let shared = GLSocketManager()
     
     private var socketManager: SocketManager!
+    public var socket: SocketIOClient!
     private let disposeBag = DisposeBag()
-    
-    // Room 정보 입력 필요
-    private var socket: SocketIOClient {
-        return socketManager.socket(forNamespace: "/my-namespace")
-    }
     
     // 공개적으로 접근 가능한 relays
     let relays = Relays()
@@ -48,7 +46,7 @@ final class GLSocketManager: NSObject {
     // 싱글톤으로 start메서드를 실행해주세요 소켓이 연결됩니다
     func start() {
         //
-        guard socketManager == nil, let url = URL(string: "") else {
+        guard socketManager == nil, let url = URL(string: "http://61.80.148.190:3000") else {
             return
         }
         
@@ -60,16 +58,16 @@ final class GLSocketManager: NSObject {
                 .log(true)
             ]
         )
-        
+        socket = socketManager.defaultSocket
         addListeners()
         connect()
     }
     
     func addListeners() {
-        // Custom Event를 MtsocketEvents 에 정의합니다
-        // 예시로 작성해 논것이며 MySocketEvents 열거형에 이벤트를 작성해야 합니다
+        // MARK: 3. 커스텀 이벤트를 리스너에 등록합니다!
         socket.listen(event: SocketEvents.userUpdates.rawValue, relay: relays.user)
         socket.listen(event: SocketEvents.userActivities.rawValue, relay: relays.activities)
+        socket.listen(event: SocketEvents.another.rawValue, relay: relays.another)
 
         // Connection 관리 relay.socketConnection을 구독하면 현재 소켓 연결 상태를 알 수 있다.
         socket.listen(event: SocketClientEvent.connect.rawValue, result: true, relay: relays.socketConnection)
