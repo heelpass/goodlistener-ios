@@ -10,7 +10,7 @@ import SocketIO
 import RxSwift
 import RxCocoa
 
-enum MySocketEvents: String {
+enum SocketEvents: String {
     // 사용자의 상태가 변경된 경우 -> Ex) 유저 닉네임 변경
     case userUpdates
     // 액션에 따른 UI 변경 및 기능 실행이 필요한 경우 -> Ex) 전화가 걸려온 상황에 전화 뷰를 올려줘야한다
@@ -68,8 +68,8 @@ final class GLSocketManager: NSObject {
     func addListeners() {
         // Custom Event를 MtsocketEvents 에 정의합니다
         // 예시로 작성해 논것이며 MySocketEvents 열거형에 이벤트를 작성해야 합니다
-        socket.listen(event: MySocketEvents.userUpdates.rawValue, relay: relays.user)
-        socket.listen(event: MySocketEvents.userActivities.rawValue, relay: relays.activities)
+        socket.listen(event: SocketEvents.userUpdates.rawValue, relay: relays.user)
+        socket.listen(event: SocketEvents.userActivities.rawValue, relay: relays.activities)
 
         // Connection 관리 relay.socketConnection을 구독하면 현재 소켓 연결 상태를 알 수 있다.
         socket.listen(event: SocketClientEvent.connect.rawValue, result: true, relay: relays.socketConnection)
