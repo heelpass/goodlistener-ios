@@ -240,7 +240,6 @@
 			isa = PBXGroup;
 			children = (
 				E8CB656E288E66C30076E254 /* Entities */,
-				E8CB656B288E36420076E254 /* Interface */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -258,6 +257,7 @@
 		E8CB656E288E66C30076E254 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				E8CB656B288E36420076E254 /* Interface */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
