@@ -12,6 +12,7 @@ import AuthenticationServices
 import RxSwift
 import RxCocoa
 
+
 class LoginViewController: UIViewController, SnapKitType {
     
     weak var coordinator: LoginCoordinating?
@@ -32,7 +33,13 @@ class LoginViewController: UIViewController, SnapKitType {
     
     let appleLoginButton = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
     
-
+    let kakaoLoginButton = UIButton().then{
+        $0.setTitle("카카오로 로그인", for: .normal)
+        $0.titleLabel?.textAlignment = .center
+        $0.layer.cornerRadius = 6
+        $0.backgroundColor = .systemYellow
+        $0.titleLabel?.textColor = .white
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -43,7 +50,7 @@ class LoginViewController: UIViewController, SnapKitType {
     }
 
     func addComponents() {
-        [titleLabel, subtitleLabel, appleLoginButton].forEach { view.addSubview($0) }
+        [titleLabel, subtitleLabel, appleLoginButton, kakaoLoginButton].forEach { view.addSubview($0) }
     }
     
     func setConstraints() {
@@ -63,10 +70,17 @@ class LoginViewController: UIViewController, SnapKitType {
             $0.width.equalTo(200)
             $0.height.equalTo(55)
         }
+        
+        kakaoLoginButton.snp.makeConstraints {
+            $0.top.equalTo(appleLoginButton.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(200)
+            $0.height.equalTo(55)
+        }
     }
     
     func bind() {
-        let output = viewModel.transform(input: LoginViewModel.Input(appleLoginBtnTap: appleLoginButton.tapGesture))
+        let output = viewModel.transform(input: LoginViewModel.Input(appleLoginBtnTap: appleLoginButton.tapGesture, kakaoLoginBtnTap: kakaoLoginButton.tapGesture))
         
         output.appleLoginResult
             .emit(onNext: { [weak self] (result) in
@@ -79,5 +93,17 @@ class LoginViewController: UIViewController, SnapKitType {
                 }
             })
             .disposed(by: disposeBag)
+        
+        output.kakaoLoginResult
+            .emit(onNext: { [weak self] (result) in
+                guard let self = self else {return}
+                if result {
+                    self.coordinator?.loginSuccess()
+                } else {
+                    self.coordinator?.moveToAuthCheck()
+                }
+            })
+            .disposed(by: disposeBag)
     }
+    
 }

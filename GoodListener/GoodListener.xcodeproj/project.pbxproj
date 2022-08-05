@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0DD12C28976BA200EC4D3C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A0DD12B28976BA200EC4D3C /* GoogleService-Info.plist */; };
+		0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B522896AB8300A05124 /* LoginAPI.swift */; };
+		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
+		0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B582896BC5E00A05124 /* WeatherInfo.swift */; };
 		0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2820288D5B55000D889B /* AppDelegate.swift */; };
 		0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2822288D5B55000D889B /* SceneDelegate.swift */; };
 		0ABA2825288D5B55000D889B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2824288D5B55000D889B /* LoginViewController.swift */; };
@@ -38,6 +42,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A0DD12B28976BA200EC4D3C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0A703B522896AB8300A05124 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginAPI.swift; path = Network/LoginAPI.swift; sourceTree = SOURCE_ROOT; };
+		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
+		0A703B582896BC5E00A05124 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherInfo.swift; path = GoodListener/Domain/Entities/WeatherInfo.swift; sourceTree = SOURCE_ROOT; };
 		0ABA281D288D5B55000D889B /* GoodListener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodListener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ABA2820288D5B55000D889B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0ABA2822288D5B55000D889B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -258,6 +266,8 @@
 			isa = PBXGroup;
 			children = (
 				E8CB656B288E36420076E254 /* Interface */,
+				0A703B582896BC5E00A05124 /* WeatherInfo.swift */,
+				0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -276,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				E83BD7FD288E7165006B98B2 /* Info.plist */,
+				0A0DD12B28976BA200EC4D3C /* GoogleService-Info.plist */,
 				0ABA2829288D5B56000D889B /* Assets.xcassets */,
 				0ABA282B288D5B56000D889B /* LaunchScreen.storyboard */,
 			);
@@ -311,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				E8D09853289A6C4D008AD55F /* SocketManager.swift */,
+				0A703B522896AB8300A05124 /* LoginAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -513,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0ABA282D288D5B56000D889B /* LaunchScreen.storyboard in Resources */,
+				0A0DD12C28976BA200EC4D3C /* GoogleService-Info.plist in Resources */,
 				0ABA282A288D5B56000D889B /* Assets.xcassets in Resources */,
 				0ABA2828288D5B55000D889B /* Main.storyboard in Resources */,
 			);
@@ -570,9 +583,12 @@
 				E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */,
 				E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */,
 				0ABA2825288D5B55000D889B /* LoginViewController.swift in Sources */,
+				0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */,
 				E8CFBCEA288FDB9C00D63B07 /* UIView+Extension.swift in Sources */,
+				0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */,
 				E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */,
 				0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */,
+				0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */,
 				E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */,
 				E8C3320928925F3400ECE59C /* CallViewController.swift in Sources */,
 				0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */,
@@ -743,6 +759,7 @@
 				DEVELOPMENT_TEAM = XQ24HP64B3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GoodListener/Resources/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone required";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -776,6 +793,7 @@
 				DEVELOPMENT_TEAM = XQ24HP64B3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GoodListener/Resources/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone required";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
