@@ -41,6 +41,7 @@ class MainCoordinator: CoordinatorType {
     }
     
     func start() {
+        GLSocketManager.shared.start()
         
         switch userType {
         case .speaker:
