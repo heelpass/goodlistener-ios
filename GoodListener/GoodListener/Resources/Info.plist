@@ -4,12 +4,12 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>NotoSansKR-Light</string>
-		<string>NotoSansKR-Bold</string>
-		<string>NotoSansKR-Thin</string>
-		<string>NotoSansKR-Black</string>
-		<string>NotoSansKR-Medium</string>
-		<string>NotoSansKR-Regular</string>
+		<string>NotoSansKR-Light.otf</string>
+		<string>NotoSansKR-Bold.otf</string>
+		<string>NotoSansKR-Thin.otf</string>
+		<string>NotoSansKR-Black.otf</string>
+		<string>NotoSansKR-Medium.otf</string>
+		<string>NotoSansKR-Regular.otf</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>

@@ -76,10 +76,25 @@ class MainCoordinator: CoordinatorType {
         childCoordinators.append(record)
         childCoordinators.append(myPage)
 
+        let fontAttributes = [NSAttributedString.Key.font: FontManager.shared.notoSansKR(.bold, 12)]
         
-        home.navigationController.tabBarItem = UITabBarItem(title: "홈", image: nil, tag: 0)
-        record.navigationController.tabBarItem = UITabBarItem(title: "통화 기록", image: nil, tag: 1)
-        myPage.navigationController.tabBarItem = UITabBarItem(title: "마이 페이지", image: nil, tag: 2)
+        home.navigationController.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "ic_gnb_home_off"), tag: 0)
+        home.navigationController.tabBarItem.selectedImage = UIImage(named: "ic_gnb_home_on")
+        home.navigationController.tabBarItem.setTitleTextAttributes(fontAttributes, for: .normal)
+        home.navigationController.tabBarItem.setTitleTextAttributes(fontAttributes, for: .selected)
+        
+        record.navigationController.tabBarItem = UITabBarItem(title: "대화 기록", image: UIImage(named: "ic_gnb_history_off"), tag: 1)
+        record.navigationController.tabBarItem.selectedImage = UIImage(named: "ic_gnb_history_on")
+        record.navigationController.tabBarItem.setTitleTextAttributes(fontAttributes, for: .normal)
+        record.navigationController.tabBarItem.setTitleTextAttributes(fontAttributes, for: .selected)
+        
+        myPage.navigationController.tabBarItem = UITabBarItem(title: "MY", image: UIImage(named: "ic_gnb_my_off"), tag: 2)
+        myPage.navigationController.tabBarItem.selectedImage = UIImage(named: "ic_gnb_my_on")
+        myPage.navigationController.tabBarItem.setTitleTextAttributes(fontAttributes, for: .normal)
+        myPage.navigationController.tabBarItem.setTitleTextAttributes(fontAttributes, for: .selected)
+        
+        tabBarController.tabBar.tintColor = .m1
+        tabBarController.tabBar.unselectedItemTintColor = .f5
 
         // 4️⃣ TabBarController.viewControllers에 각각코디네이터의 navigationController을 추가해주세요!
         tabBarController.viewControllers = [home.navigationController, record.navigationController, myPage.navigationController]
