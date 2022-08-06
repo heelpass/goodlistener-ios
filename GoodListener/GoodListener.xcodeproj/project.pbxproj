@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A0DD12C28976BA200EC4D3C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A0DD12B28976BA200EC4D3C /* GoogleService-Info.plist */; };
 		0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B522896AB8300A05124 /* LoginAPI.swift */; };
 		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
 		0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B582896BC5E00A05124 /* WeatherInfo.swift */; };
@@ -22,12 +21,25 @@
 		0AF4308E288FDC230078B2D5 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */; };
 		0AF43093288FDC850078B2D5 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF43092288FDC850078B2D5 /* RecordViewController.swift */; };
 		73B35A699773E2A2848FCE3D /* Pods_GoodListener.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5450741D5E8F8D9D306A0E69 /* Pods_GoodListener.framework */; };
+		E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A79539289CB28000EF9E1B /* FontManager.swift */; };
+		E8A79544289CC9CA00EF9E1B /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A7953D289CC9CA00EF9E1B /* NotoSansKR-Light.otf */; };
+		E8A79545289CC9CA00EF9E1B /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A7953E289CC9CA00EF9E1B /* NotoSansKR-Bold.otf */; };
+		E8A79546289CC9CA00EF9E1B /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A7953F289CC9CA00EF9E1B /* NotoSansKR-Thin.otf */; };
+		E8A79547289CC9CA00EF9E1B /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = E8A79540289CC9CA00EF9E1B /* OFL.txt */; };
+		E8A79548289CC9CA00EF9E1B /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A79541289CC9CA00EF9E1B /* NotoSansKR-Black.otf */; };
+		E8A79549289CC9CA00EF9E1B /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A79542289CC9CA00EF9E1B /* NotoSansKR-Medium.otf */; };
+		E8A7954A289CC9CA00EF9E1B /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A79543289CC9CA00EF9E1B /* NotoSansKR-Regular.otf */; };
+		E8A7954D289CCC4700EF9E1B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A7954C289CCC4700EF9E1B /* Colors.swift */; };
+		E8A79552289CD71000EF9E1B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E8A79551289CD71000EF9E1B /* GoogleService-Info.plist */; };
+		E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A79553289CDA7700EF9E1B /* GLButton.swift */; };
 		E8C3320928925F3400ECE59C /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallViewController.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
 		E8CB6566288E35090076E254 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6565288E35090076E254 /* Log.swift */; };
 		E8CB6568288E359A0076E254 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6567288E359A0076E254 /* ViewModelType.swift */; };
 		E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6573288E6B130076E254 /* SnapKitType.swift */; };
+		E8CE19E2289CE08C007A56FE /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE19E1289CE08C007A56FE /* UIButton+.swift */; };
+		E8CE19E4289CE15E007A56FE /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE19E3289CE15E007A56FE /* Const.swift */; };
 		E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCC3288F6DA000D63B07 /* CoordinatorType.swift */; };
 		E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCC6288F6DE900D63B07 /* LoginCoordinator.swift */; };
 		E8CFBCCD288F710300D63B07 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCCC288F710300D63B07 /* AuthViewController.swift */; };
@@ -37,12 +49,11 @@
 		E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCDB288F7D0900D63B07 /* MainCoordinator.swift */; };
 		E8CFBCE1288F874C00D63B07 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */; };
 		E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */; };
-		E8CFBCEA288FDB9C00D63B07 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE9288FDB9C00D63B07 /* UIView+Extension.swift */; };
+		E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */; };
 		E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D09853289A6C4D008AD55F /* SocketManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A0DD12B28976BA200EC4D3C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A703B522896AB8300A05124 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginAPI.swift; path = Network/LoginAPI.swift; sourceTree = SOURCE_ROOT; };
 		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
 		0A703B582896BC5E00A05124 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherInfo.swift; path = GoodListener/Domain/Entities/WeatherInfo.swift; sourceTree = SOURCE_ROOT; };
@@ -61,12 +72,25 @@
 		47C5C925F8CF8A111AFD7E1E /* Pods-GoodListener.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodListener.debug.xcconfig"; path = "Target Support Files/Pods-GoodListener/Pods-GoodListener.debug.xcconfig"; sourceTree = "<group>"; };
 		5450741D5E8F8D9D306A0E69 /* Pods_GoodListener.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodListener.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83BD7FD288E7165006B98B2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8A79539289CB28000EF9E1B /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
+		E8A7953D289CC9CA00EF9E1B /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
+		E8A7953E289CC9CA00EF9E1B /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		E8A7953F289CC9CA00EF9E1B /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
+		E8A79540289CC9CA00EF9E1B /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		E8A79541289CC9CA00EF9E1B /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
+		E8A79542289CC9CA00EF9E1B /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		E8A79543289CC9CA00EF9E1B /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
+		E8A7954C289CCC4700EF9E1B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		E8A79551289CD71000EF9E1B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E8A79553289CDA7700EF9E1B /* GLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLButton.swift; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E8CB6565288E35090076E254 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		E8CB6567288E359A0076E254 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		E8CB6573288E6B130076E254 /* SnapKitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapKitType.swift; sourceTree = "<group>"; };
+		E8CE19E1289CE08C007A56FE /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		E8CE19E3289CE15E007A56FE /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		E8CFBCC2288E8F1F00D63B07 /* GoodListener.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoodListener.entitlements; sourceTree = "<group>"; };
 		E8CFBCC3288F6DA000D63B07 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		E8CFBCC6288F6DE900D63B07 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
@@ -77,7 +101,7 @@
 		E8CFBCDB288F7D0900D63B07 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
-		E8CFBCE9288FDB9C00D63B07 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		E8D09853289A6C4D008AD55F /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,6 +204,37 @@
 				5450741D5E8F8D9D306A0E69 /* Pods_GoodListener.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E8A7953B289CB2BC00EF9E1B /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				E8A7953C289CC9CA00EF9E1B /* Noto_Sans_KR */,
+				E8A79539289CB28000EF9E1B /* FontManager.swift */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		E8A7953C289CC9CA00EF9E1B /* Noto_Sans_KR */ = {
+			isa = PBXGroup;
+			children = (
+				E8A7953D289CC9CA00EF9E1B /* NotoSansKR-Light.otf */,
+				E8A7953E289CC9CA00EF9E1B /* NotoSansKR-Bold.otf */,
+				E8A7953F289CC9CA00EF9E1B /* NotoSansKR-Thin.otf */,
+				E8A79540289CC9CA00EF9E1B /* OFL.txt */,
+				E8A79541289CC9CA00EF9E1B /* NotoSansKR-Black.otf */,
+				E8A79542289CC9CA00EF9E1B /* NotoSansKR-Medium.otf */,
+				E8A79543289CC9CA00EF9E1B /* NotoSansKR-Regular.otf */,
+			);
+			path = Noto_Sans_KR;
+			sourceTree = "<group>";
+		};
+		E8A7954B289CCA8500EF9E1B /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				E8A7954C289CCC4700EF9E1B /* Colors.swift */,
+			);
+			path = Color;
 			sourceTree = "<group>";
 		};
 		E8C3320428925EFC00ECE59C /* CallScene */ = {
@@ -286,7 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				E83BD7FD288E7165006B98B2 /* Info.plist */,
-				0A0DD12B28976BA200EC4D3C /* GoogleService-Info.plist */,
+				E8A79551289CD71000EF9E1B /* GoogleService-Info.plist */,
 				0ABA2829288D5B56000D889B /* Assets.xcassets */,
 				0ABA282B288D5B56000D889B /* LaunchScreen.storyboard */,
 			);
@@ -443,7 +498,8 @@
 		E8CFBCE6288FCF4900D63B07 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				E8CFBCE9288FDB9C00D63B07 /* UIView+Extension.swift */,
+				E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */,
+				E8CE19E1289CE08C007A56FE /* UIButton+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -451,6 +507,10 @@
 		E8CFBCEB288FDDC800D63B07 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				E8A7954B289CCA8500EF9E1B /* Color */,
+				E8A7953B289CB2BC00EF9E1B /* Font */,
+				E8A79553289CDA7700EF9E1B /* GLButton.swift */,
+				E8CE19E3289CE15E007A56FE /* Const.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -524,9 +584,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8A7954A289CC9CA00EF9E1B /* NotoSansKR-Regular.otf in Resources */,
+				E8A79548289CC9CA00EF9E1B /* NotoSansKR-Black.otf in Resources */,
 				0ABA282D288D5B56000D889B /* LaunchScreen.storyboard in Resources */,
-				0A0DD12C28976BA200EC4D3C /* GoogleService-Info.plist in Resources */,
+				E8A79549289CC9CA00EF9E1B /* NotoSansKR-Medium.otf in Resources */,
+				E8A79546289CC9CA00EF9E1B /* NotoSansKR-Thin.otf in Resources */,
+				E8A79552289CD71000EF9E1B /* GoogleService-Info.plist in Resources */,
+				E8A79544289CC9CA00EF9E1B /* NotoSansKR-Light.otf in Resources */,
 				0ABA282A288D5B56000D889B /* Assets.xcassets in Resources */,
+				E8A79545289CC9CA00EF9E1B /* NotoSansKR-Bold.otf in Resources */,
+				E8A79547289CC9CA00EF9E1B /* OFL.txt in Resources */,
 				0ABA2828288D5B55000D889B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -584,14 +651,16 @@
 				E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */,
 				0ABA2825288D5B55000D889B /* LoginViewController.swift in Sources */,
 				0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */,
-				E8CFBCEA288FDB9C00D63B07 /* UIView+Extension.swift in Sources */,
+				E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */,
 				0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */,
 				E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */,
 				0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */,
+				E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */,
 				0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */,
 				E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */,
 				E8C3320928925F3400ECE59C /* CallViewController.swift in Sources */,
 				0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */,
+				E8CE19E4289CE15E007A56FE /* Const.swift in Sources */,
 				0AF43093288FDC850078B2D5 /* RecordViewController.swift in Sources */,
 				E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */,
 				E8CB6566288E35090076E254 /* Log.swift in Sources */,
@@ -600,12 +669,15 @@
 				0AF4308C288FD8E90078B2D5 /* ApplicantViewController.swift in Sources */,
 				E8C3320B289265F400ECE59C /* CallManager.swift in Sources */,
 				E8CB6568288E359A0076E254 /* ViewModelType.swift in Sources */,
+				E8CE19E2289CE08C007A56FE /* UIButton+.swift in Sources */,
+				E8A7954D289CCC4700EF9E1B /* Colors.swift in Sources */,
 				E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */,
 				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
 				E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */,
 				E8CFBCE1288F874C00D63B07 /* MyPageViewController.swift in Sources */,
 				E8CFBCCD288F710300D63B07 /* AuthViewController.swift in Sources */,
 				E8CFBCDA288F7B4800D63B07 /* HomeViewController.swift in Sources */,
+				E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */,
 				0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

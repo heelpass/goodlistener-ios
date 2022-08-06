@@ -22,14 +22,14 @@ class HomeViewController: UIViewController {
             $0.center.equalToSuperview()
         }
         
-        let button = UIButton()
-        button.setTitle("전화", for: .normal)
-        button.backgroundColor = .black
+        let button = GLButton()
+        button.title = "전화"
         view.addSubview(button)
         button.snp.makeConstraints {
             $0.top.equalTo(label.snp.bottom)
-            $0.size.equalTo(200)
             $0.centerX.equalToSuperview()
+            $0.height.equalTo(Const.glBtnHeight)
+            $0.width.equalTo(Const.glBtnWidth)
         }
         
         view.backgroundColor = .white
