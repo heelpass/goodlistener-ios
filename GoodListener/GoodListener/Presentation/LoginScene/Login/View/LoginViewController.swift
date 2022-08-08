@@ -84,21 +84,10 @@ class LoginViewController: UIViewController, SnapKitType {
     func bind() {
         let output = viewModel.transform(input: LoginViewModel.Input(appleLoginBtnTap: appleLoginButton.tapGesture, kakaoLoginBtnTap: kakaoLoginButton.tapGesture))
         
-        output.appleLoginResult
+        output.loginResult
             .emit(onNext: { [weak self] (result) in
                 guard let self = self else { return }
                 
-                if result {
-                    self.coordinator?.loginSuccess()
-                } else {
-                    self.coordinator?.moveToAuthCheck()
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        output.kakaoLoginResult
-            .emit(onNext: { [weak self] (result) in
-                guard let self = self else {return}
                 if result {
                     self.coordinator?.loginSuccess()
                 } else {
