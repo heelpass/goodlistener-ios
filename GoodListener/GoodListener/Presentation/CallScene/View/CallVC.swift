@@ -84,6 +84,9 @@ class CallVC: UIViewController, SnapKitType {
     
     let extendButton = GLButton().then {
         $0.title = "연장 요청하기\n(5분)"
+        $0.titleLabel?.lineBreakMode = .byWordWrapping
+        $0.titleLabel?.textAlignment = .center
+        $0.titleLabel?.textFontChange(text: $0.titleLabel!.text!, font: FontManager.shared.notoSansKR(.regular, 10), range: "(5분)")
     }
     
     let stopButton = GLButton().then {
