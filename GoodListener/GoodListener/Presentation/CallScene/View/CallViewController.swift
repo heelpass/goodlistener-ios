@@ -13,84 +13,96 @@ import RxCocoa
 import RxGesture
 import SnapKit
 
-class CallViewController: UIViewController {
+class CallViewController: UIViewController, SnapKitType {
     
     let manager = CallManager(appID: AgoraConfiguration.appID)
     let disposeBag = DisposeBag()
     
     let titleLabel = UILabel().then {
-        $0.text = "Call Test"
-        $0.textColor = .black
-        $0.font = UIFont.systemFont(ofSize: 50)
+        $0.text = "당신의 리스너에게서\n전화가 왔어요"
+        $0.textAlignment = .left
+        $0.font = FontManager.shared.notoSansKR(.bold, 26)
+        $0.numberOfLines = 0
+        $0.sizeToFit()
+        $0.textColor = .white
     }
     
-    let startButton = UIButton().then {
-        $0.setTitle("start", for: .normal)
-        $0.backgroundColor = .black
+    let callIcon = UIImageView().then {
+        $0.image = UIImage(named: "call_img_call")
     }
     
-    let stopButton = UIButton().then {
-        $0.setTitle("stop", for: .normal)
-        $0.backgroundColor = .red
+    let profileImage = UIImageView().then {
+        $0.image = UIImage(named: "main_img_step_01")
+        $0.layer.cornerRadius = 60
+        $0.layer.masksToBounds = true
     }
     
-    let backButton = UIButton().then {
-        $0.setTitle("back", for: .normal)
-        $0.backgroundColor = .blue
+    let nickName = UILabel().then {
+        $0.text = "닉네임"
+        $0.font = FontManager.shared.notoSansKR(.bold, 20)
+        $0.textColor = .white
+    }
+    
+    let acceptButton = GLButton().then {
+        $0.title = "전화 받기"
+    }
+    
+    let refuseButton = GLButton().then {
+        $0.title = "지금은 못받아요"
+        $0.backgroundColor = .clear
+        $0.layer.borderColor = UIColor.white.cgColor
+        $0.layer.borderWidth = 1
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = #colorLiteral(red: 0.1971904635, green: 0.2260227799, blue: 0.1979919374, alpha: 1)
         // Do any additional setup after loading the view.
-        [titleLabel, startButton, stopButton, backButton].forEach { view.addSubview($0) }
-        
+        addComponents()
+        setConstraints()
+    }
+    
+    func addComponents() {
+        [titleLabel, callIcon, profileImage, nickName, acceptButton, refuseButton].forEach { view.addSubview($0) }
+    }
+    
+    func setConstraints() {
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(200)
+            $0.bottom.equalTo(profileImage.snp.top).offset(-90)
+            $0.left.equalToSuperview().inset(Const.padding)
+        }
+        
+        callIcon.snp.makeConstraints {
+            $0.size.equalTo(24)
+            $0.bottom.equalTo(titleLabel).offset(-5)
+            $0.right.equalTo(titleLabel).offset(-30)
+        }
+        
+        profileImage.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-20)
+            $0.size.equalTo(120)
+        }
+        
+        nickName.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(profileImage.snp.bottom).offset(20)
+        }
+        
+        acceptButton.snp.makeConstraints {
+            $0.top.equalTo(nickName.snp.bottom).offset(90)
+            $0.height.equalTo(Const.glBtnHeight)
+            $0.width.equalTo(200)
             $0.centerX.equalToSuperview()
         }
         
-        startButton.snp.makeConstraints {
+        refuseButton.snp.makeConstraints {
+            $0.top.equalTo(acceptButton.snp.bottom).offset(20)
+            $0.height.equalTo(Const.glBtnHeight)
             $0.width.equalTo(200)
-            $0.height.equalTo(75)
-            $0.center.equalToSuperview()
-        }
-        
-        stopButton.snp.makeConstraints {
-            $0.width.equalTo(200)
-            $0.height.equalTo(75)
-            $0.top.equalTo(startButton.snp.bottom).offset(30)
             $0.centerX.equalToSuperview()
         }
-        
-        backButton.snp.makeConstraints {
-            $0.width.equalTo(200)
-            $0.height.equalTo(75)
-            $0.top.equalTo(stopButton.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-        }
-        
-        startButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self.manager.start()
-            })
-            .disposed(by: disposeBag)
-        
-        stopButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self.manager.stop()
-            })
-            .disposed(by: disposeBag)
-        
-        backButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self.dismiss(animated: true)
-            })
-            .disposed(by: disposeBag)
     }
 
 }
