@@ -11,7 +11,7 @@ import RxGesture
 import RxSwift
 import Then
 
-class AuthViewController: UIViewController, SnapKitType {
+class AuthVC: UIViewController, SnapKitType {
     
     weak var coordinator: LoginCoordinating?
     
@@ -84,6 +84,7 @@ class AuthViewController: UIViewController, SnapKitType {
         
         addComponents()
         setConstraints()
+        bind()
     }
     
     func addComponents() {
@@ -150,6 +151,14 @@ class AuthViewController: UIViewController, SnapKitType {
             $0.height.equalTo(Const.glBtnHeight)
             $0.width.equalTo(115)
         }
+    }
+    
+    func bind() {
+        sendButton.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.coordinator?.moveToPersonalInfoPage()
+            })
+            .disposed(by: disposeBag)
     }
 
 }

@@ -12,7 +12,7 @@
 		0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B582896BC5E00A05124 /* WeatherInfo.swift */; };
 		0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2820288D5B55000D889B /* AppDelegate.swift */; };
 		0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2822288D5B55000D889B /* SceneDelegate.swift */; };
-		0ABA2825288D5B55000D889B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2824288D5B55000D889B /* LoginViewController.swift */; };
+		0ABA2825288D5B55000D889B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2824288D5B55000D889B /* LoginVC.swift */; };
 		0ABA2828288D5B55000D889B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA2826288D5B55000D889B /* Main.storyboard */; };
 		0ABA282A288D5B56000D889B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA2829288D5B56000D889B /* Assets.xcassets */; };
 		0ABA282D288D5B56000D889B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA282B288D5B56000D889B /* LaunchScreen.storyboard */; };
@@ -32,6 +32,8 @@
 		E8A7954D289CCC4700EF9E1B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A7954C289CCC4700EF9E1B /* Colors.swift */; };
 		E8A79552289CD71000EF9E1B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E8A79551289CD71000EF9E1B /* GoogleService-Info.plist */; };
 		E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A79553289CDA7700EF9E1B /* GLButton.swift */; };
+		E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435028A0E8540003815B /* PersonalInfoVC.swift */; };
+		E8B4435828A0EADD0003815B /* NicknameSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435728A0EADD0003815B /* NicknameSetupVC.swift */; };
 		E8C3320928925F3400ECE59C /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallViewController.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
@@ -42,7 +44,7 @@
 		E8CE19E4289CE15E007A56FE /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CE19E3289CE15E007A56FE /* Const.swift */; };
 		E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCC3288F6DA000D63B07 /* CoordinatorType.swift */; };
 		E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCC6288F6DE900D63B07 /* LoginCoordinator.swift */; };
-		E8CFBCCD288F710300D63B07 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCCC288F710300D63B07 /* AuthViewController.swift */; };
+		E8CFBCCD288F710300D63B07 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCCC288F710300D63B07 /* AuthVC.swift */; };
 		E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCCE288F73AB00D63B07 /* AppCoordinator.swift */; };
 		E8CFBCD8288F7A9C00D63B07 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCD7288F7A9C00D63B07 /* HomeCoordinator.swift */; };
 		E8CFBCDA288F7B4800D63B07 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCD9288F7B4800D63B07 /* HomeViewController.swift */; };
@@ -60,7 +62,7 @@
 		0ABA281D288D5B55000D889B /* GoodListener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodListener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ABA2820288D5B55000D889B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0ABA2822288D5B55000D889B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0ABA2824288D5B55000D889B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0ABA2824288D5B55000D889B /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		0ABA2827288D5B55000D889B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0ABA2829288D5B56000D889B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0ABA282C288D5B56000D889B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -83,6 +85,8 @@
 		E8A7954C289CCC4700EF9E1B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E8A79551289CD71000EF9E1B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E8A79553289CDA7700EF9E1B /* GLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLButton.swift; sourceTree = "<group>"; };
+		E8B4435028A0E8540003815B /* PersonalInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoVC.swift; sourceTree = "<group>"; };
+		E8B4435728A0EADD0003815B /* NicknameSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSetupVC.swift; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -94,7 +98,7 @@
 		E8CFBCC2288E8F1F00D63B07 /* GoodListener.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoodListener.entitlements; sourceTree = "<group>"; };
 		E8CFBCC3288F6DA000D63B07 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		E8CFBCC6288F6DE900D63B07 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
-		E8CFBCCC288F710300D63B07 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		E8CFBCCC288F710300D63B07 /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
 		E8CFBCCE288F73AB00D63B07 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E8CFBCD7288F7A9C00D63B07 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		E8CFBCD9288F7B4800D63B07 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -237,6 +241,54 @@
 			path = Color;
 			sourceTree = "<group>";
 		};
+		E8B4434F28A0E8080003815B /* PersonalInformation */ = {
+			isa = PBXGroup;
+			children = (
+				E8B4435328A0E86A0003815B /* View */,
+				E8B4435228A0E8660003815B /* ViewModel */,
+			);
+			path = PersonalInformation;
+			sourceTree = "<group>";
+		};
+		E8B4435228A0E8660003815B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E8B4435328A0E86A0003815B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E8B4435028A0E8540003815B /* PersonalInfoVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E8B4435428A0EA8E0003815B /* NicknameSet */ = {
+			isa = PBXGroup;
+			children = (
+				E8B4435628A0EACC0003815B /* View */,
+				E8B4435528A0EAC70003815B /* ViewModel */,
+			);
+			path = NicknameSet;
+			sourceTree = "<group>";
+		};
+		E8B4435528A0EAC70003815B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E8B4435628A0EACC0003815B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E8B4435728A0EADD0003815B /* NicknameSetupVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E8C3320428925EFC00ECE59C /* CallScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,6 +385,8 @@
 				E8CFBCC5288F6DE100D63B07 /* Flow */,
 				E8CFBCC8288F704D00D63B07 /* Login */,
 				E8CFBCC9288F705600D63B07 /* Auth */,
+				E8B4434F28A0E8080003815B /* PersonalInformation */,
+				E8B4435428A0EA8E0003815B /* NicknameSet */,
 			);
 			path = LoginScene;
 			sourceTree = "<group>";
@@ -351,7 +405,7 @@
 		E8CB6571288E67B30076E254 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0ABA2824288D5B55000D889B /* LoginViewController.swift */,
+				0ABA2824288D5B55000D889B /* LoginVC.swift */,
 				0ABA2826288D5B55000D889B /* Main.storyboard */,
 			);
 			path = View;
@@ -411,7 +465,7 @@
 		E8CFBCCA288F70C000D63B07 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E8CFBCCC288F710300D63B07 /* AuthViewController.swift */,
+				E8CFBCCC288F710300D63B07 /* AuthVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -649,8 +703,9 @@
 			files = (
 				E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */,
 				E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */,
-				0ABA2825288D5B55000D889B /* LoginViewController.swift in Sources */,
+				0ABA2825288D5B55000D889B /* LoginVC.swift in Sources */,
 				0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */,
+				E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */,
 				E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */,
 				0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */,
 				E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */,
@@ -675,9 +730,10 @@
 				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
 				E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */,
 				E8CFBCE1288F874C00D63B07 /* MyPageViewController.swift in Sources */,
-				E8CFBCCD288F710300D63B07 /* AuthViewController.swift in Sources */,
+				E8CFBCCD288F710300D63B07 /* AuthVC.swift in Sources */,
 				E8CFBCDA288F7B4800D63B07 /* HomeViewController.swift in Sources */,
 				E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */,
+				E8B4435828A0EADD0003815B /* NicknameSetupVC.swift in Sources */,
 				0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

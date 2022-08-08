@@ -13,7 +13,7 @@ import RxSwift
 import RxCocoa
 
 
-class LoginViewController: UIViewController, SnapKitType {
+class LoginVC: UIViewController, SnapKitType {
     
     weak var coordinator: LoginCoordinating?
     var viewModel = LoginViewModel()

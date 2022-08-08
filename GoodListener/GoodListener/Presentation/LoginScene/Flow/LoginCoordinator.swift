@@ -12,6 +12,8 @@ protocol LoginCoordinating: AnyObject {
     func moveToAuthCheck()  // 본인인증 페이지로 이동
     func loginSuccess()     // 로그인에 성공한 경우
     func moveToLoginPage()  // 로그인페이지로 이동
+    func moveToPersonalInfoPage() // 개인정보 입력 페이지
+    func moveToNicknameSetPage() // 닉네임 설정 페이지
 }
 
 class LoginCoordinator: CoordinatorType {
@@ -29,7 +31,7 @@ class LoginCoordinator: CoordinatorType {
     }
     
     func start() {
-        let vc = LoginViewController()
+        let vc = LoginVC()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
@@ -38,7 +40,7 @@ class LoginCoordinator: CoordinatorType {
 extension LoginCoordinator: LoginCoordinating {
     // 본인인증 페이지로 이동
     func moveToAuthCheck() {
-        let vc = AuthViewController()
+        let vc = AuthVC()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
@@ -50,8 +52,20 @@ extension LoginCoordinator: LoginCoordinating {
     
     // 로그인 페이지로 이동
     func moveToLoginPage() {
-        navigationController.viewControllers.forEach {
-            if $0 is LoginViewController {} else { navigationController.popViewController(animated: true) }
-        }
+        navigationController.popToRootViewController(animated: true)
     }
+    
+    func moveToPersonalInfoPage() {
+        let vc = PersonalInfoVC()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func moveToNicknameSetPage() {
+        let vc = NicknameSetupVC()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    
 }
