@@ -34,7 +34,8 @@
 		E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A79553289CDA7700EF9E1B /* GLButton.swift */; };
 		E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435028A0E8540003815B /* PersonalInfoVC.swift */; };
 		E8B4435828A0EADD0003815B /* NicknameSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435728A0EADD0003815B /* NicknameSetupVC.swift */; };
-		E8C3320928925F3400ECE59C /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallViewController.swift */; };
+		E8B4435A28A103570003815B /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435928A103570003815B /* UILabel+.swift */; };
+		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
 		E8CB6566288E35090076E254 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6565288E35090076E254 /* Log.swift */; };
@@ -87,7 +88,8 @@
 		E8A79553289CDA7700EF9E1B /* GLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLButton.swift; sourceTree = "<group>"; };
 		E8B4435028A0E8540003815B /* PersonalInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoVC.swift; sourceTree = "<group>"; };
 		E8B4435728A0EADD0003815B /* NicknameSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSetupVC.swift; sourceTree = "<group>"; };
-		E8C3320828925F3400ECE59C /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
+		E8B4435928A103570003815B /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E8CB6565288E35090076E254 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -302,7 +304,7 @@
 		E8C3320528925F0600ECE59C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E8C3320828925F3400ECE59C /* CallViewController.swift */,
+				E8C3320828925F3400ECE59C /* CallVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -554,6 +556,7 @@
 			children = (
 				E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */,
 				E8CE19E1289CE08C007A56FE /* UIButton+.swift */,
+				E8B4435928A103570003815B /* UILabel+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -713,7 +716,7 @@
 				E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */,
 				0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */,
 				E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */,
-				E8C3320928925F3400ECE59C /* CallViewController.swift in Sources */,
+				E8C3320928925F3400ECE59C /* CallVC.swift in Sources */,
 				0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */,
 				E8CE19E4289CE15E007A56FE /* Const.swift in Sources */,
 				0AF43093288FDC850078B2D5 /* RecordViewController.swift in Sources */,
@@ -733,6 +736,7 @@
 				E8CFBCCD288F710300D63B07 /* AuthVC.swift in Sources */,
 				E8CFBCDA288F7B4800D63B07 /* HomeViewController.swift in Sources */,
 				E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */,
+				E8B4435A28A103570003815B /* UILabel+.swift in Sources */,
 				E8B4435828A0EADD0003815B /* NicknameSetupVC.swift in Sources */,
 				0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */,
 			);

@@ -145,7 +145,7 @@ extension MainCoordinator: MainCoordinating {
     }
     
     func call() {
-        let callVC = CallViewController()
+        let callVC = CallVC()
         callVC.modalPresentationStyle = .fullScreen
         self.tabBarController.present(callVC, animated: true)
     }
