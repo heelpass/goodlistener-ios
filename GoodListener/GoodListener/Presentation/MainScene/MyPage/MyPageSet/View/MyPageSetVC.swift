@@ -24,10 +24,6 @@ class MyPageSetVC: UIViewController, SnapKitType {
     
     let navigationView = NavigationView(frame: .zero, type: .save)
     
-    let line = UIView().then {
-        $0.backgroundColor = #colorLiteral(red: 0.9592439532, green: 0.9656613469, blue: 0.9688369632, alpha: 1)
-    }
-    
     let stackView = UIStackView().then {
         $0.backgroundColor = .clear
         $0.axis = .vertical
@@ -111,10 +107,6 @@ class MyPageSetVC: UIViewController, SnapKitType {
         $0.tintColor = .m1
     }
     
-    let line2 = UIView().then {
-        $0.backgroundColor = #colorLiteral(red: 0.9592439532, green: 0.9656613469, blue: 0.9688369632, alpha: 1)
-    }
-    
     let logoutContainer = UIView().then {
         $0.backgroundColor = .clear
         $0.layer.addBorder([.bottom], color: borderColor, width: 0.5)
@@ -136,6 +128,30 @@ class MyPageSetVC: UIViewController, SnapKitType {
         $0.textColor = .f3
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
     }
+    // 8
+    let line = UIView().then {
+        $0.backgroundColor = #colorLiteral(red: 0.9592439532, green: 0.9656613469, blue: 0.9688369632, alpha: 1)
+    }
+    
+    let line2 = UIView().then {
+        $0.backgroundColor = #colorLiteral(red: 0.9592439532, green: 0.9656613469, blue: 0.9688369632, alpha: 1)
+    }
+    
+    //1
+    let line3 = UIView().then {
+        $0.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 1)
+        $0.backgroundColor = borderColor
+    }
+    
+    let line4 = UIView().then {
+        $0.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 1)
+        $0.backgroundColor = borderColor
+    }
+    
+    let line5 = UIView().then {
+        $0.frame.size = CGSize(width: UIScreen.main.bounds.width, height: 1)
+        $0.backgroundColor = borderColor
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,7 +165,7 @@ class MyPageSetVC: UIViewController, SnapKitType {
     
     func addComponents() {
         [navigationView, titleLabel, stackView].forEach { view.addSubview($0) }
-        [line, talkContainer, remindContainer, marketingContainer, line2, logoutContainer, withdrawContainer].forEach( { stackView.addArrangedSubview($0) } )
+        [line, talkContainer, line3, remindContainer, line4, marketingContainer, line2, logoutContainer, line5, withdrawContainer].forEach( { stackView.addArrangedSubview($0) } )
         [talkTitleLabel, talkSubtitle, talkSwitch].forEach { talkContainer.addSubview($0) }
         [remindTitleLabel, remindSubtitle, remindSwitch].forEach { remindContainer.addSubview($0) }
         [marketingTitleLabel, marketingSubtitle, marketingSwitch].forEach { marketingContainer.addSubview($0) }
@@ -253,6 +269,17 @@ class MyPageSetVC: UIViewController, SnapKitType {
             $0.centerY.equalToSuperview()
         }
         
+        line3.snp.makeConstraints {
+            $0.height.equalTo(1)
+        }
+        
+        line4.snp.makeConstraints {
+            $0.height.equalTo(1)
+        }
+        
+        line5.snp.makeConstraints {
+            $0.height.equalTo(1)
+        }
     }
     
     func bind() {
