@@ -96,6 +96,20 @@ class CallVC: UIViewController, SnapKitType {
         $0.layer.borderWidth = 1
     }
     
+    let remainNoticeLabel = UILabel().then {
+        $0.text = "통화 종료까지 1분 남았습니다\n연장을 원하시면 연장을 요청하세요"
+        $0.font = FontManager.shared.notoSansKR(.regular, 10)
+        $0.textColor = .f4
+        $0.numberOfLines = 0
+    }
+    
+    let noticeLabel = UILabel().then {
+        $0.text = "시간 연장 시, 상대방의 동의를 구한 후 연장해주세요"
+        $0.font = FontManager.shared.notoSansKR(.regular, 10)
+        $0.textColor = .f4
+        $0.numberOfLines = 0
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,8 +123,8 @@ class CallVC: UIViewController, SnapKitType {
     
     func addComponents() {
         [titleStackView, profileImage, nickName, buttonStackView].forEach { view.addSubview($0) }
-        [titleLabel, timeLabel].forEach { titleStackView.addArrangedSubview($0) }
-        [extendButton, stopButton, acceptButton, refuseButton].forEach { buttonStackView.addArrangedSubview($0) }
+        [titleLabel, timeLabel, remainNoticeLabel].forEach { titleStackView.addArrangedSubview($0) }
+        [extendButton, noticeLabel, stopButton, acceptButton, refuseButton].forEach { buttonStackView.addArrangedSubview($0) }
     }
     
     func setConstraints() {
@@ -165,6 +179,18 @@ class CallVC: UIViewController, SnapKitType {
                 self?.dismiss(animated: true)
             })
             .disposed(by: disposeBag)
+        
+        extendButton.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.changeUI(.remain)
+            })
+            .disposed(by: disposeBag)
+        
+        stopButton.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     func changeUI(_ type: CallState) {
@@ -175,6 +201,8 @@ class CallVC: UIViewController, SnapKitType {
             refuseButton.isHidden = false
             extendButton.isHidden = true
             stopButton.isHidden = true
+            noticeLabel.isHidden = true
+            remainNoticeLabel.isHidden = true
             break
         case .call:
             titleLabel.text = "통화 하는 중"
@@ -183,8 +211,18 @@ class CallVC: UIViewController, SnapKitType {
             stopButton.isHidden = false
             acceptButton.isHidden = true
             refuseButton.isHidden = true
+            noticeLabel.isHidden = false
+            remainNoticeLabel.isHidden = true
             break
         case .remain:
+            titleLabel.text = "통화 하는 중"
+            timeLabel.isHidden = false
+            extendButton.isHidden = false
+            stopButton.isHidden = false
+            acceptButton.isHidden = true
+            refuseButton.isHidden = true
+            noticeLabel.isHidden = false
+            remainNoticeLabel.isHidden = false
             break
         }
     }
