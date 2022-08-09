@@ -10,6 +10,7 @@ import UIKit
 
 protocol MyPageCoordinating: AnyObject {
     func logout()
+    func movetToSetting()
 }
 
 class MyPageCoordinator: CoordinatorType {
@@ -34,5 +35,9 @@ class MyPageCoordinator: CoordinatorType {
 extension MyPageCoordinator: MyPageCoordinating {
     func logout() {
         parentCoordinator?.logout()
+    }
+    
+    func movetToSetting() {
+        
     }
 }
