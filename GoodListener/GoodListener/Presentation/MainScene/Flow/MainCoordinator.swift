@@ -146,12 +146,14 @@ extension MainCoordinator: MainCoordinating {
     
     func call() {
         let navigationController = UINavigationController()
-        let callVC = CallVC()
-        
-        navigationController.pushViewController(callVC, animated: true)
         navigationController.modalPresentationStyle = .fullScreen
         
         self.tabBarController.present(navigationController, animated: true)
+        
+        let callCoordinator = CallCoordinator(navigationController: navigationController)
+        callCoordinator.start()
+        
+        childCoordinators.append(callCoordinator)
     }
 }
 

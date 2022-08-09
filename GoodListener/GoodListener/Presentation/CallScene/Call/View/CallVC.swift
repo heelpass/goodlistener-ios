@@ -21,8 +21,12 @@ enum CallState {
 
 class CallVC: UIViewController, SnapKitType {
     
+    weak var coordinator: CallCoordinator?
     let manager = CallManager(appID: AgoraConfiguration.appID)
     let disposeBag = DisposeBag()
+    
+    // 현재 전화 상태
+    var state: CallState = .ready
     
     let titleStackView = UIStackView().then {
         $0.axis = .vertical
@@ -171,24 +175,26 @@ class CallVC: UIViewController, SnapKitType {
         acceptButton.rx.tap
             .bind(onNext: { [weak self] in
                 self?.changeUI(.call)
+                // 소켓
             })
             .disposed(by: disposeBag)
         
         refuseButton.rx.tap
             .bind(onNext: { [weak self] in
-                self?.dismiss(animated: true)
+                self?.coordinator?.moveToMain()
             })
             .disposed(by: disposeBag)
         
         extendButton.rx.tap
             .bind(onNext: { [weak self] in
                 self?.changeUI(.remain)
+                // 통화시간 연장
             })
             .disposed(by: disposeBag)
         
         stopButton.rx.tap
             .bind(onNext: { [weak self] in
-                self?.dismiss(animated: true)
+                self?.coordinator?.moveToMain()
             })
             .disposed(by: disposeBag)
     }
