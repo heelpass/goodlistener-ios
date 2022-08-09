@@ -38,6 +38,8 @@ extension MyPageCoordinator: MyPageCoordinating {
     }
     
     func movetToSetting() {
-        
+        let vc = MyPageSetVC()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
     }
 }

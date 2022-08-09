@@ -16,9 +16,7 @@ class MyPageVC: UIViewController, SnapKitType {
     weak var coordinator: MyPageCoordinating?
     var disposeBag = DisposeBag()
     
-    let settingIco = UIButton().then {
-        $0.setImage(UIImage(named: "ic_navi_setting_dark"), for: .normal)
-    }
+    let navigationView = NavigationView(frame: .zero, type: .setting)
     
     let profileImage = UIImageView().then {
         $0.image = UIImage(named: "main_img_step_01")
@@ -57,24 +55,8 @@ class MyPageVC: UIViewController, SnapKitType {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let button = UIButton()
-        button.setTitleColor(.black, for: .normal)
-        button.setTitle("로그아웃", for: .normal)
-        view.addSubview(button)
-        button.snp.makeConstraints {
-            $0.size.equalTo(100)
-            $0.top.centerX.equalToSuperview()
-        }
-        
         view.backgroundColor = .white
         
-        // 로그아웃 예제
-        button.rx.tap
-            .subscribe(onNext: { [weak self] in
-                Log.d("Logout")
-                self?.coordinator?.logout()
-            })
-            .disposed(by: disposeBag)
         // Do any additional setup after loading the view.
         addComponents()
         setConstraints()
@@ -82,15 +64,15 @@ class MyPageVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [settingIco, profileImage, nicknameContainer, tagContainer].forEach { view.addSubview($0) }
+        [navigationView, profileImage, nicknameContainer, tagContainer].forEach { view.addSubview($0) }
         [nicknameLabel, nicknameTf].forEach { nicknameContainer.addSubview($0) }
         [tagLabel].forEach { tagContainer.addSubview($0) }
     }
     
     func setConstraints() {
-        settingIco.snp.makeConstraints {
-            $0.right.equalToSuperview().inset(16)
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+        navigationView.snp.makeConstraints {
+            $0.top.left.right.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(35)
         }
         
         profileImage.snp.makeConstraints {
@@ -129,7 +111,11 @@ class MyPageVC: UIViewController, SnapKitType {
     }
     
     func bind() {
-        
+        navigationView.button.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.coordinator?.movetToSetting()
+            })
+            .disposed(by: disposeBag)
     }
 
 }
