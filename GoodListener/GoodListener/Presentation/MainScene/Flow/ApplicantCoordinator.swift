@@ -25,7 +25,7 @@ class ApplicantCoordinator: CoordinatorType {
     }
     
     func start() {
-        let vc = ApplicantViewController()
+        let vc = ApplicantVC()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }

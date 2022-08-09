@@ -14,7 +14,7 @@ import RxCocoa
 class CallReviewVC: UIViewController, SnapKitType {
     
     var disposeBag = DisposeBag()
-    var coordinator: CallCoordinating?
+    weak var coordinator: CallCoordinating?
     
     let titleLabel = UILabel().then {
         $0.text = "후기 남기기"

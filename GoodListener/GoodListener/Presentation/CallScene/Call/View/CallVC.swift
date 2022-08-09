@@ -21,8 +21,8 @@ enum CallState {
 
 class CallVC: UIViewController, SnapKitType {
     
-    var coordinator: CallCoordinating?
-    let manager = CallManager(appID: AgoraConfiguration.appID)
+    weak var coordinator: CallCoordinating?
+    let manager = CallManager.shared
     let disposeBag = DisposeBag()
     
     // 현재 전화 상태

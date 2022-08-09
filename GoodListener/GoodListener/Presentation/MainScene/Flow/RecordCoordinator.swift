@@ -25,7 +25,7 @@ class RecordCoordinator: CoordinatorType {
     }
     
     func start() {
-        let vc = RecordViewController()
+        let vc = RecordVC()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }

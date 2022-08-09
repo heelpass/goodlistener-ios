@@ -18,11 +18,14 @@ struct AgoraConfiguration {
 }
 
 class CallManager: NSObject {
+    
+    static let shared = CallManager()
+    
     var agoraKit: AgoraRtcEngineKit?
     
-    init(appID: String) {
+    private override init() {
         super.init()
-        agoraKit = AgoraRtcEngineKit.sharedEngine(withAppId: appID, delegate: self)
+        agoraKit = AgoraRtcEngineKit.sharedEngine(withAppId: AgoraConfiguration.appID, delegate: self)
     }
     
     func start() {

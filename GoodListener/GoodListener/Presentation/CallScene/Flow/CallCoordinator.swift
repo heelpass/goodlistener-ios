@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol CallCoordinating {
+protocol CallCoordinating: AnyObject {
     func moveToReview() // 통화가 끝난 후 후기 페이지로 이동
     func moveToMain()   // 후기 작성 후 메인으로 이동
 }
@@ -39,10 +39,11 @@ extension CallCoordinator: CallCoordinating {
     }
     
     func moveToMain() {
+        navigationController.popToRootViewController(animated: false)
+        parentCoordinator?.childDidFinish(self)
         navigationController.dismiss(animated: true)
         // 부모 코디네이터로부터 자식(self)코디네이터를 제거해야함
         // 그렇지 않으면 메모리 누수 발생
-        parentCoordinator?.childDidFinish(self)
     }
     
     

@@ -17,9 +17,9 @@
 		0ABA282A288D5B56000D889B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA2829288D5B56000D889B /* Assets.xcassets */; };
 		0ABA282D288D5B56000D889B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA282B288D5B56000D889B /* LaunchScreen.storyboard */; };
 		0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF43089288FD8800078B2D5 /* ApplicantCoordinator.swift */; };
-		0AF4308C288FD8E90078B2D5 /* ApplicantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308B288FD8E90078B2D5 /* ApplicantViewController.swift */; };
+		0AF4308C288FD8E90078B2D5 /* ApplicantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */; };
 		0AF4308E288FDC230078B2D5 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */; };
-		0AF43093288FDC850078B2D5 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF43092288FDC850078B2D5 /* RecordViewController.swift */; };
+		0AF43093288FDC850078B2D5 /* RecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF43092288FDC850078B2D5 /* RecordVC.swift */; };
 		73B35A699773E2A2848FCE3D /* Pods_GoodListener.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5450741D5E8F8D9D306A0E69 /* Pods_GoodListener.framework */; };
 		E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A79539289CB28000EF9E1B /* FontManager.swift */; };
 		E8A79544289CC9CA00EF9E1B /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A7953D289CC9CA00EF9E1B /* NotoSansKR-Light.otf */; };
@@ -50,9 +50,9 @@
 		E8CFBCCD288F710300D63B07 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCCC288F710300D63B07 /* AuthVC.swift */; };
 		E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCCE288F73AB00D63B07 /* AppCoordinator.swift */; };
 		E8CFBCD8288F7A9C00D63B07 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCD7288F7A9C00D63B07 /* HomeCoordinator.swift */; };
-		E8CFBCDA288F7B4800D63B07 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCD9288F7B4800D63B07 /* HomeViewController.swift */; };
+		E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCD9288F7B4800D63B07 /* HomeVC.swift */; };
 		E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCDB288F7D0900D63B07 /* MainCoordinator.swift */; };
-		E8CFBCE1288F874C00D63B07 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */; };
+		E8CFBCE1288F874C00D63B07 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE0288F874C00D63B07 /* MyPageVC.swift */; };
 		E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */; };
 		E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */; };
 		E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D09853289A6C4D008AD55F /* SocketManager.swift */; };
@@ -70,9 +70,9 @@
 		0ABA2829288D5B56000D889B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0ABA282C288D5B56000D889B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AF43089288FD8800078B2D5 /* ApplicantCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantCoordinator.swift; sourceTree = "<group>"; };
-		0AF4308B288FD8E90078B2D5 /* ApplicantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantViewController.swift; sourceTree = "<group>"; };
+		0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantVC.swift; sourceTree = "<group>"; };
 		0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
-		0AF43092288FDC850078B2D5 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		0AF43092288FDC850078B2D5 /* RecordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVC.swift; sourceTree = "<group>"; };
 		0F1AC0E77A46575A9E243914 /* Pods-GoodListener.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodListener.release.xcconfig"; path = "Target Support Files/Pods-GoodListener/Pods-GoodListener.release.xcconfig"; sourceTree = "<group>"; };
 		47C5C925F8CF8A111AFD7E1E /* Pods-GoodListener.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodListener.debug.xcconfig"; path = "Target Support Files/Pods-GoodListener/Pods-GoodListener.debug.xcconfig"; sourceTree = "<group>"; };
 		5450741D5E8F8D9D306A0E69 /* Pods_GoodListener.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodListener.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,9 +107,9 @@
 		E8CFBCCC288F710300D63B07 /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
 		E8CFBCCE288F73AB00D63B07 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E8CFBCD7288F7A9C00D63B07 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
-		E8CFBCD9288F7B4800D63B07 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		E8CFBCD9288F7B4800D63B07 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		E8CFBCDB288F7D0900D63B07 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		E8CFBCE0288F874C00D63B07 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
 		E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		E8D09853289A6C4D008AD55F /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 		0AF43087288FD84F0078B2D5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0AF4308B288FD8E90078B2D5 /* ApplicantViewController.swift */,
+				0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -196,7 +196,7 @@
 		0AF43090288FDC690078B2D5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0AF43092288FDC850078B2D5 /* RecordViewController.swift */,
+				0AF43092288FDC850078B2D5 /* RecordVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -561,7 +561,7 @@
 		E8CFBCD4288F7A0400D63B07 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E8CFBCD9288F7B4800D63B07 /* HomeViewController.swift */,
+				E8CFBCD9288F7B4800D63B07 /* HomeVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -585,7 +585,7 @@
 		E8CFBCDF288F874000D63B07 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */,
+				E8CFBCE0288F874C00D63B07 /* MyPageVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -759,13 +759,13 @@
 				E8C3320928925F3400ECE59C /* CallVC.swift in Sources */,
 				0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */,
 				E8CE19E4289CE15E007A56FE /* Const.swift in Sources */,
-				0AF43093288FDC850078B2D5 /* RecordViewController.swift in Sources */,
+				0AF43093288FDC850078B2D5 /* RecordVC.swift in Sources */,
 				E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */,
 				E8CB6566288E35090076E254 /* Log.swift in Sources */,
 				0AF4308E288FDC230078B2D5 /* RecordCoordinator.swift in Sources */,
 				E8CFBCD8288F7A9C00D63B07 /* HomeCoordinator.swift in Sources */,
 				E8B443EF28A2273E0003815B /* CallCoordinator.swift in Sources */,
-				0AF4308C288FD8E90078B2D5 /* ApplicantViewController.swift in Sources */,
+				0AF4308C288FD8E90078B2D5 /* ApplicantVC.swift in Sources */,
 				E8C3320B289265F400ECE59C /* CallManager.swift in Sources */,
 				E8CB6568288E359A0076E254 /* ViewModelType.swift in Sources */,
 				E8CE19E2289CE08C007A56FE /* UIButton+.swift in Sources */,
@@ -773,9 +773,9 @@
 				E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */,
 				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
 				E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */,
-				E8CFBCE1288F874C00D63B07 /* MyPageViewController.swift in Sources */,
+				E8CFBCE1288F874C00D63B07 /* MyPageVC.swift in Sources */,
 				E8CFBCCD288F710300D63B07 /* AuthVC.swift in Sources */,
-				E8CFBCDA288F7B4800D63B07 /* HomeViewController.swift in Sources */,
+				E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */,
 				E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */,
 				E8B4435A28A103570003815B /* UILabel+.swift in Sources */,
 				E8B4435828A0EADD0003815B /* NicknameSetupVC.swift in Sources */,
