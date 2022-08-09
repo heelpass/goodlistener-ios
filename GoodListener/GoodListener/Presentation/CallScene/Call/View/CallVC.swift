@@ -21,7 +21,7 @@ enum CallState {
 
 class CallVC: UIViewController, SnapKitType {
     
-    weak var coordinator: CallCoordinator?
+    var coordinator: CallCoordinating?
     let manager = CallManager(appID: AgoraConfiguration.appID)
     let disposeBag = DisposeBag()
     
@@ -194,7 +194,7 @@ class CallVC: UIViewController, SnapKitType {
         
         stopButton.rx.tap
             .bind(onNext: { [weak self] in
-                self?.coordinator?.moveToMain()
+                self?.coordinator?.moveToReview()
             })
             .disposed(by: disposeBag)
     }

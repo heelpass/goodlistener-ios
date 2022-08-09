@@ -36,6 +36,7 @@
 		E8B4435828A0EADD0003815B /* NicknameSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435728A0EADD0003815B /* NicknameSetupVC.swift */; };
 		E8B4435A28A103570003815B /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435928A103570003815B /* UILabel+.swift */; };
 		E8B443EF28A2273E0003815B /* CallCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B443EE28A2273E0003815B /* CallCoordinator.swift */; };
+		E8B443F528A22ABD0003815B /* CallReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B443F428A22ABD0003815B /* CallReviewVC.swift */; };
 		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
@@ -91,6 +92,7 @@
 		E8B4435728A0EADD0003815B /* NicknameSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSetupVC.swift; sourceTree = "<group>"; };
 		E8B4435928A103570003815B /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		E8B443EE28A2273E0003815B /* CallCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallCoordinator.swift; sourceTree = "<group>"; };
+		E8B443F428A22ABD0003815B /* CallReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallReviewVC.swift; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -302,19 +304,37 @@
 			path = Call;
 			sourceTree = "<group>";
 		};
-		E8B443F128A22A4D0003815B /* Review */ = {
+		E8B443F128A22A4D0003815B /* CallReview */ = {
+			isa = PBXGroup;
+			children = (
+				E8B443F328A22AA00003815B /* View */,
+				E8B443F228A22A9B0003815B /* ViewModel */,
+			);
+			path = CallReview;
+			sourceTree = "<group>";
+		};
+		E8B443F228A22A9B0003815B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Review;
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E8B443F328A22AA00003815B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E8B443F428A22ABD0003815B /* CallReviewVC.swift */,
+			);
+			name = View;
+			path = "퍋ㅈ";
 			sourceTree = "<group>";
 		};
 		E8C3320428925EFC00ECE59C /* CallScene */ = {
 			isa = PBXGroup;
 			children = (
-				E8B443F128A22A4D0003815B /* Review */,
 				E8C3320728925F1900ECE59C /* Flow */,
 				E8B443F028A22A330003815B /* Call */,
+				E8B443F128A22A4D0003815B /* CallReview */,
 			);
 			path = CallScene;
 			sourceTree = "<group>";
@@ -729,6 +749,7 @@
 				0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */,
 				E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */,
 				E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */,
+				E8B443F528A22ABD0003815B /* CallReviewVC.swift in Sources */,
 				0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */,
 				E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */,
 				0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */,

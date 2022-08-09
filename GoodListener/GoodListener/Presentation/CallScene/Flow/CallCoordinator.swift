@@ -17,10 +17,11 @@ class CallCoordinator: CoordinatorType {
     var childCoordinators: [CoordinatorType] = []
     
     var navigationController: UINavigationController
+    var parentCoordinator: CoordinatorType?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.navigationController.isToolbarHidden = true
+        self.navigationController.isNavigationBarHidden = true
     }
     
     func start() {
@@ -32,11 +33,16 @@ class CallCoordinator: CoordinatorType {
 
 extension CallCoordinator: CallCoordinating {
     func moveToReview() {
-        
+        let vc = CallReviewVC()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func moveToMain() {
         navigationController.dismiss(animated: true)
+        // 부모 코디네이터로부터 자식(self)코디네이터를 제거해야함
+        // 그렇지 않으면 메모리 누수 발생
+        parentCoordinator?.childDidFinish(self)
     }
     
     

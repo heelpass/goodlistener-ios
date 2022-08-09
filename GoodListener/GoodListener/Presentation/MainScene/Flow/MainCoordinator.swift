@@ -151,6 +151,7 @@ extension MainCoordinator: MainCoordinating {
         self.tabBarController.present(navigationController, animated: true)
         
         let callCoordinator = CallCoordinator(navigationController: navigationController)
+        callCoordinator.parentCoordinator = self
         callCoordinator.start()
         
         childCoordinators.append(callCoordinator)
