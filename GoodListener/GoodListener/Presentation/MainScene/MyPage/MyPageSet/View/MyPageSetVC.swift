@@ -16,13 +16,13 @@ class MyPageSetVC: UIViewController, SnapKitType {
     weak var coordinator: MyPageCoordinating?
     var disposeBag = DisposeBag()
     static let borderColor = UIColor(red: 241/255, green: 243/255, blue: 244/255, alpha:1)
-    let titleLabel = UILabel().then {
-        $0.text = "설정"
-        $0.font = FontManager.shared.notoSansKR(.bold, 26)
-        $0.textColor = .f2
-    }
     
-    let navigationView = NavigationView(frame: .zero, type: .save)
+    let navigationView = NavigationView(frame: .zero, type: .none).then {
+        $0.logo.isHidden = true
+        $0.backBtn.isHidden = false
+        $0.title.isHidden = false
+        $0.title.text = "설정"
+    }
     
     let stackView = UIStackView().then {
         $0.backgroundColor = .clear
@@ -93,11 +93,7 @@ class MyPageSetVC: UIViewController, SnapKitType {
     }
     
     let marketingSubtitle = UILabel().then {
-        if UIScreen.main.bounds.width > 375 {
-            $0.text = "혜택 소식 알림을 받을 수 있어요"
-        } else {
-            $0.text = "혜택 소식 알림을 받을 수\n있어요"
-        }
+        $0.text = "혜택 소식 알림을 받을 수 있어요"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f5
         $0.numberOfLines = 2
@@ -164,7 +160,7 @@ class MyPageSetVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [navigationView, titleLabel, stackView].forEach { view.addSubview($0) }
+        [navigationView, stackView].forEach { view.addSubview($0) }
         [line, talkContainer, line3, remindContainer, line4, marketingContainer, line2, logoutContainer, line5, withdrawContainer].forEach( { stackView.addArrangedSubview($0) } )
         [talkTitleLabel, talkSubtitle, talkSwitch].forEach { talkContainer.addSubview($0) }
         [remindTitleLabel, remindSubtitle, remindSwitch].forEach { remindContainer.addSubview($0) }
@@ -175,17 +171,13 @@ class MyPageSetVC: UIViewController, SnapKitType {
     
     func setConstraints() {
         navigationView.snp.makeConstraints {
-            $0.top.left.right.equalTo(view.safeAreaLayoutGuide)
+            $0.left.right.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(40)
             $0.height.equalTo(35)
         }
         
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(navigationView.snp.bottom).offset(32)
-            $0.left.equalToSuperview().inset(Const.padding)
-        }
-        
         stackView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(28)
+            $0.top.equalTo(navigationView.snp.bottom).offset(28)
             $0.left.right.equalToSuperview()
         }
         
@@ -286,6 +278,12 @@ class MyPageSetVC: UIViewController, SnapKitType {
         logoutContainer.tapGesture
             .subscribe(onNext: { [weak self] _ in
                 self?.coordinator?.logout()
+            })
+            .disposed(by: disposeBag)
+        
+        navigationView.backBtn.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
     }
