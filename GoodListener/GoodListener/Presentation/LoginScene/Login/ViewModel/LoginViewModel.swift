@@ -30,8 +30,7 @@ class LoginViewModel: NSObject, ViewModelType {
     }
     
     struct Output {
-        var appleLoginResult: Signal<Bool>
-        var kakaoLoginResult: Signal<Bool>
+        var loginResult: Signal<Bool>
     }
     
     override init() {
@@ -40,7 +39,7 @@ class LoginViewModel: NSObject, ViewModelType {
     
     // Input을 Output으로 변환
     func transform(input: Input) -> Output {
-        let appleLoginResult = PublishRelay<Bool>()
+        let loginResult = PublishRelay<Bool>()
         
         input.appleLoginBtnTap
             .subscribe(onNext: { [weak self] _ in
@@ -49,20 +48,14 @@ class LoginViewModel: NSObject, ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        input.kakaoLoginBtnTap
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                self.kakaoLoginHandler()
-            })
-            .disposed(by: disposeBag)
         
         // Delegate에서 받은 결과를 Output에 바인딩
-        loginResult
-            .bind(to: appleLoginResult)
+        self.loginResult
+            .bind(to: loginResult)
             .disposed(by: disposeBag)
         
         
-        return Output(appleLoginResult: appleLoginResult.asSignal(onErrorJustReturn: false), kakaoLoginResult: loginResult.asSignal(onErrorJustReturn: false))
+        return Output(loginResult: loginResult.asSignal(onErrorJustReturn: false))
     }
     
     // Apple 로그인 핸들러
