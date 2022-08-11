@@ -172,12 +172,12 @@ class MyPageSetVC: UIViewController, SnapKitType {
     func setConstraints() {
         navigationView.snp.makeConstraints {
             $0.left.right.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(40)
-            $0.height.equalTo(35)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(44)
         }
         
         stackView.snp.makeConstraints {
-            $0.top.equalTo(navigationView.snp.bottom).offset(28)
+            $0.top.equalTo(navigationView.snp.bottom)
             $0.left.right.equalToSuperview()
         }
         
@@ -190,14 +190,14 @@ class MyPageSetVC: UIViewController, SnapKitType {
         }
         
         talkTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(18)
+            $0.top.equalToSuperview().inset(20)
             $0.left.equalToSuperview().inset(Const.padding)
         }
         
         talkSubtitle.snp.makeConstraints {
-            $0.top.equalTo(talkTitleLabel.snp.bottom).offset(5)
+            $0.top.equalTo(talkTitleLabel.snp.bottom).offset(8)
             $0.left.equalToSuperview().inset(Const.padding)
-            $0.bottom.equalToSuperview().inset(17)
+            $0.bottom.equalToSuperview().inset(20)
             $0.width.greaterThanOrEqualTo(250)
         }
         
@@ -208,14 +208,14 @@ class MyPageSetVC: UIViewController, SnapKitType {
         }
         
         remindTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(18)
+            $0.top.equalToSuperview().inset(20)
             $0.left.equalToSuperview().inset(Const.padding)
         }
         
         remindSubtitle.snp.makeConstraints {
-            $0.top.equalTo(remindTitleLabel.snp.bottom).offset(5)
+            $0.top.equalTo(remindTitleLabel.snp.bottom).offset(8)
             $0.left.equalToSuperview().inset(Const.padding)
-            $0.bottom.equalToSuperview().inset(17)
+            $0.bottom.equalToSuperview().inset(20)
             $0.width.greaterThanOrEqualTo(250)
         }
         
@@ -226,14 +226,14 @@ class MyPageSetVC: UIViewController, SnapKitType {
         }
         
         marketingTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(18)
+            $0.top.equalToSuperview().inset(20)
             $0.left.equalToSuperview().inset(Const.padding)
         }
         
         marketingSubtitle.snp.makeConstraints {
-            $0.top.equalTo(marketingTitleLabel.snp.bottom).offset(5)
+            $0.top.equalTo(marketingTitleLabel.snp.bottom).offset(8)
             $0.left.equalToSuperview().inset(Const.padding)
-            $0.bottom.equalToSuperview().inset(17)
+            $0.bottom.equalToSuperview().inset(20)
             $0.width.greaterThanOrEqualTo(250)
         }
         
@@ -244,7 +244,7 @@ class MyPageSetVC: UIViewController, SnapKitType {
         }
         
         logoutContainer.snp.makeConstraints {
-            $0.height.equalTo(60)
+            $0.height.equalTo(64)
         }
         
         logoutLabel.snp.makeConstraints {
@@ -253,7 +253,7 @@ class MyPageSetVC: UIViewController, SnapKitType {
         }
         
         withdrawContainer.snp.makeConstraints {
-            $0.height.equalTo(60)
+            $0.height.equalTo(64)
         }
         
         withdrawLabel.snp.makeConstraints {

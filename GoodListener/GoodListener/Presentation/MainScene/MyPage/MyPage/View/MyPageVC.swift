@@ -111,9 +111,15 @@ class MyPageVC: UIViewController, SnapKitType {
     }
     
     func bind() {
-        navigationView.button.rx.tap
+        navigationView.rightBtn.rx.tap
             .bind(onNext: { [weak self] in
                 self?.coordinator?.movetToSetting()
+            })
+            .disposed(by: disposeBag)
+        
+        tagContainer.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                self?.coordinator?.moveToTagPage()
             })
             .disposed(by: disposeBag)
     }
