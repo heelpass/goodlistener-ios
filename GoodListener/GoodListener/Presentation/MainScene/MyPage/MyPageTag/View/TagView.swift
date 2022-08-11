@@ -16,12 +16,13 @@ class TagView: UIView {
     var title = UILabel().then {
         $0.text = "나이"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
-        $0.textColor = .f6
+        $0.textColor = .f3
     }
     
     lazy var collectionView: UICollectionView = {
         
-        let layout = UICollectionViewFlowLayout()
+        let layout = TagCollectionViewLayout()
+        layout.scrollDirection = .vertical
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
@@ -30,6 +31,10 @@ class TagView: UIView {
         view.dataSource = self
         return view
     }()
+    
+    let line = UIView().then {
+        $0.backgroundColor = .l2
+    }
     
     private override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,14 +50,22 @@ class TagView: UIView {
         
         addSubview(title)
         addSubview(collectionView)
+        addSubview(line)
         title.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(28)
-            $0.left.equalToSuperview()
+            $0.top.equalToSuperview().inset(20)
+            $0.left.equalToSuperview().inset(Const.padding)
+            $0.height.equalTo(24)
         }
         
         collectionView.snp.makeConstraints {
             $0.top.equalTo(title.snp.bottom).offset(10)
-            $0.edges.equalToSuperview()
+            $0.left.right.equalToSuperview().inset(Const.padding)
+            $0.bottom.equalToSuperview().inset(21)
+        }
+        
+        line.snp.makeConstraints {
+            $0.left.right.bottom.equalToSuperview()
+            $0.height.equalTo(1)
         }
     }
     
@@ -76,7 +89,7 @@ extension TagView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as! TagCell
         
         cell.label.text = tagData[indexPath.row]
-        selectedTag == tagData[indexPath.row] ? cell.configUI(.selected) : cell.configUI(.deselected)
+        indexPath.row == 0 ? cell.configUI(.selected) : cell.configUI(.deselected)
         
         return cell
     }

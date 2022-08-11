@@ -20,8 +20,8 @@ class TagCell: UICollectionViewCell {
     
     let label = UILabel().then {
         $0.text = "TAG"
-        $0.font = FontManager.shared.notoSansKR(.bold, 14)
-        $0.textColor = .f4
+        $0.font = FontManager.shared.notoSansKR(.bold, 16)
+        $0.textColor = .f3
     }
     
     let background = UIView().then {
@@ -52,8 +52,8 @@ class TagCell: UICollectionViewCell {
         case .selected:
             label.textColor = .f3
             background.backgroundColor = UIColor(red: 247/255, green: 255/255, blue: 242/255, alpha: 1)
-            background.layer.borderWidth = 1
-            background.layer.borderColor = UIColor(red: 94/255, green: 199/255, blue: 92/255, alpha: 0.3).cgColor
+            background.layer.borderWidth = 2
+            background.layer.borderColor = UIColor.m1.cgColor
         case .deselected:
             label.textColor = .f4
             background.backgroundColor = .m3
