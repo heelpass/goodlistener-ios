@@ -17,6 +17,7 @@ import KakaoSDKAuth
 import RxKakaoSDKAuth
 import KakaoSDKUser
 import RxKakaoSDKUser
+import SwiftyJSON
 
 
 class LoginViewModel: NSObject, ViewModelType {
@@ -90,18 +91,18 @@ class LoginViewModel: NSObject, ViewModelType {
     // Token을 서버사이드에 전달
     // Moya로 API부분 설계완료되면 수정 필요
     private func send(token: String) {
-        guard let authData = try? JSONEncoder().encode(["token": token]) else {
-            return
-        }
-        guard let url = URL(string: "URL 입력 필요!!") else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let task = URLSession.shared.uploadTask(with: request, from: authData) { data, response, error in
-            // Handle response from your backend.
-        }
-        task.resume()
+        let moyaProvider = MoyaProvider<LoginAPI>()
+        //moyaProvider.rx.request(.signIn(path: DEF, token: token))
+        moyaProvider.rx.request(.signIn(token))
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] result in
+                switch result {
+                case .success(let response):
+                    Log.d(JSON(response.data))
+                case .failure(let error):
+                    Log.e("\(error.localizedDescription)")
+                }
+            }.disposed(by: disposeBag)
         
     }
     
@@ -110,20 +111,20 @@ class LoginViewModel: NSObject, ViewModelType {
         //private func practiveMoya(token: String)
         // ex) 만일 'ABC/DEF'에 token을 post로 보내야 한다고 가정 -> LoginAPI.swift 참고
      
-        let moyaProvider = MoyaProvider<LoginAPI>()
-        //moyaProvider.rx.request(.signIn(path: DEF, token: token))
-        moyaProvider.rx.request(.signIn)
-            .map(WeatherInfo.self)
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] result in
-                switch result {
-                case .success(let response):
-                    print("지역은 \(response.name ?? "")입니다")
-                    print("위도는\(response.coord.lat ?? 0.0)이고, 경도는\(response.coord.lon ?? 0.0)")
-                case .failure(let error):
-                    Log.e("\(error.localizedDescription)")
-                }
-            }.disposed(by: disposeBag)
+//        let moyaProvider = MoyaProvider<LoginAPI>()
+//        //moyaProvider.rx.request(.signIn(path: DEF, token: token))
+//        moyaProvider.rx.request(.signIn())
+//            .map(WeatherInfo.self)
+//            .observe(on: MainScheduler.instance)
+//            .subscribe { [weak self] result in
+//                switch result {
+//                case .success(let response):
+//                    print("지역은 \(response.name ?? "")입니다")
+//                    print("위도는\(response.coord.lat ?? 0.0)이고, 경도는\(response.coord.lon ?? 0.0)")
+//                case .failure(let error):
+//                    Log.e("\(error.localizedDescription)")
+//                }
+//            }.disposed(by: disposeBag)
     }
 }
 

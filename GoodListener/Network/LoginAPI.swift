@@ -13,7 +13,7 @@ import Moya
 //ex) 만일 'ABC/DEF'에 token을 post로 보내야 한다고 가정
 // case signIn(path: String, token: String)
 public enum LoginAPI {
-    case signIn
+    case signIn(String)
     case signOut
     case leave
 }
@@ -25,7 +25,7 @@ extension LoginAPI: TargetType {
     //서버의 base URL / Moya는 이를 통하여 endpoint객체 생성
     // return URL(string: "ABC")
     public var baseURL: URL {
-        return URL(string: "https://api.openweathermap.org/data/2.5/weather?q=seoul&appid=e64744f55787649f18b384852530434e")!
+        return URL(string: "http://223.130.162.39:29430")!
     }
     
     // 서버의 base URL 뒤에 추가 될 Path (일반적으로 API)
@@ -33,11 +33,11 @@ extension LoginAPI: TargetType {
     public var path: String {
         switch self {
         case .signIn:
-            return ""
+            return ApiURL.Join
         case .signOut:
             return ""
         case .leave:
-            return ""
+            return ApiURL.CloseAccount
         }
     }
     
@@ -46,7 +46,7 @@ extension LoginAPI: TargetType {
     public var method: Moya.Method {
         switch self {
         case .signIn:
-            return .get
+            return .post
         case .signOut:
             return .post
         case .leave:
@@ -65,8 +65,8 @@ extension LoginAPI: TargetType {
     // case let .signIn(_, token): return .requestJSONEncodable(["accesstoken": token])
     public var task: Task {
         switch self {
-        case .signIn:
-            return .requestPlain
+        case .signIn(let token):
+            return .requestJSONEncodable(["token" : token])
         case .signOut:
             return .requestPlain
         case .leave:
@@ -77,7 +77,8 @@ extension LoginAPI: TargetType {
     // HTTP header
     //  return ["Content-type": "application/json"]
     public var headers: [String : String]? {
-        return ["Content-type": "application/json"]
+        return ["Authorization" : "Bearer eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLmhlZWxwYXNzLmdvb2QtbGlzdGVuZXIiLCJleHAiOjE2NjAyMTQ3NTIsImlhdCI6MTY2MDEyODM1Miwic3ViIjoiMDAwODU3Ljc3NThhOGQ3NDAzYTRkMWNhYzIwOTNmMDYzOWI3NGQ5LjE0NTIiLCJhdF9oYXNoIjoiREhLdzZJUlNyZ19XcTBFWHlNTHhyZyIsImVtYWlsIjoieWh3cTdwZHdmdkBwcml2YXRlcmVsYXkuYXBwbGVpZC5jb20iLCJlbWFpbF92ZXJpZmllZCI6InRydWUiLCJpc19wcml2YXRlX2VtYWlsIjoidHJ1ZSJ9.vxOpTFuseAKsBul46JoPRwAUvG7nEYoLP0HX888AMrGWMkvW0pKVKUvX1kAmPpY8CbDaHHqzbpuvHGf5nH3eHccLgzfw0UwuIgEji-bxpTAjjCyl0ZzAUUPhvks8MZWQcbe279yiOoRLcNz5XIlI7PheYgK6ZBmFArPsq9ySuHvnkNiLGRWbJVXmfZ1nIMl4hVh_K1_tFM9URV8sI3R2GMmCMKOsgmUamjEAI_cp8M0D5GgDW7q5QJyxy2cq6QKH57q9c7GJOR_TkAEtADEm3-31nbv15IRrTEeQwuIbt-Kd5CT_a0ogoqTOEvWsSbz8Nle16McgOkdLiHwtewhyFg",
+            "Content-type": "application/json"]
     }
     
     
