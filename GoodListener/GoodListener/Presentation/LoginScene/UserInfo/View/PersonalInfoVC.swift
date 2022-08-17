@@ -20,7 +20,7 @@ class PersonalInfoVC: UIViewController, SnapKitType {
     let titleLabel = UILabel().then {
         $0.text = "당신에 대해서 알려주세요"
         $0.textAlignment = .left
-        $0.font = FontManager.shared.notoSansKR(.bold, 26)
+        $0.font = FontManager.shared.notoSansKR(.bold, 20)
         $0.numberOfLines = 0
         $0.sizeToFit()
     }
@@ -50,13 +50,13 @@ class PersonalInfoVC: UIViewController, SnapKitType {
     
     func setConstraints() {
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(68)
-            $0.left.equalToSuperview().inset(Const.padding)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
+            $0.centerX.equalToSuperview()
         }
         
         subtitleLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(15)
-            $0.left.equalToSuperview().inset(Const.padding)
+            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.centerX.equalToSuperview()
         }
         
         nextButton.snp.makeConstraints {

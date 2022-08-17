@@ -39,6 +39,7 @@
 		E8B443F528A22ABD0003815B /* CallReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B443F428A22ABD0003815B /* CallReviewVC.swift */; };
 		E8B4449228ACB6610003815B /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449128ACB6610003815B /* NetworkConstant.swift */; };
 		E8B4449628ACC7AD0003815B /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449528ACC7AD0003815B /* UserDefaultsManager.swift */; };
+		E8B4449828ACDF890003815B /* PersonalInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449728ACDF890003815B /* PersonalInfoViewModel.swift */; };
 		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
@@ -97,6 +98,7 @@
 		E8B443F428A22ABD0003815B /* CallReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallReviewVC.swift; sourceTree = "<group>"; };
 		E8B4449128ACB6610003815B /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
 		E8B4449528ACC7AD0003815B /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		E8B4449728ACDF890003815B /* PersonalInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewModel.swift; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -251,18 +253,19 @@
 			path = Color;
 			sourceTree = "<group>";
 		};
-		E8B4434F28A0E8080003815B /* PersonalInformation */ = {
+		E8B4434F28A0E8080003815B /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
 				E8B4435328A0E86A0003815B /* View */,
 				E8B4435228A0E8660003815B /* ViewModel */,
 			);
-			path = PersonalInformation;
+			path = UserInfo;
 			sourceTree = "<group>";
 		};
 		E8B4435228A0E8660003815B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E8B4449728ACDF890003815B /* PersonalInfoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -431,7 +434,7 @@
 				E8CFBCC5288F6DE100D63B07 /* Flow */,
 				E8CFBCC8288F704D00D63B07 /* Login */,
 				E8CFBCC9288F705600D63B07 /* Auth */,
-				E8B4434F28A0E8080003815B /* PersonalInformation */,
+				E8B4434F28A0E8080003815B /* UserInfo */,
 				E8B4435428A0EA8E0003815B /* NicknameSet */,
 			);
 			path = LoginScene;
@@ -766,6 +769,7 @@
 				0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */,
 				E8CE19E4289CE15E007A56FE /* Const.swift in Sources */,
 				0AF43093288FDC850078B2D5 /* RecordVC.swift in Sources */,
+				E8B4449828ACDF890003815B /* PersonalInfoViewModel.swift in Sources */,
 				E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */,
 				E8CB6566288E35090076E254 /* Log.swift in Sources */,
 				0AF4308E288FDC230078B2D5 /* RecordCoordinator.swift in Sources */,
