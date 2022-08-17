@@ -32,4 +32,14 @@ extension UILabel {
         self.attributedText = attributedStr
         
     }
+    
+    func textUnderLine(text: String, range: [String]) {
+        let attributeString = NSMutableAttributedString(string: text)
+
+        // ✅ 굵기 1의 언더라인과 함께 처음부터 끝까지 밑줄 설정.
+        range.forEach {
+            attributeString.addAttribute(.underlineStyle, value: 1, range: (text as NSString).range(of: $0))
+        }
+        self.attributedText = attributeString
+    }
 }

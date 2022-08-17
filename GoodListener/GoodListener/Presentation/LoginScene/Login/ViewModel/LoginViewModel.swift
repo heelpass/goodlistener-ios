@@ -27,7 +27,8 @@ class LoginViewModel: NSObject, ViewModelType {
     
     struct Input {
         var appleLoginBtnTap: Observable<UITapGestureRecognizer>
-        var kakaoLoginBtnTap: Observable<UITapGestureRecognizer>
+        var nonLoginBtnTap: Observable<UITapGestureRecognizer>
+        var termsOfServiceBtnTap: Observable<UITapGestureRecognizer>
     }
     
     struct Output {
@@ -49,6 +50,12 @@ class LoginViewModel: NSObject, ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        input.nonLoginBtnTap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                loginResult.accept(true)
+            })
+            .disposed(by: disposeBag)
         
         // Delegate에서 받은 결과를 Output에 바인딩
         self.loginResult
@@ -90,6 +97,7 @@ class LoginViewModel: NSObject, ViewModelType {
     // Token을 서버사이드에 전달
     // Moya로 API부분 설계완료되면 수정 필요
     private func send(token: String) {
+        
         let moyaProvider = MoyaProvider<LoginAPI>()
         moyaProvider.rx.request(.signIn(token))
             .observe(on: MainScheduler.instance)
