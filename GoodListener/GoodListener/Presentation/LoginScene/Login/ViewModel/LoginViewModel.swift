@@ -79,7 +79,6 @@ class LoginViewModel: NSObject, ViewModelType {
                     Log.i("KakaoLogin Succeed")
                     Log.d("Token:: \(oauthToken)")
                     self.loginResult.onNext(true)
-                    self.practiceMoya()
                 }, onError: { [self] error in
                     Log.e("\(error)")
                     self.loginResult.onNext(false)
@@ -92,7 +91,6 @@ class LoginViewModel: NSObject, ViewModelType {
     // Moya로 API부분 설계완료되면 수정 필요
     private func send(token: String) {
         let moyaProvider = MoyaProvider<LoginAPI>()
-        //moyaProvider.rx.request(.signIn(path: DEF, token: token))
         moyaProvider.rx.request(.signIn(token))
             .observe(on: MainScheduler.instance)
             .subscribe { [weak self] result in
@@ -105,27 +103,6 @@ class LoginViewModel: NSObject, ViewModelType {
             }.disposed(by: disposeBag)
         
     }
-    
-    // Moya연습용 - 나중에 위와 합치기
-    private func practiceMoya(){
-        //private func practiveMoya(token: String)
-        // ex) 만일 'ABC/DEF'에 token을 post로 보내야 한다고 가정 -> LoginAPI.swift 참고
-     
-//        let moyaProvider = MoyaProvider<LoginAPI>()
-//        //moyaProvider.rx.request(.signIn(path: DEF, token: token))
-//        moyaProvider.rx.request(.signIn())
-//            .map(WeatherInfo.self)
-//            .observe(on: MainScheduler.instance)
-//            .subscribe { [weak self] result in
-//                switch result {
-//                case .success(let response):
-//                    print("지역은 \(response.name ?? "")입니다")
-//                    print("위도는\(response.coord.lat ?? 0.0)이고, 경도는\(response.coord.lon ?? 0.0)")
-//                case .failure(let error):
-//                    Log.e("\(error.localizedDescription)")
-//                }
-//            }.disposed(by: disposeBag)
-    }
 }
 
 extension LoginViewModel : ASAuthorizationControllerDelegate  {
@@ -133,7 +110,6 @@ extension LoginViewModel : ASAuthorizationControllerDelegate  {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             loginResult.onNext(true)
-            practiceMoya()
             guard let tokenData = credential.authorizationCode,
                   let token = String(data: tokenData, encoding: .utf8) else {
                 Log.e("AuthToken Error")
