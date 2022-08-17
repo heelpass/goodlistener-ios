@@ -37,6 +37,7 @@
 		E8B4435A28A103570003815B /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435928A103570003815B /* UILabel+.swift */; };
 		E8B443EF28A2273E0003815B /* CallCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B443EE28A2273E0003815B /* CallCoordinator.swift */; };
 		E8B443F528A22ABD0003815B /* CallReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B443F428A22ABD0003815B /* CallReviewVC.swift */; };
+		E8B4449228ACB6610003815B /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449128ACB6610003815B /* NetworkConstant.swift */; };
 		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
@@ -93,6 +94,7 @@
 		E8B4435928A103570003815B /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		E8B443EE28A2273E0003815B /* CallCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallCoordinator.swift; sourceTree = "<group>"; };
 		E8B443F428A22ABD0003815B /* CallReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallReviewVC.swift; sourceTree = "<group>"; };
+		E8B4449128ACB6610003815B /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 		E8CFBCC1288E74F800D63B07 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				E8B4449128ACB6610003815B /* NetworkConstant.swift */,
 				E8D09853289A6C4D008AD55F /* SocketManager.swift */,
 				0A703B522896AB8300A05124 /* LoginAPI.swift */,
 			);
@@ -773,6 +776,7 @@
 				E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */,
 				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
 				E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */,
+				E8B4449228ACB6610003815B /* NetworkConstant.swift in Sources */,
 				E8CFBCE1288F874C00D63B07 /* MyPageVC.swift in Sources */,
 				E8CFBCCD288F710300D63B07 /* AuthVC.swift in Sources */,
 				E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */,
