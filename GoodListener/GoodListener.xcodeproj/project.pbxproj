@@ -17,9 +17,9 @@
 		0ABA282A288D5B56000D889B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA2829288D5B56000D889B /* Assets.xcassets */; };
 		0ABA282D288D5B56000D889B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA282B288D5B56000D889B /* LaunchScreen.storyboard */; };
 		0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF43089288FD8800078B2D5 /* ApplicantCoordinator.swift */; };
-		0AF4308C288FD8E90078B2D5 /* ApplicantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308B288FD8E90078B2D5 /* ApplicantViewController.swift */; };
+		0AF4308C288FD8E90078B2D5 /* ApplicantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */; };
 		0AF4308E288FDC230078B2D5 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */; };
-		0AF43093288FDC850078B2D5 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF43092288FDC850078B2D5 /* RecordViewController.swift */; };
+		0AF43093288FDC850078B2D5 /* RecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF43092288FDC850078B2D5 /* RecordVC.swift */; };
 		73B35A699773E2A2848FCE3D /* Pods_GoodListener.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5450741D5E8F8D9D306A0E69 /* Pods_GoodListener.framework */; };
 		E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A79539289CB28000EF9E1B /* FontManager.swift */; };
 		E8A79544289CC9CA00EF9E1B /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A7953D289CC9CA00EF9E1B /* NotoSansKR-Light.otf */; };
@@ -34,7 +34,10 @@
 		E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A79553289CDA7700EF9E1B /* GLButton.swift */; };
 		E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435028A0E8540003815B /* PersonalInfoVC.swift */; };
 		E8B4435828A0EADD0003815B /* NicknameSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435728A0EADD0003815B /* NicknameSetupVC.swift */; };
-		E8C3320928925F3400ECE59C /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallViewController.swift */; };
+		E8B4435A28A103570003815B /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435928A103570003815B /* UILabel+.swift */; };
+		E8B443EF28A2273E0003815B /* CallCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B443EE28A2273E0003815B /* CallCoordinator.swift */; };
+		E8B443F528A22ABD0003815B /* CallReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B443F428A22ABD0003815B /* CallReviewVC.swift */; };
+		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
 		E8CB6566288E35090076E254 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CB6565288E35090076E254 /* Log.swift */; };
@@ -47,9 +50,9 @@
 		E8CFBCCD288F710300D63B07 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCCC288F710300D63B07 /* AuthVC.swift */; };
 		E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCCE288F73AB00D63B07 /* AppCoordinator.swift */; };
 		E8CFBCD8288F7A9C00D63B07 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCD7288F7A9C00D63B07 /* HomeCoordinator.swift */; };
-		E8CFBCDA288F7B4800D63B07 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCD9288F7B4800D63B07 /* HomeViewController.swift */; };
+		E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCD9288F7B4800D63B07 /* HomeVC.swift */; };
 		E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCDB288F7D0900D63B07 /* MainCoordinator.swift */; };
-		E8CFBCE1288F874C00D63B07 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */; };
+		E8CFBCE1288F874C00D63B07 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE0288F874C00D63B07 /* MyPageVC.swift */; };
 		E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */; };
 		E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */; };
 		E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D09853289A6C4D008AD55F /* SocketManager.swift */; };
@@ -67,9 +70,9 @@
 		0ABA2829288D5B56000D889B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0ABA282C288D5B56000D889B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AF43089288FD8800078B2D5 /* ApplicantCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantCoordinator.swift; sourceTree = "<group>"; };
-		0AF4308B288FD8E90078B2D5 /* ApplicantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantViewController.swift; sourceTree = "<group>"; };
+		0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantVC.swift; sourceTree = "<group>"; };
 		0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
-		0AF43092288FDC850078B2D5 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		0AF43092288FDC850078B2D5 /* RecordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordVC.swift; sourceTree = "<group>"; };
 		0F1AC0E77A46575A9E243914 /* Pods-GoodListener.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodListener.release.xcconfig"; path = "Target Support Files/Pods-GoodListener/Pods-GoodListener.release.xcconfig"; sourceTree = "<group>"; };
 		47C5C925F8CF8A111AFD7E1E /* Pods-GoodListener.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodListener.debug.xcconfig"; path = "Target Support Files/Pods-GoodListener/Pods-GoodListener.debug.xcconfig"; sourceTree = "<group>"; };
 		5450741D5E8F8D9D306A0E69 /* Pods_GoodListener.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodListener.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,7 +90,10 @@
 		E8A79553289CDA7700EF9E1B /* GLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLButton.swift; sourceTree = "<group>"; };
 		E8B4435028A0E8540003815B /* PersonalInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoVC.swift; sourceTree = "<group>"; };
 		E8B4435728A0EADD0003815B /* NicknameSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSetupVC.swift; sourceTree = "<group>"; };
-		E8C3320828925F3400ECE59C /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
+		E8B4435928A103570003815B /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		E8B443EE28A2273E0003815B /* CallCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallCoordinator.swift; sourceTree = "<group>"; };
+		E8B443F428A22ABD0003815B /* CallReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallReviewVC.swift; sourceTree = "<group>"; };
+		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		E8CB6565288E35090076E254 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -101,9 +107,9 @@
 		E8CFBCCC288F710300D63B07 /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
 		E8CFBCCE288F73AB00D63B07 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		E8CFBCD7288F7A9C00D63B07 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
-		E8CFBCD9288F7B4800D63B07 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		E8CFBCD9288F7B4800D63B07 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		E8CFBCDB288F7D0900D63B07 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		E8CFBCE0288F874C00D63B07 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
 		E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		E8D09853289A6C4D008AD55F /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
@@ -166,7 +172,7 @@
 		0AF43087288FD84F0078B2D5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0AF4308B288FD8E90078B2D5 /* ApplicantViewController.swift */,
+				0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -190,7 +196,7 @@
 		0AF43090288FDC690078B2D5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0AF43092288FDC850078B2D5 /* RecordViewController.swift */,
+				0AF43092288FDC850078B2D5 /* RecordVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -289,12 +295,46 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		E8B443F028A22A330003815B /* Call */ = {
+			isa = PBXGroup;
+			children = (
+				E8C3320528925F0600ECE59C /* View */,
+				E8C3320628925F1300ECE59C /* ViewModel */,
+			);
+			path = Call;
+			sourceTree = "<group>";
+		};
+		E8B443F128A22A4D0003815B /* CallReview */ = {
+			isa = PBXGroup;
+			children = (
+				E8B443F328A22AA00003815B /* View */,
+				E8B443F228A22A9B0003815B /* ViewModel */,
+			);
+			path = CallReview;
+			sourceTree = "<group>";
+		};
+		E8B443F228A22A9B0003815B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E8B443F328A22AA00003815B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E8B443F428A22ABD0003815B /* CallReviewVC.swift */,
+			);
+			name = View;
+			path = "퍋ㅈ";
+			sourceTree = "<group>";
+		};
 		E8C3320428925EFC00ECE59C /* CallScene */ = {
 			isa = PBXGroup;
 			children = (
 				E8C3320728925F1900ECE59C /* Flow */,
-				E8C3320528925F0600ECE59C /* View */,
-				E8C3320628925F1300ECE59C /* ViewModel */,
+				E8B443F028A22A330003815B /* Call */,
+				E8B443F128A22A4D0003815B /* CallReview */,
 			);
 			path = CallScene;
 			sourceTree = "<group>";
@@ -302,7 +342,7 @@
 		E8C3320528925F0600ECE59C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E8C3320828925F3400ECE59C /* CallViewController.swift */,
+				E8C3320828925F3400ECE59C /* CallVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -318,6 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				E8C3320A289265F400ECE59C /* CallManager.swift */,
+				E8B443EE28A2273E0003815B /* CallCoordinator.swift */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -520,7 +561,7 @@
 		E8CFBCD4288F7A0400D63B07 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E8CFBCD9288F7B4800D63B07 /* HomeViewController.swift */,
+				E8CFBCD9288F7B4800D63B07 /* HomeVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -544,7 +585,7 @@
 		E8CFBCDF288F874000D63B07 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E8CFBCE0288F874C00D63B07 /* MyPageViewController.swift */,
+				E8CFBCE0288F874C00D63B07 /* MyPageVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -554,6 +595,7 @@
 			children = (
 				E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */,
 				E8CE19E1289CE08C007A56FE /* UIButton+.swift */,
+				E8B4435928A103570003815B /* UILabel+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -707,21 +749,23 @@
 				0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */,
 				E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */,
 				E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */,
+				E8B443F528A22ABD0003815B /* CallReviewVC.swift in Sources */,
 				0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */,
 				E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */,
 				0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */,
 				E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */,
 				0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */,
 				E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */,
-				E8C3320928925F3400ECE59C /* CallViewController.swift in Sources */,
+				E8C3320928925F3400ECE59C /* CallVC.swift in Sources */,
 				0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */,
 				E8CE19E4289CE15E007A56FE /* Const.swift in Sources */,
-				0AF43093288FDC850078B2D5 /* RecordViewController.swift in Sources */,
+				0AF43093288FDC850078B2D5 /* RecordVC.swift in Sources */,
 				E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */,
 				E8CB6566288E35090076E254 /* Log.swift in Sources */,
 				0AF4308E288FDC230078B2D5 /* RecordCoordinator.swift in Sources */,
 				E8CFBCD8288F7A9C00D63B07 /* HomeCoordinator.swift in Sources */,
-				0AF4308C288FD8E90078B2D5 /* ApplicantViewController.swift in Sources */,
+				E8B443EF28A2273E0003815B /* CallCoordinator.swift in Sources */,
+				0AF4308C288FD8E90078B2D5 /* ApplicantVC.swift in Sources */,
 				E8C3320B289265F400ECE59C /* CallManager.swift in Sources */,
 				E8CB6568288E359A0076E254 /* ViewModelType.swift in Sources */,
 				E8CE19E2289CE08C007A56FE /* UIButton+.swift in Sources */,
@@ -729,10 +773,11 @@
 				E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */,
 				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
 				E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */,
-				E8CFBCE1288F874C00D63B07 /* MyPageViewController.swift in Sources */,
+				E8CFBCE1288F874C00D63B07 /* MyPageVC.swift in Sources */,
 				E8CFBCCD288F710300D63B07 /* AuthVC.swift in Sources */,
-				E8CFBCDA288F7B4800D63B07 /* HomeViewController.swift in Sources */,
+				E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */,
 				E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */,
+				E8B4435A28A103570003815B /* UILabel+.swift in Sources */,
 				E8B4435828A0EADD0003815B /* NicknameSetupVC.swift in Sources */,
 				0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */,
 			);

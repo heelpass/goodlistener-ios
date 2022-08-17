@@ -1,5 +1,5 @@
 //
-//  ApplicantViewController.swift
+//  RecordViewController.swift
 //  GoodListener
 //
 //  Created by Jiyoung Park on 2022/07/26.
@@ -7,21 +7,22 @@
 
 import UIKit
 
-class ApplicantViewController: UIViewController {
+class RecordVC: UIViewController {
     
-    weak var coordinator: ApplicantCoordinating?
+    weak var coordinator: RecordCoordinating?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let label = UILabel()
-        label.text = "Applicant"
+        label.text = "Record"
         view.addSubview(label)
         label.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
         
         view.backgroundColor = .white
+        
     }
     
 

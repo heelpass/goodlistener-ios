@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  MyPageViewController.swift
 //  GoodListener
 //
 //  Created by cheonsong on 2022/07/26.
@@ -7,39 +7,42 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
-class HomeViewController: UIViewController {
-    
-    weak var coordinator: HomeCoordinating?
-    let disposeBag = DisposeBag()
+class MyPageVC: UIViewController {
+
+    weak var coordinator: MyPageCoordinating?
+    var disposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let label = UILabel()
-        label.text = "Home"
+        label.text = "MyPage"
         view.addSubview(label)
         label.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
         
-        let button = GLButton()
-        button.title = "전화"
+        let button = UIButton()
+        button.setTitleColor(.black, for: .normal)
+        button.setTitle("로그아웃", for: .normal)
         view.addSubview(button)
         button.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(Const.glBtnHeight)
-            $0.width.equalTo(Const.glBtnWidth)
+            $0.size.equalTo(100)
+            $0.top.centerX.equalToSuperview()
         }
         
         view.backgroundColor = .white
-        // Do any additional setup after loading the view.
         
+        // 로그아웃 예제
         button.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.coordinator?.call()
+                Log.d("Logout")
+                self?.coordinator?.logout()
             })
             .disposed(by: disposeBag)
+        // Do any additional setup after loading the view.
     }
     
 
