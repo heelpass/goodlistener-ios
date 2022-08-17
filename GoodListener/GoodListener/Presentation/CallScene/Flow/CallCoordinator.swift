@@ -39,7 +39,6 @@ extension CallCoordinator: CallCoordinating {
     }
     
     func moveToMain() {
-        navigationController.popToRootViewController(animated: false)
         parentCoordinator?.childDidFinish(self)
         navigationController.dismiss(animated: true)
         // 부모 코디네이터로부터 자식(self)코디네이터를 제거해야함

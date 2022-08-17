@@ -1,0 +1,117 @@
+//
+//  TagCollectionView.swift
+//  GoodListener
+//
+//  Created by cheonsong on 2022/08/11.
+//
+
+import UIKit
+
+class TagView: UIView {
+    
+    var tagData: [String] = []
+    
+    var selectedTag: String = "10대"
+    
+    var title = UILabel().then {
+        $0.text = "나이"
+        $0.font = FontManager.shared.notoSansKR(.bold, 16)
+        $0.textColor = .f3
+    }
+    
+    lazy var collectionView: UICollectionView = {
+        
+        let layout = TagCollectionViewLayout()
+        layout.scrollDirection = .vertical
+        
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.backgroundColor = .clear
+        view.register(TagCell.self, forCellWithReuseIdentifier: TagCell.identifier)
+        view.delegate = self
+        view.dataSource = self
+        return view
+    }()
+    
+    let line = UIView().then {
+        $0.backgroundColor = .l2
+    }
+    
+    private override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    convenience init(frame: CGRect, data: [String]) {
+        self.init(frame: frame)
+        self.tagData = data
+        
+        addSubview(title)
+        addSubview(collectionView)
+        addSubview(line)
+        title.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(20)
+            $0.left.equalToSuperview().inset(Const.padding)
+            $0.height.equalTo(24)
+        }
+        
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(title.snp.bottom).offset(10)
+            $0.left.right.equalToSuperview().inset(Const.padding)
+            $0.bottom.equalToSuperview().inset(21)
+        }
+        
+        line.snp.makeConstraints {
+            $0.left.right.bottom.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+    }
+    
+    func calculateCellWidth(index: Int) -> CGFloat {
+        let label = UILabel()
+        label.text = tagData[index]
+        label.font = FontManager.shared.notoSansKR(.bold, 14)
+        label.sizeToFit()
+        // ✅ 32(여백)
+        return label.frame.width + 32
+    }
+
+}
+
+extension TagView: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return tagData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as! TagCell
+        
+        cell.label.text = tagData[indexPath.row]
+        indexPath.row == 0 ? cell.configUI(.selected) : cell.configUI(.deselected)
+        
+        return cell
+    }
+    
+}
+
+extension TagView: UICollectionViewDelegate {
+    
+}
+
+extension TagView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let cellWidth = calculateCellWidth(index: indexPath.row)
+        
+        return CGSize(width: cellWidth, height: 38)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+}

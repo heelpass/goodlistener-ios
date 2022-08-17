@@ -40,6 +40,9 @@
 		E8B4449228ACB6610003815B /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449128ACB6610003815B /* NetworkConstant.swift */; };
 		E8B4449628ACC7AD0003815B /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449528ACC7AD0003815B /* UserDefaultsManager.swift */; };
 		E8B4449828ACDF890003815B /* PersonalInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449728ACDF890003815B /* PersonalInfoViewModel.swift */; };
+		E8B443FB28A23E5B0003815B /* MyPageSetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B443FA28A23E5B0003815B /* MyPageSetVC.swift */; };
+		E8B443FD28A243CC0003815B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B443FC28A243CC0003815B /* NavigationView.swift */; };
+		E8B443FF28A255D30003815B /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B443FE28A255D30003815B /* CALayer+.swift */; };
 		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
@@ -59,6 +62,10 @@
 		E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */; };
 		E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */; };
 		E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D09853289A6C4D008AD55F /* SocketManager.swift */; };
+		ECBA27B128A4DD0E0034A751 /* MyPageTagVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B028A4DD0E0034A751 /* MyPageTagVC.swift */; };
+		ECBA27B528A4DF970034A751 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B428A4DF970034A751 /* TagView.swift */; };
+		ECBA27B728A4E0B60034A751 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B628A4E0B60034A751 /* TagCell.swift */; };
+		ECBA27B928A4FCEE0034A751 /* TagCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +106,9 @@
 		E8B4449128ACB6610003815B /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
 		E8B4449528ACC7AD0003815B /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		E8B4449728ACDF890003815B /* PersonalInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewModel.swift; sourceTree = "<group>"; };
+		E8B443FA28A23E5B0003815B /* MyPageSetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSetVC.swift; sourceTree = "<group>"; };
+		E8B443FC28A243CC0003815B /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		E8B443FE28A255D30003815B /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -119,6 +129,10 @@
 		E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
 		E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		E8D09853289A6C4D008AD55F /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
+		ECBA27B028A4DD0E0034A751 /* MyPageTagVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTagVC.swift; sourceTree = "<group>"; };
+		ECBA27B428A4DF970034A751 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		ECBA27B628A4E0B60034A751 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +348,39 @@
 			);
 			name = View;
 			path = "퍋ㅈ";
+			sourceTree = "<group>";
+		};
+		E8B443F628A23DFC0003815B /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				E8CFBCDF288F874000D63B07 /* View */,
+				E8CFBCDE288F873C00D63B07 /* ViewModel */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		E8B443F728A23E050003815B /* MyPageSet */ = {
+			isa = PBXGroup;
+			children = (
+				E8B443F928A23E1A0003815B /* View */,
+				E8B443F828A23E150003815B /* ViewModel */,
+			);
+			path = MyPageSet;
+			sourceTree = "<group>";
+		};
+		E8B443F828A23E150003815B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E8B443F928A23E1A0003815B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E8B443FA28A23E5B0003815B /* MyPageSetVC.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E8C3320428925EFC00ECE59C /* CallScene */ = {
@@ -578,8 +625,9 @@
 		E8CFBCDD288F873300D63B07 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				E8CFBCDF288F874000D63B07 /* View */,
-				E8CFBCDE288F873C00D63B07 /* ViewModel */,
+				E8B443F628A23DFC0003815B /* MyPage */,
+				ECBA27AD28A4DCF10034A751 /* MyPageTag */,
+				E8B443F728A23E050003815B /* MyPageSet */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -605,6 +653,7 @@
 				E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */,
 				E8CE19E1289CE08C007A56FE /* UIButton+.swift */,
 				E8B4435928A103570003815B /* UILabel+.swift */,
+				E8B443FE28A255D30003815B /* CALayer+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -616,8 +665,36 @@
 				E8A7953B289CB2BC00EF9E1B /* Font */,
 				E8A79553289CDA7700EF9E1B /* GLButton.swift */,
 				E8CE19E3289CE15E007A56FE /* Const.swift */,
+				E8B443FC28A243CC0003815B /* NavigationView.swift */,
 			);
 			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		ECBA27AD28A4DCF10034A751 /* MyPageTag */ = {
+			isa = PBXGroup;
+			children = (
+				ECBA27AF28A4DD050034A751 /* View */,
+				ECBA27AE28A4DD010034A751 /* ViewModel */,
+			);
+			path = MyPageTag;
+			sourceTree = "<group>";
+		};
+		ECBA27AE28A4DD010034A751 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ECBA27AF28A4DD050034A751 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ECBA27B028A4DD0E0034A751 /* MyPageTagVC.swift */,
+				ECBA27B428A4DF970034A751 /* TagView.swift */,
+				ECBA27B628A4E0B60034A751 /* TagCell.swift */,
+				ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		EFE54EE7D3D04F3932FBA642 /* Pods */ = {
@@ -758,11 +835,15 @@
 				0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */,
 				E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */,
 				E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */,
+				E8B443FB28A23E5B0003815B /* MyPageSetVC.swift in Sources */,
 				E8B443F528A22ABD0003815B /* CallReviewVC.swift in Sources */,
 				0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */,
 				E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */,
 				0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */,
+				ECBA27B528A4DF970034A751 /* TagView.swift in Sources */,
+				E8B443FD28A243CC0003815B /* NavigationView.swift in Sources */,
 				E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */,
+				E8B443FF28A255D30003815B /* CALayer+.swift in Sources */,
 				0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */,
 				E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */,
 				E8C3320928925F3400ECE59C /* CallVC.swift in Sources */,
@@ -777,10 +858,12 @@
 				E8B443EF28A2273E0003815B /* CallCoordinator.swift in Sources */,
 				0AF4308C288FD8E90078B2D5 /* ApplicantVC.swift in Sources */,
 				E8C3320B289265F400ECE59C /* CallManager.swift in Sources */,
+				ECBA27B728A4E0B60034A751 /* TagCell.swift in Sources */,
 				E8CB6568288E359A0076E254 /* ViewModelType.swift in Sources */,
 				E8CE19E2289CE08C007A56FE /* UIButton+.swift in Sources */,
 				E8A7954D289CCC4700EF9E1B /* Colors.swift in Sources */,
 				E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */,
+				ECBA27B928A4FCEE0034A751 /* TagCollectionViewLayout.swift in Sources */,
 				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
 				E8B4449628ACC7AD0003815B /* UserDefaultsManager.swift in Sources */,
 				E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */,
@@ -792,6 +875,7 @@
 				E8B4435A28A103570003815B /* UILabel+.swift in Sources */,
 				E8B4435828A0EADD0003815B /* NicknameSetupVC.swift in Sources */,
 				0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */,
+				ECBA27B128A4DD0E0034A751 /* MyPageTagVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
