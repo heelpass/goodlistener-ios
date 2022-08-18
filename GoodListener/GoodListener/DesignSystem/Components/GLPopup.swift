@@ -193,7 +193,7 @@ class GLPopup: UIView, SnapKitType {
             .disposed(by: disposeBag)
         
         backgroundView.tapGesture
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] _ in
                 if let action = self?.cancelAction {
                     action()
                 }
