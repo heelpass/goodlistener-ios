@@ -114,12 +114,6 @@ class LoginVC: UIViewController, SnapKitType {
                 }
             })
             .disposed(by: disposeBag)
-        
-        kakaoLoginButton.rx.tap
-            .bind(onNext: {
-                self.coordinator?.loginSuccess()
-            })
-            .disposed(by: disposeBag)
     }
     
 }

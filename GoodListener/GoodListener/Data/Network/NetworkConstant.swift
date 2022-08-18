@@ -12,8 +12,6 @@ struct ApiAddress {
 }
 
 struct ApiURL {
-    // 서비스 시작확인 (GET)
-    static let ServiceStart = ApiAddress.Host
     // 엑세스 토큰 재발급 (POST)
     static let TokenRefresh = "/auth/token/apple/access"
     // 회원가입 (POST)
