@@ -108,15 +108,17 @@ class ProfileImageSelectView: UIView, SnapKitType {
     }
     
     func bind() {
+        // Rx CollectionViewDatasource
         images.bind(to: collectionView.rx.items(
-            cellIdentifier: ProfileImageSelectCell.identifier, cellType: ProfileImageSelectCell.self)) { [weak self] row, model, cell in
-//                guard let self = self else { return }
+            cellIdentifier: ProfileImageSelectCell.identifier, cellType: ProfileImageSelectCell.self)) { row, model, cell in
                 cell.profileImage.image = model
             }
             .disposed(by: disposeBag)
         
+        // Rx CollectionViewDelegate
         Observable.zip(collectionView.rx.itemSelected, collectionView.rx.modelSelected(UIImage.self))
             .subscribe(onNext: {[weak self] indexPath, model in
+                // 선택되지 않은 셀들 UI 변경
                 self?.collectionView.visibleCells.forEach {
                     if let cell = $0 as? ProfileImageSelectCell {
                         cell.alpha = 0.6
@@ -124,13 +126,15 @@ class ProfileImageSelectView: UIView, SnapKitType {
                     }
                 }
                 
+                // 선택된 셀의 UI 변경
                 let cell = self?.collectionView.cellForItem(at: indexPath) as! ProfileImageSelectCell
                 cell.alpha = 1
                 cell.profileImage.layer.borderWidth = 2
                 cell.profileImage.layer.borderColor = UIColor.m1.cgColor
                 
-                
+                // 완료버튼 활성화
                 self?.completeBtn.configUI(.active)
+                // 선택된 이미지 넘겨주기 -> ProfileSetupVC에서 받아서 사용
                 self?.selectedImage.accept(model)
             })
             .disposed(by: disposeBag)

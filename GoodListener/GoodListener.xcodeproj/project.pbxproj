@@ -46,6 +46,7 @@
 		E8B4449A28ADC8620003815B /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449928ADC8620003815B /* UserInfo.swift */; };
 		E8B4449C28ADF20B0003815B /* ProfileImageSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449B28ADF20B0003815B /* ProfileImageSelectView.swift */; };
 		E8B4449E28ADF4AD0003815B /* ProfileImageSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449D28ADF4AD0003815B /* ProfileImageSelectCell.swift */; };
+		E8B444A228AE1BE40003815B /* ProfileSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444A128AE1BE40003815B /* ProfileSetupViewModel.swift */; };
 		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
@@ -115,6 +116,7 @@
 		E8B4449928ADC8620003815B /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		E8B4449B28ADF20B0003815B /* ProfileImageSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSelectView.swift; sourceTree = "<group>"; };
 		E8B4449D28ADF4AD0003815B /* ProfileImageSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSelectCell.swift; sourceTree = "<group>"; };
+		E8B444A128AE1BE40003815B /* ProfileSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupViewModel.swift; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 		E8B4435528A0EAC70003815B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E8B444A128AE1BE40003815B /* ProfileSetupViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -879,6 +882,7 @@
 				E8B4449628ACC7AD0003815B /* UserDefaultsManager.swift in Sources */,
 				E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */,
 				E8B4449228ACB6610003815B /* NetworkConstant.swift in Sources */,
+				E8B444A228AE1BE40003815B /* ProfileSetupViewModel.swift in Sources */,
 				E8CFBCE1288F874C00D63B07 /* MyPageVC.swift in Sources */,
 				E8CFBCCD288F710300D63B07 /* AuthVC.swift in Sources */,
 				E8B4449E28ADF4AD0003815B /* ProfileImageSelectCell.swift in Sources */,

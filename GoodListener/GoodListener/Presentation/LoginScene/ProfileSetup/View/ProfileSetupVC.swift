@@ -15,6 +15,9 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     
     weak var coordinator: LoginCoordinating?
     var disposeBag = DisposeBag()
+    var viewModel = ProfileSetupViewModel()
+    
+    var selectedImage = BehaviorRelay<UIImage?>(value: nil)
     
     var userInfo: UserInfo?
     
@@ -74,7 +77,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     }
     
     let nicknameLimitLbl = UILabel().then {
-        $0.text = "*한글/영문 + 숫자로 15글자까지 가능합니다."
+        $0.text = "*한글/영문 + 숫자로 10글자까지 가능합니다."
         $0.textColor = .f4
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
     }
@@ -181,6 +184,47 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     }
     
     func bind() {
+        let output = viewModel.transform(input: ProfileSetupViewModel.Input(profileImage: selectedImage,
+                                                                            nickname: nicknameTf.rx.text.orEmpty.asObservable(),
+                                                                            checkDuplicate: nicknameCheckBtn.rx.tap.asObservable()))
+        // 닉네임 유효성 검사결과에 따른 중복확인 버튼 UI변경
+        output.nicknameValidationResult
+            .emit(onNext: { [weak self] result in
+                if result {
+                    self?.nicknameCheckBtn.titleColor = .m1
+                    self?.nicknameCheckBtn.isUserInteractionEnabled = true
+                } else {
+                    self?.nicknameCheckBtn.titleColor = .f4
+                    self?.nicknameCheckBtn.isUserInteractionEnabled = false
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        output.nicknameDuplicateResult
+            .emit(onNext: { [weak self] (nickname, result) in
+                guard let self = self else { return }
+                
+                if result {
+                    // 성공팝업
+                    // TODO: 중복확인 버튼 어떻게 처리?
+                    self.userInfo?.name = nickname
+                } else {
+                    // 실패팝업
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        output.canComplete
+            .emit(onNext: { [weak self] result in
+                if result {
+                    self?.completeButton.configUI(.active)
+                } else {
+                    self?.completeButton.configUI(.deactivate)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        // 프로필 이미지 Edit버튼 터치 시 프로필이미지선택 팝업을 띄워준다
         editView.tapGesture
             .subscribe(onNext: { [weak self] _ in
                 let view = ProfileImageSelectView()
@@ -189,12 +233,24 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                     $0.edges.equalToSuperview()
                 }
                 
+                // 팝업에서 선택된 이미지를 현재 프로필이미지에 반영
+                view.selectedImage
+                    .subscribe(onNext: { [weak self] image in
+                        self?.profileImage.image = image
+                        self?.userInfo?.profileImage = image
+                        self?.selectedImage.accept(image)
+                    })
+                    .disposed(by: view.disposeBag)
+                
             })
             .disposed(by: disposeBag)
         
+        // 완료버튼 클릭
+        // TODO: 아마 userInfo API 보내줘야할듯
         completeButton.rx.tap
             .bind(onNext: { [weak self] in
-                self?.coordinator?.moveToLoginPage()
+                guard let self = self else { return }
+                self.coordinator?.completeJoin(model: self.userInfo!)
             })
             .disposed(by: disposeBag)
     }
@@ -204,7 +260,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     }
     
     @objc func keyboardWillShow(_ notification:NSNotification) {
-        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         
@@ -218,7 +274,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
 
 
     @objc func keyboardWillHide(_ notification:NSNotification) {
-        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        guard let _ = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
         [titleLbl, imageContainer].forEach {
             $0.isHidden = false
