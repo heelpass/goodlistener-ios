@@ -11,7 +11,7 @@ import Then
 import RxSwift
 import RxCocoa
 
-class NicknameSetupVC: UIViewController, SnapKitType {
+class ProfileSetupVC: UIViewController, SnapKitType {
     
     weak var coordinator: LoginCoordinating?
     var disposeBag = DisposeBag()
@@ -62,9 +62,9 @@ class NicknameSetupVC: UIViewController, SnapKitType {
     }
     
     let nicknameCheckBtn = UIButton().then {
-        $0.setTitle("중복확인", for: .normal)
-        $0.setTitleColor(.f4, for: .normal)
-        $0.titleLabel?.font = FontManager.shared.notoSansKR(.regular, 14)
+        $0.title = "중복확인"
+        $0.titleColor = .f4
+        $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.backgroundColor = .clear
         $0.isUserInteractionEnabled = false
     }
@@ -181,6 +181,17 @@ class NicknameSetupVC: UIViewController, SnapKitType {
     }
     
     func bind() {
+        editView.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                let view = ProfileImageSelectView()
+                self?.view.addSubview(view)
+                view.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+                
+            })
+            .disposed(by: disposeBag)
+        
         completeButton.rx.tap
             .bind(onNext: { [weak self] in
                 self?.coordinator?.moveToLoginPage()

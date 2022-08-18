@@ -62,7 +62,7 @@ extension LoginCoordinator: LoginCoordinating {
     }
     
     func moveToNicknameSetPage(model: UserInfo) {
-        let vc = NicknameSetupVC()
+        let vc = ProfileSetupVC()
         vc.coordinator = self
         vc.userInfo = model
         navigationController.pushViewController(vc, animated: true)

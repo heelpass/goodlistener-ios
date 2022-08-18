@@ -33,7 +33,7 @@
 		E8A79552289CD71000EF9E1B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E8A79551289CD71000EF9E1B /* GoogleService-Info.plist */; };
 		E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A79553289CDA7700EF9E1B /* GLButton.swift */; };
 		E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435028A0E8540003815B /* PersonalInfoVC.swift */; };
-		E8B4435828A0EADD0003815B /* NicknameSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435728A0EADD0003815B /* NicknameSetupVC.swift */; };
+		E8B4435828A0EADD0003815B /* ProfileSetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435728A0EADD0003815B /* ProfileSetupVC.swift */; };
 		E8B4435A28A103570003815B /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4435928A103570003815B /* UILabel+.swift */; };
 		E8B443EF28A2273E0003815B /* CallCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B443EE28A2273E0003815B /* CallCoordinator.swift */; };
 		E8B443F528A22ABD0003815B /* CallReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B443F428A22ABD0003815B /* CallReviewVC.swift */; };
@@ -44,6 +44,8 @@
 		E8B4449628ACC7AD0003815B /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449528ACC7AD0003815B /* UserDefaultsManager.swift */; };
 		E8B4449828ACDF890003815B /* PersonalInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449728ACDF890003815B /* PersonalInfoViewModel.swift */; };
 		E8B4449A28ADC8620003815B /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449928ADC8620003815B /* UserInfo.swift */; };
+		E8B4449C28ADF20B0003815B /* ProfileImageSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449B28ADF20B0003815B /* ProfileImageSelectView.swift */; };
+		E8B4449E28ADF4AD0003815B /* ProfileImageSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B4449D28ADF4AD0003815B /* ProfileImageSelectCell.swift */; };
 		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
@@ -100,7 +102,7 @@
 		E8A79551289CD71000EF9E1B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E8A79553289CDA7700EF9E1B /* GLButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLButton.swift; sourceTree = "<group>"; };
 		E8B4435028A0E8540003815B /* PersonalInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoVC.swift; sourceTree = "<group>"; };
-		E8B4435728A0EADD0003815B /* NicknameSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameSetupVC.swift; sourceTree = "<group>"; };
+		E8B4435728A0EADD0003815B /* ProfileSetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupVC.swift; sourceTree = "<group>"; };
 		E8B4435928A103570003815B /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		E8B443EE28A2273E0003815B /* CallCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallCoordinator.swift; sourceTree = "<group>"; };
 		E8B443F428A22ABD0003815B /* CallReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallReviewVC.swift; sourceTree = "<group>"; };
@@ -111,6 +113,8 @@
 		E8B4449528ACC7AD0003815B /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		E8B4449728ACDF890003815B /* PersonalInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewModel.swift; sourceTree = "<group>"; };
 		E8B4449928ADC8620003815B /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		E8B4449B28ADF20B0003815B /* ProfileImageSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSelectView.swift; sourceTree = "<group>"; };
+		E8B4449D28ADF4AD0003815B /* ProfileImageSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSelectCell.swift; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -294,13 +298,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		E8B4435428A0EA8E0003815B /* NicknameSet */ = {
+		E8B4435428A0EA8E0003815B /* ProfileSetup */ = {
 			isa = PBXGroup;
 			children = (
 				E8B4435628A0EACC0003815B /* View */,
 				E8B4435528A0EAC70003815B /* ViewModel */,
 			);
-			path = NicknameSet;
+			path = ProfileSetup;
 			sourceTree = "<group>";
 		};
 		E8B4435528A0EAC70003815B /* ViewModel */ = {
@@ -313,7 +317,9 @@
 		E8B4435628A0EACC0003815B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E8B4435728A0EADD0003815B /* NicknameSetupVC.swift */,
+				E8B4435728A0EADD0003815B /* ProfileSetupVC.swift */,
+				E8B4449B28ADF20B0003815B /* ProfileImageSelectView.swift */,
+				E8B4449D28ADF4AD0003815B /* ProfileImageSelectCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -485,7 +491,7 @@
 				E8CFBCC8288F704D00D63B07 /* Login */,
 				E8CFBCC9288F705600D63B07 /* Auth */,
 				E8B4434F28A0E8080003815B /* UserInfo */,
-				E8B4435428A0EA8E0003815B /* NicknameSet */,
+				E8B4435428A0EA8E0003815B /* ProfileSetup */,
 			);
 			path = LoginScene;
 			sourceTree = "<group>";
@@ -848,6 +854,7 @@
 				E8B443FD28A243CC0003815B /* NavigationView.swift in Sources */,
 				E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */,
 				E8B443FF28A255D30003815B /* CALayer+.swift in Sources */,
+				E8B4449C28ADF20B0003815B /* ProfileImageSelectView.swift in Sources */,
 				0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */,
 				E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */,
 				E8C3320928925F3400ECE59C /* CallVC.swift in Sources */,
@@ -874,10 +881,11 @@
 				E8B4449228ACB6610003815B /* NetworkConstant.swift in Sources */,
 				E8CFBCE1288F874C00D63B07 /* MyPageVC.swift in Sources */,
 				E8CFBCCD288F710300D63B07 /* AuthVC.swift in Sources */,
+				E8B4449E28ADF4AD0003815B /* ProfileImageSelectCell.swift in Sources */,
 				E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */,
 				E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */,
 				E8B4435A28A103570003815B /* UILabel+.swift in Sources */,
-				E8B4435828A0EADD0003815B /* NicknameSetupVC.swift in Sources */,
+				E8B4435828A0EADD0003815B /* ProfileSetupVC.swift in Sources */,
 				0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */,
 				ECBA27B128A4DD0E0034A751 /* MyPageTagVC.swift in Sources */,
 			);
