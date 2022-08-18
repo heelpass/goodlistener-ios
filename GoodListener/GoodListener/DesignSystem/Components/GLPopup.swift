@@ -61,6 +61,26 @@ class GLPopup: UIView, SnapKitType {
         }
     }
     
+    var completeBtnTitle: String {
+        get {
+            return completeBtn.title
+        }
+        
+        set {
+            completeBtn.title = newValue
+        }
+    }
+    
+    var cancelBtnTitle: String {
+        get {
+            return cancelBtn.title
+        }
+        
+        set {
+            cancelBtn.title = newValue
+        }
+    }
+    
     /// EX) popup.completeAction = { ~~ }
     var completeAction: (()->Void)? = nil
     /// EX) popup.cancelAction = { ~~ }
