@@ -20,9 +20,9 @@ class PersonalInfoViewModel: ViewModelType {
     }
     
     struct Input {
-        var genderTag: Observable<String>
-        var ageTag: Observable<String>
-        var jobTag: Observable<String>
+        var genderTag: BehaviorRelay<String>
+        var ageTag: BehaviorRelay<String>
+        var jobTag: BehaviorRelay<String>
     }
     
     struct Output {

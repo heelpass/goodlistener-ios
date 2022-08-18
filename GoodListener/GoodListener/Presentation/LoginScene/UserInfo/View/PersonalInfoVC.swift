@@ -16,6 +16,7 @@ class PersonalInfoVC: UIViewController, SnapKitType {
     
     weak var coordinator: LoginCoordinating?
     var disposeBag = DisposeBag()
+    let viewModel = PersonalInfoViewModel()
     
     let titleLabel = UILabel().then {
         $0.text = "당신에 대해서 알려주세요"
@@ -33,6 +34,20 @@ class PersonalInfoVC: UIViewController, SnapKitType {
     
     let nextButton = GLButton().then {
         $0.title = "다음"
+        $0.configUI(.deactivate)
+    }
+    
+    lazy var ageTagView = TagView(frame: .zero, data: TagList.ageList).then {
+        $0.title.text = "나이"
+    }
+    
+    lazy var sexTagView = TagView(frame: .zero, data: TagList.sexList).then {
+        $0.title.text = "성별"
+    }
+    
+    lazy var jobTagView = TagView(frame: .zero, data: TagList.jobList).then {
+        $0.title.text = "직업"
+        $0.line.isHidden = true
     }
     
     override func viewDidLoad() {
@@ -45,7 +60,7 @@ class PersonalInfoVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [titleLabel, subtitleLabel, nextButton].forEach { view.addSubview($0) }
+        [titleLabel, subtitleLabel, nextButton, ageTagView, sexTagView, jobTagView].forEach { view.addSubview($0) }
     }
     
     func setConstraints() {
@@ -65,12 +80,49 @@ class PersonalInfoVC: UIViewController, SnapKitType {
             $0.height.equalTo(Const.glBtnHeight)
             $0.centerX.equalToSuperview()
         }
+        
+        ageTagView.snp.makeConstraints {
+            $0.top.equalTo(subtitleLabel.snp.bottom).offset(20)
+            $0.left.right.equalToSuperview()
+            $0.height.equalTo(ageTagView.tagCollectionViewHeight())
+        }
+        
+        sexTagView.snp.makeConstraints {
+            $0.top.equalTo(ageTagView.snp.bottom)
+            $0.left.right.equalToSuperview()
+            $0.height.equalTo(sexTagView.tagCollectionViewHeight())
+        }
+        
+        jobTagView.snp.makeConstraints {
+            $0.top.equalTo(sexTagView.snp.bottom)
+            $0.left.right.equalToSuperview()
+            $0.height.equalTo(jobTagView.tagCollectionViewHeight())
+        }
     }
     
     func bind() {
+        let output = viewModel.transform(input: PersonalInfoViewModel.Input(genderTag: sexTagView.selectedTag,
+                                                                            ageTag: ageTagView.selectedTag,
+                                                                            jobTag: jobTagView.selectedTag))
+        
+        output.canNext
+            .emit(onNext: { [weak self] can in
+                if can {
+                    self?.nextButton.configUI(.active)
+                } else {
+                    self?.nextButton.configUI(.deactivate)
+                }
+            })
+            .disposed(by: disposeBag)
+        
         nextButton.rx.tap
             .bind(onNext: { [weak self] in
-                self?.coordinator?.moveToNicknameSetPage()
+                var userInfo = UserInfo()
+                userInfo.gender = self?.viewModel.model.gender.value
+                userInfo.age = self?.viewModel.model.age.value
+                userInfo.job = self?.viewModel.model.job.value
+                
+                self?.coordinator?.moveToNicknameSetPage(model: userInfo)
             })
             .disposed(by: disposeBag)
     }

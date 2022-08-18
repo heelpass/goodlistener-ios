@@ -13,7 +13,7 @@ protocol LoginCoordinating: AnyObject {
     func loginSuccess()     // 로그인에 성공한 경우
     func moveToLoginPage()  // 로그인페이지로 이동
     func moveToPersonalInfoPage() // 개인정보 입력 페이지
-    func moveToNicknameSetPage() // 닉네임 설정 페이지
+    func moveToNicknameSetPage(model: UserInfo) // 닉네임 설정 페이지
 }
 
 class LoginCoordinator: CoordinatorType {
@@ -61,9 +61,10 @@ extension LoginCoordinator: LoginCoordinating {
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func moveToNicknameSetPage() {
+    func moveToNicknameSetPage(model: UserInfo) {
         let vc = NicknameSetupVC()
         vc.coordinator = self
+        vc.userInfo = model
         navigationController.pushViewController(vc, animated: true)
     }
     

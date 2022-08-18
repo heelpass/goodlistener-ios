@@ -16,6 +16,8 @@ class NicknameSetupVC: UIViewController, SnapKitType {
     weak var coordinator: LoginCoordinating?
     var disposeBag = DisposeBag()
     
+    var userInfo: UserInfo?
+    
     let titleLabel = UILabel().then {
         $0.text = "닉네임 설정하기"
         $0.textAlignment = .left
@@ -82,6 +84,7 @@ class NicknameSetupVC: UIViewController, SnapKitType {
     func bind() {
         completeButton.rx.tap
             .bind(onNext: { [weak self] in
+                Log.d(self?.userInfo?.gender!)
                 self?.coordinator?.moveToLoginPage()
             })
             .disposed(by: disposeBag)
