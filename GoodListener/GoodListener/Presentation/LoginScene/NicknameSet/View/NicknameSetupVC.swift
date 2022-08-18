@@ -18,27 +18,70 @@ class NicknameSetupVC: UIViewController, SnapKitType {
     
     var userInfo: UserInfo?
     
-    let titleLabel = UILabel().then {
-        $0.text = "닉네임 설정하기"
-        $0.textAlignment = .left
-        $0.font = FontManager.shared.notoSansKR(.bold, 26)
+    let titleLbl = UILabel().then {
+        $0.text = "프로필 설정하기"
+        $0.textAlignment = .center
+        $0.font = FontManager.shared.notoSansKR(.bold, 20)
         $0.numberOfLines = 0
         $0.sizeToFit()
     }
     
-    let subtitleLabel = UILabel().then {
-        $0.text = "한글/영문 + 숫자로 15글자까지 가능합니다."
+    let imageContainer = UIView().then {
+        $0.backgroundColor = #colorLiteral(red: 0.8797428608, green: 0.8797428012, blue: 0.8797428608, alpha: 1)
+        $0.layer.cornerRadius = 138 / 2
+    }
+    
+    let profileImage = UIImageView().then {
+        $0.layer.cornerRadius = 138 / 2
+        $0.layer.masksToBounds = true
+        $0.contentMode = .scaleAspectFill
+    }
+    
+    let editView = UIView().then {
+        $0.backgroundColor = .m1
+        $0.layer.cornerRadius = 43 / 2
+    }
+    
+    let editImage = UIImageView().then {
+        $0.image = UIImage(named: "ic_edit_btn")
+    }
+    
+    let nicknameLbl = UILabel().then {
+        $0.text = "닉네임"
+        $0.font = FontManager.shared.notoSansKR(.bold, 16)
+        $0.textColor = .f3
+    }
+    
+    let tfContainer = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    
+    let nicknameTf = UITextField().then {
+        $0.borderStyle = .none
+        $0.font = FontManager.shared.notoSansKR(.regular, 16)
+    }
+    
+    let nicknameCheckBtn = UIButton().then {
+        $0.setTitle("중복확인", for: .normal)
+        $0.setTitleColor(.f4, for: .normal)
+        $0.titleLabel?.font = FontManager.shared.notoSansKR(.regular, 14)
+        $0.backgroundColor = .clear
+        $0.isUserInteractionEnabled = false
+    }
+    
+    let tfUnderLine = UIView().then {
+        $0.backgroundColor = .black
+    }
+    
+    let nicknameLimitLbl = UILabel().then {
+        $0.text = "*한글/영문 + 숫자로 15글자까지 가능합니다."
         $0.textColor = .f4
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
     }
     
-    let textField = UITextField().then {
-        $0.borderStyle = .roundedRect
-        $0.font = FontManager.shared.notoSansKR(.regular, 16)
-    }
-    
     let completeButton = GLButton().then {
         $0.title = "완료"
+        $0.configUI(.deactivate)
     }
     
     override func viewDidLoad() {
@@ -50,44 +93,129 @@ class NicknameSetupVC: UIViewController, SnapKitType {
         view.backgroundColor = .white
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // keyboardWillShow, keyboardWillHide observer 등록
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func addComponents() {
-        [titleLabel, subtitleLabel, textField, completeButton].forEach { view.addSubview($0) }
+        [titleLbl, imageContainer, nicknameLbl, tfContainer, completeButton].forEach { view.addSubview($0) }
+        [profileImage, editView].forEach { imageContainer.addSubview($0) }
+        editView.addSubview(editImage)
+        [nicknameTf, nicknameCheckBtn, tfUnderLine, nicknameLimitLbl].forEach { tfContainer.addSubview($0) }
     }
     
     func setConstraints() {
-        titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(68)
+        titleLbl.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
+            $0.centerX.equalToSuperview()
+        }
+        
+        imageContainer.snp.makeConstraints {
+            $0.top.equalTo(titleLbl.snp.bottom).offset(56)
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(138)
+        }
+        
+        profileImage.snp.makeConstraints {
+            $0.center.size.equalToSuperview()
+        }
+        
+        editView.snp.makeConstraints {
+            $0.right.bottom.equalToSuperview()
+            $0.size.equalTo(43)
+        }
+        
+        editImage.snp.makeConstraints {
+            $0.width.equalTo(24)
+            $0.height.equalTo(22)
+            $0.center.equalToSuperview()
+        }
+        
+        nicknameLbl.snp.makeConstraints {
             $0.left.equalToSuperview().inset(Const.padding)
+            $0.top.equalTo(imageContainer.snp.bottom).offset(62)
         }
         
-        textField.snp.makeConstraints {
-            $0.width.equalTo(Const.glBtnWidth)
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(titleLabel.snp.bottom).offset(50)
+        tfContainer.snp.makeConstraints {
+            $0.top.equalTo(nicknameLbl.snp.bottom).offset(35)
+            $0.left.right.equalToSuperview().inset(Const.padding)
         }
         
-        subtitleLabel.snp.makeConstraints {
-            $0.top.equalTo(textField.snp.bottom).offset(20)
-            $0.centerX.equalToSuperview()
+        nicknameTf.snp.makeConstraints {
+            $0.left.top.equalToSuperview()
+        }
+        
+        nicknameCheckBtn.snp.makeConstraints {
+            $0.right.top.equalToSuperview()
+            $0.left.equalTo(nicknameTf.snp.right).offset(10)
+            $0.width.equalTo(52)
+            $0.height.equalTo(20)
+        }
+        
+        tfUnderLine.snp.makeConstraints {
+            $0.height.equalTo(1)
+            $0.left.right.equalToSuperview()
+            $0.top.equalTo(nicknameTf.snp.bottom).offset(5)
+        }
+        
+        nicknameLimitLbl.snp.makeConstraints {
+            $0.top.equalTo(tfUnderLine.snp.bottom).offset(10)
+            $0.left.bottom.equalToSuperview()
         }
         
         completeButton.snp.makeConstraints {
-            $0.top.equalTo(subtitleLabel.snp.bottom).offset(50)
+            $0.bottom.equalToSuperview().inset(30)
             $0.width.equalTo(Const.glBtnWidth)
             $0.height.equalTo(Const.glBtnHeight)
             $0.centerX.equalToSuperview()
         }
-
-        
     }
     
     func bind() {
         completeButton.rx.tap
             .bind(onNext: { [weak self] in
-                Log.d(self?.userInfo?.gender!)
                 self?.coordinator?.moveToLoginPage()
             })
             .disposed(by: disposeBag)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(_ notification:NSNotification) {
+        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keyboardRectangle.height
+        
+        [titleLbl, imageContainer].forEach {
+            $0.isHidden = true
+        }
+        [nicknameLbl, tfContainer].forEach {
+            $0.transform = CGAffineTransform.init(translationX: 0, y: -keyboardHeight + 100)
+        }
+    }
+
+
+    @objc func keyboardWillHide(_ notification:NSNotification) {
+        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        
+        [titleLbl, imageContainer].forEach {
+            $0.isHidden = false
+        }
+        [nicknameLbl, tfContainer].forEach {
+            $0.transform = .identity
+        }
+    }
+
+
 }
