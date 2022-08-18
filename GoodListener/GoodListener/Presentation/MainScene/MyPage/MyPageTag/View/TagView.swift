@@ -6,15 +6,23 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+
+struct TagList {
+    static let ageList = ["10대", "20대", "30대", "40대 이상"]
+    static let sexList = ["남자", "여자"]
+    static let jobList = ["학생", "직장인", "프리랜서", "취준생", "기타"]
+}
 
 class TagView: UIView {
     
     var tagData: [String] = []
     
-    var selectedTag: String = "10대"
+    var selectedTag: BehaviorRelay<String> = .init(value: "")
     
     var title = UILabel().then {
-        $0.text = "나이"
+        $0.text = "제목"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
         $0.textColor = .f3
     }
@@ -77,6 +85,30 @@ class TagView: UIView {
         // ✅ 32(여백)
         return label.frame.width + 32
     }
+    
+    func tagCollectionViewHeight()-> CGFloat {
+        let spacing: CGFloat = 8
+        var totalCellWidth: CGFloat = Const.padding * 2
+        let cellSpacing: CGFloat = 32
+        let screenWidth = UIScreen.main.bounds.width
+        var height: CGFloat = 113
+        
+        tagData.forEach { (text) in
+            let label = UILabel()
+            label.text = text
+            label.font = FontManager.shared.notoSansKR(.bold, 14)
+            label.sizeToFit()
+            totalCellWidth += (label.frame.width + cellSpacing)
+            if totalCellWidth + spacing < screenWidth {
+                totalCellWidth += spacing
+            } else {
+                height += (38 + spacing)
+                totalCellWidth = Const.padding * 2
+            }
+        }
+
+        return height
+    }
 
 }
 
@@ -89,7 +121,7 @@ extension TagView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as! TagCell
         
         cell.label.text = tagData[indexPath.row]
-        indexPath.row == 0 ? cell.configUI(.selected) : cell.configUI(.deselected)
+        tagData[indexPath.row] == selectedTag.value ? cell.configUI(.selected) : cell.configUI(.deselected)
         
         return cell
     }
@@ -97,7 +129,17 @@ extension TagView: UICollectionViewDataSource {
 }
 
 extension TagView: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.visibleCells.forEach {
+            if let cell = $0 as? TagCell {
+                cell.configUI(.deselected)
+            }
+        }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? TagCell else { return }
+        cell.configUI(.selected)
+        self.selectedTag.accept(tagData[indexPath.row])
+        
+    }
 }
 
 extension TagView: UICollectionViewDelegateFlowLayout {
