@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 struct UserInfo {
     var name: String?
     var age: String?
     var gender: String?
     var job: String?
-    var profileImage: String?
+    var profileImage: UIImage?
 }

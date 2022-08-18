@@ -24,6 +24,8 @@ class ProfileImageSelectView: UIView, SnapKitType {
     let cellSize = (UIScreen.main.bounds.width - (Const.padding * 4) - 26) / 3
     var disposeBag = DisposeBag()
     
+    var selectedImage = BehaviorRelay<UIImage?>(value: nil)
+    
     let backgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
     }
@@ -108,9 +110,35 @@ class ProfileImageSelectView: UIView, SnapKitType {
     func bind() {
         images.bind(to: collectionView.rx.items(
             cellIdentifier: ProfileImageSelectCell.identifier, cellType: ProfileImageSelectCell.self)) { [weak self] row, model, cell in
-                guard let self = self else { return }
+//                guard let self = self else { return }
                 cell.profileImage.image = model
             }
+            .disposed(by: disposeBag)
+        
+        Observable.zip(collectionView.rx.itemSelected, collectionView.rx.modelSelected(UIImage.self))
+            .subscribe(onNext: {[weak self] indexPath, model in
+                self?.collectionView.visibleCells.forEach {
+                    if let cell = $0 as? ProfileImageSelectCell {
+                        cell.alpha = 0.6
+                        cell.profileImage.layer.borderWidth = 0
+                    }
+                }
+                
+                let cell = self?.collectionView.cellForItem(at: indexPath) as! ProfileImageSelectCell
+                cell.alpha = 1
+                cell.profileImage.layer.borderWidth = 2
+                cell.profileImage.layer.borderColor = UIColor.m1.cgColor
+                
+                
+                self?.completeBtn.configUI(.active)
+                self?.selectedImage.accept(model)
+            })
+            .disposed(by: disposeBag)
+        
+        completeBtn.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.removeFromSuperview()
+            })
             .disposed(by: disposeBag)
     }
 }
