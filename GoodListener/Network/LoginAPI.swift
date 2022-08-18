@@ -25,14 +25,14 @@ extension LoginAPI: TargetType {
     //서버의 base URL / Moya는 이를 통하여 endpoint객체 생성
     // return URL(string: "ABC")
     public var baseURL: URL {
-        return URL(string: "http://223.130.162.39:29430")!
+        return URL(string: "http://223.130.162.39:31081")!
     }
     
     // 서버의 base URL 뒤에 추가 될 Path (일반적으로 API)
     // case .signIn(path, _) return "/\(path)"
     public var path: String {
         switch self {
-        case .signIn:
+        case .signIn(_):
             return ApiURL.Join
         case .signOut:
             return ""
@@ -77,8 +77,7 @@ extension LoginAPI: TargetType {
     // HTTP header
     //  return ["Content-type": "application/json"]
     public var headers: [String : String]? {
-        return ["Authorization" : "Bearer eyJraWQiOiJZdXlYb1kiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLmhlZWxwYXNzLmdvb2QtbGlzdGVuZXIiLCJleHAiOjE2NjAyMTQ3NTIsImlhdCI6MTY2MDEyODM1Miwic3ViIjoiMDAwODU3Ljc3NThhOGQ3NDAzYTRkMWNhYzIwOTNmMDYzOWI3NGQ5LjE0NTIiLCJhdF9oYXNoIjoiREhLdzZJUlNyZ19XcTBFWHlNTHhyZyIsImVtYWlsIjoieWh3cTdwZHdmdkBwcml2YXRlcmVsYXkuYXBwbGVpZC5jb20iLCJlbWFpbF92ZXJpZmllZCI6InRydWUiLCJpc19wcml2YXRlX2VtYWlsIjoidHJ1ZSJ9.vxOpTFuseAKsBul46JoPRwAUvG7nEYoLP0HX888AMrGWMkvW0pKVKUvX1kAmPpY8CbDaHHqzbpuvHGf5nH3eHccLgzfw0UwuIgEji-bxpTAjjCyl0ZzAUUPhvks8MZWQcbe279yiOoRLcNz5XIlI7PheYgK6ZBmFArPsq9ySuHvnkNiLGRWbJVXmfZ1nIMl4hVh_K1_tFM9URV8sI3R2GMmCMKOsgmUamjEAI_cp8M0D5GgDW7q5QJyxy2cq6QKH57q9c7GJOR_TkAEtADEm3-31nbv15IRrTEeQwuIbt-Kd5CT_a0ogoqTOEvWsSbz8Nle16McgOkdLiHwtewhyFg",
-            "Content-type": "application/json"]
+        return ["Content-type": "application/json"]
     }
     
     

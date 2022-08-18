@@ -201,6 +201,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
             .disposed(by: disposeBag)
         
         output.nicknameDuplicateResult
+            .skip(1)
             .emit(onNext: { [weak self] (nickname, result) in
                 guard let self = self else { return }
                 
@@ -208,8 +209,10 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                     // 성공팝업
                     // TODO: 중복확인 버튼 어떻게 처리?
                     self.userInfo?.name = nickname
+                    self.nicknameDuplicateResultPopup(result)
                 } else {
                     // 실패팝업
+                    self.nicknameDuplicateResultPopup(result)
                 }
             })
             .disposed(by: disposeBag)
@@ -253,6 +256,24 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                 self.coordinator?.completeJoin(model: self.userInfo!)
             })
             .disposed(by: disposeBag)
+    }
+    
+    // 중복 확인 팝업
+    func nicknameDuplicateResultPopup(_ result: Bool) {
+        let popup = GLPopup()
+        if result {
+            popup.title = "닉네임 중복 확인"
+            popup.contents = "사용 가능한 닉네임이에요"
+        } else {
+            popup.title = "닉네임 중복 확인"
+            popup.contents = "닉네임 중복 확인을 해주세요"
+        }
+        popup.cancelIsHidden = true
+        popup.alignment = .center
+        view.addSubview(popup)
+        popup.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
