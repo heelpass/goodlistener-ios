@@ -135,12 +135,14 @@ class ProfileImageSelectView: UIView, SnapKitType {
                 // 완료버튼 활성화
                 self?.completeBtn.configUI(.active)
                 // 선택된 이미지 넘겨주기 -> ProfileSetupVC에서 받아서 사용
-                self?.selectedImage.accept(model)
             })
             .disposed(by: disposeBag)
         
         completeBtn.rx.tap
-            .subscribe(onNext: { [weak self] in
+            .asObservable()
+            .withLatestFrom(collectionView.rx.modelSelected(UIImage.self))
+            .subscribe(onNext: { [weak self] image in
+                self?.selectedImage.accept(image)
                 self?.removeFromSuperview()
             })
             .disposed(by: disposeBag)
