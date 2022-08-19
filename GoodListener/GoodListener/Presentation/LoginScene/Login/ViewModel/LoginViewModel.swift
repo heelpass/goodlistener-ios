@@ -17,6 +17,7 @@ import KakaoSDKAuth
 import RxKakaoSDKAuth
 import KakaoSDKUser
 import RxKakaoSDKUser
+import SwiftyJSON
 
 
 class LoginViewModel: NSObject, ViewModelType {
@@ -26,7 +27,8 @@ class LoginViewModel: NSObject, ViewModelType {
     
     struct Input {
         var appleLoginBtnTap: Observable<UITapGestureRecognizer>
-        var kakaoLoginBtnTap: Observable<UITapGestureRecognizer>
+        var nonLoginBtnTap: Observable<UITapGestureRecognizer>
+        var termsOfServiceBtnTap: Observable<UITapGestureRecognizer>
     }
     
     struct Output {
@@ -48,6 +50,12 @@ class LoginViewModel: NSObject, ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        input.nonLoginBtnTap
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                loginResult.accept(true)
+            })
+            .disposed(by: disposeBag)
         
         // Delegate에서 받은 결과를 Output에 바인딩
         self.loginResult
@@ -78,7 +86,6 @@ class LoginViewModel: NSObject, ViewModelType {
                     Log.i("KakaoLogin Succeed")
                     Log.d("Token:: \(oauthToken)")
                     self.loginResult.onNext(true)
-                    self.practiceMoya()
                 }, onError: { [self] error in
                     Log.e("\(error)")
                     self.loginResult.onNext(false)
@@ -90,40 +97,21 @@ class LoginViewModel: NSObject, ViewModelType {
     // Token을 서버사이드에 전달
     // Moya로 API부분 설계완료되면 수정 필요
     private func send(token: String) {
-        guard let authData = try? JSONEncoder().encode(["token": token]) else {
-            return
-        }
-        guard let url = URL(string: "URL 입력 필요!!") else { return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let task = URLSession.shared.uploadTask(with: request, from: authData) { data, response, error in
-            // Handle response from your backend.
-        }
-        task.resume()
-        
-    }
-    
-    // Moya연습용 - 나중에 위와 합치기
-    private func practiceMoya(){
-        //private func practiveMoya(token: String)
-        // ex) 만일 'ABC/DEF'에 token을 post로 보내야 한다고 가정 -> LoginAPI.swift 참고
-     
-        let moyaProvider = MoyaProvider<LoginAPI>()
-        //moyaProvider.rx.request(.signIn(path: DEF, token: token))
-        moyaProvider.rx.request(.signIn)
-            .map(WeatherInfo.self)
+        let moyaProvider = MoyaProvider<TokenAPI>()
+        moyaProvider.rx.request(.getAppleToken(token))
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] result in
+            .subscribe { result in
                 switch result {
                 case .success(let response):
-                    print("지역은 \(response.name ?? "")입니다")
-                    print("위도는\(response.coord.lat ?? 0.0)이고, 경도는\(response.coord.lon ?? 0.0)")
+                    Log.d(JSON(response.data))
+                    if let token = JSON(response.data)["token"].string {
+                        UserDefaultsManager.shared.accessToken = "Bearer " + token
+                    }
                 case .failure(let error):
                     Log.e("\(error.localizedDescription)")
                 }
             }.disposed(by: disposeBag)
+        
     }
 }
 
@@ -132,13 +120,17 @@ extension LoginViewModel : ASAuthorizationControllerDelegate  {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             loginResult.onNext(true)
-            practiceMoya()
             guard let tokenData = credential.authorizationCode,
-                  let token = String(data: tokenData, encoding: .utf8) else {
+                  let token = String(data: tokenData, encoding: .utf8),
+                  let identityToken = credential.identityToken,
+                  let identity = String(data: identityToken, encoding: .utf8)
+            else {
                 Log.e("AuthToken Error")
                 return
             }
             Log.d("Token:: \(token)")
+            Log.d("Identity:: \(identity)")
+            UserDefaultsManager.shared.accessToken = "Bearer " + identity
             send(token: token)
         }
     }

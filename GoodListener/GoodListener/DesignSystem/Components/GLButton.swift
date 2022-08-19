@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum GLButtonState {
+    case active
+    case deactivate
+}
+
 /**
  높이 48 공통 버튼
  */
@@ -29,6 +34,17 @@ class GLButton: UIButton {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    func configUI(_ type: GLButtonState) {
+        switch type {
+        case .active:
+            backgroundColor = .m1
+            self.isUserInteractionEnabled = true
+        case .deactivate:
+            backgroundColor = #colorLiteral(red: 0.6, green: 0.6, blue: 0.6, alpha: 1)
+            self.isUserInteractionEnabled = false
+        }
     }
     
 }
