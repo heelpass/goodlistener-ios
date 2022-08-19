@@ -10,7 +10,7 @@ import UIKit
 
 protocol MyPageCoordinating: AnyObject {
     func logout()
-    func movetToSetting()
+    func moveToSetting()
     func moveToTagPage()
 }
 
@@ -38,7 +38,7 @@ extension MyPageCoordinator: MyPageCoordinating {
         parentCoordinator?.logout()
     }
     
-    func movetToSetting() {
+    func moveToSetting() {
         let vc = MyPageSetVC()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)

@@ -113,7 +113,7 @@ class MyPageVC: UIViewController, SnapKitType {
     func bind() {
         navigationView.rightBtn.rx.tap
             .bind(onNext: { [weak self] in
-                self?.coordinator?.movetToSetting()
+                self?.coordinator?.moveToSetting()
             })
             .disposed(by: disposeBag)
         
