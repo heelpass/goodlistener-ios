@@ -111,7 +111,6 @@ class GLPopup: UIView, SnapKitType {
         $0.backgroundColor = .clear
         $0.axis = .horizontal
         $0.distribution = .fillEqually
-        $0.layer.addBorder([.top], color: .f6, width: 1)
     }
     
     private let completeBtn = UIButton().then {
@@ -119,6 +118,7 @@ class GLPopup: UIView, SnapKitType {
         $0.font = FontManager.shared.notoSansKR(.bold, 14)
         $0.titleColor = .m1
         $0.backgroundColor = .clear
+        $0.layer.addBorder([.top], color: .f6, width: 1)
     }
     
     private let cancelBtn = UIButton().then {
@@ -126,6 +126,7 @@ class GLPopup: UIView, SnapKitType {
         $0.font = FontManager.shared.notoSansKR(.bold, 14)
         $0.titleColor = .m1
         $0.backgroundColor = .clear
+        $0.layer.addBorder([.top], color: .f6, width: 1)
     }
     
     override init(frame: CGRect) {
@@ -137,6 +138,18 @@ class GLPopup: UIView, SnapKitType {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func draw(_ frame: CGRect) {
+        super.draw(frame)
+        if self.cancelIsHidden == true {
+            completeBtn.layer.addBorder([.top], color: .f6, width: 1)
+        } else {
+            completeBtn.layer.addBorder([.top], color: .f6, width: 1)
+            completeBtn.layer.addBorder([.left], color: .f6, width: 0.5)
+            cancelBtn.layer.addBorder([.top], color: .f6, width: 1)
+            cancelBtn.layer.addBorder([.right], color: .f6, width: 0.5)
+        }
     }
     
     func addComponents() {
