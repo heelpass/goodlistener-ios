@@ -12,15 +12,13 @@ import Moya
 
 //ex) 만일 'ABC/DEF'에 token을 post로 보내야 한다고 가정
 // case signIn(path: String, token: String)
-public enum LoginAPI {
-    case signIn
-    case signOut
-    case leave
+public enum TokenAPI {
+    case getAppleToken(String)
 }
 
 
 // TargetType Protocol Implementation
-extension LoginAPI: TargetType {
+extension TokenAPI: TargetType {
     
     //서버의 base URL / Moya는 이를 통하여 endpoint객체 생성
     // return URL(string: "ABC")
@@ -32,12 +30,8 @@ extension LoginAPI: TargetType {
     // case .signIn(path, _) return "/\(path)"
     public var path: String {
         switch self {
-        case .signIn:
-            return ""
-        case .signOut:
-            return ""
-        case .leave:
-            return ""
+        case .getAppleToken(_):
+            return "/auth/apple/login"
         }
     }
     
@@ -45,11 +39,7 @@ extension LoginAPI: TargetType {
     // case .signIn: return .post
     public var method: Moya.Method {
         switch self {
-        case .signIn:
-            return .post
-        case .signOut:
-            return .post
-        case .leave:
+        case .getAppleToken(_):
             return .post
         }
 
@@ -65,19 +55,16 @@ extension LoginAPI: TargetType {
     // case let .signIn(_, token): return .requestJSONEncodable(["accesstoken": token])
     public var task: Task {
         switch self {
-        case .signIn:
-            return .requestPlain
-        case .signOut:
-            return .requestPlain
-        case .leave:
-            return .requestPlain
+        case .getAppleToken(let token):
+            return .requestJSONEncodable(["token": token])
         }
     }
     
     // HTTP header
     //  return ["Content-type": "application/json"]
     public var headers: [String : String]? {
-        return ["Content-type": "application/json"]
+        return ["Content-type": "application/json",
+                "Authorization": UserDefaultsManager.shared.accessToken!]
     }
     
     

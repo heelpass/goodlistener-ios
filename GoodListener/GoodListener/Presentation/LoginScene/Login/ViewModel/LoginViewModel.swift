@@ -97,14 +97,16 @@ class LoginViewModel: NSObject, ViewModelType {
     // Token을 서버사이드에 전달
     // Moya로 API부분 설계완료되면 수정 필요
     private func send(token: String) {
-        
-        let moyaProvider = MoyaProvider<LoginAPI>()
-        moyaProvider.rx.request(.signIn(token))
+        let moyaProvider = MoyaProvider<TokenAPI>()
+        moyaProvider.rx.request(.getAppleToken(token))
             .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] result in
+            .subscribe { result in
                 switch result {
                 case .success(let response):
                     Log.d(JSON(response.data))
+                    if let token = JSON(response.data)["token"].string {
+                        UserDefaultsManager.shared.accessToken = "Bearer " + token
+                    }
                 case .failure(let error):
                     Log.e("\(error.localizedDescription)")
                 }
@@ -119,11 +121,16 @@ extension LoginViewModel : ASAuthorizationControllerDelegate  {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             loginResult.onNext(true)
             guard let tokenData = credential.authorizationCode,
-                  let token = String(data: tokenData, encoding: .utf8) else {
+                  let token = String(data: tokenData, encoding: .utf8),
+                  let identityToken = credential.identityToken,
+                  let identity = String(data: identityToken, encoding: .utf8)
+            else {
                 Log.e("AuthToken Error")
                 return
             }
             Log.d("Token:: \(token)")
+            Log.d("Identity:: \(identity)")
+            UserDefaultsManager.shared.accessToken = "Bearer " + identity
             send(token: token)
         }
     }
