@@ -36,6 +36,12 @@ class ProfileSetupViewModel: ViewModelType {
                 guard let self = self else { return }
                 // 문자열을 확인 후 output에 넘겨주기
                 nicknameValidationResult.accept(self.checkText(text: text))
+                // 중복확인 후 문자열이 바뀐경우
+                // 중복확인된 시점과 문자열이 같아진 경우 완료버튼 활성화 ( 닉네임을 썼다 지운 경우 )
+                // 중복확인된 시점과 문자열이 다른경우 비활성화
+                if !nicknameDuplicateResult.value.0.isEmpty {
+                    nicknameDuplicateResult.value.0 == text ? canComplete.accept(true) : canComplete.accept(false)
+                }
             })
             .disposed(by: disposeBag)
         
