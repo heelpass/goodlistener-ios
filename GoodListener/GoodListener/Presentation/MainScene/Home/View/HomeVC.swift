@@ -139,7 +139,7 @@ class HomeVC: UIViewController, SnapKitType {
             $0.left.right.bottom.equalToSuperview()
         }
         contentStackView.snp.makeConstraints {
-            $0.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 35, left: Const.padding, bottom: 0, right: Const.padding))
+            $0.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 35, left: Const.padding, bottom: 100, right: Const.padding))
             $0.width.equalTo(scrollView.snp.width).offset(-Const.padding*2)
         }
         
