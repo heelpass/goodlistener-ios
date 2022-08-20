@@ -146,7 +146,7 @@ class HomeVC: UIViewController, SnapKitType {
         contentStackView.setCustomSpacing(20, after: titleLbl)
         
         containerView.snp.makeConstraints {
-            $0.height.equalTo(500)
+            $0.height.equalTo(488)
            //$0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-108)
         }
         
@@ -194,7 +194,7 @@ class HomeVC: UIViewController, SnapKitType {
             $0.width.equalTo(Const.glBtnWidth)
             $0.height.equalTo(Const.glBtnHeight)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-30)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
         self.view.bringSubviewToFront(confirmBtn)
         
