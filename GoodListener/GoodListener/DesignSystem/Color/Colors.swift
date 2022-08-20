@@ -20,6 +20,8 @@ extension UIColor {
     static var m4: UIColor { return #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1) }
     /// #FFFFFF
     static var m5: UIColor { return #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) }
+    /// #E9F7E8
+    static var m6: UIColor { return #colorLiteral(red: 0.9137254902, green: 0.968627451, blue: 0.9098039216, alpha: 1) }
     
     // MARK: FontColor - f
     /// #4C5264

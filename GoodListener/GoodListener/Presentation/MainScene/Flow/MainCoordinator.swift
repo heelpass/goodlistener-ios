@@ -93,6 +93,7 @@ class MainCoordinator: CoordinatorType {
         myPage.navigationController.tabBarItem.setTitleTextAttributes(fontAttributes, for: .normal)
         myPage.navigationController.tabBarItem.setTitleTextAttributes(fontAttributes, for: .selected)
         
+        tabBarController.tabBar.backgroundColor = .m5
         tabBarController.tabBar.tintColor = .m1
         tabBarController.tabBar.unselectedItemTintColor = .f5
 

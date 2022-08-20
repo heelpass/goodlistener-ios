@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 
+// TODO: 신청 전, 매칭 후 2가지 상태 view 표시(enum)
 class HomeVC: UIViewController {
     
     weak var coordinator: HomeCoordinating?
@@ -15,6 +16,7 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .m6
         let label = UILabel()
         label.text = "Home"
         view.addSubview(label)
@@ -22,35 +24,6 @@ class HomeVC: UIViewController {
             $0.center.equalToSuperview()
         }
         
-        let button = GLButton()
-        button.title = "전화"
-        view.addSubview(button)
-        button.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(Const.glBtnHeight)
-            $0.width.equalTo(Const.glBtnWidth)
-        }
-        
-        view.backgroundColor = .white
-        // Do any additional setup after loading the view.
-        
-        button.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.coordinator?.call()
-            })
-            .disposed(by: disposeBag)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
