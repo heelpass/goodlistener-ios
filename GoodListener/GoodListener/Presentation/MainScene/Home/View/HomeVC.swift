@@ -19,6 +19,7 @@ class HomeVC: UIViewController, SnapKitType {
     weak var coordinator: HomeCoordinating?
     let disposeBag = DisposeBag()
 
+    let navigationView = NavigationView(frame: .zero, type: .notice)
     let scrollView = UIScrollView().then {
         $0.backgroundColor = .m6
     }
@@ -28,7 +29,7 @@ class HomeVC: UIViewController, SnapKitType {
         $0.backgroundColor = .clear
     }
     
-    let navigationView = NavigationView(frame: .zero, type: .notice)
+    //매칭 화면 UI 요소
     let titleLbl = UILabel().then {
         $0.text = "나의 리스너"
         $0.font = FontManager.shared.notoSansKR(.bold, 20)
@@ -40,7 +41,8 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     let daycheckLbl = UILabel().then{
-        $0.text = "7일 중 3일차"
+        let dayformat = "7일 중 %d일차"
+        $0.text = String(format: dayformat, 3) //api data
         $0.font = FontManager.shared.notoSansKR(.bold, 20)
         $0.textColor = .f2
         $0.textAlignment = .center
@@ -51,12 +53,56 @@ class HomeVC: UIViewController, SnapKitType {
         $0.contentMode = .scaleAspectFill
     }
     
+    let nickNameLbl = UILabel().then {
+        $0.text = "행복해지고싶은지은이"
+        $0.font = FontManager.shared.notoSansKR(.bold, 18)
+        $0.textColor = .f2
+        $0.textAlignment = .center
+    }
     
+    let introLbl = UILabel().then {
+        $0.textAlignment = .left
+        $0.numberOfLines = 3
+        $0.text = "안녕하세요? 스피커님과 즐거운 대화를 해나가고 싶어요 일주일동안 잘 부탁드려요 안녕하세요? 스피커님과 즐거운 안녕하세요? 스피커님과 즐거운 대화를 해나가고 싶어요 일주일동안 잘 부탁드려요 안녕하세요? 스피커님과 즐거운"
+        $0.font = FontManager.shared.notoSansKR(.regular, 16)
+        $0.textColor = .f4
+        $0.lineBreakMode = .byTruncatingTail //바꾸기
+    }
+        
+    let scheduleLbl = UILabel().then {
+        $0.text = "대화시간"
+        $0.font = FontManager.shared.notoSansKR(.bold, 16)
+        $0.textColor = .f2
+    }
+    
+    let timeLbl = UILabel().then {
+        $0.text = "매일 오후 10:20"
+        $0.font = FontManager.shared.notoSansKR(.regular, 16)
+        $0.textColor = .f7
+    }
+    
+    let dateLbl = UILabel().then {
+        $0.text = "2022.8.2 ~ 8.8 (7일간)" //나중에 API 호출 시 format 만들기
+        $0.font = FontManager.shared.notoSansKR(.regular, 16)
+        $0.textColor = .f7
+    }
+    
+    //신청 전 화면 UI 요소
+    let joinImg = UIImageView().then {
+        $0.image = #imageLiteral(resourceName: "main_img_notalk")
+    }
+    
+    let joinLbl = UILabel().then {
+        $0.text = "아직 진행 중인 대화가 없어요.\n지금 바로 대화를 신청해 보세요"
+        $0.font = FontManager.shared.notoSansKR(.regular, 16)
+        $0.numberOfLines = 0
+        $0.textAlignment = .center
+    }
+
     let confirmBtn = GLButton().then {
         $0.title = "오늘 대화 미루기"
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .m6
@@ -75,6 +121,9 @@ class HomeVC: UIViewController, SnapKitType {
         scrollView.addSubview(contentStackView)
         [titleLbl, containerView].forEach {
             contentStackView.addArrangedSubview($0)
+        }
+        [daycheckLbl, profileImg, nickNameLbl, introLbl, scheduleLbl, timeLbl, dateLbl].forEach {
+            containerView.addSubview($0)
         }
      
     }
@@ -95,18 +144,59 @@ class HomeVC: UIViewController, SnapKitType {
         }
         
         contentStackView.setCustomSpacing(20, after: titleLbl)
+        
         containerView.snp.makeConstraints {
-            //$0.height.equalTo(488)
-           $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-108)
+            $0.height.equalTo(500)
+           //$0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-108)
         }
-  
+        
+        daycheckLbl.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(30)
+            $0.left.equalToSuperview().offset(70)
+            $0.right.equalToSuperview().offset(-70)
+        }
+        
+        profileImg.snp.makeConstraints {
+            $0.top.equalTo(daycheckLbl.snp.bottom).offset(30)
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(CGSize(width: 138, height: 138))
+            //$0.layer.cornerRadius = self.frame.size.width/2 //일반 사진일 경우
+        }
+        
+        nickNameLbl.snp.makeConstraints {
+            $0.top.equalTo(profileImg.snp.bottom).offset(16)
+            $0.left.equalToSuperview().offset(30)
+            $0.right.equalToSuperview().offset(-30)
+        }
+        
+        
+        introLbl.snp.makeConstraints{
+            $0.top.equalTo(nickNameLbl.snp.bottom).offset(28)
+            $0.left.equalToSuperview().offset(30)
+            $0.right.equalToSuperview().offset(-30)
+        }
+        
+        scheduleLbl.snp.makeConstraints{
+            $0.top.equalTo(introLbl.snp.bottom).offset(22)
+            $0.left.equalToSuperview().offset(30)
+        }
+        
+        timeLbl.snp.makeConstraints{
+            $0.top.equalTo(scheduleLbl.snp.bottom).offset(10)
+            $0.left.equalToSuperview().offset(30)
+        }
+        dateLbl.snp.makeConstraints{
+            $0.top.equalTo(timeLbl.snp.bottom)
+            $0.left.equalToSuperview().offset(30)
+        }
+        
         confirmBtn.snp.makeConstraints {
             $0.width.equalTo(Const.glBtnWidth)
             $0.height.equalTo(Const.glBtnHeight)
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-30)
         }
-       // self.view.bringSubviewToFront(confirmBtn)
+        self.view.bringSubviewToFront(confirmBtn)
         
     }
 }
