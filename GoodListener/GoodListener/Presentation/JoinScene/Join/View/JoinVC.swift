@@ -113,6 +113,7 @@ class JoinVC: UIViewController, SnapKitType {
         super.viewDidLoad()
         addComponents()
         setConstraints()
+        bind()
     }
     
     func addComponents() {
@@ -151,10 +152,18 @@ class JoinVC: UIViewController, SnapKitType {
         btnView.snp.makeConstraints{
             $0.height.equalTo(48)
         }
+    }
+    
+    func bind() {
+        btnView.okBtn.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                self?.coordinator?.moveToJoinMatch()
+            })
+            .disposed(by: disposeBag)
         
         btnView.cancelBtn.tapGesture
             .subscribe(onNext: { [weak self] _ in
-                print("Cancel")
+                self?.coordinator?.moveToHome()
             })
             .disposed(by: disposeBag)
     }

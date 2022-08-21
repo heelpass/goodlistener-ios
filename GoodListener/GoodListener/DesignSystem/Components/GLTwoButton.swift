@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RxSwift
 
 class GLTwoButton: UIView, SnapKitType {
 
