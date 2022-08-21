@@ -72,7 +72,7 @@ class JoinVC: UIViewController, SnapKitType {
     let answerFourStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.backgroundColor = .clear
-        $0.distribution = .equalCentering
+        $0.distribution = .equalSpacing
     }
     
     let answerFourLbl = UILabel().then {
@@ -105,6 +105,9 @@ class JoinVC: UIViewController, SnapKitType {
     
     //TODO: 날짜 시간 뷰 추가
     //TODO: 버튼 2개 공용 뷰 추가
+    let btnView = GLTwoButton(frame: .zero)
+  
+        
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,7 +126,7 @@ class JoinVC: UIViewController, SnapKitType {
             answerFourStackView.addArrangedSubview($0)
         }
         
-        [titleLbl, descriptionLbl, questionOneStackView, questionTwoLbl, questionThreeLbl, answerFourStackView, lineView, questionFourLbl, questionFourSubLbl].forEach {
+        [titleLbl, descriptionLbl, questionOneStackView, questionTwoLbl, questionThreeLbl, answerFourStackView, lineView, questionFourLbl, questionFourSubLbl, btnView].forEach {
             contentStackView.addArrangedSubview($0)
         }
     }
@@ -144,6 +147,15 @@ class JoinVC: UIViewController, SnapKitType {
         lineView.snp.makeConstraints{
             $0.height.equalTo(1)
         }
-
+        
+        btnView.snp.makeConstraints{
+            $0.height.equalTo(48)
+        }
+        
+        btnView.cancelBtn.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                print("Cancel")
+            })
+            .disposed(by: disposeBag)
     }
 }

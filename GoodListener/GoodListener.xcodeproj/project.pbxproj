@@ -10,6 +10,7 @@
 		0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B522896AB8300A05124 /* LoginAPI.swift */; };
 		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
 		0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B582896BC5E00A05124 /* WeatherInfo.swift */; };
+		0A7584E928B2725400D07750 /* GLTwoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7584E828B2725400D07750 /* GLTwoButton.swift */; };
 		0AAE1C0728B2049400A94C26 /* JoinCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE1C0628B2049400A94C26 /* JoinCoordinator.swift */; };
 		0AAE1C0F28B2051800A94C26 /* JoinMatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE1C0E28B2051800A94C26 /* JoinMatchVC.swift */; };
 		0AAE1C1128B208E400A94C26 /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE1C1028B208E400A94C26 /* JoinVC.swift */; };
@@ -81,6 +82,7 @@
 		0A703B522896AB8300A05124 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginAPI.swift; path = Network/LoginAPI.swift; sourceTree = SOURCE_ROOT; };
 		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
 		0A703B582896BC5E00A05124 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherInfo.swift; path = GoodListener/Domain/Entities/WeatherInfo.swift; sourceTree = SOURCE_ROOT; };
+		0A7584E828B2725400D07750 /* GLTwoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLTwoButton.swift; sourceTree = "<group>"; };
 		0AAE1C0628B2049400A94C26 /* JoinCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCoordinator.swift; sourceTree = "<group>"; };
 		0AAE1C0E28B2051800A94C26 /* JoinMatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMatchVC.swift; sourceTree = "<group>"; };
 		0AAE1C1028B208E400A94C26 /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 			isa = PBXGroup;
 			children = (
 				E8A79553289CDA7700EF9E1B /* GLButton.swift */,
+				0A7584E828B2725400D07750 /* GLTwoButton.swift */,
 				E8B443FC28A243CC0003815B /* NavigationView.swift */,
 				E8B444A428AE2AAD0003815B /* GLPopup.swift */,
 			);
@@ -932,6 +935,7 @@
 				E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */,
 				0ABA2825288D5B55000D889B /* LoginVC.swift in Sources */,
 				0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */,
+				0A7584E928B2725400D07750 /* GLTwoButton.swift in Sources */,
 				E8B4449A28ADC8620003815B /* UserInfo.swift in Sources */,
 				E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */,
 				E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */,
