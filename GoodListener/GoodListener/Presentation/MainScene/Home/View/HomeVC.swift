@@ -115,10 +115,9 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        view.addSubview(navigationView)
-        view.addSubview(scrollView)
-        view.addSubview(confirmBtn)
-        navigationView.backgroundColor = .m6
+        [navigationView, scrollView, confirmBtn].forEach{
+            view.addSubview($0)
+        }
         scrollView.addSubview(contentStackView)
         [titleLbl, containerView].forEach {
             contentStackView.addArrangedSubview($0)
@@ -126,7 +125,7 @@ class HomeVC: UIViewController, SnapKitType {
         [daycheckLbl, profileImg, nickNameLbl, introLbl, scheduleLbl, timeLbl, dateLbl].forEach {
             containerView.addSubview($0)
         }
-     
+        navigationView.backgroundColor = .m6
     }
     
     func setConstraints() {
