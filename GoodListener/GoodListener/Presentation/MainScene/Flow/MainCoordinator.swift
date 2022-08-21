@@ -14,6 +14,7 @@ import UIKit
 protocol MainCoordinating: AnyObject {
     func logout()
     func call()
+    func join()
 }
 
 enum UserType {
@@ -156,6 +157,19 @@ extension MainCoordinator: MainCoordinating {
         callCoordinator.start()
         
         childCoordinators.append(callCoordinator)
+    }
+    
+    func join() {
+        let navigationController = UINavigationController()
+        navigationController.modalPresentationStyle = .fullScreen
+        
+        self.tabBarController.present(navigationController, animated: true)
+        
+        let joinCoordinator = JoinCoordinator(navigationController: navigationController)
+        joinCoordinator.parentCoordinator = self
+        joinCoordinator.start()
+        
+        childCoordinators.append(joinCoordinator)
     }
 }
 

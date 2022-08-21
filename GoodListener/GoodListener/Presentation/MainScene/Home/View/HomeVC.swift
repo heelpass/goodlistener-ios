@@ -111,6 +111,7 @@ class HomeVC: UIViewController, SnapKitType {
         var homeState: homeState = .matched
         addComponents()
         setConstraints()
+        bind()
     }
     
     func addComponents() {
@@ -198,6 +199,15 @@ class HomeVC: UIViewController, SnapKitType {
         }
         self.view.bringSubviewToFront(confirmBtn)
         
+    }
+    
+    func bind() {
+        confirmBtn.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                //self?.coordinator?.call()
+                self?.coordinator?.join()
+            })
+            .disposed(by: disposeBag)
     }
 }
 

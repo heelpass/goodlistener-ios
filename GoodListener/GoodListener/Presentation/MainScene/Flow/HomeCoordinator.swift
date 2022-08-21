@@ -10,6 +10,7 @@ import UIKit
 
 protocol HomeCoordinating: AnyObject {
     func call()
+    func join()
 }
 
 class HomeCoordinator: CoordinatorType {
@@ -34,5 +35,9 @@ class HomeCoordinator: CoordinatorType {
 extension HomeCoordinator: HomeCoordinating {
     func call() {
         parentCoordinator?.call()
+    }
+    
+    func join() {
+        parentCoordinator?.join()
     }
 }
