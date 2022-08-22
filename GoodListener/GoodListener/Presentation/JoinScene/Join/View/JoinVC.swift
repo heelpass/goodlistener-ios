@@ -55,7 +55,6 @@ class JoinVC: UIViewController, SnapKitType {
         $0.textColor = .f3
     }
     
-    // TODO: 이모지 버튼 추가
     let emojiTagView = EmojiTagView(frame: .zero, emojiImgdata: EmojiTagList.emojiImgList, emojiTextdata: EmojiTagList.emojiTextList)
     
     
@@ -66,6 +65,7 @@ class JoinVC: UIViewController, SnapKitType {
     }
     
     // TODO: 텍스트 필드 추가
+    
     let questionThreeLbl = UILabel().then {
         $0.text = "대화 기간은 매일 7일 동안 이어집니다.\n시작 가능한 날짜를 선택해 주세요."
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
@@ -108,6 +108,7 @@ class JoinVC: UIViewController, SnapKitType {
     
     //TODO: 시간 뷰 추가
     let btnView = GLTwoButton(frame: .zero)
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,10 +145,11 @@ class JoinVC: UIViewController, SnapKitType {
         
         contentStackView.setCustomSpacing(20, after: titleLbl)
         contentStackView.setCustomSpacing(50, after: descriptionLbl)
-        contentStackView.setCustomSpacing(50, after: questionOneLbl)
+        contentStackView.setCustomSpacing(20, after: questionOneStackView)
+        contentStackView.setCustomSpacing(50, after: emojiTagView)
         
         emojiTagView.snp.makeConstraints{
-            $0.height.equalTo(100) 
+            $0.height.equalTo(100) //TODO: 동적 높이 조절되도록
         }
         
         lineView.snp.makeConstraints{
@@ -157,6 +159,7 @@ class JoinVC: UIViewController, SnapKitType {
         btnView.snp.makeConstraints{
             $0.height.equalTo(48)
         }
+        btnView.okBtn.title = "대화 신청하기"
     }
     
     func bind() {
