@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-// TODO: 신청 전, 매칭 후 2가지 상태 view 표시(enum)
+// 신청 전, 매칭 후 2가지 상태
 enum homeState {
     case join
     case matched
@@ -24,12 +24,14 @@ class HomeVC: UIViewController, SnapKitType {
         $0.backgroundColor = .m6
     }
     
+    // 현재 홈 화면 상태
+    var homeState: homeState = .join
+    
     let contentStackView = UIStackView().then {
         $0.axis = .vertical
         $0.backgroundColor = .clear
     }
     
-    //매칭 화면 UI 요소
     let titleLbl = UILabel().then {
         $0.text = "나의 리스너"
         $0.font = FontManager.shared.notoSansKR(.bold, 20)
@@ -40,6 +42,24 @@ class HomeVC: UIViewController, SnapKitType {
         $0.layer.cornerRadius = 20
     }
     
+    //신청 전 화면 UI 요소
+    let joinImg = UIImageView().then {
+        $0.image = #imageLiteral(resourceName: "main_img_notalk")
+    }
+    
+    let joinLbl = UILabel().then {
+        $0.text = "아직 진행 중인 대화가 없어요.\n지금 바로 대화를 신청해 보세요"
+        $0.font = FontManager.shared.notoSansKR(.regular, 16)
+        $0.numberOfLines = 0
+        $0.textAlignment = .center
+        $0.textColor = .f4
+    }
+
+    let joinBtn = GLButton().then {
+        $0.title = "신청하기"
+    }
+    
+    //매칭 후 UI 요소
     let daycheckLbl = UILabel().then{
         let dayformat = "7일 중 %d일차"
         $0.text = String(format: dayformat, 3) //api data
@@ -66,7 +86,7 @@ class HomeVC: UIViewController, SnapKitType {
         $0.text = "안녕하세요? 스피커님과 즐거운 대화를 해나가고 싶어요 일주일동안 잘 부탁드려요 안녕하세요? 스피커님과 즐거운 안녕하세요? 스피커님과 즐거운 대화를 해나가고 싶어요 일주일동안 잘 부탁드려요 안녕하세요? 스피커님과 즐거운"
         $0.font = FontManager.shared.notoSansKR(.regular, 16)
         $0.textColor = .f4
-        $0.lineBreakMode = .byTruncatingTail //바꾸기
+        $0.lineBreakMode = .byTruncatingTail
     }
         
     let scheduleLbl = UILabel().then {
@@ -87,42 +107,28 @@ class HomeVC: UIViewController, SnapKitType {
         $0.textColor = .f7
     }
     
-    //신청 전 화면 UI 요소
-    let joinImg = UIImageView().then {
-        $0.image = #imageLiteral(resourceName: "main_img_notalk")
-    }
-    
-    let joinLbl = UILabel().then {
-        $0.text = "아직 진행 중인 대화가 없어요.\n지금 바로 대화를 신청해 보세요"
-        $0.font = FontManager.shared.notoSansKR(.regular, 16)
-        $0.numberOfLines = 0
-        $0.textAlignment = .center
-    }
-
-    let confirmBtn = GLButton().then {
+    let delayBtn = GLButton().then {
         $0.title = "오늘 대화 미루기"
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .m6
-        
-        //TODO: 사용자 상태 값에 따라 나중에 바꾸기
-        var homeState: homeState = .matched
         addComponents()
         setConstraints()
         bind()
+        changeUI(.matched)
     }
     
     func addComponents() {
-        [navigationView, scrollView, confirmBtn].forEach{
+        [navigationView, scrollView, joinBtn, delayBtn].forEach{
             view.addSubview($0)
         }
         scrollView.addSubview(contentStackView)
         [titleLbl, containerView].forEach {
             contentStackView.addArrangedSubview($0)
         }
-        [daycheckLbl, profileImg, nickNameLbl, introLbl, scheduleLbl, timeLbl, dateLbl].forEach {
+        [joinImg, joinLbl, daycheckLbl, profileImg, nickNameLbl, introLbl, scheduleLbl, timeLbl, dateLbl].forEach {
             containerView.addSubview($0)
         }
         navigationView.backgroundColor = .m6
@@ -147,9 +153,28 @@ class HomeVC: UIViewController, SnapKitType {
         
         containerView.snp.makeConstraints {
             $0.height.equalTo(488)
-           //$0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-108)
         }
         
+        // 신청 전 UI
+        joinImg.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(139)
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(CGSize(width:100, height:100))
+        }
+        joinLbl.snp.makeConstraints{
+            $0.top.equalTo(joinImg.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
+        }
+        joinBtn.snp.makeConstraints {
+            $0.width.equalTo(Const.glBtnWidth)
+            $0.height.equalTo(Const.glBtnHeight)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
+        }
+        self.view.bringSubviewToFront(joinBtn)
+        
+        
+        // 매칭 후 UI
         daycheckLbl.snp.makeConstraints {
             $0.top.equalToSuperview().offset(30)
             $0.left.equalToSuperview().offset(70)
@@ -190,23 +215,59 @@ class HomeVC: UIViewController, SnapKitType {
             $0.left.equalToSuperview().offset(30)
         }
         
-        confirmBtn.snp.makeConstraints {
+        delayBtn.snp.makeConstraints {
             $0.width.equalTo(Const.glBtnWidth)
             $0.height.equalTo(Const.glBtnHeight)
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
-        self.view.bringSubviewToFront(confirmBtn)
+        self.view.bringSubviewToFront(delayBtn)
         
     }
     
     func bind() {
-        confirmBtn.tapGesture
-            .subscribe(onNext: { [weak self] _ in
-                //self?.coordinator?.call()
+        joinBtn.rx.tap
+            .bind(onNext: { [weak self] in
                 self?.coordinator?.join()
             })
             .disposed(by: disposeBag)
+        
+        delayBtn.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.coordinator?.call()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func changeUI(_ type: homeState) {
+        switch type {
+        case .join:
+            joinImg.isHidden = false
+            joinLbl.isHidden = false
+            joinBtn.isHidden = false
+            daycheckLbl.isHidden = true
+            profileImg.isHidden = true
+            nickNameLbl.isHidden = true
+            introLbl.isHidden = true
+            scheduleLbl.isHidden = true
+            timeLbl.isHidden = true
+            dateLbl.isHidden = true
+            delayBtn.isHidden = true
+            break
+        case .matched:
+            joinImg.isHidden = true
+            joinLbl.isHidden = true
+            joinBtn.isHidden = true
+            daycheckLbl.isHidden = false
+            profileImg.isHidden = false
+            nickNameLbl.isHidden = false
+            introLbl.isHidden = false
+            scheduleLbl.isHidden = false
+            timeLbl.isHidden = false
+            dateLbl.isHidden = false
+            delayBtn.isHidden = false
+            break
+        }
     }
 }
 

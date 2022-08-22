@@ -10,7 +10,6 @@ import RxSwift
 
 class JoinVC: UIViewController, SnapKitType {
 
-
     weak var coordinator: JoinCoordinating?
     let disposeBag = DisposeBag()
     
