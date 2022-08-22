@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A2A836828B3B9BE0074A7C2 /* CustomViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A836728B3B9BE0074A7C2 /* CustomViewFlowLayout.swift */; };
 		0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B522896AB8300A05124 /* LoginAPI.swift */; };
 		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
 		0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B582896BC5E00A05124 /* WeatherInfo.swift */; };
@@ -20,6 +21,8 @@
 		0ABA2828288D5B55000D889B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA2826288D5B55000D889B /* Main.storyboard */; };
 		0ABA282A288D5B56000D889B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA2829288D5B56000D889B /* Assets.xcassets */; };
 		0ABA282D288D5B56000D889B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA282B288D5B56000D889B /* LaunchScreen.storyboard */; };
+		0AC49EC128B32D1F00CA3D23 /* EmojiTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC49EC028B32D1F00CA3D23 /* EmojiTagView.swift */; };
+		0AC49EC328B32D6700CA3D23 /* EmojiTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC49EC228B32D6700CA3D23 /* EmojiTagCell.swift */; };
 		0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF43089288FD8800078B2D5 /* ApplicantCoordinator.swift */; };
 		0AF4308C288FD8E90078B2D5 /* ApplicantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */; };
 		0AF4308E288FDC230078B2D5 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */; };
@@ -79,6 +82,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A2A836728B3B9BE0074A7C2 /* CustomViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewFlowLayout.swift; sourceTree = "<group>"; };
 		0A703B522896AB8300A05124 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginAPI.swift; path = Network/LoginAPI.swift; sourceTree = SOURCE_ROOT; };
 		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
 		0A703B582896BC5E00A05124 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherInfo.swift; path = GoodListener/Domain/Entities/WeatherInfo.swift; sourceTree = SOURCE_ROOT; };
@@ -93,6 +97,8 @@
 		0ABA2827288D5B55000D889B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0ABA2829288D5B56000D889B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0ABA282C288D5B56000D889B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0AC49EC028B32D1F00CA3D23 /* EmojiTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTagView.swift; sourceTree = "<group>"; };
+		0AC49EC228B32D6700CA3D23 /* EmojiTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTagCell.swift; sourceTree = "<group>"; };
 		0AF43089288FD8800078B2D5 /* ApplicantCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantCoordinator.swift; sourceTree = "<group>"; };
 		0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantVC.swift; sourceTree = "<group>"; };
 		0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
@@ -207,6 +213,9 @@
 			isa = PBXGroup;
 			children = (
 				0AAE1C1028B208E400A94C26 /* JoinVC.swift */,
+				0AC49EC028B32D1F00CA3D23 /* EmojiTagView.swift */,
+				0AC49EC228B32D6700CA3D23 /* EmojiTagCell.swift */,
+				0A2A836728B3B9BE0074A7C2 /* CustomViewFlowLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -950,6 +959,7 @@
 				E8B443FD28A243CC0003815B /* NavigationView.swift in Sources */,
 				E8B444A528AE2AAD0003815B /* GLPopup.swift in Sources */,
 				E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */,
+				0AC49EC328B32D6700CA3D23 /* EmojiTagCell.swift in Sources */,
 				E8B443FF28A255D30003815B /* CALayer+.swift in Sources */,
 				0AAE1C0F28B2051800A94C26 /* JoinMatchVC.swift in Sources */,
 				E8B4449C28ADF20B0003815B /* ProfileImageSelectView.swift in Sources */,
@@ -959,6 +969,7 @@
 				0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */,
 				E8CE19E4289CE15E007A56FE /* Const.swift in Sources */,
 				0AF43093288FDC850078B2D5 /* RecordVC.swift in Sources */,
+				0AC49EC128B32D1F00CA3D23 /* EmojiTagView.swift in Sources */,
 				E8B4449828ACDF890003815B /* PersonalInfoViewModel.swift in Sources */,
 				E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */,
 				E8CB6566288E35090076E254 /* Log.swift in Sources */,
@@ -982,6 +993,7 @@
 				E8CFBCE1288F874C00D63B07 /* MyPageVC.swift in Sources */,
 				E8CFBCCD288F710300D63B07 /* AuthVC.swift in Sources */,
 				E8B4449E28ADF4AD0003815B /* ProfileImageSelectCell.swift in Sources */,
+				0A2A836828B3B9BE0074A7C2 /* CustomViewFlowLayout.swift in Sources */,
 				E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */,
 				E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */,
 				E8B4435A28A103570003815B /* UILabel+.swift in Sources */,

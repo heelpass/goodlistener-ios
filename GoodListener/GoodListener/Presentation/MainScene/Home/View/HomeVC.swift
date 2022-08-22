@@ -117,7 +117,7 @@ class HomeVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
-        changeUI(.matched)
+        changeUI(homeState)
     }
     
     func addComponents() {

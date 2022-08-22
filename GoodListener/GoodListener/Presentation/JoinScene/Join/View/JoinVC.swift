@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class JoinVC: UIViewController, SnapKitType {
 
@@ -55,6 +56,9 @@ class JoinVC: UIViewController, SnapKitType {
     }
     
     // TODO: 이모지 버튼 추가
+    let emojiTagView = EmojiTagView(frame: .zero, emojiImgdata: EmojiTagList.emojiImgList, emojiTextdata: EmojiTagList.emojiTextList)
+    
+    
     let questionTwoLbl = UILabel().then {
         $0.text = "신청하게 된 계기를 알려주세요"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
@@ -102,12 +106,9 @@ class JoinVC: UIViewController, SnapKitType {
         $0.textColor = .f3
     }
     
-    //TODO: 날짜 시간 뷰 추가
-    //TODO: 버튼 2개 공용 뷰 추가
+    //TODO: 시간 뷰 추가
     let btnView = GLTwoButton(frame: .zero)
-  
-        
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         addComponents()
@@ -126,7 +127,7 @@ class JoinVC: UIViewController, SnapKitType {
             answerFourStackView.addArrangedSubview($0)
         }
         
-        [titleLbl, descriptionLbl, questionOneStackView, questionTwoLbl, questionThreeLbl, answerFourStackView, lineView, questionFourLbl, questionFourSubLbl, btnView].forEach {
+        [titleLbl, descriptionLbl, questionOneStackView, emojiTagView, questionTwoLbl, questionThreeLbl, answerFourStackView, lineView, questionFourLbl, questionFourSubLbl, btnView].forEach {
             contentStackView.addArrangedSubview($0)
         }
     }
@@ -143,6 +144,11 @@ class JoinVC: UIViewController, SnapKitType {
         
         contentStackView.setCustomSpacing(20, after: titleLbl)
         contentStackView.setCustomSpacing(50, after: descriptionLbl)
+        contentStackView.setCustomSpacing(50, after: questionOneLbl)
+        
+        emojiTagView.snp.makeConstraints{
+            $0.height.equalTo(100) 
+        }
         
         lineView.snp.makeConstraints{
             $0.height.equalTo(1)
