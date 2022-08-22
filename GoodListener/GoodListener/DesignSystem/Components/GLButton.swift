@@ -12,6 +12,11 @@ enum GLButtonState {
     case deactivate
 }
 
+enum GLButtonType {
+    case rectangle
+    case round
+}
+
 /**
  높이 48 공통 버튼
  */
@@ -33,6 +38,16 @@ class GLButton: UIButton {
         setTitleColor(.white, for: .normal)
         titleLabel?.font = FontManager.shared.notoSansKR(.bold, 16)
         self.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - Const.padding * 2, height: Const.glBtnHeight)
+    }
+    
+    convenience init(frame: CGRect, type: GLButtonType) {
+        self.init(frame: frame)
+        switch type {
+        case .rectangle:
+            layer.cornerRadius = Const.glBtnHeight / 2
+        case .round:
+            layer.cornerRadius = 5
+        }
     }
     
     required init?(coder: NSCoder) {
