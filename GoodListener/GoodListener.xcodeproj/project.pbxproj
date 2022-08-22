@@ -49,6 +49,7 @@
 		E8B444A228AE1BE40003815B /* ProfileSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444A128AE1BE40003815B /* ProfileSetupViewModel.swift */; };
 		E8B444A528AE2AAD0003815B /* GLPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444A428AE2AAD0003815B /* GLPopup.swift */; };
 		E8B444A928AF55E00003815B /* TokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444A828AF55E00003815B /* TokenAPI.swift */; };
+		E8B444AF28B316FE0003815B /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444AE28B316FE0003815B /* UIColor+.swift */; };
 		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
@@ -121,6 +122,7 @@
 		E8B444A128AE1BE40003815B /* ProfileSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupViewModel.swift; sourceTree = "<group>"; };
 		E8B444A428AE2AAD0003815B /* GLPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLPopup.swift; sourceTree = "<group>"; };
 		E8B444A828AF55E00003815B /* TokenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAPI.swift; sourceTree = "<group>"; };
+		E8B444AE28B316FE0003815B /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -681,6 +683,7 @@
 				E8CE19E1289CE08C007A56FE /* UIButton+.swift */,
 				E8B4435928A103570003815B /* UILabel+.swift */,
 				E8B443FE28A255D30003815B /* CALayer+.swift */,
+				E8B444AE28B316FE0003815B /* UIColor+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -872,6 +875,7 @@
 				E8B443FD28A243CC0003815B /* NavigationView.swift in Sources */,
 				E8B444A528AE2AAD0003815B /* GLPopup.swift in Sources */,
 				E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */,
+				E8B444AF28B316FE0003815B /* UIColor+.swift in Sources */,
 				E8B443FF28A255D30003815B /* CALayer+.swift in Sources */,
 				E8B4449C28ADF20B0003815B /* ProfileImageSelectView.swift in Sources */,
 				0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */,
