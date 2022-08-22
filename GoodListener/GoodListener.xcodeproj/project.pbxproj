@@ -50,6 +50,7 @@
 		E8B444A528AE2AAD0003815B /* GLPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444A428AE2AAD0003815B /* GLPopup.swift */; };
 		E8B444A928AF55E00003815B /* TokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444A828AF55E00003815B /* TokenAPI.swift */; };
 		E8B444AF28B316FE0003815B /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444AE28B316FE0003815B /* UIColor+.swift */; };
+		E8B444B228B338710003815B /* SwipeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444B128B338710003815B /* SwipeButton.swift */; };
 		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
@@ -123,6 +124,7 @@
 		E8B444A428AE2AAD0003815B /* GLPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLPopup.swift; sourceTree = "<group>"; };
 		E8B444A828AF55E00003815B /* TokenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAPI.swift; sourceTree = "<group>"; };
 		E8B444AE28B316FE0003815B /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		E8B444B128B338710003815B /* SwipeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeButton.swift; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -403,11 +405,23 @@
 		E8B444A328AE2A9E0003815B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E8B444B028B3382C0003815B /* TagView */,
 				E8A79553289CDA7700EF9E1B /* GLButton.swift */,
 				E8B443FC28A243CC0003815B /* NavigationView.swift */,
 				E8B444A428AE2AAD0003815B /* GLPopup.swift */,
+				E8B444B128B338710003815B /* SwipeButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		E8B444B028B3382C0003815B /* TagView */ = {
+			isa = PBXGroup;
+			children = (
+				ECBA27B428A4DF970034A751 /* TagView.swift */,
+				ECBA27B628A4E0B60034A751 /* TagCell.swift */,
+				ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */,
+			);
+			path = TagView;
 			sourceTree = "<group>";
 		};
 		E8C3320428925EFC00ECE59C /* CallScene */ = {
@@ -719,9 +733,6 @@
 			isa = PBXGroup;
 			children = (
 				ECBA27B028A4DD0E0034A751 /* MyPageTagVC.swift */,
-				ECBA27B428A4DF970034A751 /* TagView.swift */,
-				ECBA27B628A4E0B60034A751 /* TagCell.swift */,
-				ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -866,6 +877,7 @@
 				E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */,
 				E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */,
 				E8B443FB28A23E5B0003815B /* MyPageSetVC.swift in Sources */,
+				E8B444B228B338710003815B /* SwipeButton.swift in Sources */,
 				E8B444A928AF55E00003815B /* TokenAPI.swift in Sources */,
 				E8B443F528A22ABD0003815B /* CallReviewVC.swift in Sources */,
 				0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */,
