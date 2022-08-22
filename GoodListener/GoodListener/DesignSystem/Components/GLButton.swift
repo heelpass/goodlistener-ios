@@ -21,6 +21,9 @@ enum GLButtonState {
 // 잡아주세요~~
 class GLButton: UIButton {
     
+    lazy var highlightLayer = CAShapeLayer()
+    var pressColor = UIColor(r: 83, g: 174, b: 81)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -34,6 +37,31 @@ class GLButton: UIButton {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+        layer.masksToBounds = true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        press()
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        highlightLayer.removeFromSuperlayer()
+    }
+    
+    private func press() {
+        highlightLayer.fillColor = pressColor.cgColor
+        highlightLayer.path = UIBezierPath(rect: self.bounds).cgPath
+        
+        if let firstLayer = self.layer.sublayers?.first {
+            self.layer.insertSublayer(self.highlightLayer, below: firstLayer)
+        }
     }
     
     func configUI(_ type: GLButtonState) {
