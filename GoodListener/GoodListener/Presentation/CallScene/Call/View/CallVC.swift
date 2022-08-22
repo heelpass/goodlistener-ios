@@ -53,8 +53,9 @@ class CallVC: UIViewController, SnapKitType {
     
     let timeLabel = UILabel().then {
         $0.text = "0:00 / 3:00"
-        $0.font = FontManager.shared.notoSansKR(.regular, 20)
+        $0.font = FontManager.shared.notoSansKR(.bold, 40)
         $0.textColor = .white
+        $0.textAlignment = .left
     }
     
     let profileImage = UIImageView().then {
@@ -70,20 +71,24 @@ class CallVC: UIViewController, SnapKitType {
     }
     
     let buttonStackView = UIStackView().then {
-        $0.axis = .vertical
+        $0.axis = .horizontal
         $0.backgroundColor = .clear
         $0.spacing = 20
+        $0.distribution = .fillEqually
     }
     
-    let acceptButton = GLButton().then {
+    let acceptButton = GLButton(frame: .zero, type: .rectangle).then {
         $0.title = "전화 받기"
     }
     
-    let refuseButton = GLButton().then {
-        $0.title = "지금은 못받아요"
+    let refuseButton = GLButton(frame: .zero, type: .rectangle).then {
+        $0.title = "다음에 받기"
+        $0.backgroundColor = .m2
+    }
+    
+    let stopButton = SwipeButton().then {
+        $0.isHidden = true
         $0.backgroundColor = .clear
-        $0.layer.borderColor = UIColor.white.cgColor
-        $0.layer.borderWidth = 1
     }
     
     let extendButton = GLButton().then {
@@ -91,27 +96,6 @@ class CallVC: UIViewController, SnapKitType {
         $0.titleLabel?.lineBreakMode = .byWordWrapping
         $0.titleLabel?.textAlignment = .center
         $0.titleLabel?.textFontChange(text: $0.titleLabel!.text!, font: FontManager.shared.notoSansKR(.regular, 10), range: "(5분)")
-    }
-    
-    let stopButton = GLButton().then {
-        $0.title = "종료"
-        $0.backgroundColor = .clear
-        $0.layer.borderColor = UIColor.white.cgColor
-        $0.layer.borderWidth = 1
-    }
-    
-    let remainNoticeLabel = UILabel().then {
-        $0.text = "통화 종료까지 1분 남았습니다\n연장을 원하시면 연장을 요청하세요"
-        $0.font = FontManager.shared.notoSansKR(.regular, 10)
-        $0.textColor = .f4
-        $0.numberOfLines = 0
-    }
-    
-    let noticeLabel = UILabel().then {
-        $0.text = "시간 연장 시, 상대방의 동의를 구한 후 연장해주세요"
-        $0.font = FontManager.shared.notoSansKR(.regular, 10)
-        $0.textColor = .f4
-        $0.numberOfLines = 0
     }
     
     override func viewDidLoad() {
@@ -126,15 +110,15 @@ class CallVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [titleStackView, profileImage, nickName, buttonStackView].forEach { view.addSubview($0) }
-        [titleLabel, timeLabel, remainNoticeLabel].forEach { titleStackView.addArrangedSubview($0) }
-        [extendButton, noticeLabel, stopButton, acceptButton, refuseButton].forEach { buttonStackView.addArrangedSubview($0) }
+        [titleStackView, profileImage, nickName, buttonStackView, stopButton].forEach { view.addSubview($0) }
+        [titleLabel, timeLabel].forEach { titleStackView.addArrangedSubview($0) }
+        [refuseButton, acceptButton].forEach { buttonStackView.addArrangedSubview($0) }
     }
     
     func setConstraints() {
         titleStackView.snp.makeConstraints {
             $0.bottom.equalTo(profileImage.snp.top).offset(-90)
-            $0.left.equalToSuperview().inset(Const.padding)
+            $0.left.right.equalToSuperview().inset(Const.padding)
         }
         
         profileImage.snp.makeConstraints {
@@ -150,8 +134,7 @@ class CallVC: UIViewController, SnapKitType {
         
         buttonStackView.snp.makeConstraints {
             $0.top.equalTo(nickName.snp.bottom).offset(90)
-            $0.width.equalTo(200)
-            $0.centerX.equalToSuperview()
+            $0.left.right.equalToSuperview().inset(Const.padding)
         }
         
         acceptButton.snp.makeConstraints {
@@ -162,12 +145,11 @@ class CallVC: UIViewController, SnapKitType {
             $0.height.equalTo(Const.glBtnHeight)
         }
         
-        extendButton.snp.makeConstraints {
-            $0.height.equalTo(Const.glBtnHeight)
-        }
-        
         stopButton.snp.makeConstraints {
-            $0.height.equalTo(Const.glBtnHeight)
+            $0.top.equalTo(nickName.snp.bottom).offset(82)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(240)
+            $0.height.equalTo(64)
         }
     }
     
@@ -192,8 +174,9 @@ class CallVC: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
         
-        stopButton.rx.tap
-            .bind(onNext: { [weak self] in
+        stopButton.swipeSuccessResult
+            .filter { $0 }
+            .bind(onNext: { [weak self] _ in
                 self?.coordinator?.moveToReview()
             })
             .disposed(by: disposeBag)
@@ -207,18 +190,18 @@ class CallVC: UIViewController, SnapKitType {
             refuseButton.isHidden = false
             extendButton.isHidden = true
             stopButton.isHidden = true
-            noticeLabel.isHidden = true
-            remainNoticeLabel.isHidden = true
             break
         case .call:
-            titleLabel.text = "통화 하는 중"
+            titleLabel.text = "리스너와 대화중이에요"
+            titleLabel.font = FontManager.shared.notoSansKR(.regular, 20)
+            titleLabel.textAlignment = .center
             timeLabel.isHidden = false
+            timeLabel.textAlignment = .center
             extendButton.isHidden = false
             stopButton.isHidden = false
             acceptButton.isHidden = true
             refuseButton.isHidden = true
-            noticeLabel.isHidden = false
-            remainNoticeLabel.isHidden = true
+            stopButton.isHidden = false
             break
         case .remain:
             titleLabel.text = "통화 하는 중"
@@ -227,8 +210,6 @@ class CallVC: UIViewController, SnapKitType {
             stopButton.isHidden = false
             acceptButton.isHidden = true
             refuseButton.isHidden = true
-            noticeLabel.isHidden = false
-            remainNoticeLabel.isHidden = false
             break
         }
     }
