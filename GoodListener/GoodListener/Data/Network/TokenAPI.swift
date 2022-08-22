@@ -31,7 +31,7 @@ extension TokenAPI: TargetType {
     public var path: String {
         switch self {
         case .getAppleToken(_):
-            return "/auth/apple/login"
+            return "/auth/sign/apple"
         }
     }
     
