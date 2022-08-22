@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A2A836828B3B9BE0074A7C2 /* CustomViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A836728B3B9BE0074A7C2 /* CustomViewFlowLayout.swift */; };
+		0A2A836828B3B9BE0074A7C2 /* EmojiTagFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2A836728B3B9BE0074A7C2 /* EmojiTagFlowLayout.swift */; };
 		0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B522896AB8300A05124 /* LoginAPI.swift */; };
 		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
 		0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B582896BC5E00A05124 /* WeatherInfo.swift */; };
@@ -82,7 +82,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A2A836728B3B9BE0074A7C2 /* CustomViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewFlowLayout.swift; sourceTree = "<group>"; };
+		0A2A836728B3B9BE0074A7C2 /* EmojiTagFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTagFlowLayout.swift; sourceTree = "<group>"; };
 		0A703B522896AB8300A05124 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginAPI.swift; path = Network/LoginAPI.swift; sourceTree = SOURCE_ROOT; };
 		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
 		0A703B582896BC5E00A05124 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherInfo.swift; path = GoodListener/Domain/Entities/WeatherInfo.swift; sourceTree = SOURCE_ROOT; };
@@ -215,7 +215,7 @@
 				0AAE1C1028B208E400A94C26 /* JoinVC.swift */,
 				0AC49EC028B32D1F00CA3D23 /* EmojiTagView.swift */,
 				0AC49EC228B32D6700CA3D23 /* EmojiTagCell.swift */,
-				0A2A836728B3B9BE0074A7C2 /* CustomViewFlowLayout.swift */,
+				0A2A836728B3B9BE0074A7C2 /* EmojiTagFlowLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -993,7 +993,7 @@
 				E8CFBCE1288F874C00D63B07 /* MyPageVC.swift in Sources */,
 				E8CFBCCD288F710300D63B07 /* AuthVC.swift in Sources */,
 				E8B4449E28ADF4AD0003815B /* ProfileImageSelectCell.swift in Sources */,
-				0A2A836828B3B9BE0074A7C2 /* CustomViewFlowLayout.swift in Sources */,
+				0A2A836828B3B9BE0074A7C2 /* EmojiTagFlowLayout.swift in Sources */,
 				E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */,
 				E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */,
 				E8B4435A28A103570003815B /* UILabel+.swift in Sources */,

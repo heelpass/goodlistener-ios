@@ -29,7 +29,6 @@ class EmojiTagCell: UICollectionViewCell{
     let emojiLbl = UILabel().then {
         $0.text = "감정"
         $0.textColor = .f3
-        //$0.backgroundColor = .systemYellow
         $0.font = FontManager.shared.notoSansKR(.bold, 14)
     }
     

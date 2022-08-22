@@ -24,10 +24,9 @@ class EmojiTagView: UIView {
     var collectionHeight: NSLayoutConstraint!
     
     lazy var collectionView: UICollectionView = {
-        let layout = CustomViewFlowLayout()
+        let layout = EmojiTagFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
-        //view.backgroundColor = .systemGreen
         view.register(EmojiTagCell.self, forCellWithReuseIdentifier: EmojiTagCell.identifier)
         view.delegate = self
         view.dataSource = self
@@ -54,7 +53,6 @@ class EmojiTagView: UIView {
            
         }
         
-        print("###높이", self.collectionView.contentSize.height) //remake? observe? stack?
     }
     
     func calculateCellWidth(index: Int) -> CGFloat {

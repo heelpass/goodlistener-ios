@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomViewFlowLayout: UICollectionViewFlowLayout {
+class EmojiTagFlowLayout: UICollectionViewFlowLayout {
         let cellSpacing: CGFloat = 20
 
         override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
