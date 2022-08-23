@@ -64,7 +64,6 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.textColor = .f3
     }
     
-    // TODO: 텍스트뷰 추가
     let answerTwoTV = GLTextView(frame: .zero)
     
     let questionThreeLbl = UILabel().then {
@@ -73,13 +72,13 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.textColor = .f3
     }
     
-    let answerFourStackView = UIStackView().then {
+    let answerThreeStackView = UIStackView().then {
         $0.axis = .horizontal
         $0.backgroundColor = .clear
         $0.distribution = .equalSpacing
     }
     
-    let answerFourLbl = UILabel().then {
+    let answerThreeLbl = UILabel().then {
         $0.text = "22년 00월 00일 이후" //format으로 만들기(api대비)
         $0.font = FontManager.shared.notoSansKR(.regular, 16)
         $0.textColor = UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 1)
@@ -89,6 +88,10 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.setTitle("날짜 선택", for: .normal)
         $0.setTitleColor(.m1, for: .normal)
         $0.titleLabel?.font = FontManager.shared.notoSansKR(.bold, 14)
+    }
+    
+    let datePicker = UIDatePicker().then {
+        $0.datePickerMode = .date
     }
     
     let lineView = UIView().then {
@@ -126,11 +129,11 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             questionOneStackView.addArrangedSubview($0)
         }
         
-        [answerFourLbl, selectDateBtn].forEach {
-            answerFourStackView.addArrangedSubview($0)
+        [answerThreeLbl, selectDateBtn].forEach {
+            answerThreeStackView.addArrangedSubview($0)
         }
         
-        [titleLbl, descriptionLbl, questionOneStackView, emojiTagView, questionTwoLbl, answerTwoTV, questionThreeLbl, answerFourStackView, lineView, questionFourLbl, questionFourSubLbl, btnView].forEach {
+        [titleLbl, descriptionLbl, questionOneStackView, emojiTagView, questionTwoLbl, answerTwoTV, questionThreeLbl, answerThreeStackView, lineView, questionFourLbl, questionFourSubLbl, btnView].forEach {
             contentStackView.addArrangedSubview($0)
         }
     }
@@ -171,6 +174,13 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     func bind() {
+        
+        selectDateBtn.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                self?.datePicker.isHidden = false
+            })
+            .disposed(by: disposeBag)
+        
         btnView.okBtn.tapGesture
             .subscribe(onNext: { [weak self] _ in
                 self?.coordinator?.moveToJoinMatch()
@@ -208,5 +218,5 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         answerTwoTV.reasonTV.endEditing(true)
     }
-    
+
 }
