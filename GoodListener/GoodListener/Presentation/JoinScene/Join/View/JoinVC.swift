@@ -65,6 +65,7 @@ class JoinVC: UIViewController, SnapKitType {
     }
     
     // TODO: 텍스트뷰 추가
+    let answerTwoTV = GLTextView(frame: .zero)
     
     let questionThreeLbl = UILabel().then {
         $0.text = "대화 기간은 매일 7일 동안 이어집니다.\n시작 가능한 날짜를 선택해 주세요."
@@ -128,7 +129,7 @@ class JoinVC: UIViewController, SnapKitType {
             answerFourStackView.addArrangedSubview($0)
         }
         
-        [titleLbl, descriptionLbl, questionOneStackView, emojiTagView, questionTwoLbl, questionThreeLbl, answerFourStackView, lineView, questionFourLbl, questionFourSubLbl, btnView].forEach {
+        [titleLbl, descriptionLbl, questionOneStackView, emojiTagView, questionTwoLbl, answerTwoTV, questionThreeLbl, answerFourStackView, lineView, questionFourLbl, questionFourSubLbl, btnView].forEach {
             contentStackView.addArrangedSubview($0)
         }
     }
@@ -147,9 +148,15 @@ class JoinVC: UIViewController, SnapKitType {
         contentStackView.setCustomSpacing(50, after: descriptionLbl)
         contentStackView.setCustomSpacing(20, after: questionOneStackView)
         contentStackView.setCustomSpacing(50, after: emojiTagView)
+        contentStackView.setCustomSpacing(13, after: questionTwoLbl)
+        contentStackView.setCustomSpacing(50, after: answerTwoTV)
         
         emojiTagView.snp.makeConstraints{
             $0.height.equalTo(100) //TODO: 동적 높이 조절되도록
+        }
+        
+        answerTwoTV.snp.makeConstraints{
+            $0.height.equalTo(100)
         }
         
         lineView.snp.makeConstraints{

@@ -12,6 +12,7 @@
 		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
 		0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B582896BC5E00A05124 /* WeatherInfo.swift */; };
 		0A7584E928B2725400D07750 /* GLTwoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7584E828B2725400D07750 /* GLTwoButton.swift */; };
+		0A86E03E28B4AEE100AB10EC /* GLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A86E03D28B4AEE100AB10EC /* GLTextView.swift */; };
 		0AAE1C0728B2049400A94C26 /* JoinCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE1C0628B2049400A94C26 /* JoinCoordinator.swift */; };
 		0AAE1C0F28B2051800A94C26 /* JoinMatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE1C0E28B2051800A94C26 /* JoinMatchVC.swift */; };
 		0AAE1C1128B208E400A94C26 /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE1C1028B208E400A94C26 /* JoinVC.swift */; };
@@ -87,6 +88,7 @@
 		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
 		0A703B582896BC5E00A05124 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherInfo.swift; path = GoodListener/Domain/Entities/WeatherInfo.swift; sourceTree = SOURCE_ROOT; };
 		0A7584E828B2725400D07750 /* GLTwoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLTwoButton.swift; sourceTree = "<group>"; };
+		0A86E03D28B4AEE100AB10EC /* GLTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLTextView.swift; sourceTree = "<group>"; };
 		0AAE1C0628B2049400A94C26 /* JoinCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCoordinator.swift; sourceTree = "<group>"; };
 		0AAE1C0E28B2051800A94C26 /* JoinMatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMatchVC.swift; sourceTree = "<group>"; };
 		0AAE1C1028B208E400A94C26 /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
@@ -462,8 +464,9 @@
 				0A2A836728B3B9BE0074A7C2 /* EmojiTagFlowLayout.swift */,
 				E8A79553289CDA7700EF9E1B /* GLButton.swift */,
 				0A7584E828B2725400D07750 /* GLTwoButton.swift */,
-				E8B443FC28A243CC0003815B /* NavigationView.swift */,
+				0A86E03D28B4AEE100AB10EC /* GLTextView.swift */,
 				E8B444A428AE2AAD0003815B /* GLPopup.swift */,
+				E8B443FC28A243CC0003815B /* NavigationView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -956,6 +959,7 @@
 				E8C3320B289265F400ECE59C /* CallManager.swift in Sources */,
 				ECBA27B728A4E0B60034A751 /* TagCell.swift in Sources */,
 				E8CB6568288E359A0076E254 /* ViewModelType.swift in Sources */,
+				0A86E03E28B4AEE100AB10EC /* GLTextView.swift in Sources */,
 				E8CE19E2289CE08C007A56FE /* UIButton+.swift in Sources */,
 				E8A7954D289CCC4700EF9E1B /* Colors.swift in Sources */,
 				E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */,
