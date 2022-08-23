@@ -44,9 +44,9 @@ class GLButton: UIButton {
         self.init(frame: frame)
         switch type {
         case .rectangle:
-            layer.cornerRadius = Const.glBtnHeight / 2
-        case .round:
             layer.cornerRadius = 5
+        case .round:
+            layer.cornerRadius = Const.glBtnHeight / 2
         }
     }
     
