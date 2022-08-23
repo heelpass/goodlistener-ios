@@ -93,23 +93,26 @@ class SwipeButton: UIButton, SnapKitType {
                 let translation = pan.translation(in: self.swipeView)
                 let velocity = pan.velocity(in: self.swipeView)
                 
-                // 왼쪽으로 스와이프 불가능
-                if translation.x < 0 { return }
+                var transX: CGFloat = 0
                 
-                let transX = min(self.successCnt,translation.x)
+                // 왼쪽으로 스와이프 불가능
+                if translation.x <= 0 {
+                    self.textLabel.isHidden = false
+                    transX = max(translation.x, 0)
+                } else {
+                    transX = min(self.successCnt,translation.x)
+                }
+                
                 Log.d(transX)
                 
                 switch pan.state {
                 case .began:
-                    self.textLabel.isHidden = true
-                    
-                
+                    break
                 case .changed:
                     self.backgroundView.snp.updateConstraints {
                         $0.left.equalToSuperview().inset(transX)
                     }
-                    
-                    self.textLabel.isHidden = transX > 5 ? true : false
+                    self.textLabel.isHidden = transX > 0
                     
                 case .ended:
                     
@@ -118,22 +121,10 @@ class SwipeButton: UIButton, SnapKitType {
                         self.swipeSuccessResult.accept(true)
                         return
                     }
-                    // 종료 실패
-                    else {
-                        UIView.animate(withDuration: 0.5, animations: {
-                            self.backgroundView.snp.updateConstraints {
-                                $0.left.equalToSuperview()
-                            }
-                            self.layoutIfNeeded()
-                        }, completion: { _ in
-                            self.textLabel.isHidden = false
-                        })
-                    }
-                    
                     // 빠른속도로 스와이프 한 경우 종료됨
-                    if velocity.x > 1000 {
+                    else if velocity.x > 1000 {
                         self.textLabel.isHidden = true
-                        UIView.animate(withDuration: 0.5, animations: {
+                        UIView.animate(withDuration: 0.3, animations: {
                             self.backgroundView.snp.updateConstraints {
                                 $0.left.equalToSuperview().inset(self.successCnt)
                             }
@@ -143,10 +134,20 @@ class SwipeButton: UIButton, SnapKitType {
                             return
                         })
                     }
-                    
+                    // 종료 실패
+                    else {
+                        UIView.animate(withDuration: 0.3, animations: {
+                            self.backgroundView.snp.updateConstraints {
+                                $0.left.equalToSuperview()
+                            }
+                            self.layoutIfNeeded()
+                        }, completion: { _ in
+                            self.textLabel.isHidden = false
+                        })
+                    }
                     
                 default:
-                    break
+                    self.textLabel.isHidden = true
                 }
                 
             })
