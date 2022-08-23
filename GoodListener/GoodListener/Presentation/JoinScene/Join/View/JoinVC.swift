@@ -124,12 +124,13 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     
     func addComponents() {
         view.addSubview(scrollView)
+        self.datePicker.isHidden = true
         scrollView.addSubview(contentStackView)
         [questionOneLbl, questionOneSubLbl].forEach {
             questionOneStackView.addArrangedSubview($0)
         }
         
-        [answerThreeLbl, selectDateBtn].forEach {
+        [answerThreeLbl, selectDateBtn, datePicker].forEach {
             answerThreeStackView.addArrangedSubview($0)
         }
         
