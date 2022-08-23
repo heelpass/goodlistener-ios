@@ -110,7 +110,6 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.textColor = .f3
     }
     
-    //TODO: 시간 뷰 추가
     let timeView = TimeView(frame: .zero, timeList: TimeList.timeList)
     let btnView = GLTwoButton(frame: .zero)
     
@@ -157,6 +156,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(13, after: questionTwoLbl)
         contentStackView.setCustomSpacing(50, after: answerTwoTV)
         contentStackView.setCustomSpacing(46, after: lineView)
+        contentStackView.setCustomSpacing(20, after: questionFourSubLbl)
         contentStackView.setCustomSpacing(63, after: timeView)
         
         emojiTagView.snp.makeConstraints{

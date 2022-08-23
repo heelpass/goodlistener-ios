@@ -16,6 +16,7 @@ struct TimeList {
 class TimeView: UIView {
 
     var timeData: [String] = []
+    var selectedTime: BehaviorRelay<[String]> = .init(value: [""])
     
     lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -52,9 +53,8 @@ extension TimeView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TimeCell.identifier, for: indexPath) as? TimeCell else {fatalError()}
-        cell.layer.cornerRadius = 5
-        cell.layer.borderWidth = 2
-        cell.layer.borderColor = CGColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)
+        cell.background.layer.borderWidth = 2
+        cell.background.layer.borderColor = UIColor.f6.cgColor
         cell.timeLbl.text = timeData[indexPath.row]
         return cell
     }
@@ -63,7 +63,18 @@ extension TimeView: UICollectionViewDataSource {
 
 extension TimeView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected section\(indexPath.section) and row \(indexPath.row)")
+
+        //TODO: 3개 제한 필요함 - 3개 넘으면 별도 효과?
+        //TODO: 2번 눌렀을 때 unselected 한 상태로 돌아가는 것도 필요함
+        guard let cell = collectionView.cellForItem(at: indexPath) as? TimeCell else { return }
+        
+        cell.configUI(.selected)
+       
+        if self.selectedTime.value == [""] {
+            self.selectedTime.accept([timeData[indexPath.row]])
+        } else {
+            self.selectedTime.accept(selectedTime.value + [timeData[indexPath.row]])
+        }
     }
 }
 
