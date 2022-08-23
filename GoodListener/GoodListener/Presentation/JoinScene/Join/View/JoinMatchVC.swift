@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 
 enum JoinMatchState {
-    case waiting
+    case waiting //TODO: 화면 따로 분리 필요
     case unable
     case matched
 }
@@ -21,6 +21,8 @@ class JoinMatchVC: UIViewController, SnapKitType {
     
     // 현재 매칭 화면 상태
     var joinMatchState: JoinMatchState = .matched
+    
+    //TODO: 스크롤, 전체 요소contentStack에 넣기
     
     //MARK: - 대기 중 State
     let waitingLbl = UILabel().then{
