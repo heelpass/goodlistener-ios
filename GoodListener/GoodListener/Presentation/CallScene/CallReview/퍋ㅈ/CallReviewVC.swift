@@ -20,6 +20,8 @@ class CallReviewVC: UIViewController, SnapKitType {
     
     var disposeBag = DisposeBag()
     weak var coordinator: CallCoordinating?
+    
+    // CallReviewVC 인스턴스를 생성후 type을 주입시키면 해당 UI로 변경됩니다!
     var type: ReviewType = .day {
         willSet {
             configUI(type: newValue)

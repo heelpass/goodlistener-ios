@@ -16,7 +16,7 @@ import SnapKit
 enum CallState {
     case ready
     case call
-    case remain
+    case fail
 }
 
 class CallVC: UIViewController, SnapKitType {
@@ -31,6 +31,7 @@ class CallVC: UIViewController, SnapKitType {
     let titleStackView = UIStackView().then {
         $0.axis = .vertical
         $0.backgroundColor = .clear
+        $0.spacing = 18
     }
     
     lazy var titleLabel: UILabel = {
@@ -51,11 +52,21 @@ class CallVC: UIViewController, SnapKitType {
         return label
     }()
     
+    let subTitleLabel = UILabel().then {
+        $0.text = "오늘은 대화가 힘드신 것 같아요\n우리 내일 같은 시간에 다시 대화해요"
+        $0.font = FontManager.shared.notoSansKR(.regular, 16)
+        $0.textColor = .m5
+        $0.numberOfLines = 0
+        $0.textAlignment = .center
+        $0.isHidden = true
+    }
+    
     let timeLabel = UILabel().then {
         $0.text = "0:00 / 3:00"
         $0.font = FontManager.shared.notoSansKR(.bold, 40)
         $0.textColor = .white
-        $0.textAlignment = .left
+        $0.textAlignment = .center
+        $0.sizeToFit()
     }
     
     let profileImage = UIImageView().then {
@@ -86,6 +97,10 @@ class CallVC: UIViewController, SnapKitType {
         $0.backgroundColor = .m2
     }
     
+    let okayBtn = GLButton(frame: .zero, type: .round).then {
+        $0.title = "네, 알겠어요"
+    }
+    
     let stopButton = SwipeButton().then {
         $0.isHidden = true
         $0.backgroundColor = .clear
@@ -110,8 +125,8 @@ class CallVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [titleStackView, profileImage, nickName, buttonStackView, stopButton].forEach { view.addSubview($0) }
-        [titleLabel, timeLabel].forEach { titleStackView.addArrangedSubview($0) }
+        [titleStackView, profileImage, nickName, buttonStackView, stopButton, okayBtn].forEach { view.addSubview($0) }
+        [titleLabel, timeLabel, subTitleLabel].forEach { titleStackView.addArrangedSubview($0) }
         [refuseButton, acceptButton].forEach { buttonStackView.addArrangedSubview($0) }
     }
     
@@ -145,6 +160,13 @@ class CallVC: UIViewController, SnapKitType {
             $0.height.equalTo(Const.glBtnHeight)
         }
         
+        okayBtn.snp.makeConstraints {
+            $0.height.equalTo(Const.glBtnHeight)
+            $0.width.equalTo(200)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(nickName.snp.bottom).offset(90)
+        }
+        
         stopButton.snp.makeConstraints {
             $0.top.equalTo(nickName.snp.bottom).offset(82)
             $0.centerX.equalToSuperview()
@@ -154,6 +176,7 @@ class CallVC: UIViewController, SnapKitType {
     }
     
     func bind() {
+        // 통화 수락
         acceptButton.rx.tap
             .bind(onNext: { [weak self] in
                 self?.changeUI(.call)
@@ -161,23 +184,25 @@ class CallVC: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
         
+        // 통화 거절
         refuseButton.rx.tap
             .bind(onNext: { [weak self] in
-                self?.coordinator?.moveToMain()
+                self?.changeUI(.fail)
             })
             .disposed(by: disposeBag)
         
-        extendButton.rx.tap
-            .bind(onNext: { [weak self] in
-                self?.changeUI(.remain)
-                // 통화시간 연장
-            })
-            .disposed(by: disposeBag)
-        
+        // 통화 중지
         stopButton.swipeSuccessResult
             .filter { $0 }
             .bind(onNext: { [weak self] _ in
                 self?.coordinator?.moveToReview()
+            })
+            .disposed(by: disposeBag)
+        
+        // 통화 연결 실패 시 오케이버튼
+        okayBtn.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.coordinator?.moveToMain()
             })
             .disposed(by: disposeBag)
     }
@@ -185,30 +210,43 @@ class CallVC: UIViewController, SnapKitType {
     func changeUI(_ type: CallState) {
         switch type {
         case .ready:
+            // Title
             timeLabel.isHidden = true
+            subTitleLabel.isHidden = true
+            
+            // Btn
             acceptButton.isHidden = false
             refuseButton.isHidden = false
-            extendButton.isHidden = true
+            okayBtn.isHidden = true
             stopButton.isHidden = true
-            break
+            
         case .call:
+            // Title
             titleLabel.text = "리스너와 대화중이에요"
             titleLabel.font = FontManager.shared.notoSansKR(.regular, 20)
             titleLabel.textAlignment = .center
             timeLabel.isHidden = false
             timeLabel.textAlignment = .center
-            extendButton.isHidden = false
-            stopButton.isHidden = false
+            subTitleLabel.isHidden = true
+            
+            // Btn
             acceptButton.isHidden = true
             refuseButton.isHidden = true
+            okayBtn.isHidden = true
             stopButton.isHidden = false
-            break
-        case .remain:
-            titleLabel.text = "통화 하는 중"
-            timeLabel.isHidden = false
-            extendButton.isHidden = false
-            stopButton.isHidden = false
+            
+        case .fail:
+            // Title
+            titleLabel.text = "리스너와 통화에 실패했어요 :("
+            titleLabel.font = FontManager.shared.notoSansKR(.bold, 20)
+            titleLabel.textAlignment = .center
+            timeLabel.isHidden = true
+            subTitleLabel.isHidden = false
+            
+            // Btn
+            stopButton.isHidden = true
             acceptButton.isHidden = true
+            okayBtn.isHidden = false
             refuseButton.isHidden = true
             break
         }
