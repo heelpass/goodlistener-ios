@@ -64,7 +64,7 @@ class JoinVC: UIViewController, SnapKitType {
         $0.textColor = .f3
     }
     
-    // TODO: 텍스트 필드 추가
+    // TODO: 텍스트뷰 추가
     
     let questionThreeLbl = UILabel().then {
         $0.text = "대화 기간은 매일 7일 동안 이어집니다.\n시작 가능한 날짜를 선택해 주세요."
