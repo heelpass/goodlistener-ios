@@ -109,7 +109,6 @@ class JoinVC: UIViewController, SnapKitType {
     
     //TODO: 시간 뷰 추가
     let btnView = GLTwoButton(frame: .zero)
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
