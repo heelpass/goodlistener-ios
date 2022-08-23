@@ -89,8 +89,18 @@ extension EmojiTagView: UICollectionViewDataSource {
 
 extension EmojiTagView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? EmojiTagCell else { return }
+//
+//        cell.configureUI(.selected)
         
-        
+        collectionView.visibleCells.forEach {
+            if let cell = $0 as? EmojiTagCell {
+                cell.configureUI(.unselected)
+            }
+        }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? EmojiTagCell else { return }
+        cell.configureUI(.selected)
+        self.selectedemojiText.accept(emojiTextData[indexPath.row])
     }
 }
 
