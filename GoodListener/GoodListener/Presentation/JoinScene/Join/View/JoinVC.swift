@@ -155,6 +155,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(50, after: emojiTagView)
         contentStackView.setCustomSpacing(13, after: questionTwoLbl)
         contentStackView.setCustomSpacing(50, after: answerTwoTV)
+        contentStackView.setCustomSpacing(46, after: lineView)
         
         emojiTagView.snp.makeConstraints{
             $0.height.equalTo(100) //TODO: 동적 높이 조절되도록

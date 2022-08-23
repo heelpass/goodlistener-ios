@@ -24,6 +24,7 @@ class GLTextView: UIView, SnapKitType {
         $0.text = "일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십"
         $0.textColor = .f7
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
+        $0.isScrollEnabled = false
     }
     
     let descriptionLbl = UILabel().then {
