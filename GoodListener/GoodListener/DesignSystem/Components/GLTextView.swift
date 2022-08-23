@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GLTextView: UIView, SnapKitType, UITextViewDelegate {
+class GLTextView: UIView, SnapKitType {
     
     let stackView = UIStackView().then {
         $0.axis = .vertical
@@ -40,13 +40,8 @@ class GLTextView: UIView, SnapKitType, UITextViewDelegate {
         super.init(frame: frame)
         addComponents()
         setConstraints()
-        reasonTV.delegate = self
     }
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//       endEditing(true)
-//    }
-    
+
     func addComponents() {
         addSubview(stackView)
         [baseView, descriptionLbl].forEach{
@@ -65,9 +60,14 @@ class GLTextView: UIView, SnapKitType, UITextViewDelegate {
         }
     }
     
-    func textViewDidChange(_ textView: UITextView) {
-        if reasonTV.text.count > 50 {
-            reasonTV.deleteBackward()
-        }
-    }
+    // Delegate
+//    func textViewDidChange(_ textView: UITextView) {
+//        if reasonTV.text.count > 50 {
+//            reasonTV.deleteBackward()
+//        }
+//    }
+//
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//       endEditing(true)
+//    }
 }

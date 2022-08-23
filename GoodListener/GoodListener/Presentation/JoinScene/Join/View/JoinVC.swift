@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class JoinVC: UIViewController, SnapKitType {
+class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
 
     weak var coordinator: JoinCoordinating?
     let disposeBag = DisposeBag()
@@ -109,12 +109,14 @@ class JoinVC: UIViewController, SnapKitType {
     
     //TODO: 시간 뷰 추가
     let btnView = GLTwoButton(frame: .zero)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addComponents()
         setConstraints()
         bind()
+        setDoneBtn()
+        self.answerTwoTV.reasonTV.delegate = self
     }
     
     func addComponents() {
@@ -181,4 +183,30 @@ class JoinVC: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
     }
+    
+    //키보드 상단 완료 버튼 추가
+    func setDoneBtn() {
+        let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: self.view.frame.size.width, height: 30))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneBtn: UIBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(dismissMyKeyboard))
+        toolbar.setItems([flexSpace, doneBtn], animated: false)
+        toolbar.sizeToFit()
+        self.answerTwoTV.reasonTV.inputAccessoryView = toolbar
+    }
+    
+    @objc func dismissMyKeyboard() {
+        view.endEditing(true)
+    }
+    
+    // TextView Delegate
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.count > 50 {
+            textView.deleteBackward()
+        }
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        answerTwoTV.reasonTV.endEditing(true)
+    }
+    
 }
