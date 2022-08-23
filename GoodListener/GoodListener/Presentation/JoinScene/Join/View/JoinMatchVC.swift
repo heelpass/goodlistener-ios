@@ -20,8 +20,31 @@ class JoinMatchVC: UIViewController, SnapKitType {
     let disposeBag = DisposeBag()
     
     // 현재 매칭 화면 상태
-    var joinMatchState: JoinMatchState = .unable
+    var joinMatchState: JoinMatchState = .waiting
     
+    //MARK: - 대기 중 State
+    let waitingLbl = UILabel().then{
+        $0.text = "잠시만 기다려 주세요..."
+        $0.textAlignment = .center
+        $0.font = FontManager.shared.notoSansKR(.bold, 20)
+        $0.textColor = .f2
+    }
+    
+    let waitingImg = UIImageView().then{
+        $0.image = #imageLiteral(resourceName: "main_img_matching")
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+    }
+    
+    let waitingdescriptionLbl = UILabel().then{
+        $0.text = "대화가 가능한 리스너를\n 찾고 있어요!"
+        $0.textAlignment = .center
+        $0.numberOfLines = 0
+        $0.font = FontManager.shared.notoSansKR(.regular, 16)
+        $0.textColor = .f4
+    }
+    
+    //MARK: - 매칭 불가 State
     let unableLbl = UILabel().then {
         $0.text = "죄송합니다"
         $0.textAlignment = .center
@@ -66,12 +89,27 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [unableLbl, unableSubLbl, unableImg, unabledescriptionLbl, confirmBtn].forEach {
+        [waitingLbl, waitingImg, waitingdescriptionLbl, unableLbl, unableSubLbl, unableImg, unabledescriptionLbl, confirmBtn].forEach {
             view.addSubview($0)
         }
     }
     
     func setConstraints() {
+        waitingLbl.snp.makeConstraints{
+            $0.top.equalToSuperview().offset(200)
+            $0.centerX.equalToSuperview()
+        }
+        
+        waitingImg.snp.makeConstraints {
+            $0.top.equalTo(waitingLbl.snp.bottom).offset(33)
+            $0.centerX.equalToSuperview()
+        }
+        
+        waitingdescriptionLbl.snp.makeConstraints{
+            $0.top.equalTo(waitingImg.snp.bottom).offset(29)
+            $0.centerX.equalToSuperview()
+        }
+        
         unableLbl.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(128)
             $0.centerX.equalToSuperview()
@@ -112,8 +150,19 @@ class JoinMatchVC: UIViewController, SnapKitType {
     func changeUI(_ type: JoinMatchState) {
         switch type {
         case  .waiting:
+            waitingLbl.isHidden = false
+            waitingImg.isHidden = false
+            waitingdescriptionLbl.isHidden = false
+            unableLbl.isHidden = true
+            unableSubLbl.isHidden = true
+            unableImg.isHidden = true
+            unabledescriptionLbl.isHidden = true
+            confirmBtn.isHidden = true
             break
         case .unable:
+            waitingLbl.isHidden = true
+            waitingImg.isHidden = true
+            waitingdescriptionLbl.isHidden = true
             unableLbl.isHidden = false
             unableSubLbl.isHidden = false
             unableImg.isHidden = false
