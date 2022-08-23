@@ -111,6 +111,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     //TODO: 시간 뷰 추가
+    let timeView = TimeView(frame: .zero, timeList: TimeList.timeList)
     let btnView = GLTwoButton(frame: .zero)
     
     override func viewDidLoad() {
@@ -134,7 +135,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             answerThreeStackView.addArrangedSubview($0)
         }
         
-        [titleLbl, descriptionLbl, questionOneStackView, emojiTagView, questionTwoLbl, answerTwoTV, questionThreeLbl, answerThreeStackView, lineView, questionFourLbl, questionFourSubLbl, btnView].forEach {
+        [titleLbl, descriptionLbl, questionOneStackView, emojiTagView, questionTwoLbl, answerTwoTV, questionThreeLbl, answerThreeStackView, lineView, questionFourLbl, questionFourSubLbl, timeView, btnView].forEach {
             contentStackView.addArrangedSubview($0)
         }
     }
@@ -145,7 +146,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         }
         
         contentStackView.snp.makeConstraints{
-            $0.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 50, left: Const.padding, bottom: 0, right: Const.padding))
+            $0.edges.equalTo(scrollView).inset(UIEdgeInsets(top: 50, left: Const.padding, bottom: 8, right: Const.padding))
             $0.width.equalTo(scrollView.snp.width).offset(-Const.padding*2)
         }
         
@@ -156,6 +157,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(13, after: questionTwoLbl)
         contentStackView.setCustomSpacing(50, after: answerTwoTV)
         contentStackView.setCustomSpacing(46, after: lineView)
+        contentStackView.setCustomSpacing(63, after: timeView)
         
         emojiTagView.snp.makeConstraints{
             $0.height.equalTo(100) //TODO: 동적 높이 조절되도록
@@ -169,9 +171,14 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             $0.height.equalTo(1)
         }
         
+        timeView.snp.makeConstraints{
+            $0.height.equalTo(180)
+        }
+        
         btnView.snp.makeConstraints{
             $0.height.equalTo(48)
         }
+        
         btnView.okBtn.title = "대화 신청하기"
     }
     

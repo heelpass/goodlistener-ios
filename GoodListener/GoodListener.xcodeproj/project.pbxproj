@@ -24,6 +24,8 @@
 		0ABA282D288D5B56000D889B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA282B288D5B56000D889B /* LaunchScreen.storyboard */; };
 		0AC49EC128B32D1F00CA3D23 /* EmojiTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC49EC028B32D1F00CA3D23 /* EmojiTagView.swift */; };
 		0AC49EC328B32D6700CA3D23 /* EmojiTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC49EC228B32D6700CA3D23 /* EmojiTagCell.swift */; };
+		0AE0DDCC28B4FF5600FDFA0D /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE0DDCB28B4FF5600FDFA0D /* TimeView.swift */; };
+		0AE0DDCE28B5002700FDFA0D /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE0DDCD28B5002700FDFA0D /* TimeCell.swift */; };
 		0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF43089288FD8800078B2D5 /* ApplicantCoordinator.swift */; };
 		0AF4308C288FD8E90078B2D5 /* ApplicantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */; };
 		0AF4308E288FDC230078B2D5 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */; };
@@ -101,6 +103,8 @@
 		0ABA282C288D5B56000D889B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AC49EC028B32D1F00CA3D23 /* EmojiTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTagView.swift; sourceTree = "<group>"; };
 		0AC49EC228B32D6700CA3D23 /* EmojiTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTagCell.swift; sourceTree = "<group>"; };
+		0AE0DDCB28B4FF5600FDFA0D /* TimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
+		0AE0DDCD28B5002700FDFA0D /* TimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
 		0AF43089288FD8800078B2D5 /* ApplicantCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantCoordinator.swift; sourceTree = "<group>"; };
 		0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantVC.swift; sourceTree = "<group>"; };
 		0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
@@ -206,6 +210,8 @@
 			children = (
 				0AAE1C1028B208E400A94C26 /* JoinVC.swift */,
 				0AAE1C0E28B2051800A94C26 /* JoinMatchVC.swift */,
+				0AE0DDCB28B4FF5600FDFA0D /* TimeView.swift */,
+				0AE0DDCD28B5002700FDFA0D /* TimeCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -964,6 +970,7 @@
 				E8A7954D289CCC4700EF9E1B /* Colors.swift in Sources */,
 				E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */,
 				ECBA27B928A4FCEE0034A751 /* TagCollectionViewLayout.swift in Sources */,
+				0AE0DDCC28B4FF5600FDFA0D /* TimeView.swift in Sources */,
 				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
 				E8B4449628ACC7AD0003815B /* UserDefaultsManager.swift in Sources */,
 				E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */,
@@ -975,6 +982,7 @@
 				E8B4449E28ADF4AD0003815B /* ProfileImageSelectCell.swift in Sources */,
 				0A2A836828B3B9BE0074A7C2 /* EmojiTagFlowLayout.swift in Sources */,
 				E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */,
+				0AE0DDCE28B5002700FDFA0D /* TimeCell.swift in Sources */,
 				E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */,
 				E8B4435A28A103570003815B /* UILabel+.swift in Sources */,
 				E8B4435828A0EADD0003815B /* ProfileSetupVC.swift in Sources */,
