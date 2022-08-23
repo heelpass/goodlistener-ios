@@ -106,11 +106,36 @@ class CallVC: UIViewController, SnapKitType {
         $0.backgroundColor = .clear
     }
     
-    let extendButton = GLButton().then {
-        $0.title = "연장 요청하기\n(5분)"
-        $0.titleLabel?.lineBreakMode = .byWordWrapping
-        $0.titleLabel?.textAlignment = .center
-        $0.titleLabel?.textFontChange(text: $0.titleLabel!.text!, font: FontManager.shared.notoSansKR(.regular, 10), range: "(5분)")
+    let popup = UIView().then {
+        $0.backgroundColor = .black.withAlphaComponent(0.6)
+    }
+    
+    let popupContainer = UIView().then {
+        $0.backgroundColor = .m5
+        $0.layer .cornerRadius = 10
+    }
+    
+    let popupTitle = UILabel().then {
+        $0.text = " 잠깐!\n오늘 대화를 하지 못하면\n리스너와의 7일중 1회가 차감됩니다.\n오늘 대화를 취소하시겠어요?"
+        $0.font = FontManager.shared.notoSansKR(.bold, 16)
+        $0.textColor = .f2
+        $0.textAlignment = .center
+        $0.numberOfLines = 0
+    }
+    
+    let popupBtnStackView = UIStackView().then {
+        $0.backgroundColor = .clear
+        $0.axis = .horizontal
+        $0.spacing = 8
+        $0.distribution = .fillEqually
+    }
+    
+    let delayBtn = GLButton(type: .rectangle, reverse: true).then {
+        $0.title = "대화 미루기"
+    }
+    
+    let cancelBtn = GLButton(type: .rectangle).then {
+        $0.title = "종료"
     }
     
     override func viewDidLoad() {
@@ -128,6 +153,11 @@ class CallVC: UIViewController, SnapKitType {
         [titleStackView, profileImage, nickName, buttonStackView, stopButton, okayBtn].forEach { view.addSubview($0) }
         [titleLabel, timeLabel, subTitleLabel].forEach { titleStackView.addArrangedSubview($0) }
         [refuseButton, acceptButton].forEach { buttonStackView.addArrangedSubview($0) }
+        
+        // 팝업
+        popup.addSubview(popupContainer)
+        [popupTitle, popupBtnStackView].forEach { popupContainer.addSubview($0) }
+        [delayBtn, cancelBtn].forEach { popupBtnStackView.addArrangedSubview($0) }
     }
     
     func setConstraints() {
@@ -173,6 +203,24 @@ class CallVC: UIViewController, SnapKitType {
             $0.width.equalTo(240)
             $0.height.equalTo(64)
         }
+        
+        // 팝업
+        popupContainer.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.left.right.equalToSuperview().inset(Const.padding)
+        }
+        
+        popupTitle.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(33)
+            $0.centerX.equalToSuperview()
+        }
+        
+        popupBtnStackView.snp.makeConstraints {
+            $0.height.equalTo(Const.glBtnHeight)
+            $0.left.right.equalToSuperview().inset(Const.padding)
+            $0.top.equalTo(popupTitle.snp.bottom).offset(37)
+            $0.bottom.equalToSuperview().inset(20)
+        }
     }
     
     func bind() {
@@ -201,6 +249,22 @@ class CallVC: UIViewController, SnapKitType {
         
         // 통화 연결 실패 시 오케이버튼
         okayBtn.rx.tap
+            .bind(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.view.addSubview(self.popup)
+                self.popup.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        delayBtn.rx.tap
+            .bind(onNext: {
+                
+            })
+            .disposed(by: disposeBag)
+        
+        cancelBtn.rx.tap
             .bind(onNext: { [weak self] in
                 self?.coordinator?.moveToMain()
             })
