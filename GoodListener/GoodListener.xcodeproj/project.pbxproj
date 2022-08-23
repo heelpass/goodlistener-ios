@@ -54,6 +54,7 @@
 		E8B444B528B36D1A0003815B /* MoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444B428B36D1A0003815B /* MoodCell.swift */; };
 		E8B444B728B3723A0003815B /* MoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444B628B3723A0003815B /* MoodView.swift */; };
 		E8B444B928B4A2680003815B /* CallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444B828B4A2680003815B /* CallViewModel.swift */; };
+		E8B444BC28B4B4990003815B /* CallReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444BB28B4B4990003815B /* CallReviewViewModel.swift */; };
 		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
@@ -131,6 +132,7 @@
 		E8B444B428B36D1A0003815B /* MoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCell.swift; sourceTree = "<group>"; };
 		E8B444B628B3723A0003815B /* MoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodView.swift; sourceTree = "<group>"; };
 		E8B444B828B4A2680003815B /* CallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewModel.swift; sourceTree = "<group>"; };
+		E8B444BB28B4B4990003815B /* CallReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallReviewViewModel.swift; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 		E8B443F228A22A9B0003815B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E8B444BB28B4B4990003815B /* CallReviewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -887,6 +890,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */,
+				E8B444BC28B4B4990003815B /* CallReviewViewModel.swift in Sources */,
 				E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */,
 				0ABA2825288D5B55000D889B /* LoginVC.swift in Sources */,
 				0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */,
