@@ -40,8 +40,8 @@ class GLButton: UIButton {
         self.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - Const.padding * 2, height: Const.glBtnHeight)
     }
     
-    convenience init(frame: CGRect, type: GLButtonType) {
-        self.init(frame: frame)
+    convenience init(type: GLButtonType) {
+        self.init(frame: .zero)
         switch type {
         case .rectangle:
             layer.cornerRadius = 5

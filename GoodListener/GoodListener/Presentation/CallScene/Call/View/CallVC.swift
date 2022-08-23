@@ -88,16 +88,16 @@ class CallVC: UIViewController, SnapKitType {
         $0.distribution = .fillEqually
     }
     
-    let acceptButton = GLButton(frame: .zero, type: .rectangle).then {
+    let acceptButton = GLButton(type: .rectangle).then {
         $0.title = "전화 받기"
     }
     
-    let refuseButton = GLButton(frame: .zero, type: .rectangle).then {
+    let refuseButton = GLButton(type: .rectangle).then {
         $0.title = "다음에 받기"
         $0.backgroundColor = .m2
     }
     
-    let okayBtn = GLButton(frame: .zero, type: .round).then {
+    let okayBtn = GLButton(type: .round).then {
         $0.title = "네, 알겠어요"
     }
     

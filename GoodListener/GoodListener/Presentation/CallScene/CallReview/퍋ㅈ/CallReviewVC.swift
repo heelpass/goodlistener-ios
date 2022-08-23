@@ -103,12 +103,12 @@ class CallReviewVC: UIViewController, SnapKitType {
         $0.distribution = .fillEqually
     }
     
-    let toDoNextBtn = GLButton(frame: .zero, type: .rectangle).then {
+    let toDoNextBtn = GLButton(type: .rectangle).then {
         $0.title = "다음에 하기"
         $0.backgroundColor = .m2
     }
     
-    let reapplicationBtn = GLButton(frame: .zero, type: .rectangle).then {
+    let reapplicationBtn = GLButton(type: .rectangle).then {
         $0.title = "재신청하기"
         $0.backgroundColor = .m1
     }
