@@ -43,4 +43,10 @@ extension UIView {
             layer.mask = mask
         }
     }
+    
+    // Keyboard를 올릴때 원하는 뷰를 남은 여백의 가운대로 이동시키기 위해 이동값을 계산하는 함수
+    func calculateTranslationY(_ keyboardHeight: CGFloat)-> CGFloat {
+        let remain = UIScreen.main.bounds.height - keyboardHeight
+        return frame.midY - (remain/2)
+    }
 }
