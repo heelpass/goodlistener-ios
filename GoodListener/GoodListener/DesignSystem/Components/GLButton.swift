@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SocketIO
 
 enum GLButtonState {
     case active
@@ -28,7 +29,7 @@ class GLButton: UIButton {
     
     lazy var highlightLayer = CAShapeLayer()
     var pressColor = UIColor(r: 83, g: 174, b: 81)
-    
+    private var isReverse = false
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -40,13 +41,18 @@ class GLButton: UIButton {
         self.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - Const.padding * 2, height: Const.glBtnHeight)
     }
     
-    convenience init(type: GLButtonType) {
+    convenience init(type: GLButtonType, reverse: Bool = false) {
         self.init(frame: .zero)
         switch type {
         case .rectangle:
             layer.cornerRadius = 5
         case .round:
             layer.cornerRadius = Const.glBtnHeight / 2
+        }
+        
+        isReverse = reverse
+        if reverse {
+            reverseUI()
         }
     }
     
@@ -67,16 +73,27 @@ class GLButton: UIButton {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        highlightLayer.removeFromSuperlayer()
+        if isReverse {
+            self.titleColor = .m1
+            self.layer.borderColor = UIColor.m1.cgColor
+        } else {
+            highlightLayer.removeFromSuperlayer()
+        }
     }
     
     private func press() {
-        highlightLayer.fillColor = pressColor.cgColor
-        highlightLayer.path = UIBezierPath(rect: self.bounds).cgPath
-        
-        if let firstLayer = self.layer.sublayers?.first {
-            self.layer.insertSublayer(self.highlightLayer, below: firstLayer)
+        if isReverse {
+            self.titleColor = pressColor
+            self.layer.borderColor = pressColor.cgColor
+        } else {
+            highlightLayer.fillColor = pressColor.cgColor
+            highlightLayer.path = UIBezierPath(rect: self.bounds).cgPath
+            
+            if let firstLayer = self.layer.sublayers?.first {
+                self.layer.insertSublayer(self.highlightLayer, below: firstLayer)
+            }
         }
+        
     }
     
     func configUI(_ type: GLButtonState) {
@@ -88,6 +105,14 @@ class GLButton: UIButton {
             backgroundColor = #colorLiteral(red: 0.6, green: 0.6, blue: 0.6, alpha: 1)
             self.isUserInteractionEnabled = false
         }
+    }
+    
+    func reverseUI() {
+        self.layer.borderWidth = 2
+        self.layer.borderColor = self.backgroundColor?.cgColor
+        self.titleColor = self.backgroundColor ?? .m1
+        self.backgroundColor = .white
+        self.layoutIfNeeded()
     }
     
 }
