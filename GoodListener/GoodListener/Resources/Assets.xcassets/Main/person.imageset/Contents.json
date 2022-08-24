@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "main_img_step_05.png",
+      "filename" : "Mask group.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "main_img_step_05@2x.png",
+      "filename" : "Mask group@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "main_img_step_05@3x.png",
+      "filename" : "Mask group@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

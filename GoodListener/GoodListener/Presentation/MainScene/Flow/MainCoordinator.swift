@@ -14,6 +14,7 @@ import UIKit
 protocol MainCoordinating: AnyObject {
     func logout()
     func call()
+    func join()
 }
 
 enum UserType {
@@ -93,6 +94,7 @@ class MainCoordinator: CoordinatorType {
         myPage.navigationController.tabBarItem.setTitleTextAttributes(fontAttributes, for: .normal)
         myPage.navigationController.tabBarItem.setTitleTextAttributes(fontAttributes, for: .selected)
         
+        tabBarController.tabBar.backgroundColor = .m5
         tabBarController.tabBar.tintColor = .m1
         tabBarController.tabBar.unselectedItemTintColor = .f5
 
@@ -155,6 +157,19 @@ extension MainCoordinator: MainCoordinating {
         callCoordinator.start()
         
         childCoordinators.append(callCoordinator)
+    }
+    
+    func join() {
+        let navigationController = UINavigationController()
+        navigationController.modalPresentationStyle = .fullScreen
+        
+        self.tabBarController.present(navigationController, animated: true)
+        
+        let joinCoordinator = JoinCoordinator(navigationController: navigationController)
+        joinCoordinator.parentCoordinator = self
+        joinCoordinator.start()
+        
+        childCoordinators.append(joinCoordinator)
     }
 }
 
