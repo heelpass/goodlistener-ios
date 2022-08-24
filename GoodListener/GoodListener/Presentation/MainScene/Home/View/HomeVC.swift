@@ -160,7 +160,7 @@ class HomeVC: UIViewController, SnapKitType {
         joinImg.snp.makeConstraints{
             $0.top.equalToSuperview().offset(139)
             $0.centerX.equalToSuperview()
-            $0.size.equalTo(CGSize(width:100, height:100))
+            $0.size.equalTo(100)
         }
         joinLbl.snp.makeConstraints{
             $0.top.equalTo(joinImg.snp.bottom).offset(20)

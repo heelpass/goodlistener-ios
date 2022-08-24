@@ -270,12 +270,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
             $0.left.equalTo(matchedImg.snp.right).offset(12)
         }
         
-        matchedListenerStackView.setCustomSpacing(5, after: matchedGenderLbl)
-        matchedListenerStackView.setCustomSpacing(5, after: lineOneView)
-        matchedListenerStackView.setCustomSpacing(5, after: matchedAgeLbl)
-        matchedListenerStackView.setCustomSpacing(5, after: lineTwoView)
-        matchedListenerStackView.setCustomSpacing(5, after: matchedCharacterLblOne)
-        matchedListenerStackView.setCustomSpacing(5, after: lineThreeView)
+        matchedListenerStackView.spacing = 5
         
         lineOneView.snp.makeConstraints{
             $0.size.equalTo(CGSize(width: 2, height: 15))
