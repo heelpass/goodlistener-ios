@@ -8,7 +8,7 @@
 import UIKit
 
 class EmojiTagFlowLayout: UICollectionViewFlowLayout {
-        let cellSpacing: CGFloat = 20
+        let cellSpacing: CGFloat = 10
 
         override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
             self.minimumLineSpacing = 10.0

@@ -71,6 +71,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     
     let questionThreeLbl = UILabel().then {
         $0.text = "대화 기간은 매일 7일 동안 이어집니다.\n시작 가능한 날짜를 선택해 주세요."
+        $0.numberOfLines = 0
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
         $0.textColor = .f3
     }
