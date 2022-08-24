@@ -22,8 +22,6 @@ class JoinMatchVC: UIViewController, SnapKitType {
     // 현재 매칭 화면 상태
     var joinMatchState: JoinMatchState = .matched
     
-    //TODO: 스크롤, 요소 contentStack에 넣기
-    
     //MARK: - 대기 중 State
     let waitingLbl = UILabel().then{
         $0.text = "잠시만 기다려 주세요..."
@@ -236,7 +234,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
         unableImg.snp.makeConstraints {
             $0.top.equalTo(unableSubLbl.snp.bottom).offset(33)
             $0.centerX.equalToSuperview()
-            $0.size.equalTo(CGSize(width: 100, height: 100))
+            $0.size.equalTo(100)
         }
         
         unabledescriptionLbl.snp.makeConstraints {
@@ -245,19 +243,19 @@ class JoinMatchVC: UIViewController, SnapKitType {
         }
         
         matchedTitle.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(67)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(35)
             $0.centerX.equalToSuperview()
         }
         
         matchedListenerLbl.snp.makeConstraints{
-            $0.top.equalTo(matchedTitle.snp.bottom).offset(47)
+            $0.top.equalTo(matchedTitle.snp.bottom).offset(35)
             $0.left.equalToSuperview().offset(44)
         }
         
         matchedImg.snp.makeConstraints{
             $0.top.equalTo(matchedListenerLbl.snp.bottom).offset(17)
             $0.left.equalToSuperview().offset(44)
-            $0.size.equalTo(CGSize(width: 72, height: 72))
+            $0.size.equalTo(72)
         }
         
         matchedNameLbl.snp.makeConstraints{
