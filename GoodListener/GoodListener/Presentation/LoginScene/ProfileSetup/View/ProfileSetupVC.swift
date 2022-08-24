@@ -289,7 +289,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
             $0.isHidden = true
         }
         [nicknameLbl, tfContainer].forEach {
-            $0.transform = CGAffineTransform.init(translationX: 0, y: -keyboardHeight + 100)
+            $0.transform = CGAffineTransform.init(translationX: 0, y: -tfContainer.calculateTranslationY(keyboardHeight))
         }
     }
 

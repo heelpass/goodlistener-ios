@@ -35,6 +35,7 @@ extension CallCoordinator: CallCoordinating {
     func moveToReview() {
         let vc = CallReviewVC()
         vc.coordinator = self
+        vc.type = .day
         navigationController.pushViewController(vc, animated: true)
     }
     

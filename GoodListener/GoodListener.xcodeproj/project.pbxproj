@@ -49,6 +49,10 @@
 		E8B444A228AE1BE40003815B /* ProfileSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444A128AE1BE40003815B /* ProfileSetupViewModel.swift */; };
 		E8B444A528AE2AAD0003815B /* GLPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444A428AE2AAD0003815B /* GLPopup.swift */; };
 		E8B444A928AF55E00003815B /* TokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444A828AF55E00003815B /* TokenAPI.swift */; };
+		E8B444AF28B316FE0003815B /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444AE28B316FE0003815B /* UIColor+.swift */; };
+		E8B444B228B338710003815B /* SwipeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444B128B338710003815B /* SwipeButton.swift */; };
+		E8B444B528B36D1A0003815B /* MoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444B428B36D1A0003815B /* MoodCell.swift */; };
+		E8B444B728B3723A0003815B /* MoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444B628B3723A0003815B /* MoodView.swift */; };
 		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
@@ -121,6 +125,10 @@
 		E8B444A128AE1BE40003815B /* ProfileSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSetupViewModel.swift; sourceTree = "<group>"; };
 		E8B444A428AE2AAD0003815B /* GLPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLPopup.swift; sourceTree = "<group>"; };
 		E8B444A828AF55E00003815B /* TokenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAPI.swift; sourceTree = "<group>"; };
+		E8B444AE28B316FE0003815B /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		E8B444B128B338710003815B /* SwipeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeButton.swift; sourceTree = "<group>"; };
+		E8B444B428B36D1A0003815B /* MoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodCell.swift; sourceTree = "<group>"; };
+		E8B444B628B3723A0003815B /* MoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodView.swift; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -401,11 +409,33 @@
 		E8B444A328AE2A9E0003815B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E8B444B328B36CE20003815B /* MoodView */,
+				E8B444B028B3382C0003815B /* TagView */,
 				E8A79553289CDA7700EF9E1B /* GLButton.swift */,
 				E8B443FC28A243CC0003815B /* NavigationView.swift */,
 				E8B444A428AE2AAD0003815B /* GLPopup.swift */,
+				E8B444B128B338710003815B /* SwipeButton.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		E8B444B028B3382C0003815B /* TagView */ = {
+			isa = PBXGroup;
+			children = (
+				ECBA27B428A4DF970034A751 /* TagView.swift */,
+				ECBA27B628A4E0B60034A751 /* TagCell.swift */,
+				ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */,
+			);
+			path = TagView;
+			sourceTree = "<group>";
+		};
+		E8B444B328B36CE20003815B /* MoodView */ = {
+			isa = PBXGroup;
+			children = (
+				E8B444B428B36D1A0003815B /* MoodCell.swift */,
+				E8B444B628B3723A0003815B /* MoodView.swift */,
+			);
+			path = MoodView;
 			sourceTree = "<group>";
 		};
 		E8C3320428925EFC00ECE59C /* CallScene */ = {
@@ -681,6 +711,7 @@
 				E8CE19E1289CE08C007A56FE /* UIButton+.swift */,
 				E8B4435928A103570003815B /* UILabel+.swift */,
 				E8B443FE28A255D30003815B /* CALayer+.swift */,
+				E8B444AE28B316FE0003815B /* UIColor+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -716,9 +747,6 @@
 			isa = PBXGroup;
 			children = (
 				ECBA27B028A4DD0E0034A751 /* MyPageTagVC.swift */,
-				ECBA27B428A4DF970034A751 /* TagView.swift */,
-				ECBA27B628A4E0B60034A751 /* TagCell.swift */,
-				ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -863,6 +891,7 @@
 				E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */,
 				E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */,
 				E8B443FB28A23E5B0003815B /* MyPageSetVC.swift in Sources */,
+				E8B444B228B338710003815B /* SwipeButton.swift in Sources */,
 				E8B444A928AF55E00003815B /* TokenAPI.swift in Sources */,
 				E8B443F528A22ABD0003815B /* CallReviewVC.swift in Sources */,
 				0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */,
@@ -872,6 +901,7 @@
 				E8B443FD28A243CC0003815B /* NavigationView.swift in Sources */,
 				E8B444A528AE2AAD0003815B /* GLPopup.swift in Sources */,
 				E8A79554289CDA7700EF9E1B /* GLButton.swift in Sources */,
+				E8B444AF28B316FE0003815B /* UIColor+.swift in Sources */,
 				E8B443FF28A255D30003815B /* CALayer+.swift in Sources */,
 				E8B4449C28ADF20B0003815B /* ProfileImageSelectView.swift in Sources */,
 				0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */,
@@ -893,8 +923,10 @@
 				E8CE19E2289CE08C007A56FE /* UIButton+.swift in Sources */,
 				E8A7954D289CCC4700EF9E1B /* Colors.swift in Sources */,
 				E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */,
+				E8B444B528B36D1A0003815B /* MoodCell.swift in Sources */,
 				ECBA27B928A4FCEE0034A751 /* TagCollectionViewLayout.swift in Sources */,
 				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
+				E8B444B728B3723A0003815B /* MoodView.swift in Sources */,
 				E8B4449628ACC7AD0003815B /* UserDefaultsManager.swift in Sources */,
 				E8CFBCC7288F6DE900D63B07 /* LoginCoordinator.swift in Sources */,
 				E8B4449228ACB6610003815B /* NetworkConstant.swift in Sources */,
