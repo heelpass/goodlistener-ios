@@ -40,7 +40,6 @@ class CallVC: UIViewController, SnapKitType {
         label.textAlignment = .left
         label.font = FontManager.shared.notoSansKR(.bold, 26)
         label.numberOfLines = 0
-        label.sizeToFit()
         label.textColor = .white
         
         let attr = NSMutableAttributedString(string: label.text!)
@@ -49,6 +48,7 @@ class CallVC: UIViewController, SnapKitType {
         attr.append(NSAttributedString(attachment: imageAttachment))
         
         label.attributedText = attr
+        label.sizeToFit()
         return label
     }()
     
@@ -131,7 +131,7 @@ class CallVC: UIViewController, SnapKitType {
     }
     
     let delayBtn = GLButton(type: .rectangle, reverse: true).then {
-        $0.title = "대화 미루기"
+        $0.title = "대화 1회 미루기"
     }
     
     let cancelBtn = GLButton(type: .rectangle).then {
@@ -283,6 +283,9 @@ class CallVC: UIViewController, SnapKitType {
             refuseButton.isHidden = false
             okayBtn.isHidden = true
             stopButton.isHidden = true
+            titleStackView.snp.updateConstraints {
+                $0.bottom.equalTo(profileImage.snp.top).offset(-90)
+            }
             
         case .call:
             // Title
@@ -292,6 +295,10 @@ class CallVC: UIViewController, SnapKitType {
             timeLabel.isHidden = false
             timeLabel.textAlignment = .center
             subTitleLabel.isHidden = true
+            titleStackView.snp.updateConstraints {
+                $0.bottom.equalTo(profileImage.snp.top).offset(-90)
+            }
+            titleStackView.spacing = 0
             
             // Btn
             acceptButton.isHidden = true
@@ -306,13 +313,16 @@ class CallVC: UIViewController, SnapKitType {
             titleLabel.textAlignment = .center
             timeLabel.isHidden = true
             subTitleLabel.isHidden = false
+            titleStackView.snp.updateConstraints {
+                $0.bottom.equalTo(profileImage.snp.top).offset(-57)
+            }
+            titleStackView.spacing = 20
             
             // Btn
             stopButton.isHidden = true
             acceptButton.isHidden = true
             okayBtn.isHidden = false
             refuseButton.isHidden = true
-            break
         }
     }
 
