@@ -20,6 +20,7 @@ class CallReviewVC: UIViewController, SnapKitType {
     
     var disposeBag = DisposeBag()
     weak var coordinator: CallCoordinating?
+    let viewModel = CallReviewViewModel()
     
     // CallReviewVC 인스턴스를 생성후 type을 주입시키면 해당 UI로 변경됩니다!
     var type: ReviewType = .day {
@@ -198,6 +199,15 @@ class CallReviewVC: UIViewController, SnapKitType {
     }
     
     func bind() {
+        //TODO: 다음에하기, 재신청하기도 확인버튼과 동일하게 동작하는지 물어보고 수정필요
+        let output = viewModel.transform(input: CallReviewViewModel.Input(reviewText: reviewTv.rx.text.orEmpty.asObservable(),
+                                                                          moodTag: moodView.selectedTag,
+                                                                          sendReview: completeButton.rx.tap.asObservable()))
+        
+        output.textValidationResult
+            .emit(to: reviewTv.rx.text)
+            .disposed(by: disposeBag)
+        
         // 완료 -> 메인으로 이동
         completeButton.rx.tap
             .bind(onNext: { [weak self] in

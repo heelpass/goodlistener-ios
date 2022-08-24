@@ -25,6 +25,8 @@ class CallVC: UIViewController, SnapKitType {
     let manager = CallManager.shared
     let disposeBag = DisposeBag()
     
+    let viewModel = CallViewModel()
+    
     // 현재 전화 상태
     var state: CallState = .ready
     
@@ -88,11 +90,11 @@ class CallVC: UIViewController, SnapKitType {
         $0.distribution = .fillEqually
     }
     
-    let acceptButton = GLButton(type: .rectangle).then {
+    let acceptBtn = GLButton(type: .rectangle).then {
         $0.title = "전화 받기"
     }
     
-    let refuseButton = GLButton(type: .rectangle).then {
+    let refuseBtn = GLButton(type: .rectangle).then {
         $0.title = "다음에 받기"
         $0.backgroundColor = .m2
     }
@@ -101,7 +103,7 @@ class CallVC: UIViewController, SnapKitType {
         $0.title = "네, 알겠어요"
     }
     
-    let stopButton = SwipeButton().then {
+    let stopBtn = SwipeButton().then {
         $0.isHidden = true
         $0.backgroundColor = .clear
     }
@@ -150,9 +152,9 @@ class CallVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [titleStackView, profileImage, nickName, buttonStackView, stopButton, okayBtn].forEach { view.addSubview($0) }
+        [titleStackView, profileImage, nickName, buttonStackView, stopBtn, okayBtn].forEach { view.addSubview($0) }
         [titleLabel, timeLabel, subTitleLabel].forEach { titleStackView.addArrangedSubview($0) }
-        [refuseButton, acceptButton].forEach { buttonStackView.addArrangedSubview($0) }
+        [refuseBtn, acceptBtn].forEach { buttonStackView.addArrangedSubview($0) }
         
         // 팝업
         popup.addSubview(popupContainer)
@@ -182,11 +184,11 @@ class CallVC: UIViewController, SnapKitType {
             $0.left.right.equalToSuperview().inset(Const.padding)
         }
         
-        acceptButton.snp.makeConstraints {
+        acceptBtn.snp.makeConstraints {
             $0.height.equalTo(Const.glBtnHeight)
         }
         
-        refuseButton.snp.makeConstraints {
+        refuseBtn.snp.makeConstraints {
             $0.height.equalTo(Const.glBtnHeight)
         }
         
@@ -197,7 +199,7 @@ class CallVC: UIViewController, SnapKitType {
             $0.top.equalTo(nickName.snp.bottom).offset(90)
         }
         
-        stopButton.snp.makeConstraints {
+        stopBtn.snp.makeConstraints {
             $0.top.equalTo(nickName.snp.bottom).offset(82)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(240)
@@ -224,8 +226,13 @@ class CallVC: UIViewController, SnapKitType {
     }
     
     func bind() {
+        let output = viewModel.transform(input: CallViewModel.Input(acceptBtnTap: acceptBtn.rx.tap.asObservable(),
+                                                                    refuseBtnTap: refuseBtn.rx.tap.asObservable(),
+                                                                    stopBtnTap: stopBtn.rx.tap.asObservable(),
+                                                                    delayBtnTap: delayBtn.rx.tap.asObservable()))
+        
         // 통화 수락
-        acceptButton.rx.tap
+        acceptBtn.rx.tap
             .bind(onNext: { [weak self] in
                 self?.changeUI(.call)
                 // 소켓
@@ -233,14 +240,14 @@ class CallVC: UIViewController, SnapKitType {
             .disposed(by: disposeBag)
         
         // 통화 거절
-        refuseButton.rx.tap
+        refuseBtn.rx.tap
             .bind(onNext: { [weak self] in
                 self?.changeUI(.fail)
             })
             .disposed(by: disposeBag)
         
         // 통화 중지
-        stopButton.swipeSuccessResult
+        stopBtn.swipeSuccessResult
             .filter { $0 }
             .bind(onNext: { [weak self] _ in
                 self?.coordinator?.moveToReview()
@@ -279,13 +286,10 @@ class CallVC: UIViewController, SnapKitType {
             subTitleLabel.isHidden = true
             
             // Btn
-            acceptButton.isHidden = false
-            refuseButton.isHidden = false
+            acceptBtn.isHidden = false
+            refuseBtn.isHidden = false
             okayBtn.isHidden = true
-            stopButton.isHidden = true
-            titleStackView.snp.updateConstraints {
-                $0.bottom.equalTo(profileImage.snp.top).offset(-90)
-            }
+            stopBtn.isHidden = true
             
         case .call:
             // Title
@@ -301,10 +305,10 @@ class CallVC: UIViewController, SnapKitType {
             titleStackView.spacing = 0
             
             // Btn
-            acceptButton.isHidden = true
-            refuseButton.isHidden = true
+            acceptBtn.isHidden = true
+            refuseBtn.isHidden = true
             okayBtn.isHidden = true
-            stopButton.isHidden = false
+            stopBtn.isHidden = false
             
         case .fail:
             // Title
@@ -319,10 +323,11 @@ class CallVC: UIViewController, SnapKitType {
             titleStackView.spacing = 20
             
             // Btn
-            stopButton.isHidden = true
-            acceptButton.isHidden = true
+            stopBtn.isHidden = true
+            acceptBtn.isHidden = true
             okayBtn.isHidden = false
-            refuseButton.isHidden = true
+            refuseBtn.isHidden = true
+            break
         }
     }
 
