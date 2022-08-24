@@ -38,20 +38,10 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.textColor = .f3
     }
     
-    let questionOneStackView = UIStackView().then{
-        $0.axis = .horizontal
-        $0.backgroundColor = .clear
-    }
     
     let questionOneLbl = UILabel().then {
         $0.text = "저는 이런 대화를 원해요"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
-        $0.textColor = .f3
-    }
-    
-    let questionOneSubLbl = UILabel().then {
-        $0.text = "(중복 선택 가능)"
-        $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f3
     }
     
@@ -139,15 +129,12 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         view.addSubview(scrollView)
         self.datePicker.isHidden = true
         scrollView.addSubview(contentStackView)
-        [questionOneLbl, questionOneSubLbl].forEach {
-            questionOneStackView.addArrangedSubview($0)
-        }
-        
+
         [answerThreeLbl, selectDateBtn, datePicker].forEach {
             answerThreeStackView.addArrangedSubview($0)
         }
         
-        [titleLbl, descriptionLbl, questionOneStackView, emojiTagView, questionTwoLbl, answerTwoTV, answerTwoSubLbl, questionThreeLbl, answerThreeStackView, lineView, questionFourLbl, questionFourSubLbl, timeView, btnView].forEach {
+        [titleLbl, descriptionLbl, questionOneLbl, emojiTagView, questionTwoLbl, answerTwoTV, answerTwoSubLbl, questionThreeLbl, answerThreeStackView, lineView, questionFourLbl, questionFourSubLbl, timeView, btnView].forEach {
             contentStackView.addArrangedSubview($0)
         }
     }
@@ -164,7 +151,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         
         contentStackView.setCustomSpacing(20, after: titleLbl)
         contentStackView.setCustomSpacing(50, after: descriptionLbl)
-        contentStackView.setCustomSpacing(20, after: questionOneStackView)
+        contentStackView.setCustomSpacing(20, after: questionOneLbl)
         contentStackView.setCustomSpacing(50, after: emojiTagView)
         contentStackView.setCustomSpacing(13, after: questionTwoLbl)
         contentStackView.setCustomSpacing(6, after: answerTwoTV)
@@ -238,16 +225,9 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         }
     }
     
-    
     func textViewDidEndEditing(_ textView: UITextView) {
-        /// 플레이스홀더
         if !textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             
         }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        answerTwoTV.endEditing(true)
-    }
-
 }
