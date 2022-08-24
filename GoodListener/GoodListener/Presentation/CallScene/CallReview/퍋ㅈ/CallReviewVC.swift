@@ -205,11 +205,7 @@ class CallReviewVC: UIViewController, SnapKitType {
                                                                           sendReview: completeButton.rx.tap.asObservable()))
         
         output.textValidationResult
-            .emit(onNext: { [weak self] result in
-                if !result {
-                    self?.reviewTv.text = String(self?.reviewTv.text.dropLast() ?? "")
-                }
-            })
+            .emit(to: reviewTv.rx.text)
             .disposed(by: disposeBag)
         
         // 완료 -> 메인으로 이동

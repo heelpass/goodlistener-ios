@@ -20,18 +20,22 @@ class CallReviewViewModel: ViewModelType {
     }
     
     struct Output {
-        let textValidationResult: Signal<Bool> // 텍스트 50자 제한 검증 여부
+        let textValidationResult: Signal<String> // 텍스트 50자 제한 검증 여부
         let sendReviewResult: Signal<Bool> // 리뷰 보내기 결과 (API)
     }
     
     func transform(input: Input) -> Output {
-        let textValidationResult = PublishRelay<Bool>()
+        let textValidationResult = PublishRelay<String>()
         let sendReviewResult = PublishRelay<Bool>()
         
         input.reviewText
             .bind(onNext: { [weak self] (text) in
                 guard let self = self else { return }
-                textValidationResult.accept(self.validateReview(text))
+                var result = text
+                if !self.validateReview(text) {
+                    result = String(result.removeLast())
+                }
+                textValidationResult.accept(result)
             })
             .disposed(by: disposeBag)
         
@@ -40,11 +44,11 @@ class CallReviewViewModel: ViewModelType {
             .bind(onNext: { [weak self] (text, mood) in
                 guard let self = self else { return }
                 // API 콜 후 응답결과를 출력
-                sendReviewResult.accept(self.sendReview(text, mood))
+                sendReviewResult.accept(self.sendReview(text.trimmingCharacters(in: .whitespacesAndNewlines), mood))
             })
             .disposed(by: disposeBag)
         
-        return Output(textValidationResult: textValidationResult.asSignal(onErrorJustReturn: false),
+        return Output(textValidationResult: textValidationResult.asSignal(onErrorJustReturn: ""),
                       sendReviewResult: sendReviewResult.asSignal(onErrorJustReturn: false))
     }
     
