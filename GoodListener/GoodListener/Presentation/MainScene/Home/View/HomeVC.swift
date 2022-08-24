@@ -119,6 +119,7 @@ class HomeVC: UIViewController, SnapKitType {
         setConstraints()
         bind()
         changeUI(homeState)
+        addCallBtn()    // 전화 테스트용
     }
     
     func addComponents() {
@@ -270,5 +271,22 @@ class HomeVC: UIViewController, SnapKitType {
             break
         }
     }
+    
+    func addCallBtn() {
+        let button = GLButton()
+        button.title = "통화"
+        view.addSubview(button)
+        button.snp.makeConstraints {
+            $0.size.equalTo(50)
+            $0.right.equalToSuperview().inset(10)
+            $0.top.equalTo(navigationView.snp.bottom).offset(20)
+        }
+        
+        button.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.coordinator?.call()
+            })
+            .disposed(by: disposeBag)
+    }
+    
 }
-
