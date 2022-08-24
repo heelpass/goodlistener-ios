@@ -38,7 +38,6 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.textColor = .f3
     }
     
-    
     let questionOneLbl = UILabel().then {
         $0.text = "저는 이런 대화를 원해요"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
@@ -88,14 +87,13 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.textColor = UIColor(red: 153/255, green: 153/255, blue: 153/255, alpha: 1)
     }
     
-    let selectDateBtn = UIButton().then {
-        $0.setTitle("날짜 선택", for: .normal)
-        $0.setTitleColor(.m1, for: .normal)
-        $0.titleLabel?.font = FontManager.shared.notoSansKR(.bold, 14)
-    }
-    
     let datePicker = UIDatePicker().then {
         $0.datePickerMode = .date
+    }
+    
+    let datePickerTF = UITextField().then{
+        //$0.text = "22년 08월 20일 이후"
+        $0.font = FontManager.shared.notoSansKR(.regular, 16)
     }
     
     let lineView = UIView().then {
@@ -124,18 +122,14 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         bind()
         setDoneBtn()
         self.answerTwoTV.delegate = self
+        setDatePicker()
     }
     
     func addComponents() {
         view.addSubview(scrollView)
-        self.datePicker.isHidden = true
         scrollView.addSubview(contentStackView)
 
-        [answerThreeLbl, selectDateBtn, datePicker].forEach {
-            answerThreeStackView.addArrangedSubview($0)
-        }
-        
-        [titleLbl, descriptionLbl, questionOneLbl, emojiTagView, questionTwoLbl, answerTwoTV, answerTwoSubLbl, questionThreeLbl, answerThreeStackView, lineView, questionFourLbl, questionFourSubLbl, timeView, btnView].forEach {
+        [titleLbl, descriptionLbl, questionOneLbl, emojiTagView, questionTwoLbl, answerTwoTV, answerTwoSubLbl, questionThreeLbl, datePickerTF, lineView, questionFourLbl, questionFourSubLbl, timeView, btnView].forEach {
             contentStackView.addArrangedSubview($0)
         }
     }
@@ -157,6 +151,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(13, after: questionTwoLbl)
         contentStackView.setCustomSpacing(6, after: answerTwoTV)
         contentStackView.setCustomSpacing(50, after: answerTwoSubLbl)
+        contentStackView.setCustomSpacing(20, after: questionThreeLbl)
         contentStackView.setCustomSpacing(46, after: lineView)
         contentStackView.setCustomSpacing(20, after: questionFourSubLbl)
         contentStackView.setCustomSpacing(63, after: timeView)
@@ -185,12 +180,6 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     func bind() {
-        selectDateBtn.tapGesture
-            .subscribe(onNext: { [weak self] _ in
-                self?.datePicker.isHidden = false
-            })
-            .disposed(by: disposeBag)
-        
         btnView.okBtn.tapGesture
             .subscribe(onNext: { [weak self] _ in
                 self?.coordinator?.moveToJoinMatch()
@@ -204,7 +193,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             .disposed(by: disposeBag)
     }
     
-    //키보드 상단 완료 버튼 추가
+    //키보드 상단 완료 버튼
     func setDoneBtn() {
         let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: self.view.frame.size.width, height: 30))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -212,7 +201,9 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         toolbar.setItems([flexSpace, doneBtn], animated: false)
         toolbar.sizeToFit()
         self.answerTwoTV.inputAccessoryView = toolbar
+        self.datePickerTF.inputAccessoryView = toolbar
     }
+    
     
     @objc func dismissMyKeyboard() {
         view.endEditing(true)
@@ -231,4 +222,27 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             
         }
     }
+    
+    //DatePicker
+    func setDatePicker() {
+        datePicker.addTarget(self, action: #selector(dateChange(datePicker:)), for: UIControl.Event.valueChanged)
+        datePicker.frame.size = CGSize(width: 0, height: 300)
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
+        datePicker.locale = NSLocale(localeIdentifier: "ko_KO") as Locale
+        datePickerTF.inputView = datePicker
+        datePickerTF.text = formatDate(date: Date())
+    }
+    
+    @objc func dateChange(datePicker: UIDatePicker) {
+        datePickerTF.text = formatDate(date: datePicker.date)
+    }
+
+    func formatDate(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yy년 MM월 dd일 이후"
+        return formatter.string(from: date)
+    }
+    
 }
