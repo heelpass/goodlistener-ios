@@ -64,7 +64,20 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.textColor = .f3
     }
     
-    let answerTwoTV = GLTextView(frame: .zero)
+    let answerTwoTV = UITextView().then {
+        $0.textColor = .f7
+        $0.font = FontManager.shared.notoSansKR(.regular, 14)
+        $0.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        $0.layer.borderWidth = 1
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = UIColor.f6.cgColor
+    }
+    
+    let answerTwoSubLbl = UILabel().then {
+        $0.text = "* 최대 50글자까지 가능합니다"
+        $0.font = FontManager.shared.notoSansKR(.regular, 12)
+        $0.textColor = .f4
+    }
     
     let questionThreeLbl = UILabel().then {
         $0.text = "대화 기간은 매일 7일 동안 이어집니다.\n시작 가능한 날짜를 선택해 주세요."
@@ -119,7 +132,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         setConstraints()
         bind()
         setDoneBtn()
-        self.answerTwoTV.reasonTV.delegate = self
+        self.answerTwoTV.delegate = self
     }
     
     func addComponents() {
@@ -134,7 +147,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             answerThreeStackView.addArrangedSubview($0)
         }
         
-        [titleLbl, descriptionLbl, questionOneStackView, emojiTagView, questionTwoLbl, answerTwoTV, questionThreeLbl, answerThreeStackView, lineView, questionFourLbl, questionFourSubLbl, timeView, btnView].forEach {
+        [titleLbl, descriptionLbl, questionOneStackView, emojiTagView, questionTwoLbl, answerTwoTV, answerTwoSubLbl, questionThreeLbl, answerThreeStackView, lineView, questionFourLbl, questionFourSubLbl, timeView, btnView].forEach {
             contentStackView.addArrangedSubview($0)
         }
     }
@@ -154,7 +167,8 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(20, after: questionOneStackView)
         contentStackView.setCustomSpacing(50, after: emojiTagView)
         contentStackView.setCustomSpacing(13, after: questionTwoLbl)
-        contentStackView.setCustomSpacing(50, after: answerTwoTV)
+        contentStackView.setCustomSpacing(6, after: answerTwoTV)
+        contentStackView.setCustomSpacing(50, after: answerTwoSubLbl)
         contentStackView.setCustomSpacing(46, after: lineView)
         contentStackView.setCustomSpacing(20, after: questionFourSubLbl)
         contentStackView.setCustomSpacing(63, after: timeView)
@@ -164,7 +178,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         }
         
         answerTwoTV.snp.makeConstraints{
-            $0.height.equalTo(100)
+            $0.height.equalTo(80)
         }
         
         lineView.snp.makeConstraints{
@@ -183,7 +197,6 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     func bind() {
-        
         selectDateBtn.tapGesture
             .subscribe(onNext: { [weak self] _ in
                 self?.datePicker.isHidden = false
@@ -210,7 +223,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         let doneBtn: UIBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(dismissMyKeyboard))
         toolbar.setItems([flexSpace, doneBtn], animated: false)
         toolbar.sizeToFit()
-        self.answerTwoTV.reasonTV.inputAccessoryView = toolbar
+        self.answerTwoTV.inputAccessoryView = toolbar
     }
     
     @objc func dismissMyKeyboard() {
@@ -220,12 +233,21 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     // TextView Delegate
     func textViewDidChange(_ textView: UITextView) {
         if textView.text.count > 50 {
+            //TODO: 사용자에게 알림 줘야 하나?
             textView.deleteBackward()
         }
     }
-
+    
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        /// 플레이스홀더
+        if !textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            
+        }
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        answerTwoTV.reasonTV.endEditing(true)
+        answerTwoTV.endEditing(true)
     }
 
 }
