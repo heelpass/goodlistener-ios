@@ -39,6 +39,7 @@ class RecordVC: UIViewController, SnapKitType{
         $0.font = FontManager.shared.notoSansKR(.regular, 15)
     }
 
+    //TODO: progress 진행 중인 대화 있을 때 UI 구현 필요(collection 중첩)
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .m5
