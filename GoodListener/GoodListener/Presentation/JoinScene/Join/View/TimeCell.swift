@@ -23,7 +23,6 @@ class TimeCell: UICollectionViewCell {
         $0.layer.cornerRadius = 5
     }
     
-    
     let timeLbl = UILabel().then {
         $0.text = "오후 9:00"
         $0.textAlignment = .center

@@ -24,6 +24,7 @@ class TimeView: UIView {
         view.register(TimeCell.self, forCellWithReuseIdentifier: TimeCell.identifier)
         view.delegate = self
         view.dataSource = self
+        view.allowsMultipleSelection = true
         return view
     }()
     
@@ -63,19 +64,28 @@ extension TimeView: UICollectionViewDataSource {
 
 extension TimeView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        //TODO: 3개 제한 필요함 - 3개 넘으면 별도 효과?
-        //TODO: 2번 눌렀을 때 unselected 한 상태로 돌아가는 것도 필요함
+        
+        //TODO: 3개 제한 필요함 - count 해 주기
+        //TODO: 똑같은 거 2번 눌렀을 때 unselected 한 상태로 돌아가는 것도 필요함
+        //if selected { selected = false }
         guard let cell = collectionView.cellForItem(at: indexPath) as? TimeCell else { return }
         
         cell.configUI(.selected)
        
+        
         if self.selectedTime.value == [""] {
             self.selectedTime.accept([timeData[indexPath.row]])
         } else {
             self.selectedTime.accept(selectedTime.value + [timeData[indexPath.row]])
         }
+
     }
+    
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? TimeCell else { return }
+        cell.configUI(.unselected)
+    }
+
 }
 
 extension TimeView: UICollectionViewDelegateFlowLayout {
