@@ -105,6 +105,7 @@ class GLPopup: UIView, SnapKitType {
         $0.text = "컨텐츠"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f2
+        $0.numberOfLines = 0
     }
     
     private let buttonStackView = UIStackView().then {
