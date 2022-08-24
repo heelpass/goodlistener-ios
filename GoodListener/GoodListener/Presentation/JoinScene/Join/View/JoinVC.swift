@@ -152,6 +152,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(6, after: answerTwoTV)
         contentStackView.setCustomSpacing(50, after: answerTwoSubLbl)
         contentStackView.setCustomSpacing(20, after: questionThreeLbl)
+        contentStackView.setCustomSpacing(8, after: datePickerTF)
         contentStackView.setCustomSpacing(46, after: lineView)
         contentStackView.setCustomSpacing(20, after: questionFourSubLbl)
         contentStackView.setCustomSpacing(63, after: timeView)
