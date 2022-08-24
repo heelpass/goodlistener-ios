@@ -44,20 +44,19 @@ class LoginVC: UIViewController, SnapKitType {
     let appleLoginBtn = UIButton().then {
         $0.backgroundColor = .white
         $0.setImage(UIImage(named: "appleLogoB"), for: .normal)
-        $0.title = "Apple로 로그인"
+        $0.title = "Apple 로그인"
         $0.titleColor = .f2
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
         $0.contentHorizontalAlignment = .center
-        $0.imageEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 15) //<- 중요
+        $0.imageEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 10) //<- 중요
         $0.layer.cornerRadius = 24
     }
     
-    let nonLoginBtn = UIButton().then{
+    let emailLoginBtn = GLButton().then{
         $0.title = "이메일로 로그인"
-        $0.titleColor = .f2
-        $0.font = FontManager.shared.notoSansKR(.bold, 16)
-        $0.layer.cornerRadius = 24
-        $0.backgroundColor = .white
+        $0.setImage(UIImage(named: "ic_login_email"), for: .normal)
+        $0.contentHorizontalAlignment = .center
+        $0.imageEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 10) //<- 중요
     }
     
     let termsOfServiceBtn = UIButton().then {
@@ -78,7 +77,7 @@ class LoginVC: UIViewController, SnapKitType {
 
     func addComponents() {
         [titleLabel, subtitleLabel, buttonStackView, termsOfServiceBtn].forEach { view.addSubview($0) }
-        [appleLoginBtn, nonLoginBtn].forEach { buttonStackView.addArrangedSubview($0) }
+        [appleLoginBtn, emailLoginBtn].forEach { buttonStackView.addArrangedSubview($0) }
     }
     
     func setConstraints() {
@@ -101,7 +100,7 @@ class LoginVC: UIViewController, SnapKitType {
             $0.height.equalTo(Const.glBtnHeight)
         }
         
-        nonLoginBtn.snp.makeConstraints {
+        emailLoginBtn.snp.makeConstraints {
             $0.height.equalTo(Const.glBtnHeight)
         }
         
@@ -115,7 +114,7 @@ class LoginVC: UIViewController, SnapKitType {
     
     func bind() {
         let output = viewModel.transform(input: LoginViewModel.Input(appleLoginBtnTap: appleLoginBtn.tapGesture,
-                                                                     nonLoginBtnTap: nonLoginBtn.tapGesture,
+                                                                     nonLoginBtnTap: emailLoginBtn.tapGesture,
                                                                      termsOfServiceBtnTap: termsOfServiceBtn.tapGesture))
         
         output.loginResult
@@ -126,6 +125,23 @@ class LoginVC: UIViewController, SnapKitType {
                     self.coordinator?.loginSuccess()
                 } else {
                     self.coordinator?.moveToPersonalInfoPage()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        termsOfServiceBtn.rx.tap
+            .bind(onNext: { [weak self] in
+                guard let self = self else { return }
+                
+                let popup = GLPopup()
+                popup.title = "이용약관"
+                popup.contents = "이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관"
+                popup.cancelIsHidden = true
+                popup.alignment = .center
+                
+                self.view.addSubview(popup)
+                popup.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
                 }
             })
             .disposed(by: disposeBag)
