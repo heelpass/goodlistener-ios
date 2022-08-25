@@ -16,10 +16,17 @@ class MyPageVC: UIViewController, SnapKitType {
     weak var coordinator: MyPageCoordinating?
     var disposeBag = DisposeBag()
     
+    var userInfo: UserInfo = UserInfo(name: "굿리스너스피커",
+                                      age: "10대",
+                                      gender: "남자",
+                                      job: "직장인",
+                                      profileImage: Image.profile1.rawValue,
+                                      introduce: "안녕하세요 저는 스피커입니다")
+    
     let navigationView = NavigationView(frame: .zero, type: .setting)
     
     let profileImage = UIImageView().then {
-        $0.image = UIImage(named: "main_img_step_01")
+        $0.image = UIImage(named: Image.emoji1.rawValue)
         $0.layer.cornerRadius = 50
         $0.layer.masksToBounds = true
     }
@@ -71,6 +78,7 @@ class MyPageVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
+        configUI(model: userInfo)
     }
     
     func addComponents() {
@@ -150,12 +158,19 @@ class MyPageVC: UIViewController, SnapKitType {
                 // 팝업에서 선택된 이미지를 현재 프로필이미지에 반영
                 view.selectedImage
                     .subscribe(onNext: { [weak self] image in
-                        self?.profileImage.image = image
+                        guard let self = self, let image = image else { return }
+                        self.profileImage.image = UIImage(named: image)
                     })
                     .disposed(by: view.disposeBag)
                 
             })
             .disposed(by: disposeBag)
+    }
+    
+    func configUI(model: UserInfo) {
+        nicknameLbl.text = model.name
+        tagView.tagData = [model.age!, model.gender!, model.job!]
+        introduceView.contents = model.introduce!
     }
 
 }
