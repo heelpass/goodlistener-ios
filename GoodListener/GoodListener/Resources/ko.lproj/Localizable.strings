@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  GoodListener
+
+  Created by cheonsong on 2022/08/25.
+  
+*/
+
+// 성별
+male = "남자"
+female = "여자"
+
+// 나이
+age10 = "10대 이하"
+age20 = "20대"
+age30 = "30대"
+age40 = "40대 이상"
+
+// 하는일
+student = "학생"
+worker = "직장인"
+freelancer = "프리랜서"
+jobseeker = "취준생"
+etc = "기타"
+
+
+
