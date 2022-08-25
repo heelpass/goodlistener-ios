@@ -42,14 +42,9 @@ class MyPageVC: UIViewController, SnapKitType {
         $0.textAlignment = .center
     }
     
-    let tagContainer = UIView().then {
-        $0.backgroundColor = .clear
-    }
-    
-    let tagLabel = UILabel().then {
-        $0.text = "나의 태그"
-        $0.font = FontManager.shared.notoSansKR(.bold, 14)
-        $0.textColor = .f4
+    let tagView = TagView(data: ["20대","여자","직장인","차분한"], isAllSelcted: true).then {
+        $0.title.text = "나의 태그"
+        $0.line.isHidden = true
     }
 
     override func viewDidLoad() {
@@ -64,9 +59,8 @@ class MyPageVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [navigationView, profileImage, nicknameContainer, tagContainer].forEach { view.addSubview($0) }
+        [navigationView, profileImage, nicknameContainer, tagView].forEach { view.addSubview($0) }
         [nicknameLabel, nicknameTf].forEach { nicknameContainer.addSubview($0) }
-        [tagLabel].forEach { tagContainer.addSubview($0) }
     }
     
     func setConstraints() {
@@ -98,15 +92,10 @@ class MyPageVC: UIViewController, SnapKitType {
             $0.right.equalToSuperview().inset(16)
         }
         
-        tagContainer.snp.makeConstraints {
-            $0.top.equalTo(nicknameContainer.snp.bottom).offset(50)
-            $0.height.equalTo(30)
-            $0.left.right.equalToSuperview().inset(Const.padding)
-        }
-        
-        tagLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.left.equalToSuperview()
+        tagView.snp.makeConstraints {
+            $0.top.equalTo(nicknameContainer.snp.bottom).offset(26)
+            $0.height.equalTo(tagView.tagCollectionViewHeight())
+            $0.left.right.equalToSuperview()
         }
     }
     
@@ -114,12 +103,6 @@ class MyPageVC: UIViewController, SnapKitType {
         navigationView.rightBtn.rx.tap
             .bind(onNext: { [weak self] in
                 self?.coordinator?.moveToSetting()
-            })
-            .disposed(by: disposeBag)
-        
-        tagContainer.tapGesture
-            .subscribe(onNext: { [weak self] _ in
-                self?.coordinator?.moveToTagPage()
             })
             .disposed(by: disposeBag)
     }
