@@ -51,7 +51,8 @@ extension UIColor {
     
     
     // MARK: LineColor - l
+    ///F5F6F7
     static var l1: UIColor { return #colorLiteral(red: 0.9592439532, green: 0.9656613469, blue: 0.9688369632, alpha: 1) }
-    
+    ///F4F5F6
     static var l2: UIColor { return #colorLiteral(red: 0.9560983777, green: 0.9625223279, blue: 0.965701282, alpha: 1) }
 }
