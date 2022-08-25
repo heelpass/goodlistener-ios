@@ -29,22 +29,28 @@ class MyPageVC: UIViewController, SnapKitType {
         $0.layer.cornerRadius = 6
     }
     
-    let nicknameLabel = UILabel().then {
+    let nicknameTitleLbl = UILabel().then {
         $0.text = "닉네임"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
         $0.textColor = .f6
     }
     
-    let nicknameTf = UITextField().then {
+    let nicknameLbl = UILabel().then {
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
         $0.textColor = .f3
-        $0.text = "닉네임~~"
+        $0.text = "굿리스너스피커"
         $0.textAlignment = .center
     }
     
     let tagView = TagView(data: ["20대","여자","직장인","차분한"], isAllSelcted: true).then {
         $0.title.text = "나의 태그"
         $0.line.isHidden = true
+    }
+    
+    let introduceView = GLTextView(maxCount: 30).then {
+        $0.title = "소개글"
+        $0.contents = "일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사"
+        $0.isEditable = false
     }
 
     override func viewDidLoad() {
@@ -59,8 +65,8 @@ class MyPageVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [navigationView, profileImage, nicknameContainer, tagView].forEach { view.addSubview($0) }
-        [nicknameLabel, nicknameTf].forEach { nicknameContainer.addSubview($0) }
+        [navigationView, profileImage, nicknameContainer, tagView, introduceView].forEach { view.addSubview($0) }
+        [nicknameTitleLbl, nicknameLbl].forEach { nicknameContainer.addSubview($0) }
     }
     
     func setConstraints() {
@@ -71,24 +77,24 @@ class MyPageVC: UIViewController, SnapKitType {
         
         profileImage.snp.makeConstraints {
             $0.size.equalTo(100)
-            $0.bottom.equalTo(nicknameContainer.snp.top).offset(-28)
+            $0.top.equalTo(navigationView.snp.bottom).offset(58)
             $0.centerX.equalToSuperview()
         }
         
         nicknameContainer.snp.makeConstraints {
-            $0.width.equalTo(Const.glBtnWidth)
+            $0.top.equalTo(profileImage.snp.bottom).offset(28)
+            $0.left.right.equalToSuperview().inset(Const.padding)
             $0.height.equalTo(Const.glBtnHeight)
-            $0.center.equalTo(view.safeAreaLayoutGuide)
         }
         
-        nicknameLabel.snp.makeConstraints {
+        nicknameTitleLbl.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.left.equalToSuperview().inset(16)
         }
         
-        nicknameTf.snp.makeConstraints {
+        nicknameLbl.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.left.equalTo(nicknameLabel).offset(16)
+            $0.left.equalTo(nicknameTitleLbl).offset(16)
             $0.right.equalToSuperview().inset(16)
         }
         
@@ -96,6 +102,12 @@ class MyPageVC: UIViewController, SnapKitType {
             $0.top.equalTo(nicknameContainer.snp.bottom).offset(26)
             $0.height.equalTo(tagView.tagCollectionViewHeight())
             $0.left.right.equalToSuperview()
+        }
+        
+        introduceView.snp.makeConstraints {
+            $0.top.equalTo(tagView.snp.bottom).offset(41)
+            $0.left.right.equalToSuperview()
+            $0.height.equalTo(introduceView.glTextViewHeight(textViewHeight: 62))
         }
     }
     
