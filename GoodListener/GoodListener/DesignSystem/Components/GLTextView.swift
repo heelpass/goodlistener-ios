@@ -57,6 +57,17 @@ class GLTextView: UIView, SnapKitType {
         }
     }
     
+    /// 타이틀 정렬 Default = .left
+    var titleAlignment: NSTextAlignment {
+        get {
+            return titleLbl.textAlignment
+        }
+        
+        set {
+            titleLbl.textAlignment = newValue
+        }
+    }
+    
     private let container = UIView().then {
         $0.backgroundColor = .clear
     }
@@ -65,6 +76,7 @@ class GLTextView: UIView, SnapKitType {
         $0.text = "제목"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
         $0.textColor = .f2
+        $0.textAlignment = .left
         $0.sizeToFit()
     }
     
@@ -118,7 +130,7 @@ class GLTextView: UIView, SnapKitType {
     func setConstraints() {
         titleLbl.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.left.equalToSuperview().inset(Const.padding)
+            $0.left.right.equalToSuperview().inset(Const.padding)
             $0.height.equalTo(titleLbl.frame.height)
         }
         
