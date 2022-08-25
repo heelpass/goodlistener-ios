@@ -421,8 +421,6 @@
 			isa = PBXGroup;
 			children = (
 				E8B4435728A0EADD0003815B /* ProfileSetupVC.swift */,
-				E8B4449B28ADF20B0003815B /* ProfileImageSelectView.swift */,
-				E8B4449D28ADF4AD0003815B /* ProfileImageSelectCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -498,6 +496,7 @@
 		E8B444A328AE2A9E0003815B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E8B444CE28B742650003815B /* ProfileImageSelectView */,
 				0A558A4B28B6205B001949D6 /* Popup */,
 				0A558A4A28B62046001949D6 /* Button */,
 				0A558A4928B62010001949D6 /* EmojiView */,
@@ -526,6 +525,15 @@
 				E8B444B628B3723A0003815B /* MoodView.swift */,
 			);
 			path = MoodView;
+			sourceTree = "<group>";
+		};
+		E8B444CE28B742650003815B /* ProfileImageSelectView */ = {
+			isa = PBXGroup;
+			children = (
+				E8B4449B28ADF20B0003815B /* ProfileImageSelectView.swift */,
+				E8B4449D28ADF4AD0003815B /* ProfileImageSelectCell.swift */,
+			);
+			path = ProfileImageSelectView;
 			sourceTree = "<group>";
 		};
 		E8C3320428925EFC00ECE59C /* CallScene */ = {

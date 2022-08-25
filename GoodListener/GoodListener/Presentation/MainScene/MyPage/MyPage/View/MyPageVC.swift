@@ -24,6 +24,15 @@ class MyPageVC: UIViewController, SnapKitType {
         $0.layer.masksToBounds = true
     }
     
+    let profileImageEditView = UIView().then {
+        $0.backgroundColor = .m3
+        $0.layer.cornerRadius = 14
+    }
+    
+    let pencilIco = UIImageView().then {
+        $0.image = UIImage(named: "ic_pencil")
+    }
+    
     let nicknameContainer = UIView().then {
         $0.backgroundColor = .m3
         $0.layer.cornerRadius = 6
@@ -65,8 +74,9 @@ class MyPageVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [navigationView, profileImage, nicknameContainer, tagView, introduceView].forEach { view.addSubview($0) }
+        [navigationView, profileImage, profileImageEditView, nicknameContainer, tagView, introduceView].forEach { view.addSubview($0) }
         [nicknameTitleLbl, nicknameLbl].forEach { nicknameContainer.addSubview($0) }
+        profileImageEditView.addSubview(pencilIco)
     }
     
     func setConstraints() {
@@ -79,6 +89,16 @@ class MyPageVC: UIViewController, SnapKitType {
             $0.size.equalTo(100)
             $0.top.equalTo(navigationView.snp.bottom).offset(58)
             $0.centerX.equalToSuperview()
+        }
+        
+        profileImageEditView.snp.makeConstraints {
+            $0.size.equalTo(28)
+            $0.right.bottom.equalTo(profileImage)
+        }
+        
+        pencilIco.snp.makeConstraints {
+            $0.size.equalTo(10)
+            $0.center.equalToSuperview()
         }
         
         nicknameContainer.snp.makeConstraints {
@@ -115,6 +135,25 @@ class MyPageVC: UIViewController, SnapKitType {
         navigationView.rightBtn.rx.tap
             .bind(onNext: { [weak self] in
                 self?.coordinator?.moveToSetting()
+            })
+            .disposed(by: disposeBag)
+        
+        // 프로필 이미지 Edit버튼 터치 시 프로필이미지선택 팝업을 띄워준다
+        profileImageEditView.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                let view = ProfileImageSelectView()
+                self?.view.addSubview(view)
+                view.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+                
+                // 팝업에서 선택된 이미지를 현재 프로필이미지에 반영
+                view.selectedImage
+                    .subscribe(onNext: { [weak self] image in
+                        self?.profileImage.image = image
+                    })
+                    .disposed(by: view.disposeBag)
+                
             })
             .disposed(by: disposeBag)
     }
