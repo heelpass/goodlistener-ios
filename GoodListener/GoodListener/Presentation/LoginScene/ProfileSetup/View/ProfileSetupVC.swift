@@ -49,8 +49,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         $0.image = UIImage(named: "ic_edit_btn")
     }
     
-    let nicknameView = GLTextField(maxCount: 10).then {
-        $0.tag = 1
+    let nicknameView = GLTextField(maxCount: 10, tag: 1).then {
         $0.title = "닉네임"
     }
     
@@ -136,21 +135,21 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         output.nicknameValidationResult
             .emit(onNext: { [weak self] result in
                 if result {
-                    self?.nicknameView.limitLbl.text = "*한글/영문 + 숫자로 10글자까지 가능합니다"
-                    self?.nicknameView.limitLbl.textColor = .f4
+                    self?.nicknameView.descriptionLbl.text = "*한글/영문 + 숫자로 10글자까지 가능합니다"
+                    self?.nicknameView.descriptionLbl.textColor = .f4
                     self?.nicknameView.checkBtn.titleColor = .m1
                     self?.nicknameView.tfUnderLine.backgroundColor = .black
                     self?.nicknameView.checkBtn.isUserInteractionEnabled = true
                 } else {
                     if self?.nicknameView.inputTf.text?.count == 0 {
-                        self?.nicknameView.limitLbl.text = "닉네임을 입력해주세요."
+                        self?.nicknameView.descriptionLbl.text = "닉네임을 입력해주세요."
                     } else if self?.nicknameView.inputTf.text?.count ?? 0 > 10{
-                        self?.nicknameView.limitLbl.text = "1자~10자 이내의 닉네임을 입력해주세요."
+                        self?.nicknameView.descriptionLbl.text = "1자~10자 이내의 닉네임을 입력해주세요."
                     } else {
-                        self?.nicknameView.limitLbl.text = "특수문자, 공백을 제외한  닉네임을 입력해주세요."
+                        self?.nicknameView.descriptionLbl.text = "특수문자, 공백을 제외한  닉네임을 입력해주세요."
                     }
                     self?.nicknameView.tfUnderLine.backgroundColor = .error
-                    self?.nicknameView.limitLbl.textColor = .error
+                    self?.nicknameView.descriptionLbl.textColor = .error
                     self?.nicknameView.checkBtn.titleColor = .f4
                     self?.nicknameView.checkBtn.isUserInteractionEnabled = false
                 }

@@ -22,13 +22,13 @@ class GLTextField: UIView, SnapKitType {
         }
     }
     
-    var limit: String {
+    var descriptionText: String {
         get {
-            return limitLbl.text ?? ""
+            return descriptionLbl.text ?? ""
         }
         
         set {
-            limitLbl.text = newValue
+            descriptionLbl.text = newValue
         }
     }
     
@@ -69,8 +69,8 @@ class GLTextField: UIView, SnapKitType {
         $0.backgroundColor = .black
     }
     
-    lazy var limitLbl = UILabel().then {
-        $0.text = "*한글/영문 + 숫자로 \(self.maxCount)글자까지 가능합니다."
+    lazy var descriptionLbl = UILabel().then {
+        $0.text = "*한글/영문 + 숫자로 10글자까지 가능합니다."
         $0.textColor = .f4
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
     }
@@ -79,10 +79,10 @@ class GLTextField: UIView, SnapKitType {
         super.init(frame: frame)
     }
     
-    convenience init(maxCount: Int) {
+    convenience init(tag: Int, isShowDescription: Bool = true) {
         self.init(frame: .zero)
-        self.maxCount = maxCount
-        
+        self.tag = tag
+        self.descriptionLbl.isHidden = !isShowDescription
         addComponents()
         setConstraints()
         
@@ -101,7 +101,7 @@ class GLTextField: UIView, SnapKitType {
     
     func addComponents() {
         [titleLbl, tfContainer].forEach { addSubview($0) }
-        [inputTf, checkBtn, tfUnderLine, limitLbl].forEach { tfContainer.addSubview($0) }
+        [inputTf, checkBtn, tfUnderLine, descriptionLbl].forEach { tfContainer.addSubview($0) }
     }
     
     func setConstraints() {
@@ -132,7 +132,7 @@ class GLTextField: UIView, SnapKitType {
             $0.top.equalTo(inputTf.snp.bottom).offset(5)
         }
         
-        limitLbl.snp.makeConstraints {
+        descriptionLbl.snp.makeConstraints {
             $0.top.equalTo(tfUnderLine.snp.bottom).offset(10)
             $0.left.bottom.equalToSuperview()
         }
