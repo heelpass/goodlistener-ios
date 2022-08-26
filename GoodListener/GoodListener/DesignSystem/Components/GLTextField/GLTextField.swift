@@ -10,6 +10,38 @@ import UIKit
 
 class GLTextField: UIView, SnapKitType {
     
+    var maxCount = 0
+    
+    var title: String {
+        get {
+            return titleLbl.text ?? ""
+        }
+        
+        set {
+            titleLbl.text = newValue
+        }
+    }
+    
+    var limit: String {
+        get {
+            return limitLbl.text ?? ""
+        }
+        
+        set {
+            limitLbl.text = newValue
+        }
+    }
+    
+    var checkBtnTitle: String {
+        get {
+            return checkBtn.title
+        }
+        
+        set {
+            checkBtn.title = newValue
+        }
+    }
+    
     let titleLbl = UILabel().then {
         $0.text = "닉네임"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
@@ -37,20 +69,34 @@ class GLTextField: UIView, SnapKitType {
         $0.backgroundColor = .black
     }
     
-    let limitLbl = UILabel().then {
-        $0.text = "*한글/영문 + 숫자로 10글자까지 가능합니다."
+    lazy var limitLbl = UILabel().then {
+        $0.text = "*한글/영문 + 숫자로 \(self.maxCount)글자까지 가능합니다."
         $0.textColor = .f4
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
     }
     
-    override init(frame: CGRect) {
+    private override init(frame: CGRect) {
         super.init(frame: frame)
+    }
+    
+    convenience init(maxCount: Int) {
+        self.init(frame: .zero)
+        self.maxCount = maxCount
+        
         addComponents()
         setConstraints()
+        
+        // keyboardWillShow, keyboardWillHide observer 등록
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func addComponents() {
@@ -91,5 +137,34 @@ class GLTextField: UIView, SnapKitType {
             $0.left.bottom.equalToSuperview()
         }
         
+    }
+    
+    @objc func keyboardWillShow(_ notification:NSNotification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keyboardRectangle.height
+        superview?.subviews.forEach {
+            if $0.tag != self.tag {
+                $0.isHidden = true
+            }
+        }
+        
+        [self].forEach {
+            $0.transform = CGAffineTransform.init(translationX: 0, y: -calculateTranslationY(keyboardHeight))
+        }
+    }
+
+
+    @objc func keyboardWillHide(_ notification:NSNotification) {
+        guard let _ = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        superview?.subviews.forEach {
+            if $0.tag != self.tag {
+                $0.isHidden = false
+            }
+        }
+        
+        [self].forEach {
+            $0.transform = .identity
+        }
     }
 }

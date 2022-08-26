@@ -500,12 +500,12 @@
 		E8B444A328AE2A9E0003815B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E8B444ED28B8AD410003815B /* GLTextField */,
 				0A558A4B28B6205B001949D6 /* Popup */,
 				0A558A4A28B62046001949D6 /* Button */,
 				0A558A4928B62010001949D6 /* EmojiView */,
 				E8B444B328B36CE20003815B /* MoodView */,
 				E8B444B028B3382C0003815B /* TagView */,
-				E8B444EB28B8A9220003815B /* GLTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -528,6 +528,14 @@
 				E8B444B628B3723A0003815B /* MoodView.swift */,
 			);
 			path = MoodView;
+			sourceTree = "<group>";
+		};
+		E8B444ED28B8AD410003815B /* GLTextField */ = {
+			isa = PBXGroup;
+			children = (
+				E8B444EB28B8A9220003815B /* GLTextField.swift */,
+			);
+			path = GLTextField;
 			sourceTree = "<group>";
 		};
 		E8C3320428925EFC00ECE59C /* CallScene */ = {
