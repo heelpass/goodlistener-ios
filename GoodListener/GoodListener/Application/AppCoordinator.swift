@@ -28,6 +28,12 @@ class AppCoordinator: CoordinatorType {
         child.parentCoordinatorDelegate = self
         childCoordinators.append(child)
         child.start()
+        
+        if UserDefaultsManager.shared.isLogin == true {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.moveToMain()
+            })
+        }
     }
 }
 

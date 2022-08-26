@@ -9,6 +9,8 @@ import Foundation
 
 enum UserDefaultKey : String {
     case accessToken
+    case appleID
+    case isLogin
 }
 
 class UserDefaultsManager {
@@ -26,6 +28,32 @@ class UserDefaultsManager {
         
         set(accessToken) {
             UserDefaults.standard.set(accessToken, forKey:  UserDefaultKey.accessToken.rawValue)
+        }
+    }
+    
+    var appleID : String? {
+        get {
+            guard let appleID = UserDefaults.standard.value(forKey: UserDefaultKey.appleID.rawValue) as? String else {
+                return nil
+            }
+            return appleID
+        }
+        
+        set(appleID) {
+            UserDefaults.standard.set(appleID, forKey:  UserDefaultKey.appleID.rawValue)
+        }
+    }
+    
+    var isLogin : Bool? {
+        get {
+            guard let isLogin = UserDefaults.standard.value(forKey: UserDefaultKey.isLogin.rawValue) as? Bool? else {
+                return false
+            }
+            return isLogin
+        }
+        
+        set(isLogin) {
+            UserDefaults.standard.set(isLogin, forKey:  UserDefaultKey.isLogin.rawValue)
         }
     }
 }

@@ -128,6 +128,8 @@ extension LoginViewModel : ASAuthorizationControllerDelegate  {
                 Log.e("AuthToken Error")
                 return
             }
+            Log.d("AppleID:: \(credential.user)")
+            UserDefaultsManager.shared.appleID = credential.user
             Log.d("Token:: \(token)")
             Log.d("Identity:: \(identity)")
             UserDefaultsManager.shared.accessToken = "Bearer " + identity
