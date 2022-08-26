@@ -49,7 +49,10 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         $0.image = UIImage(named: "ic_edit_btn")
     }
     
-    let nicknameView = GLTextField()
+    let nicknameView = GLTextField(maxCount: 10).then {
+        $0.tag = 1
+        $0.title = "닉네임"
+    }
     
     let completeButton = GLButton().then {
         $0.title = "완료"
@@ -126,78 +129,90 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     }
     
     func bind() {
-//        let output = viewModel.transform(input: ProfileSetupViewModel.Input(profileImage: selectedImage,
-//                                                                            nickname: nicknameTf.rx.text.orEmpty.asObservable(),
-//                                                                            checkDuplicate: nicknameCheckBtn.rx.tap.asObservable()))
-//        // 닉네임 유효성 검사결과에 따른 중복확인 버튼 UI변경
-//        output.nicknameValidationResult
-//            .emit(onNext: { [weak self] result in
-//                if result {
-//                    self?.nicknameCheckBtn.titleColor = .m1
-//                    self?.nicknameCheckBtn.isUserInteractionEnabled = true
-//                } else {
-//                    self?.nicknameCheckBtn.titleColor = .f4
-//                    self?.nicknameCheckBtn.isUserInteractionEnabled = false
-//                }
-//            })
-//            .disposed(by: disposeBag)
-//
-//        output.nicknameDuplicateResult
-//            .skip(1)
-//            .emit(onNext: { [weak self] (nickname, result) in
-//                guard let self = self else { return }
-//
-//                if result {
-//                    // 성공팝업
-//                    // TODO: 중복확인 버튼 어떻게 처리?
-//                    self.userInfo?.name = nickname
-//                    self.nicknameDuplicateResultPopup(result)
-//                } else {
-//                    // 실패팝업
-//                    self.nicknameDuplicateResultPopup(result)
-//                }
-//            })
-//            .disposed(by: disposeBag)
-//
-//        output.canComplete
-//            .emit(onNext: { [weak self] result in
-//                if result {
-//                    self?.completeButton.configUI(.active)
-//                } else {
-//                    self?.completeButton.configUI(.deactivate)
-//                }
-//            })
-//            .disposed(by: disposeBag)
-//
-//        // 프로필 이미지 Edit버튼 터치 시 프로필이미지선택 팝업을 띄워준다
-//        editView.tapGesture
-//            .subscribe(onNext: { [weak self] _ in
-//                let view = ProfileImageSelectView()
-//                self?.view.addSubview(view)
-//                view.snp.makeConstraints {
-//                    $0.edges.equalToSuperview()
-//                }
-//
-//                // 팝업에서 선택된 이미지를 현재 프로필이미지에 반영
-//                view.selectedImage
-//                    .subscribe(onNext: { [weak self] image in
-//                        self?.profileImage.image = image
-//                        self?.userInfo?.profileImage = image
-//                        self?.selectedImage.accept(image)
-//                    })
-//                    .disposed(by: view.disposeBag)
-//
-//            })
-//            .disposed(by: disposeBag)
-//
-//        // 완료버튼 클릭
-//        // TODO: 아마 userInfo API 보내줘야할듯
-//        completeButton.rx.tap
-//            .bind(onNext: { [weak self] in
-//                guard let self = self else { return }
-//                self.coordinator?.completeJoin(model: self.userInfo!)
-//            })
-//            .disposed(by: disposeBag)
+        let output = viewModel.transform(input: ProfileSetupViewModel.Input(profileImage: selectedImage,
+                                                                            nickname: nicknameView.inputTf.rx.text.orEmpty.asObservable(),
+                                                                            checkDuplicate: nicknameView.checkBtn.rx.tap.asObservable()))
+        // 닉네임 유효성 검사결과에 따른 중복확인 버튼 UI변경
+        output.nicknameValidationResult
+            .emit(onNext: { [weak self] result in
+                if result {
+                    self?.nicknameView.limitLbl.text = "*한글/영문 + 숫자로 10글자까지 가능합니다"
+                    self?.nicknameView.limitLbl.textColor = .f4
+                    self?.nicknameView.checkBtn.titleColor = .m1
+                    self?.nicknameView.tfUnderLine.backgroundColor = .black
+                    self?.nicknameView.checkBtn.isUserInteractionEnabled = true
+                } else {
+                    if self?.nicknameView.inputTf.text?.count == 0 {
+                        self?.nicknameView.limitLbl.text = "닉네임을 입력해주세요."
+                    } else if self?.nicknameView.inputTf.text?.count ?? 0 > 10{
+                        self?.nicknameView.limitLbl.text = "1자~10자 이내의 닉네임을 입력해주세요."
+                    } else {
+                        self?.nicknameView.limitLbl.text = "특수문자, 공백을 제외한  닉네임을 입력해주세요."
+                    }
+                    self?.nicknameView.tfUnderLine.backgroundColor = .error
+                    self?.nicknameView.limitLbl.textColor = .error
+                    self?.nicknameView.checkBtn.titleColor = .f4
+                    self?.nicknameView.checkBtn.isUserInteractionEnabled = false
+                }
+            })
+            .disposed(by: disposeBag)
+
+        output.nicknameDuplicateResult
+            .skip(1)
+            .emit(onNext: { [weak self] (nickname, result) in
+                guard let self = self else { return }
+
+                if result {
+                    // 성공팝업
+                    // TODO: 중복확인 버튼 어떻게 처리?
+                    self.userInfo?.name = nickname
+                    self.nicknameDuplicateResultPopup(result)
+                } else {
+                    // 실패팝업
+                    self.nicknameDuplicateResultPopup(result)
+                }
+            })
+            .disposed(by: disposeBag)
+
+        output.canComplete
+            .emit(onNext: { [weak self] result in
+                if result {
+                    self?.completeButton.configUI(.active)
+                } else {
+                    self?.completeButton.configUI(.deactivate)
+                }
+            })
+            .disposed(by: disposeBag)
+
+        // 프로필 이미지 Edit버튼 터치 시 프로필이미지선택 팝업을 띄워준다
+        editView.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                let view = ProfileImageSelectView()
+                self?.view.addSubview(view)
+                view.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+
+                // 팝업에서 선택된 이미지를 현재 프로필이미지에 반영
+                view.selectedImage
+                    .subscribe(onNext: { [weak self] image in
+                        self?.profileImage.image = image
+                        self?.userInfo?.profileImage = image
+                        self?.selectedImage.accept(image)
+                    })
+                    .disposed(by: view.disposeBag)
+
+            })
+            .disposed(by: disposeBag)
+
+        // 완료버튼 클릭
+        // TODO: 아마 userInfo API 보내줘야할듯
+        completeButton.rx.tap
+            .bind(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.coordinator?.completeJoin(model: self.userInfo!)
+            })
+            .disposed(by: disposeBag)
     }
     
     // 중복 확인 팝업
@@ -227,24 +242,18 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         
-        [titleLbl, imageContainer].forEach {
-            $0.isHidden = true
-        }
-        [nicknameView].forEach {
-            $0.transform = CGAffineTransform.init(translationX: 0, y: -nicknameView.calculateTranslationY(keyboardHeight))
-        }
+//        [titleLbl, imageContainer].forEach {
+//            $0.isHidden = true
+//        }
     }
 
 
     @objc func keyboardWillHide(_ notification:NSNotification) {
         guard let _ = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
-        [titleLbl, imageContainer].forEach {
-            $0.isHidden = false
-        }
-        [nicknameView].forEach {
-            $0.transform = .identity
-        }
+//        [titleLbl, imageContainer].forEach {
+//            $0.isHidden = false
+//        }
     }
 
 
