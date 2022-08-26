@@ -16,4 +16,6 @@ struct Const {
     
     static let glBtnHeight: CGFloat = 48
     static let glBtnWidth: CGFloat = UIScreen.main.bounds.width - (padding * 2)
+    
+    static let glTfHeight: CGFloat = 118
 }
