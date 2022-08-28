@@ -9,6 +9,13 @@ import Foundation
 
 enum UserDefaultKey : String {
     case accessToken
+    
+    // 유저 정보
+    case name
+    case gender
+    case age
+    case job
+    case introduce
 }
 
 class UserDefaultsManager {
@@ -26,6 +33,71 @@ class UserDefaultsManager {
         
         set(accessToken) {
             UserDefaults.standard.set(accessToken, forKey:  UserDefaultKey.accessToken.rawValue)
+        }
+    }
+    
+    var name: String? {
+        get {
+            guard let name = UserDefaults.standard.value(forKey: UserDefaultKey.name.rawValue) as? String else {
+                return "리스너"
+            }
+            return name
+        }
+        
+        set(name) {
+            UserDefaults.standard.set(name, forKey:  UserDefaultKey.name.rawValue)
+        }
+    }
+    
+    var gender: String? {
+        get {
+            guard let gender = UserDefaults.standard.value(forKey: UserDefaultKey.gender.rawValue) as? String else {
+                return "male"
+            }
+            return gender
+        }
+        
+        set(gender) {
+            UserDefaults.standard.set(gender, forKey:  UserDefaultKey.gender.rawValue)
+        }
+    }
+    
+    var age: String? {
+        get {
+            guard let age = UserDefaults.standard.value(forKey: UserDefaultKey.age.rawValue) as? String else {
+                return "age10"
+            }
+            return age
+        }
+        
+        set(age) {
+            UserDefaults.standard.set(age, forKey:  UserDefaultKey.age.rawValue)
+        }
+    }
+    
+    var job: String? {
+        get {
+            guard let job = UserDefaults.standard.value(forKey: UserDefaultKey.job.rawValue) as? String else {
+                return "student"
+            }
+            return job
+        }
+        
+        set(job) {
+            UserDefaults.standard.set(job, forKey:  UserDefaultKey.job.rawValue)
+        }
+    }
+    
+    var introduce: String? {
+        get {
+            guard let introduce = UserDefaults.standard.value(forKey: UserDefaultKey.introduce.rawValue) as? String else {
+                return "안녕하세요 굿 리스너입니다."
+            }
+            return introduce
+        }
+        
+        set(introduce) {
+            UserDefaults.standard.set(introduce, forKey:  UserDefaultKey.introduce.rawValue)
         }
     }
 }
