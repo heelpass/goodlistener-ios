@@ -18,6 +18,7 @@ struct TagList {
 class TagView: UIView {
     
     var tagData: [String] = []
+    var isAllSelected: Bool = false
     
     var selectedTag: BehaviorRelay<String> = .init(value: "")
     
@@ -52,9 +53,10 @@ class TagView: UIView {
         super.init(coder: coder)
     }
     
-    convenience init(frame: CGRect, data: [String]) {
-        self.init(frame: frame)
+    convenience init(data: [String], isAllSelcted: Bool = false) {
+        self.init(frame: .zero)
         self.tagData = data
+        self.isAllSelected = isAllSelcted
         
         addSubview(title)
         addSubview(collectionView)
@@ -91,7 +93,18 @@ class TagView: UIView {
         var totalCellWidth: CGFloat = Const.padding * 2
         let cellSpacing: CGFloat = 32
         let screenWidth = UIScreen.main.bounds.width
-        var height: CGFloat = 113
+        var height: CGFloat = 38
+        
+        let title = UILabel()
+        title.text = self.title.text
+        title.font = self.title.font
+        title.sizeToFit()
+        // 제목 Height
+        height += title.frame.height
+        // 타이틀 태그 간격
+        height += 10
+        // 상하 패딩
+        height += 21*2
         
         tagData.forEach { (text) in
             let label = UILabel()
@@ -106,7 +119,7 @@ class TagView: UIView {
                 totalCellWidth = Const.padding * 2
             }
         }
-
+        
         return height
     }
 
@@ -121,7 +134,12 @@ extension TagView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as! TagCell
         
         cell.label.text = tagData[indexPath.row]
-        tagData[indexPath.row] == selectedTag.value ? cell.configUI(.selected) : cell.configUI(.deselected)
+        
+        if isAllSelected {
+            cell.configUI(.selected)
+        } else {
+            tagData[indexPath.row] == selectedTag.value ? cell.configUI(.selected) : cell.configUI(.deselected)
+        }
         
         return cell
     }
@@ -130,6 +148,9 @@ extension TagView: UICollectionViewDataSource {
 
 extension TagView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if isAllSelected { return }
+        
         collectionView.visibleCells.forEach {
             if let cell = $0 as? TagCell {
                 cell.configUI(.deselected)

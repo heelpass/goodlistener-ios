@@ -28,19 +28,19 @@ class MyPageTagVC: UIViewController, SnapKitType {
         $0.axis = .vertical
     }
     
-    lazy var ageTagView = TagView(frame: .zero, data: TagList.ageList).then {
+    lazy var ageTagView = TagView(data: TagList.ageList).then {
         $0.title.text = "나이"
     }
     
-    lazy var sexTagView = TagView(frame: .zero, data: TagList.sexList).then {
+    lazy var sexTagView = TagView(data: TagList.sexList).then {
         $0.title.text = "성별"
     }
     
-    lazy var jobTagView = TagView(frame: .zero, data: TagList.jobList).then {
+    lazy var jobTagView = TagView(data: TagList.jobList).then {
         $0.title.text = "직업"
     }
     
-    lazy var tagView = TagView(frame: .zero, data: ["편안한", "잔인한", "행복한", "즐거운", "무서운"]).then {
+    lazy var tagView = TagView(data: ["편안한", "잔인한", "행복한", "즐거운", "무서운"]).then {
         $0.title.text = "원하는 대화 분위기"
         $0.line.isHidden = true
     }

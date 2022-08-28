@@ -14,17 +14,17 @@ import Then
 
 class ProfileImageSelectView: UIView, SnapKitType {
     
-    var images = BehaviorRelay<[UIImage?]>(value: [UIImage(named: "main_img_step_01"),
-                                                  UIImage(named: "main_img_step_01"),
-                                                  UIImage(named: "main_img_step_01"),
-                                                  UIImage(named: "main_img_step_01"),
-                                                  UIImage(named: "main_img_step_01"),
-                                                  UIImage(named: "main_img_step_01")])
+    var images = BehaviorRelay<[String?]>(value: [Image.profile1.rawValue,
+                                                  Image.profile2.rawValue,
+                                                  Image.profile3.rawValue,
+                                                  Image.profile4.rawValue,
+                                                  Image.profile5.rawValue,
+                                                  Image.profile6.rawValue])
     
     let cellSize = (UIScreen.main.bounds.width - (Const.padding * 4) - 26) / 3
     var disposeBag = DisposeBag()
     
-    var selectedImage = BehaviorRelay<UIImage?>(value: nil)
+    var selectedImage = BehaviorRelay<String?>(value: nil)
     
     let backgroundView = UIView().then {
         $0.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
@@ -111,12 +111,13 @@ class ProfileImageSelectView: UIView, SnapKitType {
         // Rx CollectionViewDatasource
         images.bind(to: collectionView.rx.items(
             cellIdentifier: ProfileImageSelectCell.identifier, cellType: ProfileImageSelectCell.self)) { row, model, cell in
-                cell.profileImage.image = model
+                guard let name = model else { return }
+                cell.profileImage.image = UIImage(named: name)
             }
             .disposed(by: disposeBag)
         
         // Rx CollectionViewDelegate
-        Observable.zip(collectionView.rx.itemSelected, collectionView.rx.modelSelected(UIImage.self))
+        Observable.zip(collectionView.rx.itemSelected, collectionView.rx.modelSelected(String.self))
             .subscribe(onNext: {[weak self] indexPath, model in
                 // 선택되지 않은 셀들 UI 변경
                 self?.collectionView.visibleCells.forEach {
@@ -140,9 +141,9 @@ class ProfileImageSelectView: UIView, SnapKitType {
         
         completeBtn.rx.tap
             .asObservable()
-            .withLatestFrom(collectionView.rx.modelSelected(UIImage.self))
-            .subscribe(onNext: { [weak self] image in
-                self?.selectedImage.accept(image)
+            .withLatestFrom(collectionView.rx.modelSelected(String.self))
+            .subscribe(onNext: { [weak self] imageName in
+                self?.selectedImage.accept(imageName)
                 self?.removeFromSuperview()
             })
             .disposed(by: disposeBag)
