@@ -1,0 +1,69 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :testflight do |options|
+    get_certificates
+    get_provisioning_profile()
+    updateVersion(options)
+    increment_build_number(
+	build_number: latest_testflight_build_number + 1
+    )
+    build_app(
+	configuration: "Debug"
+    )
+    upload_to_testflight(
+	skip_waiting_for_build_processing: true
+    )
+    slack(
+	message: "Testflight 배포에 성공했습니다!",
+	slack_url: "https://hooks.slack.com/services/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"
+    )  
+  end
+
+  error do |lane, exception, options|
+    slack(
+      message: "에러 발생 : #{exception}",
+      success: false,
+      slack_url: "https://hooks.slack.com/services/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"
+    )
+  end
+end
+
+def updateVersion(options)
+    if options[:version]
+      version = options[:version]
+    else
+      version = prompt(text: “Enter the version type or specific version\n(major, minor, patch or 1.0.0): “)
+    end
+
+    re = /\d+.\d+.\d+/
+    versionNum = version[re, 0]
+
+    if (versionNum)
+      increment_version_number(
+        version_number: versionNum
+      )
+    elsif (version == ‘major’ || version == ‘minor’ || version == ‘patch’)
+      increment_version_number(
+        bump_type: version
+      )
+    else
+      UI.user_error!(“[ERROR] Wrong version!!!!!!“)
+    end
+end

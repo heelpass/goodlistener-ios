@@ -13,5 +13,6 @@ struct UserInfo {
     var age: String?
     var gender: String?
     var job: String?
-    var profileImage: UIImage?
+    var profileImage: String?
+    var introduce: String?
 }

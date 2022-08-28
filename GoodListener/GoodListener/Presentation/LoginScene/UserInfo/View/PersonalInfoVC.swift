@@ -37,15 +37,15 @@ class PersonalInfoVC: UIViewController, SnapKitType {
         $0.configUI(.deactivate)
     }
     
-    lazy var ageTagView = TagView(frame: .zero, data: TagList.ageList).then {
+    lazy var ageTagView = TagView(data: TagList.ageList).then {
         $0.title.text = "나이"
     }
     
-    lazy var sexTagView = TagView(frame: .zero, data: TagList.sexList).then {
+    lazy var sexTagView = TagView(data: TagList.sexList).then {
         $0.title.text = "성별"
     }
     
-    lazy var jobTagView = TagView(frame: .zero, data: TagList.jobList).then {
+    lazy var jobTagView = TagView(data: TagList.jobList).then {
         $0.title.text = "직업"
         $0.line.isHidden = true
     }

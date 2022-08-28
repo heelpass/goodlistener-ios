@@ -16,12 +16,28 @@ class MyPageVC: UIViewController, SnapKitType {
     weak var coordinator: MyPageCoordinating?
     var disposeBag = DisposeBag()
     
+    var userInfo: UserInfo = UserInfo(name: "굿리스너스피커",
+                                      age: "10대",
+                                      gender: "남자",
+                                      job: "직장인",
+                                      profileImage: Image.profile1.rawValue,
+                                      introduce: "안녕하세요 저는 스피커입니다")
+    
     let navigationView = NavigationView(frame: .zero, type: .setting)
     
     let profileImage = UIImageView().then {
-        $0.image = UIImage(named: "main_img_step_01")
+        $0.image = UIImage(named: Image.emoji1.rawValue)
         $0.layer.cornerRadius = 50
         $0.layer.masksToBounds = true
+    }
+    
+    let profileImageEditView = UIView().then {
+        $0.backgroundColor = .m3
+        $0.layer.cornerRadius = 14
+    }
+    
+    let pencilIco = UIImageView().then {
+        $0.image = UIImage(named: "ic_pencil")
     }
     
     let nicknameContainer = UIView().then {
@@ -29,27 +45,28 @@ class MyPageVC: UIViewController, SnapKitType {
         $0.layer.cornerRadius = 6
     }
     
-    let nicknameLabel = UILabel().then {
+    let nicknameTitleLbl = UILabel().then {
         $0.text = "닉네임"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
         $0.textColor = .f6
     }
     
-    let nicknameTf = UITextField().then {
+    let nicknameLbl = UILabel().then {
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
         $0.textColor = .f3
-        $0.text = "닉네임~~"
+        $0.text = "굿리스너스피커"
         $0.textAlignment = .center
     }
     
-    let tagContainer = UIView().then {
-        $0.backgroundColor = .clear
+    let tagView = TagView(data: ["20대","여자","직장인","차분한"], isAllSelcted: true).then {
+        $0.title.text = "나의 태그"
+        $0.line.isHidden = true
     }
     
-    let tagLabel = UILabel().then {
-        $0.text = "나의 태그"
-        $0.font = FontManager.shared.notoSansKR(.bold, 14)
-        $0.textColor = .f4
+    let introduceView = GLTextView(maxCount: 30).then {
+        $0.title = "소개글"
+        $0.contents = "일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사"
+        $0.isEditable = false
     }
 
     override func viewDidLoad() {
@@ -61,12 +78,13 @@ class MyPageVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
+        configUI(model: userInfo)
     }
     
     func addComponents() {
-        [navigationView, profileImage, nicknameContainer, tagContainer].forEach { view.addSubview($0) }
-        [nicknameLabel, nicknameTf].forEach { nicknameContainer.addSubview($0) }
-        [tagLabel].forEach { tagContainer.addSubview($0) }
+        [navigationView, profileImage, profileImageEditView, nicknameContainer, tagView, introduceView].forEach { view.addSubview($0) }
+        [nicknameTitleLbl, nicknameLbl].forEach { nicknameContainer.addSubview($0) }
+        profileImageEditView.addSubview(pencilIco)
     }
     
     func setConstraints() {
@@ -77,36 +95,47 @@ class MyPageVC: UIViewController, SnapKitType {
         
         profileImage.snp.makeConstraints {
             $0.size.equalTo(100)
-            $0.bottom.equalTo(nicknameContainer.snp.top).offset(-28)
+            $0.top.equalTo(navigationView.snp.bottom).offset(58)
             $0.centerX.equalToSuperview()
         }
         
-        nicknameContainer.snp.makeConstraints {
-            $0.width.equalTo(Const.glBtnWidth)
-            $0.height.equalTo(Const.glBtnHeight)
-            $0.center.equalTo(view.safeAreaLayoutGuide)
+        profileImageEditView.snp.makeConstraints {
+            $0.size.equalTo(28)
+            $0.right.bottom.equalTo(profileImage)
         }
         
-        nicknameLabel.snp.makeConstraints {
+        pencilIco.snp.makeConstraints {
+            $0.size.equalTo(10)
+            $0.center.equalToSuperview()
+        }
+        
+        nicknameContainer.snp.makeConstraints {
+            $0.top.equalTo(profileImage.snp.bottom).offset(28)
+            $0.left.right.equalToSuperview().inset(Const.padding)
+            $0.height.equalTo(Const.glBtnHeight)
+        }
+        
+        nicknameTitleLbl.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.left.equalToSuperview().inset(16)
         }
         
-        nicknameTf.snp.makeConstraints {
+        nicknameLbl.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.left.equalTo(nicknameLabel).offset(16)
+            $0.left.equalTo(nicknameTitleLbl).offset(16)
             $0.right.equalToSuperview().inset(16)
         }
         
-        tagContainer.snp.makeConstraints {
-            $0.top.equalTo(nicknameContainer.snp.bottom).offset(50)
-            $0.height.equalTo(30)
-            $0.left.right.equalToSuperview().inset(Const.padding)
+        tagView.snp.makeConstraints {
+            $0.top.equalTo(nicknameContainer.snp.bottom).offset(26)
+            $0.height.equalTo(tagView.tagCollectionViewHeight())
+            $0.left.right.equalToSuperview()
         }
         
-        tagLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.left.equalToSuperview()
+        introduceView.snp.makeConstraints {
+            $0.top.equalTo(tagView.snp.bottom).offset(41)
+            $0.left.right.equalToSuperview()
+            $0.height.equalTo(introduceView.glTextViewHeight(textViewHeight: 62))
         }
     }
     
@@ -117,11 +146,31 @@ class MyPageVC: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
         
-        tagContainer.tapGesture
+        // 프로필 이미지 Edit버튼 터치 시 프로필이미지선택 팝업을 띄워준다
+        profileImageEditView.tapGesture
             .subscribe(onNext: { [weak self] _ in
-                self?.coordinator?.moveToTagPage()
+                let view = ProfileImageSelectView()
+                self?.view.addSubview(view)
+                view.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+                
+                // 팝업에서 선택된 이미지를 현재 프로필이미지에 반영
+                view.selectedImage
+                    .subscribe(onNext: { [weak self] image in
+                        guard let self = self, let image = image else { return }
+                        self.profileImage.image = UIImage(named: image)
+                    })
+                    .disposed(by: view.disposeBag)
+                
             })
             .disposed(by: disposeBag)
+    }
+    
+    func configUI(model: UserInfo) {
+        nicknameLbl.text = model.name
+        tagView.tagData = [model.age!, model.gender!, model.job!]
+        introduceView.contents = model.introduce!
     }
 
 }
