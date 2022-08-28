@@ -64,6 +64,7 @@
 		E8B444B728B3723A0003815B /* MoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444B628B3723A0003815B /* MoodView.swift */; };
 		E8B444B928B4A2680003815B /* CallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444B828B4A2680003815B /* CallViewModel.swift */; };
 		E8B444BC28B4B4990003815B /* CallReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444BB28B4B4990003815B /* CallReviewViewModel.swift */; };
+		E8B444EC28B8A9220003815B /* GLTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444EB28B8A9220003815B /* GLTextField.swift */; };
 		E8B444D128B759300003815B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E8B444D328B759300003815B /* Localizable.strings */; };
 		E8B444D828B759B20003815B /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444D728B759B20003815B /* String+.swift */; };
 		E8B444CD28B730CE0003815B /* GLTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444CC28B730CE0003815B /* GLTextView.swift */; };
@@ -155,6 +156,7 @@
 		E8B444B628B3723A0003815B /* MoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodView.swift; sourceTree = "<group>"; };
 		E8B444B828B4A2680003815B /* CallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewModel.swift; sourceTree = "<group>"; };
 		E8B444BB28B4B4990003815B /* CallReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallReviewViewModel.swift; sourceTree = "<group>"; };
+		E8B444EB28B8A9220003815B /* GLTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLTextField.swift; sourceTree = "<group>"; };
 		E8B444D228B759300003815B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E8B444D428B759810003815B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Main.strings; sourceTree = "<group>"; };
 		E8B444D528B759810003815B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 		E8B444A328AE2A9E0003815B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E8B444ED28B8AD410003815B /* GLTextField */,
 				E8B444CE28B742650003815B /* ProfileImageSelectView */,
 				0A558A4B28B6205B001949D6 /* Popup */,
 				0A558A4A28B62046001949D6 /* Button */,
@@ -536,6 +539,12 @@
 			path = MoodView;
 			sourceTree = "<group>";
 		};
+		E8B444ED28B8AD410003815B /* GLTextField */ = {
+			isa = PBXGroup;
+			children = (
+				E8B444EB28B8A9220003815B /* GLTextField.swift */,
+			);
+			path = GLTextField;
 		E8B444CE28B742650003815B /* ProfileImageSelectView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1061,6 +1070,7 @@
 				E8B444B928B4A2680003815B /* CallViewModel.swift in Sources */,
 				0A558A3E28B61E44001949D6 /* TimeCell.swift in Sources */,
 				E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */,
+				E8B444EC28B8A9220003815B /* GLTextField.swift in Sources */,
 				E8B4435A28A103570003815B /* UILabel+.swift in Sources */,
 				0A558A4628B61F2A001949D6 /* EmojiTagView.swift in Sources */,
 				E8B4435828A0EADD0003815B /* ProfileSetupVC.swift in Sources */,

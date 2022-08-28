@@ -26,7 +26,7 @@ class ProfileSetupViewModel: ViewModelType {
     }
     
     func transform(input: Input) -> Output {
-        let nicknameValidationResult = BehaviorRelay<Bool>(value: false)
+        let nicknameValidationResult = BehaviorRelay<Bool>(value: true)
         let nicknameDuplicateResult = BehaviorRelay<(String, Bool)>(value: ("", false))
         let canComplete = BehaviorRelay<Bool>(value: false)
         
@@ -61,7 +61,7 @@ class ProfileSetupViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        return Output(nicknameValidationResult: nicknameValidationResult.asSignal(onErrorJustReturn: false),
+        return Output(nicknameValidationResult: nicknameValidationResult.skip(2).asSignal(onErrorJustReturn: true),
                       nicknameDuplicateResult: nicknameDuplicateResult.asSignal(onErrorJustReturn: ("", false)),
                       canComplete: canComplete.asSignal(onErrorJustReturn: false)
         )
