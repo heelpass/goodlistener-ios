@@ -15,6 +15,7 @@ import Moya
 enum LoginAPI {
     case signIn(SignInModel)
     case nicknameCheck(String)
+    case getUserInfo
 }
 
 
@@ -36,6 +37,9 @@ extension LoginAPI: TargetType {
             
         case .nicknameCheck(_):
             return "/user/valid"
+            
+        case .getUserInfo:
+            return "/user"
         }
     }
     
@@ -47,6 +51,9 @@ extension LoginAPI: TargetType {
             return .post
         
         case .nicknameCheck(_):
+            return .get
+            
+        case .getUserInfo:
             return .get
         }
 
@@ -71,6 +78,9 @@ extension LoginAPI: TargetType {
             ]
 //
             return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+            
+        case .getUserInfo:
+            return .requestPlain
         }
     }
     

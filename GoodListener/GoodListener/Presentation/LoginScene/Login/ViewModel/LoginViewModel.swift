@@ -100,20 +100,56 @@ class LoginViewModel: NSObject, ViewModelType {
         let moyaProvider = MoyaProvider<TokenAPI>()
         moyaProvider.rx.request(.getAppleToken(token))
             .observe(on: MainScheduler.instance)
-            .subscribe { result in
+            .subscribe { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success(let response):
                     let jsonData = JSON(response.data)
+                    Log.d(jsonData)
                     if let token = jsonData["token"].string {
                         UserDefaultsManager.shared.accessToken = "Bearer " + token
                     }
-                    self.loginResult.onNext(jsonData["isExistUser"].boolValue)
+                    
+                    // 이미 회원으로 등록된 경우 회원정보를 불러온다.
+                    if jsonData["isExistUser"].boolValue {
+                        self.getUserInfo { _ in
+                            self.loginResult.onNext(true)
+                            
+                            // TODO: 회원정보를 불러오기 실패한 경우에는 어떻게 할껀지?
+                        }
+                    } else {
+                        self.loginResult.onNext(false)
+                    }
                     
                 case .failure(let error):
                     Log.e("\(error.localizedDescription)")
                 }
             }.disposed(by: disposeBag)
         
+    }
+    
+    private func getUserInfo(_ completion: ((Bool)->Void)? = nil) {
+        let moyaProvider = MoyaProvider<LoginAPI>()
+        moyaProvider.rx.request(.getUserInfo)
+            .subscribe { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let model = try JSONDecoder().decode(UserInfo.self, from: response.data)
+                        UserDefaultsManager.shared.nickname = model.nickname
+                        UserDefaultsManager.shared.age = model.ageRange
+                        UserDefaultsManager.shared.gender = model.gender
+                        UserDefaultsManager.shared.job = model.job
+                        completion?(true)
+                    } catch {
+                        Log.d("UserInfo Decoding Error")
+                    }
+                case .failure(let error):
+                    Log.d("GetUserInfo Error: \(error)")
+                    completion?(false)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }
 

@@ -8,11 +8,51 @@
 import Foundation
 import UIKit
 
-struct UserInfo {
-    var name: String?
-    var age: String?
-    var gender: String?
-    var job: String?
-    var profileImage: String?
-    var introduce: String?
+struct UserInfo: Codable {
+    var id: Int
+    var snsHash: String
+    var snsKind: String
+    var email: String
+    var nickname: String
+    var gender: String
+    var ageRange: String
+    var job: String
+    var profileImage: String
+    var introduce: String
+    var fcmHash: String
+    var createdAt: String
+    var updatedAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case snsHash
+        case snsKind
+        case email
+        case nickname
+        case gender
+        case ageRange
+        case job
+        case profileImage
+        case introduce
+        case fcmHash
+        case createdAt
+        case updatedAt
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values   = try decoder.container(keyedBy: CodingKeys.self)
+        id           = (try? values.decode(Int.self, forKey: .id)) ?? 0
+        snsHash      = (try? values.decode(String.self, forKey: .snsHash)) ?? ""
+        snsKind      = (try? values.decode(String.self, forKey: .snsKind)) ?? ""
+        email        = (try? values.decode(String.self, forKey: .email)) ?? ""
+        nickname     = (try? values.decode(String.self, forKey: .nickname)) ?? ""
+        gender       = (try? values.decode(String.self, forKey: .gender)) ?? ""
+        ageRange     = (try? values.decode(String.self, forKey: .ageRange)) ?? ""
+        job          = (try? values.decode(String.self, forKey: .job)) ?? ""
+        profileImage = (try? values.decode(String.self, forKey: .profileImage)) ?? ""
+        introduce    = (try? values.decode(String.self, forKey: .introduce)) ?? ""
+        fcmHash      = (try? values.decode(String.self, forKey: .fcmHash)) ?? ""
+        createdAt    = (try? values.decode(String.self, forKey: .createdAt)) ?? ""
+        updatedAt    = (try? values.decode(String.self, forKey: .updatedAt)) ?? ""
+    }
 }

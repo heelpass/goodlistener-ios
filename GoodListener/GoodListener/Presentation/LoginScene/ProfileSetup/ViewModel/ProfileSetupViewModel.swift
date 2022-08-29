@@ -93,8 +93,19 @@ class ProfileSetupViewModel: ViewModelType {
                     .subscribe { result in
                         switch result {
                         case .success(let response):
-                            signInSuccess.accept(true)
-                            Log.d("SignInError : \(JSON(response.data))")
+                            // 회원가입 성공 시 유저정보를 리턴해준다
+                            do {
+                                let model = try JSONDecoder().decode(UserInfo.self, from: response.data)
+                                UserDefaultsManager.shared.nickname = model.nickname
+                                UserDefaultsManager.shared.age = model.ageRange
+                                UserDefaultsManager.shared.gender = model.gender
+                                UserDefaultsManager.shared.job = model.job
+                                signInSuccess.accept(true)
+                            } catch {
+                                signInSuccess.accept(false)
+                                Log.d("UserInfo Decoding Error")
+                            }
+                            Log.d("SignInSuccess : \(JSON(response.data))")
                         case .failure(let error):
                             signInSuccess.accept(false)
                             Log.e("SignInError : \(error)")
@@ -120,6 +131,30 @@ class ProfileSetupViewModel: ViewModelType {
         } else {
             return false
         }
+    }
+    
+    private func getUserInfo(_ completion: ((Bool)->Void)? = nil) {
+        let moyaProvider = MoyaProvider<LoginAPI>()
+        moyaProvider.rx.request(.getUserInfo)
+            .subscribe { result in
+                switch result {
+                case .success(let response):
+                    do {
+                        let model = try JSONDecoder().decode(UserInfo.self, from: response.data)
+                        UserDefaultsManager.shared.nickname = model.nickname
+                        UserDefaultsManager.shared.age = model.ageRange
+                        UserDefaultsManager.shared.gender = model.gender
+                        UserDefaultsManager.shared.job = model.job
+                        completion?(true)
+                    } catch {
+                        Log.d("UserInfo Decoding Error")
+                    }
+                case .failure(let error):
+                    Log.d("GetUserInfo Error: \(error)")
+                    completion?(false)
+                }
+            }
+            .disposed(by: disposeBag)
     }
 }
 

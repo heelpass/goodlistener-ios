@@ -18,6 +18,7 @@ enum UserDefaultKey : String {
     case introduce
     case snsKind
     case fcmToken
+    case profileImage
 }
 
 class UserDefaultsManager {
@@ -126,6 +127,19 @@ class UserDefaultsManager {
         
         set(fcmToken) {
             UserDefaults.standard.set(fcmToken, forKey:  UserDefaultKey.fcmToken.rawValue)
+        }
+    }
+    
+    var profileImage: String {
+        get {
+            guard let profileImage = UserDefaults.standard.value(forKey: UserDefaultKey.profileImage.rawValue) as? String else {
+                return ""
+            }
+            return profileImage
+        }
+        
+        set(profileImage) {
+            UserDefaults.standard.set(profileImage, forKey:  UserDefaultKey.profileImage.rawValue)
         }
     }
 }

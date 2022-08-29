@@ -123,7 +123,7 @@ class LoginVC: UIViewController, SnapKitType {
             .emit(onNext: { [weak self] (result) in
                 guard let self = self else { return }
                 
-                if !result {
+                if result {
                     self.coordinator?.loginSuccess()
                 } else {
                     self.coordinator?.moveToPersonalInfoPage(model: self.signInModel)
