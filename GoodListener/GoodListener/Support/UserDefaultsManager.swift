@@ -19,6 +19,10 @@ enum UserDefaultKey : String {
     case snsKind
     case fcmToken
     case profileImage
+    
+    // 로그인 관련 정보
+    case appleID
+    case isLogin
 }
 
 class UserDefaultsManager {
@@ -142,5 +146,29 @@ class UserDefaultsManager {
             UserDefaults.standard.set(profileImage, forKey:  UserDefaultKey.profileImage.rawValue)
         }
     }
+    var appleID : String? {
+        get {
+            guard let appleID = UserDefaults.standard.value(forKey: UserDefaultKey.appleID.rawValue) as? String else {
+                return nil
+            }
+            return appleID
+        }
+        
+        set(appleID) {
+            UserDefaults.standard.set(appleID, forKey:  UserDefaultKey.appleID.rawValue)
+        }
+    }
+    
+    var isLogin : Bool? {
+        get {
+            guard let isLogin = UserDefaults.standard.value(forKey: UserDefaultKey.isLogin.rawValue) as? Bool? else {
+                return false
+            }
+            return isLogin
+        }
+        
+        set(isLogin) {
+            UserDefaults.standard.set(isLogin, forKey:  UserDefaultKey.isLogin.rawValue)
+        }
+    }
 }
-

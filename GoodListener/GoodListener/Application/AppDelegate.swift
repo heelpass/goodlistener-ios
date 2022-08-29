@@ -9,6 +9,7 @@ import UIKit
 import RxKakaoSDKCommon
 import FirebaseCore
 import FirebaseMessaging
+import AuthenticationServices
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
