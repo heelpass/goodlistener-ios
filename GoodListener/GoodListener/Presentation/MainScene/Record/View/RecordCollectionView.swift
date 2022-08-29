@@ -9,8 +9,8 @@ import UIKit
 
 struct RecordDataList {
     static let dayTextList = ["1일차", "2일차", "3일차", "4일차", "5일차", "6일차", "7일차"]
-    static let dayemojiList = ["emoji1", "emoji2", "emoji3", "emoji4", "emoji5", "emoji4", "emoji5"]
-    static let dayScoreList = ["10.0", "8.2", "6.0", "5.2", "7.0", "6.2", "2.5"]
+    static let dayemojiList = ["ic_mood_fond", "ic_mood_warm", "ic_mood_trust", "ic_mood_happy", "ic_mood_fond", "ic_mood_warm"]
+    static let dayScoreList = ["10.0", "8.5", "6.0", "5.5", "7.0", "6.5", "2.5"]
 }
 
 class RecordCollectionView: UIView {
@@ -27,27 +27,21 @@ class RecordCollectionView: UIView {
     lazy var dayView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.register(RecordContentCell.self, forCellWithReuseIdentifier: RecordContentCell.identifier)
-        view.delegate = self
         view.dataSource = self
-        view.backgroundColor = .clear
         return view
     }()
     
     lazy var emojiView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.register(RecordContentCell.self, forCellWithReuseIdentifier: RecordContentCell.identifier)
-        view.delegate = self
         view.dataSource = self
-        view.backgroundColor = .clear
         return view
     }()
     
     lazy var scoreView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.register(RecordContentCell.self, forCellWithReuseIdentifier: RecordContentCell.identifier)
-        view.delegate = self
         view.dataSource = self
-        view.backgroundColor = .clear
         return view
     }()
     
@@ -107,12 +101,6 @@ extension RecordCollectionView: UICollectionViewDataSource {
             cell.scoreLbl.text = scoreData[indexPath.row]
             return cell
         }
-    }
-}
-
-extension RecordCollectionView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        Log.d("\(indexPath.section)and \(indexPath.row)")
     }
 }
 
