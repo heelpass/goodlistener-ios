@@ -16,6 +16,8 @@ struct Const {
     
     static let glBtnHeight: CGFloat = 48
     static let glBtnWidth: CGFloat = UIScreen.main.bounds.width - (padding * 2)
+    
+    static let glTfHeight: CGFloat = 118
 }
 
 // TODO: 백엔드에서 이미지 코드 정해지면 수정! , Assets에서 파일명도 코드와 동일하게 수정필요

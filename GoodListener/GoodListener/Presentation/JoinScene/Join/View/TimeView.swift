@@ -81,7 +81,7 @@ extension TimeView: UICollectionViewDelegate {
 
     }
     
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? TimeCell else { return }
         cell.configUI(.unselected)
     }

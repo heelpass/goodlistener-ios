@@ -61,7 +61,7 @@ class ProfileSetupViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
-        return Output(nicknameValidationResult: nicknameValidationResult.asSignal(onErrorJustReturn: false),
+        return Output(nicknameValidationResult: nicknameValidationResult.skip(2).asSignal(onErrorJustReturn: false),
                       nicknameDuplicateResult: nicknameDuplicateResult.asSignal(onErrorJustReturn: ("", false)),
                       canComplete: canComplete.asSignal(onErrorJustReturn: false)
         )

@@ -49,37 +49,8 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         $0.image = UIImage(named: "ic_edit_btn")
     }
     
-    let nicknameLbl = UILabel().then {
-        $0.text = "닉네임"
-        $0.font = FontManager.shared.notoSansKR(.bold, 16)
-        $0.textColor = .f3
-    }
-    
-    let tfContainer = UIView().then {
-        $0.backgroundColor = .clear
-    }
-    
-    let nicknameTf = UITextField().then {
-        $0.borderStyle = .none
-        $0.font = FontManager.shared.notoSansKR(.regular, 16)
-    }
-    
-    let nicknameCheckBtn = UIButton().then {
-        $0.title = "중복확인"
-        $0.titleColor = .f4
-        $0.font = FontManager.shared.notoSansKR(.regular, 14)
-        $0.backgroundColor = .clear
-        $0.isUserInteractionEnabled = false
-    }
-    
-    let tfUnderLine = UIView().then {
-        $0.backgroundColor = .black
-    }
-    
-    let nicknameLimitLbl = UILabel().then {
-        $0.text = "*한글/영문 + 숫자로 10글자까지 가능합니다."
-        $0.textColor = .f4
-        $0.font = FontManager.shared.notoSansKR(.regular, 14)
+    let nicknameView = GLTextField(tag: 1).then {
+        $0.title = "닉네임"
     }
     
     let completeButton = GLButton().then {
@@ -110,10 +81,9 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [titleLbl, imageContainer, nicknameLbl, tfContainer, completeButton].forEach { view.addSubview($0) }
+        [titleLbl, imageContainer, nicknameView, completeButton].forEach { view.addSubview($0) }
         [profileImage, editView].forEach { imageContainer.addSubview($0) }
         editView.addSubview(editImage)
-        [nicknameTf, nicknameCheckBtn, tfUnderLine, nicknameLimitLbl].forEach { tfContainer.addSubview($0) }
     }
     
     func setConstraints() {
@@ -143,36 +113,10 @@ class ProfileSetupVC: UIViewController, SnapKitType {
             $0.center.equalToSuperview()
         }
         
-        nicknameLbl.snp.makeConstraints {
-            $0.left.equalToSuperview().inset(Const.padding)
-            $0.top.equalTo(imageContainer.snp.bottom).offset(62)
-        }
-        
-        tfContainer.snp.makeConstraints {
-            $0.top.equalTo(nicknameLbl.snp.bottom).offset(35)
-            $0.left.right.equalToSuperview().inset(Const.padding)
-        }
-        
-        nicknameTf.snp.makeConstraints {
-            $0.left.top.equalToSuperview()
-        }
-        
-        nicknameCheckBtn.snp.makeConstraints {
-            $0.right.top.equalToSuperview()
-            $0.left.equalTo(nicknameTf.snp.right).offset(10)
-            $0.width.equalTo(52)
-            $0.height.equalTo(20)
-        }
-        
-        tfUnderLine.snp.makeConstraints {
-            $0.height.equalTo(1)
+        nicknameView.snp.makeConstraints {
+            $0.top.equalTo(profileImage.snp.bottom).offset(62)
             $0.left.right.equalToSuperview()
-            $0.top.equalTo(nicknameTf.snp.bottom).offset(5)
-        }
-        
-        nicknameLimitLbl.snp.makeConstraints {
-            $0.top.equalTo(tfUnderLine.snp.bottom).offset(10)
-            $0.left.bottom.equalToSuperview()
+            $0.height.equalTo(Const.glTfHeight)
         }
         
         completeButton.snp.makeConstraints {
@@ -185,26 +129,38 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     
     func bind() {
         let output = viewModel.transform(input: ProfileSetupViewModel.Input(profileImage: selectedImage,
-                                                                            nickname: nicknameTf.rx.text.orEmpty.asObservable(),
-                                                                            checkDuplicate: nicknameCheckBtn.rx.tap.asObservable()))
+                                                                            nickname: nicknameView.inputTf.rx.text.orEmpty.asObservable(),
+                                                                            checkDuplicate: nicknameView.checkBtn.rx.tap.asObservable()))
         // 닉네임 유효성 검사결과에 따른 중복확인 버튼 UI변경
         output.nicknameValidationResult
             .emit(onNext: { [weak self] result in
                 if result {
-                    self?.nicknameCheckBtn.titleColor = .m1
-                    self?.nicknameCheckBtn.isUserInteractionEnabled = true
+                    self?.nicknameView.descriptionLbl.text = "*한글/영문 + 숫자로 10글자까지 가능합니다"
+                    self?.nicknameView.descriptionLbl.textColor = .f4
+                    self?.nicknameView.checkBtn.titleColor = .m1
+                    self?.nicknameView.tfUnderLine.backgroundColor = .black
+                    self?.nicknameView.checkBtn.isUserInteractionEnabled = true
                 } else {
-                    self?.nicknameCheckBtn.titleColor = .f4
-                    self?.nicknameCheckBtn.isUserInteractionEnabled = false
+                    if self?.nicknameView.inputTf.text?.count == 0 {
+                        self?.nicknameView.descriptionLbl.text = "닉네임을 입력해주세요."
+                    } else if self?.nicknameView.inputTf.text?.count ?? 0 > 10{
+                        self?.nicknameView.descriptionLbl.text = "1자~10자 이내의 닉네임을 입력해주세요."
+                    } else {
+                        self?.nicknameView.descriptionLbl.text = "특수문자, 공백을 제외한  닉네임을 입력해주세요."
+                    }
+                    self?.nicknameView.tfUnderLine.backgroundColor = .error
+                    self?.nicknameView.descriptionLbl.textColor = .error
+                    self?.nicknameView.checkBtn.titleColor = .f4
+                    self?.nicknameView.checkBtn.isUserInteractionEnabled = false
                 }
             })
             .disposed(by: disposeBag)
-        
+
         output.nicknameDuplicateResult
             .skip(1)
             .emit(onNext: { [weak self] (nickname, result) in
                 guard let self = self else { return }
-                
+
                 if result {
                     // 성공팝업
                     // TODO: 중복확인 버튼 어떻게 처리?
@@ -216,7 +172,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                 }
             })
             .disposed(by: disposeBag)
-        
+
         output.canComplete
             .emit(onNext: { [weak self] result in
                 if result {
@@ -226,7 +182,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                 }
             })
             .disposed(by: disposeBag)
-        
+
         // 프로필 이미지 Edit버튼 터치 시 프로필이미지선택 팝업을 띄워준다
         editView.tapGesture
             .subscribe(onNext: { [weak self] _ in
@@ -235,20 +191,19 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                 view.snp.makeConstraints {
                     $0.edges.equalToSuperview()
                 }
-                
+
                 // 팝업에서 선택된 이미지를 현재 프로필이미지에 반영
                 view.selectedImage
-                    .subscribe(onNext: { [weak self] imageName in
-                        guard let self = self, let imageName = imageName else { return }
-                        self.profileImage.image = UIImage(named: imageName)
-                        self.userInfo?.profileImage = imageName
-                        self.selectedImage.accept(imageName)
+                    .subscribe(onNext: { [weak self] image in
+                        self?.profileImage.image = UIImage(named: image ?? "")
+                        self?.userInfo?.profileImage = image
+                        self?.selectedImage.accept(image)
                     })
                     .disposed(by: view.disposeBag)
-                
+
             })
             .disposed(by: disposeBag)
-        
+
         // 완료버튼 클릭
         // TODO: 아마 userInfo API 보내줘야할듯
         completeButton.rx.tap
@@ -286,24 +241,18 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         
-        [titleLbl, imageContainer].forEach {
-            $0.isHidden = true
-        }
-        [nicknameLbl, tfContainer].forEach {
-            $0.transform = CGAffineTransform.init(translationX: 0, y: -tfContainer.calculateTranslationY(keyboardHeight))
-        }
+//        [titleLbl, imageContainer].forEach {
+//            $0.isHidden = true
+//        }
     }
 
 
     @objc func keyboardWillHide(_ notification:NSNotification) {
         guard let _ = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
-        [titleLbl, imageContainer].forEach {
-            $0.isHidden = false
-        }
-        [nicknameLbl, tfContainer].forEach {
-            $0.transform = .identity
-        }
+//        [titleLbl, imageContainer].forEach {
+//            $0.isHidden = false
+//        }
     }
 
 
