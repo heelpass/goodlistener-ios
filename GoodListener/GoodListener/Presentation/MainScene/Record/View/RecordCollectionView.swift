@@ -25,30 +25,29 @@ class RecordCollectionView: UIView {
     }
 
     lazy var dayView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.register(RecordContentCell.self, forCellWithReuseIdentifier: RecordContentCell.identifier)
-        view.backgroundColor = .systemRed
         view.delegate = self
         view.dataSource = self
+        view.backgroundColor = .clear
         return view
     }()
     
     lazy var emojiView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.register(RecordContentCell.self, forCellWithReuseIdentifier: RecordContentCell.identifier)
         view.delegate = self
         view.dataSource = self
+        view.backgroundColor = .clear
         return view
     }()
     
     lazy var scoreView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.register(RecordContentCell.self, forCellWithReuseIdentifier: RecordContentCell.identifier)
         view.delegate = self
         view.dataSource = self
+        view.backgroundColor = .clear
         return view
     }()
     

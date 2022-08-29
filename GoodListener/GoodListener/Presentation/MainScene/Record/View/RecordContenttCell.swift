@@ -58,10 +58,11 @@ class RecordContentCell: UICollectionViewCell, SnapKitType {
     
     func setConstraints() {
         dayLbl.snp.makeConstraints{
-            $0.edges.equalToSuperview()
+            $0.centerX.centerY.equalToSuperview()
         }
         emojiImg.snp.makeConstraints{
-            $0.edges.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(24)
         }
         scoreLbl.snp.makeConstraints{
             $0.edges.equalToSuperview()
