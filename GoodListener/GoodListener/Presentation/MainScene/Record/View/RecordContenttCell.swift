@@ -23,12 +23,19 @@ class RecordContentCell: UICollectionViewCell, SnapKitType {
         $0.text = "1일차"
         $0.textAlignment = .center
         $0.textColor = .f3
-        $0.font = FontManager.shared.notoSansKR(.regular, 14)
+        $0.font = FontManager.shared.notoSansKR(.regular, 10)
     }
     
     let emojiImg = UIImageView().then {
         $0.image = #imageLiteral(resourceName: "emoji4")
         $0.contentMode = .scaleAspectFill
+    }
+    
+    let scoreLbl = UILabel().then{
+        $0.text = "8.2"
+        $0.textColor = .f3
+        $0.textAlignment = .center
+        $0.font = FontManager.shared.notoSansKR(.bold, 12)
     }
     
     override init(frame: CGRect){
@@ -44,8 +51,9 @@ class RecordContentCell: UICollectionViewCell, SnapKitType {
     }
     
     func addComponents() {
-        contentView.addSubview(dayLbl)
-        contentView.addSubview(emojiImg)
+        [dayLbl, emojiImg, scoreLbl].forEach{
+            contentView.addSubview($0)
+        }
     }
     
     func setConstraints() {
@@ -55,6 +63,9 @@ class RecordContentCell: UICollectionViewCell, SnapKitType {
         emojiImg.snp.makeConstraints{
             $0.edges.equalToSuperview()
         }
+        scoreLbl.snp.makeConstraints{
+            $0.edges.equalToSuperview()
+        }
     }
     
     func changeUI(_ type: ContentState) {
@@ -62,14 +73,17 @@ class RecordContentCell: UICollectionViewCell, SnapKitType {
         case .day:
             dayLbl.isHidden = false
             emojiImg.isHidden = true
+            scoreLbl.isHidden = true
             break
         case .emoji:
             dayLbl.isHidden = true
             emojiImg.isHidden = false
+            scoreLbl.isHidden = true
             break
         case .score:
-            dayLbl.isHidden = false
+            dayLbl.isHidden = true
             emojiImg.isHidden = true
+            scoreLbl.isHidden = false
             break
         }
     }

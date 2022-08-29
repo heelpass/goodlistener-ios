@@ -22,7 +22,6 @@ class RecordCollectionView: UIView {
         $0.axis = .vertical
         $0.backgroundColor = .clear
         $0.distribution = .fillEqually
-        
     }
 
     lazy var dayView: UICollectionView = {
@@ -106,7 +105,7 @@ extension RecordCollectionView: UICollectionViewDataSource {
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordContentCell.identifier, for: indexPath) as? RecordContentCell else {fatalError()}
             cell.changeUI(.score)
-            cell.dayLbl.text = scoreData[indexPath.row]
+            cell.scoreLbl.text = scoreData[indexPath.row]
             return cell
         }
     }
