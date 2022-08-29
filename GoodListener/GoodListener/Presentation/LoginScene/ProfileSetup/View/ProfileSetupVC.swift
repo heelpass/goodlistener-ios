@@ -29,6 +29,14 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         $0.sizeToFit()
     }
     
+    let scrollView = UIScrollView().then {
+        $0.backgroundColor = .clear
+    }
+    
+    let contentsView = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    
     let imageContainer = UIView().then {
         $0.backgroundColor = #colorLiteral(red: 0.8797428608, green: 0.8797428012, blue: 0.8797428608, alpha: 1)
         $0.layer.cornerRadius = 138 / 2
@@ -51,6 +59,15 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     
     let nicknameView = GLTextField(tag: 1).then {
         $0.title = "닉네임"
+    }
+    
+    let introduceView = GLTextView(maxCount: 30).then {
+        $0.contents = ""
+        $0.title = "소개글"
+    }
+    
+    let completeBtnContainer = UIView().then {
+        $0.backgroundColor = .white
     }
     
     let completeButton = GLButton().then {
@@ -81,9 +98,12 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [titleLbl, imageContainer, nicknameView, completeButton].forEach { view.addSubview($0) }
+        [titleLbl, scrollView, completeBtnContainer].forEach { view.addSubview($0) }
+        scrollView.addSubview(contentsView)
+        [imageContainer, nicknameView, introduceView].forEach { contentsView.addSubview($0) }
         [profileImage, editView].forEach { imageContainer.addSubview($0) }
         editView.addSubview(editImage)
+        completeBtnContainer.addSubview(completeButton)
     }
     
     func setConstraints() {
@@ -92,8 +112,19 @@ class ProfileSetupVC: UIViewController, SnapKitType {
             $0.centerX.equalToSuperview()
         }
         
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(titleLbl.snp.bottom).offset(22)
+            $0.left.right.equalToSuperview()
+            $0.bottom.equalTo(completeBtnContainer.snp.top)
+        }
+        
+        contentsView.snp.makeConstraints {
+            $0.width.equalTo(UIScreen.main.bounds.width)
+            $0.edges.equalToSuperview()
+        }
+        
         imageContainer.snp.makeConstraints {
-            $0.top.equalTo(titleLbl.snp.bottom).offset(56)
+            $0.top.equalToSuperview().inset(30)
             $0.centerX.equalToSuperview()
             $0.size.equalTo(138)
         }
@@ -116,7 +147,20 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         nicknameView.snp.makeConstraints {
             $0.top.equalTo(profileImage.snp.bottom).offset(62)
             $0.left.right.equalToSuperview()
+            $0.width.equalTo(UIScreen.main.bounds.width)
             $0.height.equalTo(Const.glTfHeight)
+        }
+        
+        introduceView.snp.makeConstraints {
+            $0.top.equalTo(nicknameView.snp.bottom).offset(30)
+            $0.width.equalTo(UIScreen.main.bounds.width)
+            $0.height.equalTo(introduceView.glTextViewHeight(textViewHeight: 62))
+            $0.bottom.equalToSuperview()
+        }
+        
+        completeBtnContainer.snp.makeConstraints {
+            $0.left.right.bottom.equalToSuperview()
+            $0.height.equalTo(108)
         }
         
         completeButton.snp.makeConstraints {
@@ -160,7 +204,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
             .skip(1)
             .emit(onNext: { [weak self] (nickname, result) in
                 guard let self = self else { return }
-
+                self.view.endEditing(true)
                 if result {
                     // 성공팝업
                     // TODO: 중복확인 버튼 어떻게 처리?
@@ -212,6 +256,13 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                 self.coordinator?.completeJoin(model: self.userInfo!)
             })
             .disposed(by: disposeBag)
+        
+        Observable.of(contentsView.tapGesture, scrollView.tapGesture, completeBtnContainer.tapGesture)
+            .merge()
+            .bind(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
     }
     
     // 중복 확인 팝업
@@ -241,18 +292,14 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         
-//        [titleLbl, imageContainer].forEach {
-//            $0.isHidden = true
-//        }
+        self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight)
     }
 
 
     @objc func keyboardWillHide(_ notification:NSNotification) {
         guard let _ = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
-//        [titleLbl, imageContainer].forEach {
-//            $0.isHidden = false
-//        }
+        self.view.transform = .identity
     }
 
 
