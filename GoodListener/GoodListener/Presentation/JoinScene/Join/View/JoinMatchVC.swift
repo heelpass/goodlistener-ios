@@ -126,18 +126,8 @@ class JoinMatchVC: UIViewController, SnapKitType {
         $0.backgroundColor = .f6
     }
     
-    let matchedCharacterLblOne = UILabel().then{
-        $0.text = "밝음"
-        $0.font = FontManager.shared.notoSansKR(.regular, 14)
-        $0.textColor = .f2
-    }
-    
-    let lineThreeView = UIView().then{
-        $0.backgroundColor = .f6
-    }
-    
-    let matchedCharacterLblTwo = UILabel().then{
-        $0.text = "명랑"
+    let matchedjobLbl = UILabel().then{
+        $0.text = "프리랜서"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f2
     }
@@ -199,7 +189,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
             view.addSubview($0)
         }
         
-        [matchedGenderLbl, lineOneView, matchedAgeLbl, lineTwoView, matchedCharacterLblOne, lineThreeView, matchedCharacterLblTwo]
+        [matchedGenderLbl, lineOneView, matchedAgeLbl, lineTwoView, matchedjobLbl]
             .forEach{
                 matchedListenerStackView.addArrangedSubview($0)
             }
@@ -275,10 +265,6 @@ class JoinMatchVC: UIViewController, SnapKitType {
         }
         
         lineTwoView.snp.makeConstraints{
-            $0.size.equalTo(CGSize(width: 2, height: 15))
-        }
-        
-        lineThreeView.snp.makeConstraints{
             $0.size.equalTo(CGSize(width: 2, height: 15))
         }
         
