@@ -26,7 +26,7 @@ class LoginVC: UIViewController, SnapKitType {
         $0.font = FontManager.shared.notoSansKR(.bold, 32)
         $0.numberOfLines = 0
         $0.sizeToFit()
-        $0.textColorChange(text: "우리,\n같이 마음 편하게\n이야기해볼까요?", color: .m1, range: "마음 편하게\n이야기")
+        $0.textColorChange(text: "우리,\n같이 마음 편하게\n이야기해볼까요?", color: .m1, range: ["마음 편하게\n이야기"])
     }
     
     let subtitleLabel = UILabel().then {
@@ -133,11 +133,7 @@ class LoginVC: UIViewController, SnapKitType {
             .bind(onNext: { [weak self] in
                 guard let self = self else { return }
                 
-                let popup = GLPopup()
-                popup.title = "이용약관"
-                popup.contents = "이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관"
-                popup.cancelIsHidden = true
-                popup.alignment = .center
+                let popup = TermsOfServicePopup()
                 
                 self.view.addSubview(popup)
                 popup.snp.makeConstraints {

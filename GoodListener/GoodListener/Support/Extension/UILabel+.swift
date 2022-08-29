@@ -10,24 +10,32 @@ import UIKit
 
 extension UILabel {
     // 컬러만 변경
-    func textColorChange(text: String, color: UIColor, range: String){
+    func textColorChange(text: String, color: UIColor, range: [String]){
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: color, range: (text as NSString).range(of: range))
+        
+        range.forEach {
+            attributedStr.addAttribute(.foregroundColor, value: color, range: (text as NSString).range(of: $0))
+        }
         
         self.attributedText = attributedStr
     }
     // 폰트만 변경
-    func textFontChange(text: String, font: UIFont, range: String){
+    func textFontChange(text: String, font: UIFont, range: [String]){
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.font, value: font, range: (text as NSString).range(of: range))
+        range.forEach {
+            attributedStr.addAttribute(.font, value: font, range: (text as NSString).range(of: $0))
+        }
         
         self.attributedText = attributedStr
     }
     // 컬러, 폰트 변경
-    func textColorAndFontChange(text: String, color: UIColor, font: UIFont, range: String){
+    func textColorAndFontChange(text: String, color: UIColor, font: UIFont, range: [String]){
         let attributedStr = NSMutableAttributedString(string: text)
-        attributedStr.addAttribute(.foregroundColor, value: color, range: (text as NSString).range(of: range))
-        attributedStr.addAttribute(.font, value: font, range: (text as NSString).range(of: range))
+        
+        range.forEach {
+            attributedStr.addAttribute(.foregroundColor, value: color, range: (text as NSString).range(of: $0))
+            attributedStr.addAttribute(.font, value: font, range: (text as NSString).range(of: $0))
+        }
         
         self.attributedText = attributedStr
         
