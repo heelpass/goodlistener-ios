@@ -49,7 +49,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         $0.image = UIImage(named: "ic_edit_btn")
     }
     
-    let nicknameView = GLTextField(maxCount: 10, tag: 1).then {
+    let nicknameView = GLTextField(tag: 1).then {
         $0.title = "닉네임"
     }
     
@@ -194,11 +194,10 @@ class ProfileSetupVC: UIViewController, SnapKitType {
 
                 // 팝업에서 선택된 이미지를 현재 프로필이미지에 반영
                 view.selectedImage
-                    .subscribe(onNext: { [weak self] imageName in
-                        guard let self = self, let imageName = imageName else { return }
-                        self.profileImage.image = UIImage(named: imageName)
-                        self.userInfo?.profileImage = imageName
-                        self.selectedImage.accept(imageName)
+                    .subscribe(onNext: { [weak self] image in
+                        self?.profileImage.image = UIImage(named: image ?? "")
+                        self?.userInfo?.profileImage = image
+                        self?.selectedImage.accept(image)
                     })
                     .disposed(by: view.disposeBag)
 
