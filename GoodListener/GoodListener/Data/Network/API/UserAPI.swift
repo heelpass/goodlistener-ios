@@ -12,15 +12,16 @@ import Moya
 
 //ex) 만일 'ABC/DEF'에 token을 post로 보내야 한다고 가정
 // case signIn(path: String, token: String)
-enum LoginAPI {
-    case signIn(SignInModel)
-    case nicknameCheck(String)
-    case getUserInfo
+enum UserAPI {
+    case signIn(SignInModel)    // 회원가입
+    case nicknameCheck(String)  // 닉네임 중복 확인
+    case getUserInfo            // 유저정보 얻어오기
+    case signOut                // 회원 탈퇴
 }
 
 
 // TargetType Protocol Implementation
-extension LoginAPI: TargetType {
+extension UserAPI: TargetType {
     
     //서버의 base URL / Moya는 이를 통하여 endpoint객체 생성
     // return URL(string: "ABC")
@@ -40,6 +41,9 @@ extension LoginAPI: TargetType {
             
         case .getUserInfo:
             return "/user"
+            
+        case .signOut:
+            return "/user"
         }
     }
     
@@ -55,6 +59,9 @@ extension LoginAPI: TargetType {
             
         case .getUserInfo:
             return .get
+            
+        case .signOut:
+            return .delete
         }
 
     }
@@ -80,6 +87,9 @@ extension LoginAPI: TargetType {
             return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
             
         case .getUserInfo:
+            return .requestPlain
+            
+        case .signOut:
             return .requestPlain
         }
     }

@@ -129,7 +129,7 @@ class LoginViewModel: NSObject, ViewModelType {
     }
     
     private func getUserInfo(_ completion: ((Bool)->Void)? = nil) {
-        let moyaProvider = MoyaProvider<LoginAPI>()
+        let moyaProvider = MoyaProvider<UserAPI>()
         moyaProvider.rx.request(.getUserInfo)
             .subscribe { result in
                 switch result {

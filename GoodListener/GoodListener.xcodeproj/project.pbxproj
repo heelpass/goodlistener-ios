@@ -16,7 +16,7 @@
 		0A558A4428B61F25001949D6 /* EmojiTagFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A4328B61F25001949D6 /* EmojiTagFlowLayout.swift */; };
 		0A558A4628B61F2A001949D6 /* EmojiTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A4528B61F2A001949D6 /* EmojiTagView.swift */; };
 		0A558A4828B61F36001949D6 /* GLTwoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A4728B61F36001949D6 /* GLTwoButton.swift */; };
-		0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B522896AB8300A05124 /* LoginAPI.swift */; };
+		0A703B532896AB8300A05124 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B522896AB8300A05124 /* UserAPI.swift */; };
 		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
 		0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B582896BC5E00A05124 /* WeatherInfo.swift */; };
 		0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2820288D5B55000D889B /* AppDelegate.swift */; };
@@ -105,7 +105,7 @@
 		0A558A4328B61F25001949D6 /* EmojiTagFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTagFlowLayout.swift; sourceTree = "<group>"; };
 		0A558A4528B61F2A001949D6 /* EmojiTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTagView.swift; sourceTree = "<group>"; };
 		0A558A4728B61F36001949D6 /* GLTwoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTwoButton.swift; sourceTree = "<group>"; };
-		0A703B522896AB8300A05124 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginAPI.swift; path = GoodListener/Data/Network/API/LoginAPI.swift; sourceTree = SOURCE_ROOT; };
+		0A703B522896AB8300A05124 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserAPI.swift; path = GoodListener/Data/Network/API/UserAPI.swift; sourceTree = SOURCE_ROOT; };
 		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
 		0A703B582896BC5E00A05124 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherInfo.swift; path = GoodListener/Domain/Entities/WeatherInfo.swift; sourceTree = SOURCE_ROOT; };
 		0ABA281D288D5B55000D889B /* GoodListener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodListener.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -370,7 +370,7 @@
 		E845495128BC7CC100DAD6EE /* API */ = {
 			isa = PBXGroup;
 			children = (
-				0A703B522896AB8300A05124 /* LoginAPI.swift */,
+				0A703B522896AB8300A05124 /* UserAPI.swift */,
 				E8B444A828AF55E00003815B /* TokenAPI.swift */,
 			);
 			path = API;
@@ -1019,7 +1019,7 @@
 				E8B444B228B338710003815B /* SwipeButton.swift in Sources */,
 				E8B444A928AF55E00003815B /* TokenAPI.swift in Sources */,
 				E8B443F528A22ABD0003815B /* CallReviewVC.swift in Sources */,
-				0A703B532896AB8300A05124 /* LoginAPI.swift in Sources */,
+				0A703B532896AB8300A05124 /* UserAPI.swift in Sources */,
 				E8CFBCCF288F73AB00D63B07 /* AppCoordinator.swift in Sources */,
 				0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */,
 				ECBA27B528A4DF970034A751 /* TagView.swift in Sources */,
