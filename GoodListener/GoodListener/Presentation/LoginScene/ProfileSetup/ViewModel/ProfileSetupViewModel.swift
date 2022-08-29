@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import Moya
+import SwiftyJSON
 
 class ProfileSetupViewModel: ViewModelType {
     
@@ -54,7 +55,21 @@ class ProfileSetupViewModel: ViewModelType {
             .withLatestFrom(input.nickname)
             .subscribe(onNext: { [weak self] (text) in
                 guard let self = self else { return }
-                nicknameDuplicateResult.accept((text, self.checkDuplicateNickname()))
+                
+                let provider = MoyaProvider<LoginAPI>()
+                provider.rx.request(.nicknameCheck(text))
+                    .subscribe { result in
+                        switch result {
+                        case .success(let response):
+                            let jsonData = JSON(response.data)
+                            Log.d(jsonData)
+                            nicknameDuplicateResult.accept((text, jsonData["isExist"].boolValue))
+                        case .failure(let error):
+                            Log.e(error)
+                            nicknameDuplicateResult.accept((text, true))
+                        }
+                    }
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: disposeBag)
         
@@ -72,20 +87,20 @@ class ProfileSetupViewModel: ViewModelType {
                 data.snsKind = UserDefaultsManager.shared.snsKind
                 data.fcmHash = UserDefaultsManager.shared.fcmToken
                 Log.d(data)
-//                let loginProvider = MoyaProvider<LoginAPI>()
-//                loginProvider.rx.request(.signIn(model))
-//                    .observe(on: MainScheduler.instance)
-//                    .subscribe { result in
-//                        switch result {
-//                        case .success(let response):
-//                            signInSuccess.accept(true)
-//
-//                        case .failure(let error):
-//                            signInSuccess.accept(false)
-//                            Log.e("SignInError : \(error)")
-//                        }
-//                    }
-//                    .disposed(by: self.disposeBag)
+                let loginProvider = MoyaProvider<LoginAPI>()
+                loginProvider.rx.request(.signIn(model))
+                    .observe(on: MainScheduler.instance)
+                    .subscribe { result in
+                        switch result {
+                        case .success(let response):
+                            signInSuccess.accept(true)
+                            Log.d("SignInError : \(JSON(response.data))")
+                        case .failure(let error):
+                            signInSuccess.accept(false)
+                            Log.e("SignInError : \(error)")
+                        }
+                    }
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: disposeBag)
         
@@ -105,12 +120,6 @@ class ProfileSetupViewModel: ViewModelType {
         } else {
             return false
         }
-    }
-    
-    // 닉네임 중복검사 함수 API콜 예정
-    func checkDuplicateNickname()-> Bool {
-        
-        return true
     }
 }
 

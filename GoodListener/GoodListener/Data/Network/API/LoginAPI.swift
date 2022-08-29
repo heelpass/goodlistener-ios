@@ -14,6 +14,7 @@ import Moya
 // case signIn(path: String, token: String)
 enum LoginAPI {
     case signIn(SignInModel)
+    case nicknameCheck(String)
 }
 
 
@@ -31,7 +32,10 @@ extension LoginAPI: TargetType {
     public var path: String {
         switch self {
         case .signIn(_):
-            return "user/sign"
+            return "/user/sign"
+            
+        case .nicknameCheck(_):
+            return "/user/valid"
         }
     }
     
@@ -41,6 +45,9 @@ extension LoginAPI: TargetType {
         switch self {
         case .signIn(_):
             return .post
+        
+        case .nicknameCheck(_):
+            return .get
         }
 
     }
@@ -56,15 +63,22 @@ extension LoginAPI: TargetType {
     public var task: Task {
         switch self {
         case .signIn(let model):
-            
             return .requestJSONEncodable(model)
+            
+        case .nicknameCheck(let nickname):
+            let params: [String: Any] = [
+                "nickName": nickname
+            ]
+//
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         }
     }
     
     // HTTP header
     //  return ["Content-type": "application/json"]
     public var headers: [String : String]? {
-        return ["Content-type": "application/json"]
+        return ["Content-type": "application/json",
+                "Authorization": UserDefaultsManager.shared.accessToken!]
     }
     
     

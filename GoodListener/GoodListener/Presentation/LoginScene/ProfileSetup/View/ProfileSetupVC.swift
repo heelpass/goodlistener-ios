@@ -207,14 +207,12 @@ class ProfileSetupVC: UIViewController, SnapKitType {
             .emit(onNext: { [weak self] (nickname, result) in
                 guard let self = self else { return }
                 self.view.endEditing(true)
-                if result {
+                // fasle: 중복확인 성공
+                self.nicknameDuplicateResultPopup(result)
+                if !result {
                     // 성공팝업
                     // TODO: 중복확인 버튼 어떻게 처리?
                     self.signInModel?.nickname = nickname
-                    self.nicknameDuplicateResultPopup(result)
-                } else {
-                    // 실패팝업
-                    self.nicknameDuplicateResultPopup(result)
                 }
             })
             .disposed(by: disposeBag)
@@ -252,7 +250,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                 view.selectedImage
                     .subscribe(onNext: { [weak self] image in
                         self?.profileImage.image = UIImage(named: image ?? "")
-                        self?.signInModel?.profileImage = image ?? ""
+//                        self?.signInModel?.profileImage = image ?? ""
                         self?.selectedImage.accept(image)
                     })
                     .disposed(by: view.disposeBag)
@@ -265,7 +263,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         completeButton.rx.tap
             .bind(onNext: { [weak self] in
                 guard let self = self else { return }
-                self.signInModel?.introduce = self.introduceView.contents
+//                self.signInModel?.introduce = self.introduceView.contents
                 self.signInObservable.accept(self.signInModel!)
 //                self.coordinator?.completeJoin(model: self.signInModel!)
             })
@@ -282,8 +280,8 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     // 중복 확인 팝업
     func nicknameDuplicateResultPopup(_ result: Bool) {
         let popup = GLPopup()
-        if result {
-            popup.title = "닉네임 중복 확인"
+        if !result {
+            popup.title = "회원 가입"
             popup.contents = "사용 가능한 닉네임이에요"
         } else {
             popup.title = "닉네임 중복 확인"
