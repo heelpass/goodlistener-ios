@@ -12,10 +12,8 @@ import Moya
 
 //ex) 만일 'ABC/DEF'에 token을 post로 보내야 한다고 가정
 // case signIn(path: String, token: String)
-public enum LoginAPI {
-    case signIn
-    case signOut
-    case leave
+enum LoginAPI {
+    case signIn(SignInModel)
 }
 
 
@@ -32,12 +30,8 @@ extension LoginAPI: TargetType {
     // case .signIn(path, _) return "/\(path)"
     public var path: String {
         switch self {
-        case .signIn:
-            return ""
-        case .signOut:
-            return ""
-        case .leave:
-            return ""
+        case .signIn(_):
+            return "user/sign"
         }
     }
     
@@ -45,11 +39,7 @@ extension LoginAPI: TargetType {
     // case .signIn: return .post
     public var method: Moya.Method {
         switch self {
-        case .signIn:
-            return .post
-        case .signOut:
-            return .post
-        case .leave:
+        case .signIn(_):
             return .post
         }
 
@@ -65,12 +55,9 @@ extension LoginAPI: TargetType {
     // case let .signIn(_, token): return .requestJSONEncodable(["accesstoken": token])
     public var task: Task {
         switch self {
-        case .signIn:
-            return .requestPlain
-        case .signOut:
-            return .requestPlain
-        case .leave:
-            return .requestPlain
+        case .signIn(let model):
+            
+            return .requestJSONEncodable(model)
         }
     }
     

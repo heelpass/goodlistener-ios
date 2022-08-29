@@ -10,9 +10,9 @@ import RxCocoa
 import RxSwift
 
 struct TagList {
-    static let ageList = ["10대", "20대", "30대", "40대 이상"]
-    static let sexList = ["남자", "여자"]
-    static let jobList = ["학생", "직장인", "프리랜서", "취준생", "기타"]
+    static let ageList = ["10", "20", "30", "40"]
+    static let sexList = ["male", "female"]
+    static let jobList = ["student", "worker", "freelancer", "jobseeker", "etc"]
 }
 
 class TagView: UIView {
@@ -81,7 +81,7 @@ class TagView: UIView {
     
     func calculateCellWidth(index: Int) -> CGFloat {
         let label = UILabel()
-        label.text = tagData[index]
+        label.text = tagData[index].localized
         label.font = FontManager.shared.notoSansKR(.bold, 14)
         label.sizeToFit()
         // ✅ 32(여백)
@@ -133,7 +133,7 @@ extension TagView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.identifier, for: indexPath) as! TagCell
         
-        cell.label.text = tagData[indexPath.row]
+        cell.label.text = tagData[indexPath.row].localized
         
         if isAllSelected {
             cell.configUI(.selected)

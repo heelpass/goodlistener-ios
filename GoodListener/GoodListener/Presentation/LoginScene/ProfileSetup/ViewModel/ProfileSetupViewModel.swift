@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Moya
 
 class ProfileSetupViewModel: ViewModelType {
     
@@ -17,18 +18,21 @@ class ProfileSetupViewModel: ViewModelType {
         var profileImage: BehaviorRelay<String?>    // 프로필 이미지
         var nickname: Observable<String>             // 입력된 닉네임
         var checkDuplicate: Observable<Void>     // 닉네임 중복 확인
+        var signIn: Observable<SignInModel>     // 
     }
     
     struct Output {
         var nicknameValidationResult: Signal<Bool> // 닉네임 유효성 검사 여부
         var nicknameDuplicateResult: Signal<(String, Bool)> // 닉네임 유효성 검사 여부
         var canComplete: Signal<Bool> // 프로필 설정 완료 가능여부
+        var signInSuccess: Signal<Bool> // 회원가입 성공 여부
     }
     
     func transform(input: Input) -> Output {
         let nicknameValidationResult = BehaviorRelay<Bool>(value: true)
         let nicknameDuplicateResult = BehaviorRelay<(String, Bool)>(value: ("", false))
         let canComplete = BehaviorRelay<Bool>(value: false)
+        let signInSuccess = BehaviorRelay<Bool>(value: false)
         
         // 닉네임이 입력됐을때
         input.nickname
@@ -61,9 +65,34 @@ class ProfileSetupViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        input.signIn
+            .subscribe(onNext: { [weak self] model in
+                guard let self = self else { return }
+                var data = model
+                data.snsKind = UserDefaultsManager.shared.snsKind
+                data.fcmHash = UserDefaultsManager.shared.fcmToken
+                Log.d(data)
+//                let loginProvider = MoyaProvider<LoginAPI>()
+//                loginProvider.rx.request(.signIn(model))
+//                    .observe(on: MainScheduler.instance)
+//                    .subscribe { result in
+//                        switch result {
+//                        case .success(let response):
+//                            signInSuccess.accept(true)
+//
+//                        case .failure(let error):
+//                            signInSuccess.accept(false)
+//                            Log.e("SignInError : \(error)")
+//                        }
+//                    }
+//                    .disposed(by: self.disposeBag)
+            })
+            .disposed(by: disposeBag)
+        
         return Output(nicknameValidationResult: nicknameValidationResult.skip(2).asSignal(onErrorJustReturn: false),
                       nicknameDuplicateResult: nicknameDuplicateResult.asSignal(onErrorJustReturn: ("", false)),
-                      canComplete: canComplete.asSignal(onErrorJustReturn: false)
+                      canComplete: canComplete.asSignal(onErrorJustReturn: false),
+                      signInSuccess: signInSuccess.asSignal(onErrorJustReturn: false)
         )
     }
     

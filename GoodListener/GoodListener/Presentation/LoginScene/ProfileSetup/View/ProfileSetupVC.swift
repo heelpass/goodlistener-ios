@@ -18,8 +18,9 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     var viewModel = ProfileSetupViewModel()
     
     var selectedImage = BehaviorRelay<String?>(value: nil)
+    var signInObservable = PublishRelay<SignInModel>()
     
-    var userInfo: UserInfo?
+    var signInModel: SignInModel?
     
     let titleLbl = UILabel().then {
         $0.text = "프로필 설정하기"
@@ -174,7 +175,8 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     func bind() {
         let output = viewModel.transform(input: ProfileSetupViewModel.Input(profileImage: selectedImage,
                                                                             nickname: nicknameView.inputTf.rx.text.orEmpty.asObservable(),
-                                                                            checkDuplicate: nicknameView.checkBtn.rx.tap.asObservable()))
+                                                                            checkDuplicate: nicknameView.checkBtn.rx.tap.asObservable(),
+                                                                            signIn: signInObservable.asObservable()))
         // 닉네임 유효성 검사결과에 따른 중복확인 버튼 UI변경
         output.nicknameValidationResult
             .emit(onNext: { [weak self] result in
@@ -208,7 +210,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                 if result {
                     // 성공팝업
                     // TODO: 중복확인 버튼 어떻게 처리?
-                    self.userInfo?.name = nickname
+                    self.signInModel?.nickname = nickname
                     self.nicknameDuplicateResultPopup(result)
                 } else {
                     // 실패팝업
@@ -226,6 +228,16 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                 }
             })
             .disposed(by: disposeBag)
+        
+        output.signInSuccess
+            .emit(onNext: { [weak self] result in
+                if result {
+                    self?.coordinator?.completeJoin()
+                } else {
+                    // 회원가입 실패
+                }
+            })
+            .disposed(by: disposeBag)
 
         // 프로필 이미지 Edit버튼 터치 시 프로필이미지선택 팝업을 띄워준다
         editView.tapGesture
@@ -240,7 +252,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                 view.selectedImage
                     .subscribe(onNext: { [weak self] image in
                         self?.profileImage.image = UIImage(named: image ?? "")
-                        self?.userInfo?.profileImage = image
+                        self?.signInModel?.profileImage = image ?? ""
                         self?.selectedImage.accept(image)
                     })
                     .disposed(by: view.disposeBag)
@@ -253,7 +265,9 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         completeButton.rx.tap
             .bind(onNext: { [weak self] in
                 guard let self = self else { return }
-                self.coordinator?.completeJoin(model: self.userInfo!)
+                self.signInModel?.introduce = self.introduceView.contents
+                self.signInObservable.accept(self.signInModel!)
+//                self.coordinator?.completeJoin(model: self.signInModel!)
             })
             .disposed(by: disposeBag)
         

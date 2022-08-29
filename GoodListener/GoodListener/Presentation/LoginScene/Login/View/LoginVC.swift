@@ -19,6 +19,8 @@ class LoginVC: UIViewController, SnapKitType {
     var viewModel = LoginViewModel()
     var disposeBag = DisposeBag()
     
+    var signInModel = SignInModel()
+    
     let titleLabel = UILabel().then {
         $0.textColor = .white
         $0.text = "우리,\n같이 마음 편하게\n이야기해볼까요?"
@@ -121,10 +123,10 @@ class LoginVC: UIViewController, SnapKitType {
             .emit(onNext: { [weak self] (result) in
                 guard let self = self else { return }
                 
-                if result {
+                if !result {
                     self.coordinator?.loginSuccess()
                 } else {
-                    self.coordinator?.moveToPersonalInfoPage()
+                    self.coordinator?.moveToPersonalInfoPage(model: self.signInModel)
                 }
             })
             .disposed(by: disposeBag)

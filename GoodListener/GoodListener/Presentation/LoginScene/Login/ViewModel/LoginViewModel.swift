@@ -103,10 +103,12 @@ class LoginViewModel: NSObject, ViewModelType {
             .subscribe { result in
                 switch result {
                 case .success(let response):
-                    Log.d(JSON(response.data))
-                    if let token = JSON(response.data)["token"].string {
+                    let jsonData = JSON(response.data)
+                    if let token = jsonData["token"].string {
                         UserDefaultsManager.shared.accessToken = "Bearer " + token
                     }
+                    self.loginResult.onNext(jsonData["isExistUser"].boolValue)
+                    
                 case .failure(let error):
                     Log.e("\(error.localizedDescription)")
                 }
@@ -119,7 +121,6 @@ extension LoginViewModel : ASAuthorizationControllerDelegate  {
     // 애플 로그인 성공
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            loginResult.onNext(true)
             guard let tokenData = credential.authorizationCode,
                   let token = String(data: tokenData, encoding: .utf8),
                   let identityToken = credential.identityToken,
@@ -131,6 +132,7 @@ extension LoginViewModel : ASAuthorizationControllerDelegate  {
             Log.d("Token:: \(token)")
             Log.d("Identity:: \(identity)")
             UserDefaultsManager.shared.accessToken = "Bearer " + identity
+            UserDefaultsManager.shared.snsKind = "apple"
             send(token: token)
         }
     }
@@ -138,6 +140,5 @@ extension LoginViewModel : ASAuthorizationControllerDelegate  {
     // 애플 로그인 실패
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         Log.e("\(error)")
-        loginResult.onNext(false)
     }
 }
