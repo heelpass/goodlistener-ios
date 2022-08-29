@@ -15,7 +15,7 @@ enum recordState{
 
 class RecordVC: UIViewController, SnapKitType{
     weak var coordinator: RecordCoordinating?
-    var recordState: recordState = .nothing
+    var recordState: recordState = .progress
     
     let navigationView = NavigationView(frame: .zero, type: .notice)
     
@@ -86,6 +86,8 @@ class RecordVC: UIViewController, SnapKitType{
             nothingLbl.isHidden = false
             break
         case .progress:
+            nothingImg.isHidden = true
+            nothingLbl.isHidden = true
             break
         }
     }
