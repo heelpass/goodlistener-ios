@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A350B7D28BC5DD800EC83DA /* RecordBgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A350B7C28BC5DD800EC83DA /* RecordBgCell.swift */; };
 		0A558A3728B61DCE001949D6 /* JoinCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A3628B61DCE001949D6 /* JoinCoordinator.swift */; };
 		0A558A3A28B61E02001949D6 /* JoinMatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A3928B61E02001949D6 /* JoinMatchVC.swift */; };
 		0A558A3C28B61E28001949D6 /* JoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A3B28B61E28001949D6 /* JoinVC.swift */; };
@@ -94,6 +95,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A350B7C28BC5DD800EC83DA /* RecordBgCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordBgCell.swift; sourceTree = "<group>"; };
 		0A558A3628B61DCE001949D6 /* JoinCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCoordinator.swift; sourceTree = "<group>"; };
 		0A558A3928B61E02001949D6 /* JoinMatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinMatchVC.swift; sourceTree = "<group>"; };
 		0A558A3B28B61E28001949D6 /* JoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinVC.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				0AF43092288FDC850078B2D5 /* RecordVC.swift */,
+				0A350B7C28BC5DD800EC83DA /* RecordBgCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1012,6 +1015,7 @@
 				0A558A3A28B61E02001949D6 /* JoinMatchVC.swift in Sources */,
 				E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */,
 				0ABA2825288D5B55000D889B /* LoginVC.swift in Sources */,
+				0A350B7D28BC5DD800EC83DA /* RecordBgCell.swift in Sources */,
 				0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */,
 				E8B4449A28ADC8620003815B /* UserInfo.swift in Sources */,
 				E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */,

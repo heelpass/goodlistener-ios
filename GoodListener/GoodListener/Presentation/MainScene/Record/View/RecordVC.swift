@@ -25,12 +25,11 @@ class RecordVC: UIViewController, SnapKitType{
         $0.font = FontManager.shared.notoSansKR(.bold, 18)
     }
     
-    //진행 중인 대화가 없을 때
+    //진행 중인 대화가 없을 때(nothing)
     let nothingImg = UIImageView().then{
         $0.image = #imageLiteral(resourceName: "main_img_notalk")
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
-       // $0.frame = CGRect(origin: .zero, size: CGSize(width: 500, height: 500))
     }
     
     let nothingLbl = UILabel().then {
@@ -39,7 +38,14 @@ class RecordVC: UIViewController, SnapKitType{
         $0.font = FontManager.shared.notoSansKR(.regular, 15)
     }
 
-    //TODO: progress 진행 중인 대화 있을 때 UI 구현 필요(collection 중첩)
+    //진행 중인 대화 있을 때(progress)
+    let RecordBgView : UICollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        view.backgroundColor = .m6
+        view.showsVerticalScrollIndicator = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .m6
@@ -50,10 +56,14 @@ class RecordVC: UIViewController, SnapKitType{
     
     
     func addComponents() {
-        [navigationView, titleLbl, nothingImg, nothingLbl].forEach{
+        [navigationView, titleLbl, RecordBgView, nothingImg, nothingLbl].forEach{
             view.addSubview($0)
         }
         navigationView.backgroundColor = .m6
+
+        RecordBgView.register(RecordBgCell.self, forCellWithReuseIdentifier:RecordBgCell.identifier)
+        RecordBgView.delegate = self
+        RecordBgView.dataSource = self
     }
     
     func setConstraints() {
@@ -77,6 +87,13 @@ class RecordVC: UIViewController, SnapKitType{
             $0.centerX.equalToSuperview()
             $0.top.equalTo(nothingImg.snp.bottom).offset(32)
         }
+        
+        RecordBgView.snp.makeConstraints{
+            $0.top.equalTo(titleLbl.snp.bottom).offset(23)
+            $0.left.equalToSuperview()
+            $0.right.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
+        }
     }
     
     func changeUI(_ type: recordState) {
@@ -84,12 +101,51 @@ class RecordVC: UIViewController, SnapKitType{
         case .nothing:
             nothingImg.isHidden = false
             nothingLbl.isHidden = false
+            RecordBgView.isHidden = true
             break
         case .progress:
             nothingImg.isHidden = true
             nothingLbl.isHidden = true
+            RecordBgView.isHidden = false
             break
         }
     }
+}
+
+extension RecordVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordBgCell.identifier, for: indexPath) as? RecordBgCell else { fatalError() }
+        cell.backgroundColor = UIColor.m5.withAlphaComponent(0.8)
+        cell.layer.cornerRadius = 20
+        return cell
+    }
+}
+
+extension RecordVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Log.d("\(indexPath.section)and \(indexPath.row)")
+    }
+}
+
+extension RecordVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = view.frame.size.width - Const.padding
+        return CGSize(
+            width: width,
+            height: width * 0.8
+        )
+    }
 }
