@@ -42,7 +42,7 @@ class RecordVC: UIViewController, SnapKitType{
     //TODO: progress 진행 중인 대화 있을 때 UI 구현 필요(collection 중첩)
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .m5
+        view.backgroundColor = .m6
         addComponents()
         setConstraints()
         changeUI(recordState)
@@ -53,7 +53,7 @@ class RecordVC: UIViewController, SnapKitType{
         [navigationView, titleLbl, nothingImg, nothingLbl].forEach{
             view.addSubview($0)
         }
-        navigationView.backgroundColor = .m5
+        navigationView.backgroundColor = .m6
     }
     
     func setConstraints() {
