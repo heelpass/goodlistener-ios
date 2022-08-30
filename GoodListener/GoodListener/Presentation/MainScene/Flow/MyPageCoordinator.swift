@@ -45,7 +45,7 @@ extension MyPageCoordinator: MyPageCoordinating {
     }
     
     func moveToTagPage() {
-        let vc = MyPageTagVC()
+        let vc = MyPageModifyVC()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }

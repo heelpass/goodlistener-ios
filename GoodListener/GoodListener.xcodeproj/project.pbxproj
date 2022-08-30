@@ -89,7 +89,7 @@
 		E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */; };
 		E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */; };
 		E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D09853289A6C4D008AD55F /* SocketManager.swift */; };
-		ECBA27B128A4DD0E0034A751 /* MyPageTagVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B028A4DD0E0034A751 /* MyPageTagVC.swift */; };
+		ECBA27B128A4DD0E0034A751 /* MyPageModifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B028A4DD0E0034A751 /* MyPageModifyVC.swift */; };
 		ECBA27B528A4DF970034A751 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B428A4DF970034A751 /* TagView.swift */; };
 		ECBA27B728A4E0B60034A751 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B628A4E0B60034A751 /* TagCell.swift */; };
 		ECBA27B928A4FCEE0034A751 /* TagCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */; };
@@ -187,7 +187,7 @@
 		E8CFBCE2288F876400D63B07 /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
 		E8CFBCE9288FDB9C00D63B07 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		E8D09853289A6C4D008AD55F /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
-		ECBA27B028A4DD0E0034A751 /* MyPageTagVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTagVC.swift; sourceTree = "<group>"; };
+		ECBA27B028A4DD0E0034A751 /* MyPageModifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageModifyVC.swift; sourceTree = "<group>"; };
 		ECBA27B428A4DF970034A751 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		ECBA27B628A4E0B60034A751 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -802,7 +802,7 @@
 			isa = PBXGroup;
 			children = (
 				E8B443F628A23DFC0003815B /* MyPage */,
-				ECBA27AD28A4DCF10034A751 /* MyPageTag */,
+				ECBA27AD28A4DCF10034A751 /* MyPageModify */,
 				E8B443F728A23E050003815B /* MyPageSet */,
 			);
 			path = MyPage;
@@ -847,13 +847,13 @@
 			path = DesignSystem;
 			sourceTree = "<group>";
 		};
-		ECBA27AD28A4DCF10034A751 /* MyPageTag */ = {
+		ECBA27AD28A4DCF10034A751 /* MyPageModify */ = {
 			isa = PBXGroup;
 			children = (
 				ECBA27AF28A4DD050034A751 /* View */,
 				ECBA27AE28A4DD010034A751 /* ViewModel */,
 			);
-			path = MyPageTag;
+			path = MyPageModify;
 			sourceTree = "<group>";
 		};
 		ECBA27AE28A4DD010034A751 /* ViewModel */ = {
@@ -866,7 +866,7 @@
 		ECBA27AF28A4DD050034A751 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				ECBA27B028A4DD0E0034A751 /* MyPageTagVC.swift */,
+				ECBA27B028A4DD0E0034A751 /* MyPageModifyVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1077,7 +1077,7 @@
 				0A558A4628B61F2A001949D6 /* EmojiTagView.swift in Sources */,
 				E8B4435828A0EADD0003815B /* ProfileSetupVC.swift in Sources */,
 				0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */,
-				ECBA27B128A4DD0E0034A751 /* MyPageTagVC.swift in Sources */,
+				ECBA27B128A4DD0E0034A751 /* MyPageModifyVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
