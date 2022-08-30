@@ -163,7 +163,7 @@ class MyPageVC: UIViewController, SnapKitType {
     func configUI() {
         nicknameLbl.text = UserDefaultsManager.shared.nickname?.localized
         tagView.tagData = [UserDefaultsManager.shared.age!, UserDefaultsManager.shared.gender!, UserDefaultsManager.shared.job!]
-        introduceView.contents = UserDefaultsManager.shared.introduce!
+        introduceView.contents = UserDefaultsManager.shared.description!
     }
 
 }

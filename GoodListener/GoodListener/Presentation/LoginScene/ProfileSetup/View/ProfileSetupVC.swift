@@ -259,11 +259,10 @@ class ProfileSetupVC: UIViewController, SnapKitType {
             .disposed(by: disposeBag)
 
         // 완료버튼 클릭
-        // TODO: 아마 userInfo API 보내줘야할듯
         completeButton.rx.tap
             .bind(onNext: { [weak self] in
                 guard let self = self else { return }
-//                self.signInModel?.introduce = self.introduceView.contents
+                self.signInModel?.description = self.introduceView.contents
                 self.signInObservable.accept(self.signInModel!)
 //                self.coordinator?.completeJoin(model: self.signInModel!)
             })
