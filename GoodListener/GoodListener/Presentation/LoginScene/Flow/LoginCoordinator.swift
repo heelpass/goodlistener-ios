@@ -9,12 +9,11 @@ import Foundation
 import UIKit
 
 protocol LoginCoordinating: AnyObject {
-    func moveToAuthCheck()  // 본인인증 페이지로 이동
     func loginSuccess()     // 로그인에 성공한 경우
     func moveToLoginPage()  // 로그인페이지로 이동
-    func moveToPersonalInfoPage() // 개인정보 입력 페이지
-    func moveToNicknameSetPage(model: UserInfo) // 닉네임 설정 페이지
-    func completeJoin(model: UserInfo) // 회원가입완료
+    func moveToPersonalInfoPage(model: SignInModel) // 개인정보 입력 페이지
+    func moveToNicknameSetPage(model: SignInModel) // 닉네임 설정 페이지
+    func completeJoin() // 회원가입완료
 }
 
 class LoginCoordinator: CoordinatorType {
@@ -39,12 +38,6 @@ class LoginCoordinator: CoordinatorType {
 }
 
 extension LoginCoordinator: LoginCoordinating {
-    // 본인인증 페이지로 이동
-    func moveToAuthCheck() {
-        let vc = AuthVC()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
-    }
     
     // 로그인에 성공한 경우 메인으로 이동
     func loginSuccess() {
@@ -56,20 +49,21 @@ extension LoginCoordinator: LoginCoordinating {
         navigationController.popToRootViewController(animated: true)
     }
     
-    func moveToPersonalInfoPage() {
+    func moveToPersonalInfoPage(model: SignInModel) {
         let vc = PersonalInfoVC()
         vc.coordinator = self
+        vc.signInModel = model
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func moveToNicknameSetPage(model: UserInfo) {
+    func moveToNicknameSetPage(model: SignInModel) {
         let vc = ProfileSetupVC()
         vc.coordinator = self
-        vc.userInfo = model
+        vc.signInModel = model
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func completeJoin(model: UserInfo) {
+    func completeJoin() {
         moveToLoginPage()
         loginSuccess()
     }

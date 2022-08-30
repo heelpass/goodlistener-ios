@@ -85,10 +85,6 @@ class GLTextField: UIView, SnapKitType {
         self.descriptionLbl.isHidden = !isShowDescription
         addComponents()
         setConstraints()
-        
-        // keyboardWillShow, keyboardWillHide observer 등록
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -96,7 +92,7 @@ class GLTextField: UIView, SnapKitType {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+
     }
     
     func addComponents() {
@@ -137,34 +133,5 @@ class GLTextField: UIView, SnapKitType {
             $0.left.bottom.equalToSuperview()
         }
         
-    }
-    
-    @objc func keyboardWillShow(_ notification:NSNotification) {
-        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        let keyboardRectangle = keyboardFrame.cgRectValue
-        let keyboardHeight = keyboardRectangle.height
-        superview?.subviews.forEach {
-            if $0.tag != self.tag {
-                $0.isHidden = true
-            }
-        }
-        
-        [self].forEach {
-            $0.transform = CGAffineTransform.init(translationX: 0, y: -calculateTranslationY(keyboardHeight))
-        }
-    }
-
-
-    @objc func keyboardWillHide(_ notification:NSNotification) {
-        guard let _ = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        superview?.subviews.forEach {
-            if $0.tag != self.tag {
-                $0.isHidden = false
-            }
-        }
-        
-        [self].forEach {
-            $0.transform = .identity
-        }
     }
 }

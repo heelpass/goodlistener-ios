@@ -16,13 +16,6 @@ class MyPageVC: UIViewController, SnapKitType {
     weak var coordinator: MyPageCoordinating?
     var disposeBag = DisposeBag()
     
-    var userInfo: UserInfo = UserInfo(name: "굿리스너스피커",
-                                      age: "10대",
-                                      gender: "남자",
-                                      job: "직장인",
-                                      profileImage: Image.profile1.rawValue,
-                                      introduce: "안녕하세요 저는 스피커입니다")
-    
     let navigationView = NavigationView(frame: .zero, type: .setting)
     
     let profileImage = UIImageView().then {
@@ -78,7 +71,7 @@ class MyPageVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
-        configUI(model: userInfo)
+        configUI()
     }
     
     func addComponents() {
@@ -167,10 +160,11 @@ class MyPageVC: UIViewController, SnapKitType {
             .disposed(by: disposeBag)
     }
     
-    func configUI(model: UserInfo) {
-        nicknameLbl.text = model.name
-        tagView.tagData = [model.age!, model.gender!, model.job!]
-        introduceView.contents = model.introduce!
+    func configUI() {
+        nicknameLbl.text = UserDefaultsManager.shared.nickname?.localized
+        tagView.tagData = [UserDefaultsManager.shared.age!, UserDefaultsManager.shared.gender!, UserDefaultsManager.shared.job!]
+        introduceView.contents = UserDefaultsManager.shared.description!
+        profileImage.image = UIImage(named: UserDefaultsManager.shared.profileImg)
     }
 
 }

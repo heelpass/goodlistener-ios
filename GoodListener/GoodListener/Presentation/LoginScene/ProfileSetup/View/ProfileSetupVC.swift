@@ -18,8 +18,9 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     var viewModel = ProfileSetupViewModel()
     
     var selectedImage = BehaviorRelay<String?>(value: nil)
+    var signInObservable = PublishRelay<SignInModel>()
     
-    var userInfo: UserInfo?
+    var signInModel: SignInModel?
     
     let titleLbl = UILabel().then {
         $0.text = "프로필 설정하기"
@@ -27,6 +28,14 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         $0.font = FontManager.shared.notoSansKR(.bold, 20)
         $0.numberOfLines = 0
         $0.sizeToFit()
+    }
+    
+    let scrollView = UIScrollView().then {
+        $0.backgroundColor = .clear
+    }
+    
+    let contentsView = UIView().then {
+        $0.backgroundColor = .clear
     }
     
     let imageContainer = UIView().then {
@@ -51,6 +60,15 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     
     let nicknameView = GLTextField(tag: 1).then {
         $0.title = "닉네임"
+    }
+    
+    let introduceView = GLTextView(maxCount: 30).then {
+        $0.contents = ""
+        $0.title = "소개글"
+    }
+    
+    let completeBtnContainer = UIView().then {
+        $0.backgroundColor = .white
     }
     
     let completeButton = GLButton().then {
@@ -81,9 +99,12 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [titleLbl, imageContainer, nicknameView, completeButton].forEach { view.addSubview($0) }
+        [titleLbl, scrollView, completeBtnContainer].forEach { view.addSubview($0) }
+        scrollView.addSubview(contentsView)
+        [imageContainer, nicknameView, introduceView].forEach { contentsView.addSubview($0) }
         [profileImage, editView].forEach { imageContainer.addSubview($0) }
         editView.addSubview(editImage)
+        completeBtnContainer.addSubview(completeButton)
     }
     
     func setConstraints() {
@@ -92,8 +113,19 @@ class ProfileSetupVC: UIViewController, SnapKitType {
             $0.centerX.equalToSuperview()
         }
         
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(titleLbl.snp.bottom).offset(22)
+            $0.left.right.equalToSuperview()
+            $0.bottom.equalTo(completeBtnContainer.snp.top)
+        }
+        
+        contentsView.snp.makeConstraints {
+            $0.width.equalTo(UIScreen.main.bounds.width)
+            $0.edges.equalToSuperview()
+        }
+        
         imageContainer.snp.makeConstraints {
-            $0.top.equalTo(titleLbl.snp.bottom).offset(56)
+            $0.top.equalToSuperview().inset(30)
             $0.centerX.equalToSuperview()
             $0.size.equalTo(138)
         }
@@ -116,7 +148,20 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         nicknameView.snp.makeConstraints {
             $0.top.equalTo(profileImage.snp.bottom).offset(62)
             $0.left.right.equalToSuperview()
+            $0.width.equalTo(UIScreen.main.bounds.width)
             $0.height.equalTo(Const.glTfHeight)
+        }
+        
+        introduceView.snp.makeConstraints {
+            $0.top.equalTo(nicknameView.snp.bottom).offset(30)
+            $0.width.equalTo(UIScreen.main.bounds.width)
+            $0.height.equalTo(introduceView.glTextViewHeight(textViewHeight: 62))
+            $0.bottom.equalToSuperview()
+        }
+        
+        completeBtnContainer.snp.makeConstraints {
+            $0.left.right.bottom.equalToSuperview()
+            $0.height.equalTo(108)
         }
         
         completeButton.snp.makeConstraints {
@@ -130,7 +175,8 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     func bind() {
         let output = viewModel.transform(input: ProfileSetupViewModel.Input(profileImage: selectedImage,
                                                                             nickname: nicknameView.inputTf.rx.text.orEmpty.asObservable(),
-                                                                            checkDuplicate: nicknameView.checkBtn.rx.tap.asObservable()))
+                                                                            checkDuplicate: nicknameView.checkBtn.rx.tap.asObservable(),
+                                                                            signIn: signInObservable.asObservable()))
         // 닉네임 유효성 검사결과에 따른 중복확인 버튼 UI변경
         output.nicknameValidationResult
             .emit(onNext: { [weak self] result in
@@ -160,15 +206,13 @@ class ProfileSetupVC: UIViewController, SnapKitType {
             .skip(1)
             .emit(onNext: { [weak self] (nickname, result) in
                 guard let self = self else { return }
-
-                if result {
+                self.view.endEditing(true)
+                // fasle: 중복확인 성공
+                self.nicknameDuplicateResultPopup(result)
+                if !result {
                     // 성공팝업
                     // TODO: 중복확인 버튼 어떻게 처리?
-                    self.userInfo?.name = nickname
-                    self.nicknameDuplicateResultPopup(result)
-                } else {
-                    // 실패팝업
-                    self.nicknameDuplicateResultPopup(result)
+                    self.signInModel?.nickname = nickname
                 }
             })
             .disposed(by: disposeBag)
@@ -179,6 +223,16 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                     self?.completeButton.configUI(.active)
                 } else {
                     self?.completeButton.configUI(.deactivate)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        output.signInSuccess
+            .emit(onNext: { [weak self] result in
+                if result {
+                    self?.coordinator?.completeJoin()
+                } else {
+                    // 회원가입 실패
                 }
             })
             .disposed(by: disposeBag)
@@ -196,7 +250,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                 view.selectedImage
                     .subscribe(onNext: { [weak self] image in
                         self?.profileImage.image = UIImage(named: image ?? "")
-                        self?.userInfo?.profileImage = image
+                        self?.signInModel?.profileImg = image ?? ""
                         self?.selectedImage.accept(image)
                     })
                     .disposed(by: view.disposeBag)
@@ -205,11 +259,19 @@ class ProfileSetupVC: UIViewController, SnapKitType {
             .disposed(by: disposeBag)
 
         // 완료버튼 클릭
-        // TODO: 아마 userInfo API 보내줘야할듯
         completeButton.rx.tap
             .bind(onNext: { [weak self] in
                 guard let self = self else { return }
-                self.coordinator?.completeJoin(model: self.userInfo!)
+                self.signInModel?.description = self.introduceView.contents
+                self.signInObservable.accept(self.signInModel!)
+//                self.coordinator?.completeJoin(model: self.signInModel!)
+            })
+            .disposed(by: disposeBag)
+        
+        Observable.of(contentsView.tapGesture, scrollView.tapGesture, completeBtnContainer.tapGesture)
+            .merge()
+            .bind(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
             })
             .disposed(by: disposeBag)
     }
@@ -217,8 +279,8 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     // 중복 확인 팝업
     func nicknameDuplicateResultPopup(_ result: Bool) {
         let popup = GLPopup()
-        if result {
-            popup.title = "닉네임 중복 확인"
+        if !result {
+            popup.title = "회원 가입"
             popup.contents = "사용 가능한 닉네임이에요"
         } else {
             popup.title = "닉네임 중복 확인"
@@ -241,18 +303,14 @@ class ProfileSetupVC: UIViewController, SnapKitType {
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         
-//        [titleLbl, imageContainer].forEach {
-//            $0.isHidden = true
-//        }
+        self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight)
     }
 
 
     @objc func keyboardWillHide(_ notification:NSNotification) {
         guard let _ = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
-//        [titleLbl, imageContainer].forEach {
-//            $0.isHidden = false
-//        }
+        self.view.transform = .identity
     }
 
 

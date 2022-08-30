@@ -12,15 +12,16 @@ import Moya
 
 //ex) 만일 'ABC/DEF'에 token을 post로 보내야 한다고 가정
 // case signIn(path: String, token: String)
-public enum LoginAPI {
-    case signIn
-    case signOut
-    case leave
+enum UserAPI {
+    case signIn(SignInModel)    // 회원가입
+    case nicknameCheck(String)  // 닉네임 중복 확인
+    case getUserInfo            // 유저정보 얻어오기
+    case signOut                // 회원 탈퇴
 }
 
 
 // TargetType Protocol Implementation
-extension LoginAPI: TargetType {
+extension UserAPI: TargetType {
     
     //서버의 base URL / Moya는 이를 통하여 endpoint객체 생성
     // return URL(string: "ABC")
@@ -32,12 +33,14 @@ extension LoginAPI: TargetType {
     // case .signIn(path, _) return "/\(path)"
     public var path: String {
         switch self {
-        case .signIn:
-            return ""
-        case .signOut:
-            return ""
-        case .leave:
-            return ""
+        case .signIn(_):
+            return "/user/sign"
+            
+        case .nicknameCheck(_):
+            return "/user/valid"
+            
+        case .getUserInfo, .signOut:
+            return "/user"
         }
     }
     
@@ -45,12 +48,14 @@ extension LoginAPI: TargetType {
     // case .signIn: return .post
     public var method: Moya.Method {
         switch self {
-        case .signIn:
+        case .signIn(_):
             return .post
+        
+        case .nicknameCheck(_), .getUserInfo:
+            return .get
+            
         case .signOut:
-            return .post
-        case .leave:
-            return .post
+            return .delete
         }
 
     }
@@ -65,11 +70,17 @@ extension LoginAPI: TargetType {
     // case let .signIn(_, token): return .requestJSONEncodable(["accesstoken": token])
     public var task: Task {
         switch self {
-        case .signIn:
-            return .requestPlain
-        case .signOut:
-            return .requestPlain
-        case .leave:
+        case .signIn(let model):
+            return .requestJSONEncodable(model)
+            
+        case .nicknameCheck(let nickname):
+            let params: [String: Any] = [
+                "nickName": nickname
+            ]
+//
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+            
+        case .getUserInfo, .signOut:
             return .requestPlain
         }
     }
@@ -77,7 +88,8 @@ extension LoginAPI: TargetType {
     // HTTP header
     //  return ["Content-type": "application/json"]
     public var headers: [String : String]? {
-        return ["Content-type": "application/json"]
+        return ["Content-type": "application/json",
+                "Authorization": UserDefaultsManager.shared.accessToken!]
     }
     
     

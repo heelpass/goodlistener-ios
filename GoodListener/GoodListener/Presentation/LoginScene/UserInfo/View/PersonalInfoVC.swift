@@ -17,6 +17,7 @@ class PersonalInfoVC: UIViewController, SnapKitType {
     weak var coordinator: LoginCoordinating?
     var disposeBag = DisposeBag()
     let viewModel = PersonalInfoViewModel()
+    var signInModel: SignInModel?
     
     let titleLabel = UILabel().then {
         $0.text = "당신에 대해서 알려주세요"
@@ -117,12 +118,14 @@ class PersonalInfoVC: UIViewController, SnapKitType {
         
         nextButton.rx.tap
             .bind(onNext: { [weak self] in
-                var userInfo = UserInfo()
-                userInfo.gender = self?.viewModel.model.gender.value
-                userInfo.age = self?.viewModel.model.age.value
-                userInfo.job = self?.viewModel.model.job.value
+                guard let self = self else { return }
                 
-                self?.coordinator?.moveToNicknameSetPage(model: userInfo)
+                var signInModel = SignInModel()
+                signInModel.gender = self.viewModel.model.gender.value
+                signInModel.ageRange = self.viewModel.model.age.value
+                signInModel.job = self.viewModel.model.job.value
+                
+                self.coordinator?.moveToNicknameSetPage(model: signInModel)
             })
             .disposed(by: disposeBag)
     }
