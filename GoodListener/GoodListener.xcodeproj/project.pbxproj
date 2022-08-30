@@ -543,6 +543,7 @@
 				0A558A4928B62010001949D6 /* EmojiView */,
 				E8B444B328B36CE20003815B /* MoodView */,
 				E8B444B028B3382C0003815B /* TagView */,
+				E8B443FC28A243CC0003815B /* NavigationView.swift */,
 				E8B444CC28B730CE0003815B /* GLTextView.swift */,
 			);
 			path = Components;
@@ -551,7 +552,6 @@
 		E8B444B028B3382C0003815B /* TagView */ = {
 			isa = PBXGroup;
 			children = (
-				E8B443FC28A243CC0003815B /* NavigationView.swift */,
 				ECBA27B428A4DF970034A751 /* TagView.swift */,
 				ECBA27B628A4E0B60034A751 /* TagCell.swift */,
 				ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */,

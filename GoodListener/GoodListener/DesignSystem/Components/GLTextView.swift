@@ -29,6 +29,7 @@ class GLTextView: UIView, SnapKitType {
         
         set {
             contentsTv.text = newValue
+            descriptionLbl.text = "\(newValue.count)/\(maxCount)"
         }
     }
     
@@ -68,6 +69,16 @@ class GLTextView: UIView, SnapKitType {
         }
     }
     
+    var isDescriptionHidden: Bool {
+        get {
+            return descriptionLbl.isHidden
+        }
+        
+        set {
+            descriptionLbl.isHidden = newValue
+        }
+    }
+    
     private let container = UIView().then {
         $0.backgroundColor = .clear
     }
@@ -88,7 +99,7 @@ class GLTextView: UIView, SnapKitType {
     }
     
     private lazy var contentsTv = UITextView().then {
-        $0.text = "일이삼사오육칠팔구십 일이삼사오육칠팔구십 일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사"
+        $0.text = ""
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.backgroundColor = .clear
         $0.textColor = .f7
@@ -96,6 +107,7 @@ class GLTextView: UIView, SnapKitType {
         $0.backgroundColor = .clear
         $0.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         $0.showsHorizontalScrollIndicator = false
+        $0.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         $0.delegate = self
     }
     
@@ -117,9 +129,9 @@ class GLTextView: UIView, SnapKitType {
     convenience init(maxCount: Int) {
         self.init(frame: .zero)
         self.maxCount = maxCount
-        descriptionLbl.text = "*최대 \(maxCount)글자까지 가능합니다"
         addComponents()
         setConstraints()
+        descriptionLbl.text = "\(contents.count)/\(maxCount)"
     }
     
     func addComponents() {
@@ -146,7 +158,7 @@ class GLTextView: UIView, SnapKitType {
         
         descriptionLbl.snp.makeConstraints {
             $0.top.equalTo(contentsContainer.snp.bottom).offset(3)
-            $0.left.equalToSuperview().inset(Const.padding)
+            $0.right.equalToSuperview().inset(Const.padding)
             $0.bottom.equalToSuperview()
         }
     }
@@ -166,5 +178,8 @@ extension GLTextView: UITextViewDelegate {
         if textView.text.count > maxCount {
             textView.deleteBackward()
         }
+        textView.text = textView.text.trimmingCharacters(in: .newlines)
+        descriptionLbl.text = "\(textView.text.count)/\(maxCount)"
+        
     }
 }
