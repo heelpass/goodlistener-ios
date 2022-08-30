@@ -123,7 +123,7 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     let popupTitle = UILabel().then {
-        $0.text = "오늘의 대화가 힘드신가요?\n리스너에게 미리 알려주세요!"
+        $0.text = "오늘은 대화가 힘드신가요?\n리스너에게 미리 알려주세요!"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
         $0.textColor = .f2
         $0.textAlignment = .center
