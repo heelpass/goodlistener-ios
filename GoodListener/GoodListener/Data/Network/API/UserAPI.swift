@@ -39,10 +39,7 @@ extension UserAPI: TargetType {
         case .nicknameCheck(_):
             return "/user/valid"
             
-        case .getUserInfo:
-            return "/user"
-            
-        case .signOut:
+        case .getUserInfo, .signOut:
             return "/user"
         }
     }
@@ -54,10 +51,7 @@ extension UserAPI: TargetType {
         case .signIn(_):
             return .post
         
-        case .nicknameCheck(_):
-            return .get
-            
-        case .getUserInfo:
+        case .nicknameCheck(_), .getUserInfo:
             return .get
             
         case .signOut:
@@ -86,10 +80,7 @@ extension UserAPI: TargetType {
 //
             return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
             
-        case .getUserInfo:
-            return .requestPlain
-            
-        case .signOut:
+        case .getUserInfo, .signOut:
             return .requestPlain
         }
     }
