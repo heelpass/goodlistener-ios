@@ -8,7 +8,7 @@
 import UIKit
 
 struct RecordDataList {
-    static let dayTextList = ["1일차", "2일차", "3일차", "4일차", "5일차"]
+    static let dayTextList = ["1일차", "2일차", "3일차", "4일차", "5일차", "6일차", "7일차"]
     static let dayemojiList = ["ic_mood_fond", "ic_mood_warm"]
     static let dayScoreList = ["10.0", "8.5"]
 }
@@ -18,6 +18,8 @@ class RecordCollectionView: UIView {
     var emojiData: [String] = []
     var scoreData: [String] = []
     
+    let cellSize = (UIScreen.main.bounds.width - Const.padding - 90) / 7
+    
     let contentStack = UIStackView().then{
         $0.axis = .vertical
         $0.backgroundColor = .clear
@@ -25,7 +27,12 @@ class RecordCollectionView: UIView {
     }
 
     lazy var dayView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: cellSize, height: 14)
+        layout.minimumInteritemSpacing = 3
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 3)
+    
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(RecordContentCell.self, forCellWithReuseIdentifier: RecordContentCell.identifier)
         view.backgroundColor = .clear
         view.isScrollEnabled = false
@@ -34,7 +41,12 @@ class RecordCollectionView: UIView {
     }()
     
     lazy var emojiView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: cellSize, height: 14)
+        layout.minimumInteritemSpacing = 3
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 3)
+        
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(RecordContentCell.self, forCellWithReuseIdentifier: RecordContentCell.identifier)
         view.backgroundColor = .clear
         view.isScrollEnabled = false
@@ -43,7 +55,12 @@ class RecordCollectionView: UIView {
     }()
     
     lazy var scoreView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: cellSize, height: 14)
+        layout.minimumInteritemSpacing = 3
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 3)
+        
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(RecordContentCell.self, forCellWithReuseIdentifier: RecordContentCell.identifier)
         view.backgroundColor = .clear
         view.isScrollEnabled = false
@@ -110,11 +127,3 @@ extension RecordCollectionView: UICollectionViewDataSource {
     }
 }
 
-extension RecordCollectionView: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let margin: CGFloat = 8
-        let width: CGFloat = (collectionView.bounds.width - margin*6)/7 - 5
-        return CGSize(width: width, height: 14)
-    }
-}

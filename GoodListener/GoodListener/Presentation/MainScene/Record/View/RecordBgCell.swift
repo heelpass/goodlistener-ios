@@ -94,7 +94,7 @@ class RecordBgCell: UICollectionViewCell, SnapKitType{
             $0.top.equalTo(recordLbl.snp.bottom).offset(10)
             $0.left.equalToSuperview().offset(15)
             $0.right.equalToSuperview().offset(-15)
-            $0.bottom.equalToSuperview().offset(-27)
+            $0.bottom.equalToSuperview().offset(-15)
         }
     }
 }
