@@ -8,9 +8,9 @@
 import UIKit
 
 struct RecordDataList {
-    static let dayTextList = ["1일차", "2일차", "3일차", "4일차", "5일차", "6일차", "7일차"]
-    static let dayemojiList = ["ic_mood_fond", "ic_mood_warm", "ic_mood_trust", "ic_mood_happy", "ic_mood_fond", "ic_mood_warm"]
-    static let dayScoreList = ["10.0", "8.5", "6.0", "5.5", "7.0", "6.5", "2.5"]
+    static let dayTextList = ["1일차", "2일차", "3일차", "4일차", "5일차"]
+    static let dayemojiList = ["ic_mood_fond", "ic_mood_warm"]
+    static let dayScoreList = ["10.0", "8.5"]
 }
 
 class RecordCollectionView: UIView {
@@ -21,12 +21,14 @@ class RecordCollectionView: UIView {
     let contentStack = UIStackView().then{
         $0.axis = .vertical
         $0.backgroundColor = .clear
-        $0.distribution = .fillEqually
+        $0.distribution = .fillProportionally
     }
 
     lazy var dayView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.register(RecordContentCell.self, forCellWithReuseIdentifier: RecordContentCell.identifier)
+        view.backgroundColor = .clear
+        view.isScrollEnabled = false
         view.dataSource = self
         return view
     }()
@@ -34,6 +36,8 @@ class RecordCollectionView: UIView {
     lazy var emojiView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.register(RecordContentCell.self, forCellWithReuseIdentifier: RecordContentCell.identifier)
+        view.backgroundColor = .clear
+        view.isScrollEnabled = false
         view.dataSource = self
         return view
     }()
@@ -41,6 +45,8 @@ class RecordCollectionView: UIView {
     lazy var scoreView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.register(RecordContentCell.self, forCellWithReuseIdentifier: RecordContentCell.identifier)
+        view.backgroundColor = .clear
+        view.isScrollEnabled = false
         view.dataSource = self
         return view
     }()
