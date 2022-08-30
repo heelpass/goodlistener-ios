@@ -250,7 +250,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                 view.selectedImage
                     .subscribe(onNext: { [weak self] image in
                         self?.profileImage.image = UIImage(named: image ?? "")
-//                        self?.signInModel?.profileImage = image ?? ""
+                        self?.signInModel?.profileImg = image ?? ""
                         self?.selectedImage.accept(image)
                     })
                     .disposed(by: view.disposeBag)

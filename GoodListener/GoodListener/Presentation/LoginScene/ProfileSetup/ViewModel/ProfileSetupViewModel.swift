@@ -31,7 +31,7 @@ class ProfileSetupViewModel: ViewModelType {
     
     func transform(input: Input) -> Output {
         let nicknameValidationResult = BehaviorRelay<Bool>(value: true)
-        let nicknameDuplicateResult = BehaviorRelay<(String, Bool)>(value: ("", false))
+        let nicknameDuplicateResult = BehaviorRelay<(String, Bool)>(value: ("", true))
         let canComplete = BehaviorRelay<Bool>(value: false)
         let signInSuccess = BehaviorRelay<Bool>(value: false)
         
@@ -76,7 +76,7 @@ class ProfileSetupViewModel: ViewModelType {
         // 프로필 설정 완료 가능 여부 확인
         Observable.combineLatest(input.profileImage, nicknameDuplicateResult)
             .subscribe(onNext: { image, duplicate in
-                canComplete.accept(image != nil && nicknameDuplicateResult.value.1)
+                canComplete.accept(image != nil && !nicknameDuplicateResult.value.1)
             })
             .disposed(by: disposeBag)
         
@@ -100,6 +100,8 @@ class ProfileSetupViewModel: ViewModelType {
                                 UserDefaultsManager.shared.age = model.ageRange
                                 UserDefaultsManager.shared.gender = model.gender
                                 UserDefaultsManager.shared.job = model.job
+                                UserDefaultsManager.shared.profileImg = model.profileImg
+                                UserDefaultsManager.shared.description = model.description
                                 signInSuccess.accept(true)
                             } catch {
                                 signInSuccess.accept(false)

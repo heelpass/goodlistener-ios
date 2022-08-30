@@ -141,6 +141,9 @@ class LoginViewModel: NSObject, ViewModelType {
                         UserDefaultsManager.shared.age = model.ageRange
                         UserDefaultsManager.shared.gender = model.gender
                         UserDefaultsManager.shared.job = model.job
+                        UserDefaultsManager.shared.profileImg = model.profileImg
+                        UserDefaultsManager.shared.description = model.description
+                        
                         completion?(true)
                     } catch {
                         Log.d("UserInfo Decoding Error")

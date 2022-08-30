@@ -17,8 +17,8 @@ struct UserInfo: Codable {
     var gender: String
     var ageRange: String
     var job: String
-    var profileImage: String
-    var introduce: String
+    var profileImg: String
+    var description: String
     var fcmHash: String
     var createdAt: String
     var updatedAt: String
@@ -32,8 +32,8 @@ struct UserInfo: Codable {
         case gender
         case ageRange
         case job
-        case profileImage
-        case introduce
+        case profileImg
+        case description
         case fcmHash
         case createdAt
         case updatedAt
@@ -49,8 +49,8 @@ struct UserInfo: Codable {
         gender       = (try? values.decode(String.self, forKey: .gender)) ?? ""
         ageRange     = (try? values.decode(String.self, forKey: .ageRange)) ?? ""
         job          = (try? values.decode(String.self, forKey: .job)) ?? ""
-        profileImage = (try? values.decode(String.self, forKey: .profileImage)) ?? ""
-        introduce    = (try? values.decode(String.self, forKey: .introduce)) ?? ""
+        profileImg   = (try? values.decode(String.self, forKey: .profileImg)) ?? ""
+        description  = (try? values.decode(String.self, forKey: .description)) ?? ""
         fcmHash      = (try? values.decode(String.self, forKey: .fcmHash)) ?? ""
         createdAt    = (try? values.decode(String.self, forKey: .createdAt)) ?? ""
         updatedAt    = (try? values.decode(String.self, forKey: .updatedAt)) ?? ""
