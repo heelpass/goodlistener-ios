@@ -291,6 +291,12 @@ class MyPageSetVC: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
         
+        withdrawContainer.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                self?.coordinator?.moveToDeleteAccountPage()
+            })
+            .disposed(by: disposeBag)
+        
         navigationView.backBtn.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)

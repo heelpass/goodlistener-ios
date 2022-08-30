@@ -12,6 +12,7 @@ protocol MyPageCoordinating: AnyObject {
     func logout()
     func moveToSetting()
     func moveToModifyPage()
+    func moveToDeleteAccountPage()
 }
 
 class MyPageCoordinator: CoordinatorType {
@@ -48,5 +49,12 @@ extension MyPageCoordinator: MyPageCoordinating {
         let vc = MyPageModifyVC()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func moveToDeleteAccountPage() {
+        let vc = DeleteAccountVC()
+        vc.modalPresentationStyle = .fullScreen
+        vc.coordinator = self
+        navigationController.present(vc, animated: true)
     }
 }

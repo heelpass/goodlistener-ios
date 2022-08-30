@@ -31,6 +31,9 @@
 		0AF43093288FDC850078B2D5 /* RecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF43092288FDC850078B2D5 /* RecordVC.swift */; };
 		73B35A699773E2A2848FCE3D /* Pods_GoodListener.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5450741D5E8F8D9D306A0E69 /* Pods_GoodListener.framework */; };
 		E81E41DC28BDCBEC0094CFD9 /* MyPageModifyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E41DB28BDCBEC0094CFD9 /* MyPageModifyViewModel.swift */; };
+		E81E41E128BDF5840094CFD9 /* DeleteAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E41E028BDF5840094CFD9 /* DeleteAccountVC.swift */; };
+		E81E41E328BDF8540094CFD9 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E41E228BDF8540094CFD9 /* CheckBox.swift */; };
+		E81E41E528BE0B1B0094CFD9 /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E41E428BE0B1B0094CFD9 /* DeleteAccountViewModel.swift */; };
 		E845494B28BC4CB600DAD6EE /* GLTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494A28BC4CB600DAD6EE /* GLTextField.swift */; };
 		E845494E28BC553500DAD6EE /* TermsOfServicePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494C28BC553400DAD6EE /* TermsOfServicePopup.swift */; };
 		E845494F28BC553500DAD6EE /* TermsOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494D28BC553500DAD6EE /* TermsOfService.swift */; };
@@ -125,6 +128,9 @@
 		47C5C925F8CF8A111AFD7E1E /* Pods-GoodListener.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoodListener.debug.xcconfig"; path = "Target Support Files/Pods-GoodListener/Pods-GoodListener.debug.xcconfig"; sourceTree = "<group>"; };
 		5450741D5E8F8D9D306A0E69 /* Pods_GoodListener.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoodListener.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E81E41DB28BDCBEC0094CFD9 /* MyPageModifyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageModifyViewModel.swift; path = GoodListener/Domain/Entities/MyPageModifyViewModel.swift; sourceTree = SOURCE_ROOT; };
+		E81E41E028BDF5840094CFD9 /* DeleteAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountVC.swift; sourceTree = "<group>"; };
+		E81E41E228BDF8540094CFD9 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		E81E41E428BE0B1B0094CFD9 /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
 		E83BD7FD288E7165006B98B2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E845494A28BC4CB600DAD6EE /* GLTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTextField.swift; sourceTree = "<group>"; };
 		E845494C28BC553400DAD6EE /* TermsOfServicePopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfServicePopup.swift; sourceTree = "<group>"; };
@@ -377,6 +383,31 @@
 			path = Token;
 			sourceTree = "<group>";
 		};
+		E81E41DD28BDF4BD0094CFD9 /* DeleteAccount */ = {
+			isa = PBXGroup;
+			children = (
+				E81E41DF28BDF4E40094CFD9 /* View */,
+				E81E41DE28BDF4DB0094CFD9 /* ViewModel */,
+			);
+			path = DeleteAccount;
+			sourceTree = "<group>";
+		};
+		E81E41DE28BDF4DB0094CFD9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E81E41E428BE0B1B0094CFD9 /* DeleteAccountViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E81E41DF28BDF4E40094CFD9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E81E41E028BDF5840094CFD9 /* DeleteAccountVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E845494928BC4CB600DAD6EE /* GLTextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,6 +594,7 @@
 				E8B444B028B3382C0003815B /* TagView */,
 				E8B443FC28A243CC0003815B /* NavigationView.swift */,
 				E8B444CC28B730CE0003815B /* GLTextView.swift */,
+				E81E41E228BDF8540094CFD9 /* CheckBox.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -822,6 +854,7 @@
 				E8B443F628A23DFC0003815B /* MyPage */,
 				ECBA27AD28A4DCF10034A751 /* MyPageModify */,
 				E8B443F728A23E050003815B /* MyPageSet */,
+				E81E41DD28BDF4BD0094CFD9 /* DeleteAccount */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1030,6 +1063,7 @@
 				E8CFBCC4288F6DA000D63B07 /* CoordinatorType.swift in Sources */,
 				0ABA2825288D5B55000D889B /* LoginVC.swift in Sources */,
 				0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */,
+				E81E41E528BE0B1B0094CFD9 /* DeleteAccountViewModel.swift in Sources */,
 				E8B4449A28ADC8620003815B /* UserInfo.swift in Sources */,
 				E8B4435128A0E8540003815B /* PersonalInfoVC.swift in Sources */,
 				E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */,
@@ -1080,6 +1114,7 @@
 				E81E41DC28BDCBEC0094CFD9 /* MyPageModifyViewModel.swift in Sources */,
 				E8B444B528B36D1A0003815B /* MoodCell.swift in Sources */,
 				ECBA27B928A4FCEE0034A751 /* TagCollectionViewLayout.swift in Sources */,
+				E81E41E128BDF5840094CFD9 /* DeleteAccountVC.swift in Sources */,
 				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
 				E8B444B728B3723A0003815B /* MoodView.swift in Sources */,
 				E8B4449628ACC7AD0003815B /* UserDefaultsManager.swift in Sources */,
@@ -1087,6 +1122,7 @@
 				E8B4449228ACB6610003815B /* NetworkConstant.swift in Sources */,
 				E8B444A228AE1BE40003815B /* ProfileSetupViewModel.swift in Sources */,
 				E8CFBCE1288F874C00D63B07 /* MyPageVC.swift in Sources */,
+				E81E41E328BDF8540094CFD9 /* CheckBox.swift in Sources */,
 				E8B4449E28ADF4AD0003815B /* ProfileImageSelectCell.swift in Sources */,
 				E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */,
 				E8B444B928B4A2680003815B /* CallViewModel.swift in Sources */,
