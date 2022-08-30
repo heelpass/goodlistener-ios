@@ -114,11 +114,12 @@ class LoginViewModel: NSObject, ViewModelType {
                     if jsonData["isExistUser"].boolValue {
                         self.getUserInfo { _ in
                             self.loginResult.onNext(true)
-                            
+                            UserDefaultsManager.shared.isLogin = true
                             // TODO: 회원정보를 불러오기 실패한 경우에는 어떻게 할껀지?
                         }
                     } else {
                         self.loginResult.onNext(false)
+                        UserDefaultsManager.shared.isLogin = false
                     }
                     
                 case .failure(let error):

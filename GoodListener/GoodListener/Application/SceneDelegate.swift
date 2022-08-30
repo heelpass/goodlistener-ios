@@ -21,8 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        checkAppleLogin()
-        
         let navigationController = UINavigationController()
         coordinator = AppCoordinator(navigationController: navigationController)
         coordinator?.start()
@@ -71,26 +69,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-    }
-    
-    // 애플 로그인을 체크 후 자동로그인 하는 함수
-    func checkAppleLogin(){
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        appleIDProvider.getCredentialState(forUserID: UserDefaultsManager.shared.appleID ?? "") { (credentialState, error) in
-            switch credentialState {
-            case .authorized:
-                Log.d("해당 ID는 연동되어있습니다.")
-                UserDefaultsManager.shared.isLogin = true
-            case .revoked:
-                Log.d("해당 ID는 연동되어있지않습니다.")
-                UserDefaultsManager.shared.isLogin = false
-            case .notFound:
-                Log.d("해당 ID를 찾을 수 없습니다.")
-                UserDefaultsManager.shared.isLogin = false
-            default:
-                break
-            }
-        }
     }
 
 }
