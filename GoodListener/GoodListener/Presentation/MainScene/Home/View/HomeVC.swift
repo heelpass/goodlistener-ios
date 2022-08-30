@@ -26,7 +26,7 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     // 현재 홈 화면 상태
-    var homeState: homeState = .join
+    var homeState: homeState = .matched
     
     let contentStackView = UIStackView().then {
         $0.axis = .vertical
@@ -108,9 +108,43 @@ class HomeVC: UIViewController, SnapKitType {
         $0.textColor = .f7
     }
     
-    let delayBtn = GLButton().then {
+    let postponeBtn = GLButton().then {
         $0.title = "오늘 대화 미루기"
     }
+    
+    //팝업
+    let popup = UIView().then {
+        $0.backgroundColor = .black.withAlphaComponent(0.6)
+    }
+    
+    let popupContainer = UIView().then {
+        $0.backgroundColor = .m5
+        $0.layer .cornerRadius = 10
+    }
+    
+    let popupTitle = UILabel().then {
+        $0.text = "오늘은 대화가 힘드신가요?\n리스너에게 미리 알려주세요!"
+        $0.font = FontManager.shared.notoSansKR(.bold, 16)
+        $0.textColor = .f2
+        $0.textAlignment = .center
+        $0.numberOfLines = 0
+    }
+    
+    let popupBtnStackView = UIStackView().then {
+        $0.backgroundColor = .clear
+        $0.axis = .horizontal
+        $0.spacing = 8
+        $0.distribution = .fillEqually
+    }
+    
+    let delayBtn = GLButton(type: .rectangle, reverse: true).then {
+        $0.title = "대화 1회 미루기"
+    }
+    
+    let cancelBtn = GLButton(type: .rectangle).then {
+        $0.title = "취소"
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,7 +157,7 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [navigationView, scrollView, joinBtn, delayBtn].forEach{
+        [navigationView, scrollView, joinBtn, postponeBtn].forEach{
             view.addSubview($0)
         }
         scrollView.addSubview(contentStackView)
@@ -134,6 +168,11 @@ class HomeVC: UIViewController, SnapKitType {
             containerView.addSubview($0)
         }
         navigationView.backgroundColor = .m6
+        
+        // 팝업
+        popup.addSubview(popupContainer)
+        [popupTitle, popupBtnStackView].forEach { popupContainer.addSubview($0) }
+        [delayBtn, cancelBtn].forEach { popupBtnStackView.addArrangedSubview($0) }
     }
     
     func setConstraints() {
@@ -217,13 +256,36 @@ class HomeVC: UIViewController, SnapKitType {
             $0.left.equalToSuperview().offset(30)
         }
         
-        delayBtn.snp.makeConstraints {
+        postponeBtn.snp.makeConstraints {
             $0.width.equalTo(Const.glBtnWidth)
             $0.height.equalTo(Const.glBtnHeight)
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
-        self.view.bringSubviewToFront(delayBtn)
+        self.view.bringSubviewToFront(postponeBtn)
+
+        
+        // 팝업
+        popupContainer.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.left.right.equalToSuperview().inset(Const.padding)
+        }
+        
+        popupTitle.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(33)
+            $0.centerX.equalToSuperview()
+        }
+        
+        popupBtnStackView.snp.makeConstraints {
+            $0.height.equalTo(Const.glBtnHeight)
+            $0.left.right.equalToSuperview().inset(Const.padding)
+            $0.top.equalTo(popupTitle.snp.bottom).offset(37)
+            $0.bottom.equalToSuperview().inset(20)
+        }
+        self.view.addSubview(self.popup)
+        self.popup.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
     }
     
@@ -234,11 +296,29 @@ class HomeVC: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
         
-        delayBtn.rx.tap
+        postponeBtn.rx.tap
             .bind(onNext: { [weak self] in
-                self?.coordinator?.call()
+                guard let self = self else { return }
+                self.popup.isHidden = false
             })
             .disposed(by: disposeBag)
+        
+        delayBtn.rx.tap
+            .bind(onNext: { [weak self] in
+                guard let self = self else {return}
+                self.popup.isHidden = true
+                self.postponeBtn.isEnabled = false
+                self.postponeBtn.backgroundColor = UIColor(hex: "#999999")
+            })
+            .disposed(by: disposeBag)
+        
+        cancelBtn.rx.tap
+            .bind(onNext: { [weak self] in
+                guard let self = self else {return}
+                self.popup.isHidden = true
+            })
+            .disposed(by: disposeBag)
+        
     }
     
     func changeUI(_ type: homeState) {
@@ -254,7 +334,8 @@ class HomeVC: UIViewController, SnapKitType {
             scheduleLbl.isHidden = true
             timeLbl.isHidden = true
             dateLbl.isHidden = true
-            delayBtn.isHidden = true
+            postponeBtn.isHidden = true
+            popup.isHidden = true
             break
         case .matched:
             joinImg.isHidden = true
@@ -267,7 +348,8 @@ class HomeVC: UIViewController, SnapKitType {
             scheduleLbl.isHidden = false
             timeLbl.isHidden = false
             dateLbl.isHidden = false
-            delayBtn.isHidden = false
+            postponeBtn.isHidden = false
+            popup.isHidden = true
             break
         }
     }
