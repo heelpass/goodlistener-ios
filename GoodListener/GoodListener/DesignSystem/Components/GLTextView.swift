@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import RxCocoa
+import RxSwift
 
 class GLTextView: UIView, SnapKitType {
     
@@ -117,6 +119,8 @@ class GLTextView: UIView, SnapKitType {
         $0.text = "*최대 ~글자까지 가능합니다"
         $0.sizeToFit()
     }
+    
+    lazy var contentsObservable = contentsTv.rx.text.orEmpty.asObservable()
     
     private override init(frame: CGRect) {
         super.init(frame: frame)

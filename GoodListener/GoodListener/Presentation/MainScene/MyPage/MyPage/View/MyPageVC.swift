@@ -82,6 +82,10 @@ class MyPageVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         configUI()
     }
     
@@ -188,6 +192,7 @@ class MyPageVC: UIViewController, SnapKitType {
     func configUI() {
         nicknameLbl.text = UserDefaultsManager.shared.nickname?.localized
         tagView.tagData = [UserDefaultsManager.shared.age!, UserDefaultsManager.shared.gender!, UserDefaultsManager.shared.job!]
+        tagView.collectionView.reloadData()
         introduceView.contents = UserDefaultsManager.shared.description!
         profileImage.image = UIImage(named: UserDefaultsManager.shared.profileImg)
     }

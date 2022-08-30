@@ -17,7 +17,7 @@ enum UserAPI {
     case nicknameCheck(String)      // 닉네임 중복 확인
     case getUserInfo                // 유저정보 얻어오기
     case signOut                    // 회원 탈퇴
-    case userModify([String:Any])   // 편집페이지 회원 정보 수정 -> 닉네임, 하는일, 소개글
+    case userModify((String, String, String))   // 편집페이지 회원 정보 수정 -> 닉네임, 하는일, 소개글
     case profileImgModify(String)   // 프로필 이미지 수정
 }
 
@@ -88,15 +88,22 @@ extension UserAPI: TargetType {
         case .getUserInfo, .signOut:
             return .requestPlain
             
-        case .userModify(let params):
-            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+        case .userModify((let nickname, let job, let description)):
+            let params: [String: String] = [
+                "nickname" : nickname,
+                "job" : job,
+                "description" : description
+            ]
+            
+            return .requestJSONEncodable(params)
+//            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
             
         case .profileImgModify(let image):
-            let params: [String: Any] = [
+            let params: [String: String] = [
                 "profileImg": image
             ]
             
-            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+            return .requestJSONEncodable(params)
         }
     }
     

@@ -43,8 +43,9 @@ class NavigationView: UIView {
         [backBtn, title, logo, rightBtn].forEach { addSubview($0) }
         
         backBtn.snp.makeConstraints {
-            $0.left.equalToSuperview()
-            $0.centerY.equalToSuperview().inset(6)
+            $0.left.equalToSuperview().inset(6)
+            $0.centerY.equalToSuperview()
+            $0.size.equalTo(36)
         }
         
         title.snp.makeConstraints {
@@ -77,7 +78,7 @@ class NavigationView: UIView {
             rightBtn.titleLabel?.font = FontManager.shared.notoSansKR(.bold, 16)
             rightBtn.snp.remakeConstraints {
                 $0.centerY.equalToSuperview()
-                $0.right.equalToSuperview().inset(16)
+                $0.right.equalToSuperview().inset(6)
                 $0.height.equalTo(44)
                 $0.width.equalTo(50)
             }
