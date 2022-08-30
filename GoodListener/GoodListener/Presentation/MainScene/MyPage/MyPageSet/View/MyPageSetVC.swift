@@ -278,6 +278,7 @@ class MyPageSetVC: UIViewController, SnapKitType {
         logoutContainer.tapGesture
             .subscribe(onNext: { [weak self] _ in
                 self?.coordinator?.logout()
+                UserDefaultsManager.shared.logout()
             })
             .disposed(by: disposeBag)
         
