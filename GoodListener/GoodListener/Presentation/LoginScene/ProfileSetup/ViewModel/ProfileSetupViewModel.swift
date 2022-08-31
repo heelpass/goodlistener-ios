@@ -16,7 +16,7 @@ class ProfileSetupViewModel: ViewModelType {
     var disposeBag: DisposeBag = .init()
     
     struct Input {
-        var profileImage: BehaviorRelay<String?>    // 프로필 이미지
+        var profileImage: BehaviorRelay<Int?>    // 프로필 이미지
         var nickname: Observable<String>             // 입력된 닉네임
         var checkDuplicate: Observable<Void>     // 닉네임 중복 확인
         var signIn: Observable<SignInModel>     // 

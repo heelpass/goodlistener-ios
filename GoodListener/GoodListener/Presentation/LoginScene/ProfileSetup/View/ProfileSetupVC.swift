@@ -17,7 +17,7 @@ class ProfileSetupVC: UIViewController, SnapKitType {
     var disposeBag = DisposeBag()
     var viewModel = ProfileSetupViewModel()
     
-    var selectedImage = BehaviorRelay<String?>(value: nil)
+    var selectedImage = BehaviorRelay<Int?>(value: nil)
     var signInObservable = PublishRelay<SignInModel>()
     
     var signInModel: SignInModel?
@@ -249,8 +249,8 @@ class ProfileSetupVC: UIViewController, SnapKitType {
                 // 팝업에서 선택된 이미지를 현재 프로필이미지에 반영
                 view.selectedImage
                     .subscribe(onNext: { [weak self] image in
-                        self?.profileImage.image = UIImage(named: image ?? "")
-                        self?.signInModel?.profileImg = image ?? ""
+                        self?.profileImage.image = UIImage(named: "profile\(UserDefaultsManager.shared.profileImg)")
+                        self?.signInModel?.profileImg = image ?? 1
                         self?.selectedImage.accept(image)
                     })
                     .disposed(by: view.disposeBag)

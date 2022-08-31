@@ -18,7 +18,7 @@ enum UserAPI {
     case getUserInfo                // 유저정보 얻어오기
     case signOut                    // 회원 탈퇴
     case userModify((String, String, String))   // 편집페이지 회원 정보 수정 -> 닉네임, 하는일, 소개글
-    case profileImgModify(String)   // 프로필 이미지 수정
+    case profileImgModify(Int)   // 프로필 이미지 수정
 }
 
 
@@ -99,7 +99,7 @@ extension UserAPI: TargetType {
 //            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
             
         case .profileImgModify(let image):
-            let params: [String: String] = [
+            let params: [String: Int] = [
                 "profileImg": image
             ]
             

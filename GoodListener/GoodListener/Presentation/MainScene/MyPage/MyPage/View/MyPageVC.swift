@@ -175,7 +175,7 @@ class MyPageVC: UIViewController, SnapKitType {
                 view.selectedImage
                     .subscribe(onNext: { [weak self] image in
                         guard let self = self, let image = image else { return }
-                        self.profileImage.image = UIImage(named: image)
+                        self.profileImage.image = UIImage(named: "profile\(image)")
                     })
                     .disposed(by: view.disposeBag)
                 
@@ -194,7 +194,7 @@ class MyPageVC: UIViewController, SnapKitType {
         tagView.tagData = [UserDefaultsManager.shared.age!, UserDefaultsManager.shared.gender!, UserDefaultsManager.shared.job!]
         tagView.collectionView.reloadData()
         introduceView.contents = UserDefaultsManager.shared.description!
-        profileImage.image = UIImage(named: UserDefaultsManager.shared.profileImg)
+        profileImage.image = UIImage(named: "profile\(UserDefaultsManager.shared.profileImg)")
     }
 
 }
