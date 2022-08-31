@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+struct AppleToken: Codable {
+    var token: String
+    var isExistUser: Bool
+    
+    enum Codingkeys: String, CodingKey {
+        case token
+        case isExistUser
+    }
+}
