@@ -7,11 +7,11 @@
 
 import Moya
 
-protocol BaseTargetType: TargetType {
+protocol BaseTargetType: TargetType, AccessTokenAuthorizable {
 }
 
 extension BaseTargetType {
-    var baseURL: URL {
+    public var baseURL: URL {
         // Configuration을 통해 phase별 baseURL 설정 방법: https://ios-development.tistory.com/660
 //        guard let urlString = Bundle.main.object(forInfoDictionaryKey: "API_URL") as? String else { fatalError("API URL not defined")}
 //        gaurd let apiURL = URL(string: urlString) else { fatalError("URL is invalid") }
@@ -21,14 +21,17 @@ extension BaseTargetType {
     
     // HTTP header
     //  return ["Content-type": "application/json"]
-    var headers: [String : String]? {
-        return ["Content-type": "application/json",
-                "Authorization": UserDefaultsManager.shared.accessToken!]
+    public var headers: [String : String]? {
+        return ["Content-type": "application/json"]
     }
     
     
     // 테스트용 Mock Data
-    var sampleData: Data {
+    public var sampleData: Data {
         return Data()
+    }
+    
+    public var authorizationType: AuthorizationType? {
+        return .bearer
     }
 }
