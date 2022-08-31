@@ -95,6 +95,7 @@ class ProfileSetupViewModel: ViewModelType {
                         case .success(let response):
                             // 회원가입 성공 시 유저정보를 리턴해준다
                             do {
+                                try response.filterSuccessfulStatusCodes()
                                 let model = try JSONDecoder().decode(UserInfo.self, from: response.data)
                                 UserDefaultsManager.shared.nickname = model.nickname
                                 UserDefaultsManager.shared.age = model.ageRange
@@ -147,6 +148,7 @@ class ProfileSetupViewModel: ViewModelType {
                         UserDefaultsManager.shared.age = model.ageRange
                         UserDefaultsManager.shared.gender = model.gender
                         UserDefaultsManager.shared.job = model.job
+                        UserDefaultsManager.shared.profileImg = model.profileImg
                         completion?(true)
                     } catch {
                         Log.d("UserInfo Decoding Error")

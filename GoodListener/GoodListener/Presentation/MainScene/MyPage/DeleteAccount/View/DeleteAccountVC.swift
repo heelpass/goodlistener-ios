@@ -9,10 +9,16 @@ import Foundation
 import UIKit
 import SnapKit
 import Then
+import RxSwift
+import RxCocoa
 
 class DeleteAccountVC: UIViewController, SnapKitType {
     
     weak var coordinator: MyPageCoordinating?
+    let viewModel = DeleteAccountViewModel()
+    let disposeBag = DisposeBag()
+    
+    var deleteAccountObservable = PublishRelay<Void>()
     
     let navigationView = NavigationView(frame: .zero, type: .none)
     
@@ -99,6 +105,7 @@ class DeleteAccountVC: UIViewController, SnapKitType {
         view.backgroundColor = .white
         addComponents()
         setConstraints()
+        bind()
     }
     
     func addComponents() {
@@ -172,5 +179,50 @@ class DeleteAccountVC: UIViewController, SnapKitType {
             $0.left.right.bottom.equalToSuperview().inset(Const.padding)
             $0.height.equalTo(Const.glBtnHeight)
         }
+    }
+    
+    func bind() {
+        let output = viewModel.transform(input: DeleteAccountViewModel.Input(checkboxSeledted: checkbox.selected.asObservable(),
+                                                                             yesBtnTap: yesBtn.rx.tap.asObservable(),
+                                                                             deleteAccount: deleteAccountObservable.asObservable()))
+        
+        // 팝업 메세지 출력
+        output.popupMessage
+            .emit(onNext: { [weak self] message in
+                guard let self = self else { return }
+                
+                let popup = GLPopup()
+                popup.title = "알림"
+                popup.contents = message
+                // 회원 탈퇴 메세지일 경우 완료버튼 액션을 추가해줘야한다
+                // 완료버튼 -> 회원탈퇴 로직 타야함
+                if message == PopupMessage.deleteAccount {
+                    popup.completeAction = {
+                        self.deleteAccountObservable.accept(())
+                    }
+                } else {
+                    popup.cancelIsHidden = true
+                }
+                self.view.addSubview(popup)
+                popup.snp.makeConstraints {
+                    $0.width.equalTo(UIScreen.main.bounds.width)
+                    $0.height.equalTo(UIScreen.main.bounds.height)
+                    $0.center.equalToSuperview()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        output.deleteAccountResult
+            .emit(onNext: { [weak self] result in
+                UserDefaultsManager.shared.logout()
+                self?.coordinator?.deleteAccountSuccess()
+            })
+            .disposed(by: disposeBag)
+        
+        noBtn.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }

@@ -39,7 +39,6 @@ class UserDefaultsManager {
         self.job = ""
         self.description = "안녕하세요 굿 리스너입니다."
         self.snsKind = ""
-        self.fcmToken = ""
         self.profileImg = 0
     }
     
