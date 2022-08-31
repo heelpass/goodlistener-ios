@@ -56,7 +56,7 @@ class ProfileSetupViewModel: ViewModelType {
             .subscribe(onNext: { [weak self] (text) in
                 guard let self = self else { return }
                 
-                let provider = MoyaProvider<UserAPI>()
+                let provider = MoyaProvider<UserTargetType>()
                 provider.rx.request(.nicknameCheck(text))
                     .subscribe { result in
                         switch result {
@@ -87,7 +87,7 @@ class ProfileSetupViewModel: ViewModelType {
                 data.snsKind = UserDefaultsManager.shared.snsKind
                 data.fcmHash = UserDefaultsManager.shared.fcmToken
                 Log.d(data)
-                let loginProvider = MoyaProvider<UserAPI>()
+                let loginProvider = MoyaProvider<UserTargetType>()
                 loginProvider.rx.request(.signIn(model))
                     .observe(on: MainScheduler.instance)
                     .subscribe { result in
@@ -136,7 +136,8 @@ class ProfileSetupViewModel: ViewModelType {
     }
     
     private func getUserInfo(_ completion: ((Bool)->Void)? = nil) {
-        let moyaProvider = MoyaProvider<UserAPI>()
+        let moyaProvider = MoyaProvider<UserTargetType>()
+        
         moyaProvider.rx.request(.getUserInfo)
             .subscribe { result in
                 switch result {
