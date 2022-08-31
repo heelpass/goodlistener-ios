@@ -21,13 +21,7 @@ enum UserTargetType {
 
 
 // TargetType Protocol Implementation
-extension UserTargetType: TargetType {
-    
-    //서버의 base URL / Moya는 이를 통하여 endpoint객체 생성
-    // return URL(string: "ABC")
-    public var baseURL: URL {
-        return URL(string: Host.Host)!
-    }
+extension UserTargetType: BaseTargetType {
     
     // 서버의 base URL 뒤에 추가 될 Path (일반적으로 API)
     // case .signIn(path, _) return "/\(path)"
@@ -83,18 +77,5 @@ extension UserTargetType: TargetType {
         case .getUserInfo, .signOut:
             return .requestPlain
         }
-    }
-    
-    // HTTP header
-    //  return ["Content-type": "application/json"]
-    public var headers: [String : String]? {
-        return ["Content-type": "application/json",
-                "Authorization": UserDefaultsManager.shared.accessToken!]
-    }
-    
-    
-    // 테스트용 Mock Data
-    public var sampleData: Data {
-        return Data()
     }
 }
