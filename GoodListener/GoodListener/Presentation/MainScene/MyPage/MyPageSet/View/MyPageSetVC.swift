@@ -284,7 +284,7 @@ class MyPageSetVC: UIViewController, SnapKitType {
                     self?.coordinator?.logout()
                     UserDefaultsManager.shared.logout()
                 }
-                self?.view.addSubview(popup)
+                self?.tabBarController?.view.addSubview(popup)
                 popup.snp.makeConstraints {
                     $0.edges.equalToSuperview()
                 }

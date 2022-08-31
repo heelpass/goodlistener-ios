@@ -160,7 +160,7 @@ class MyPageModifyVC: UIViewController, SnapKitType {
         popup.cancelIsHidden = true
         popup.alignment = .center
         
-        view.addSubview(popup)
+        self.tabBarController?.view.addSubview(popup)
         popup.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
