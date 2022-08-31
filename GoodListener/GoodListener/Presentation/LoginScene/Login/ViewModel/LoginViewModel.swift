@@ -96,41 +96,64 @@ class LoginViewModel: NSObject, ViewModelType {
     
     // Token을 서버사이드에 전달
     // Moya로 API부분 설계완료되면 수정 필요
+    // MARK: 네트워크 구조화 after
     private func send(token: String) {
-        let moyaProvider = MoyaProvider<TokenAPI>()
-        moyaProvider.rx.request(.getAppleToken(token))
-            .observe(on: MainScheduler.instance)
-            .subscribe { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let response):
-                    let jsonData = JSON(response.data)
-                    Log.d(jsonData)
-                    if let token = jsonData["token"].string {
-                        UserDefaultsManager.shared.accessToken = "Bearer " + token
-                    }
-                    
-                    // 이미 회원으로 등록된 경우 회원정보를 불러온다.
-                    if jsonData["isExistUser"].boolValue {
-                        self.getUserInfo { _ in
-                            self.loginResult.onNext(true)
-                            UserDefaultsManager.shared.isLogin = true
-                            // TODO: 회원정보를 불러오기 실패한 경우에는 어떻게 할껀지?
-                        }
-                    } else {
-                        self.loginResult.onNext(false)
-                        UserDefaultsManager.shared.isLogin = false
-                    }
-                    
-                case .failure(let error):
-                    Log.e("\(error.localizedDescription)")
+        TokenAPI.getAppleToken(request: token, completion: { response, error in
+            guard let response = response else {
+                Log.e(error ?? #function)
+                return
+            }
+            
+            UserDefaultsManager.shared.accessToken = response.token
+            
+            if response.isExistUser {
+                // 유저가 이미 가입한 경우
+                self.getUserInfo { _ in
+                    self.loginResult.onNext(true)
+                    UserDefaultsManager.shared.isLogin = true
                 }
-            }.disposed(by: disposeBag)
+                
+            } else {
+                // 유저가 가입하지 않은 경우
+                self.loginResult.onNext(false)
+                UserDefaultsManager.shared.isLogin = false
+            }
+        })
+        // MARK: 네트워크 구조화 before
+//        let moyaProvider = MoyaProvider<TokenTargetType>()
+//        moyaProvider.rx.request(.getAppleToken(token))
+//            .observe(on: MainScheduler.instance)
+//            .subscribe { [weak self] result in
+//                guard let self = self else { return }
+//                switch result {
+//                case .success(let response):
+//                    let jsonData = JSON(response.data)
+//                    Log.d(jsonData)
+//                    if let token = jsonData["token"].string {
+//                        UserDefaultsManager.shared.accessToken = token
+//                    }
+//
+//                    // 이미 회원으로 등록된 경우 회원정보를 불러온다.
+//                    if jsonData["isExistUser"].boolValue {
+//                        self.getUserInfo { _ in
+//                            self.loginResult.onNext(true)
+//                            UserDefaultsManager.shared.isLogin = true
+//                            // TODO: 회원정보를 불러오기 실패한 경우에는 어떻게 할껀지?
+//                        }
+//                    } else {
+//                        self.loginResult.onNext(false)
+//                        UserDefaultsManager.shared.isLogin = false
+//                    }
+//
+//                case .failure(let error):
+//                    Log.e("\(error.localizedDescription)")
+//                }
+//            }.disposed(by: disposeBag)
         
     }
     
     private func getUserInfo(_ completion: ((Bool)->Void)? = nil) {
-        let moyaProvider = MoyaProvider<UserAPI>()
+        let moyaProvider = MoyaProvider<UserTargetType>()
         moyaProvider.rx.request(.getUserInfo)
             .subscribe { result in
                 switch result {
@@ -173,7 +196,7 @@ extension LoginViewModel : ASAuthorizationControllerDelegate  {
             UserDefaultsManager.shared.appleID = credential.user
             Log.d("Token:: \(token)")
             Log.d("Identity:: \(identity)")
-            UserDefaultsManager.shared.accessToken = "Bearer " + identity
+            UserDefaultsManager.shared.accessToken = identity
             UserDefaultsManager.shared.snsKind = "apple"
             send(token: token)
         }
