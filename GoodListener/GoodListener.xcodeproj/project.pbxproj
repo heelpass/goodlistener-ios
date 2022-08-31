@@ -34,6 +34,7 @@
 		E81E41E128BDF5840094CFD9 /* DeleteAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E41E028BDF5840094CFD9 /* DeleteAccountVC.swift */; };
 		E81E41E328BDF8540094CFD9 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E41E228BDF8540094CFD9 /* CheckBox.swift */; };
 		E81E41E528BE0B1B0094CFD9 /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E41E428BE0B1B0094CFD9 /* DeleteAccountViewModel.swift */; };
+		E81E41E728BEF5190094CFD9 /* PopupMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E41E628BEF5190094CFD9 /* PopupMessage.swift */; };
 		E845494B28BC4CB600DAD6EE /* GLTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494A28BC4CB600DAD6EE /* GLTextField.swift */; };
 		E845494E28BC553500DAD6EE /* TermsOfServicePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494C28BC553400DAD6EE /* TermsOfServicePopup.swift */; };
 		E845494F28BC553500DAD6EE /* TermsOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494D28BC553500DAD6EE /* TermsOfService.swift */; };
@@ -131,6 +132,7 @@
 		E81E41E028BDF5840094CFD9 /* DeleteAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountVC.swift; sourceTree = "<group>"; };
 		E81E41E228BDF8540094CFD9 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		E81E41E428BE0B1B0094CFD9 /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
+		E81E41E628BEF5190094CFD9 /* PopupMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupMessage.swift; sourceTree = "<group>"; };
 		E83BD7FD288E7165006B98B2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E845494A28BC4CB600DAD6EE /* GLTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTextField.swift; sourceTree = "<group>"; };
 		E845494C28BC553400DAD6EE /* TermsOfServicePopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfServicePopup.swift; sourceTree = "<group>"; };
@@ -894,6 +896,7 @@
 				E8A7954B289CCA8500EF9E1B /* Color */,
 				E8A7953B289CB2BC00EF9E1B /* Font */,
 				E8CE19E3289CE15E007A56FE /* Const.swift */,
+				E81E41E628BEF5190094CFD9 /* PopupMessage.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -1091,6 +1094,7 @@
 				E8CE19E4289CE15E007A56FE /* Const.swift in Sources */,
 				0AF43093288FDC850078B2D5 /* RecordVC.swift in Sources */,
 				0A558A4428B61F25001949D6 /* EmojiTagFlowLayout.swift in Sources */,
+				E81E41E728BEF5190094CFD9 /* PopupMessage.swift in Sources */,
 				E845494B28BC4CB600DAD6EE /* GLTextField.swift in Sources */,
 				E8B4449828ACDF890003815B /* PersonalInfoViewModel.swift in Sources */,
 				E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */,

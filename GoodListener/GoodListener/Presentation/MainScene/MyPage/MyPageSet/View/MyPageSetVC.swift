@@ -279,7 +279,7 @@ class MyPageSetVC: UIViewController, SnapKitType {
             .subscribe(onNext: { [weak self] _ in
                 let popup = GLPopup()
                 popup.title = "알림"
-                popup.contents = "정말 로그아웃 하시겠습니까?"
+                popup.contents = PopupMessage.logout
                 popup.completeAction = {
                     self?.coordinator?.logout()
                     UserDefaultsManager.shared.logout()

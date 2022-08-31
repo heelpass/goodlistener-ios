@@ -152,10 +152,10 @@ class MyPageModifyVC: UIViewController, SnapKitType {
         let popup = GLPopup()
         if !result {
             popup.title = "닉네임 중복 확인"
-            popup.contents = "사용 가능한 닉네임이에요"
+            popup.contents = PopupMessage.nicknameCheckYes
         } else {
             popup.title = "닉네임 중복 확인"
-            popup.contents = "닉네임 중복 확인을 해주세요"
+            popup.contents = PopupMessage.nicknameCheckNo
         }
         popup.cancelIsHidden = true
         popup.alignment = .center
