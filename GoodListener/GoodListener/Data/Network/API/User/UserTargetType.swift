@@ -16,7 +16,7 @@ enum UserTargetType {
     case signIn(SignInModel)        // 회원가입
     case nicknameCheck(String)      // 닉네임 중복 확인
     case getUserInfo                // 유저정보 얻어오기
-    case signOut                    // 회원 탈퇴
+    case deleteAccount                    // 회원 탈퇴
     case userModify((String, String, String))   // 편집페이지 회원 정보 수정 -> 닉네임, 하는일, 소개글
     case profileImgModify(Int)   // 프로필 이미지 수정              // 회원 탈퇴
 }
@@ -35,7 +35,7 @@ extension UserTargetType: BaseTargetType {
         case .nicknameCheck(_):
             return "/user/valid"
             
-        case .getUserInfo, .signOut, .userModify(_), .profileImgModify(_):
+        case .getUserInfo, .deleteAccount, .userModify(_), .profileImgModify(_):
             return "/user"
         }
     }
@@ -50,7 +50,7 @@ extension UserTargetType: BaseTargetType {
         case .nicknameCheck(_), .getUserInfo:
             return .get
             
-        case .signOut:
+        case .deleteAccount:
             return .delete
             
         case .userModify(_), .profileImgModify(_):
@@ -79,7 +79,7 @@ extension UserTargetType: BaseTargetType {
 //
             return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
             
-        case .getUserInfo, .signOut:
+        case .getUserInfo, .deleteAccount:
             return .requestPlain
             
         case .userModify((let nickname, let job, let description)):

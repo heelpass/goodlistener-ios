@@ -108,11 +108,22 @@ class LoginViewModel: NSObject, ViewModelType {
             
             if response.isExistUser {
                 // 유저가 이미 가입한 경우
-                self.getUserInfo { _ in
+                // 유저 정보를 불러오는 API request
+                UserAPI.requestUserInfo { response, error in
+                    guard let model = response else {
+                        Log.e(error ?? #function)
+                        return
+                    }
+                    UserDefaultsManager.shared.nickname    = model.nickname
+                    UserDefaultsManager.shared.age         = model.ageRange
+                    UserDefaultsManager.shared.gender      = model.gender
+                    UserDefaultsManager.shared.job         = model.job
+                    UserDefaultsManager.shared.profileImg  = model.profileImg
+                    UserDefaultsManager.shared.description = model.description
+                    
                     self.loginResult.onNext(true)
                     UserDefaultsManager.shared.isLogin = true
                 }
-                
             } else {
                 // 유저가 가입하지 않은 경우
                 self.loginResult.onNext(false)
@@ -150,33 +161,6 @@ class LoginViewModel: NSObject, ViewModelType {
 //                }
 //            }.disposed(by: disposeBag)
         
-    }
-    
-    private func getUserInfo(_ completion: ((Bool)->Void)? = nil) {
-        let moyaProvider = MoyaProvider<UserTargetType>()
-        moyaProvider.rx.request(.getUserInfo)
-            .subscribe { result in
-                switch result {
-                case .success(let response):
-                    do {
-                        let model = try JSONDecoder().decode(UserInfo.self, from: response.data)
-                        UserDefaultsManager.shared.nickname = model.nickname
-                        UserDefaultsManager.shared.age = model.ageRange
-                        UserDefaultsManager.shared.gender = model.gender
-                        UserDefaultsManager.shared.job = model.job
-                        UserDefaultsManager.shared.profileImg = model.profileImg
-                        UserDefaultsManager.shared.description = model.description
-                        
-                        completion?(true)
-                    } catch {
-                        Log.d("UserInfo Decoding Error")
-                    }
-                case .failure(let error):
-                    Log.d("GetUserInfo Error: \(error)")
-                    completion?(false)
-                }
-            }
-            .disposed(by: disposeBag)
     }
 }
 
