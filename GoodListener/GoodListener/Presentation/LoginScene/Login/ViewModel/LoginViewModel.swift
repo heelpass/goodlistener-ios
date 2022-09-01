@@ -98,7 +98,7 @@ class LoginViewModel: NSObject, ViewModelType {
     // Moya로 API부분 설계완료되면 수정 필요
     // MARK: 네트워크 구조화 after
     private func send(token: String) {
-        TokenAPI.getAppleToken(request: token, completion: { response, error in
+        TokenAPI.requestAppleToken(request: token, completion: { response, error in
             guard let response = response else {
                 Log.e(error ?? #function)
                 return

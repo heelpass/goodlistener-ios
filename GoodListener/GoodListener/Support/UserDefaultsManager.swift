@@ -39,8 +39,7 @@ class UserDefaultsManager {
         self.job = ""
         self.description = "안녕하세요 굿 리스너입니다."
         self.snsKind = ""
-        self.fcmToken = ""
-        self.profileImg = ""
+        self.profileImg = 0
     }
     
     // MARK: - authtoken from rest
@@ -148,10 +147,10 @@ class UserDefaultsManager {
         }
     }
     
-    var profileImg: String {
+    var profileImg: Int {
         get {
-            guard let profileImg = UserDefaults.standard.value(forKey: UserDefaultKey.profileImg.rawValue) as? String else {
-                return ""
+            guard let profileImg = UserDefaults.standard.value(forKey: UserDefaultKey.profileImg.rawValue) as? Int else {
+                return 0
             }
             return profileImg
         }

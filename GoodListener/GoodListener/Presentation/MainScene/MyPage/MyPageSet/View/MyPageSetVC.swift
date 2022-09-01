@@ -277,8 +277,23 @@ class MyPageSetVC: UIViewController, SnapKitType {
     func bind() {
         logoutContainer.tapGesture
             .subscribe(onNext: { [weak self] _ in
-                self?.coordinator?.logout()
-                UserDefaultsManager.shared.logout()
+                let popup = GLPopup()
+                popup.title = "알림"
+                popup.contents = PopupMessage.logout
+                popup.completeAction = {
+                    self?.coordinator?.logout()
+                    UserDefaultsManager.shared.logout()
+                }
+                self?.tabBarController?.view.addSubview(popup)
+                popup.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        withdrawContainer.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                self?.coordinator?.moveToDeleteAccountPage()
             })
             .disposed(by: disposeBag)
         

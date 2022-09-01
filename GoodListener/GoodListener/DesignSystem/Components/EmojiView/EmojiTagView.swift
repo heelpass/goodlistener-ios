@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 
 struct EmojiTagList {
-    static let emojiImgList = ["emoji1", "emoji2", "emoji3", "emoji4", "emoji5"]
+    static let emojiImgList = ["ic_mood_fond", "ic_mood_warm", "ic_mood_trust", "ic_mood_happy", "ic_mood_understand"]
     static let emojiTextList = ["다정한", "따뜻한", "믿음직한", "즐거운", "공감해주는"]
 }
 

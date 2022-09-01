@@ -17,7 +17,7 @@ struct UserInfo: Codable {
     var gender: String
     var ageRange: String
     var job: String
-    var profileImg: String
+    var profileImg: Int
     var description: String
     var fcmHash: String
     var createdAt: String
@@ -49,7 +49,7 @@ struct UserInfo: Codable {
         gender       = (try? values.decode(String.self, forKey: .gender)) ?? ""
         ageRange     = (try? values.decode(String.self, forKey: .ageRange)) ?? ""
         job          = (try? values.decode(String.self, forKey: .job)) ?? ""
-        profileImg   = (try? values.decode(String.self, forKey: .profileImg)) ?? ""
+        profileImg   = (try? values.decode(Int.self, forKey: .profileImg)) ?? 1
         description  = (try? values.decode(String.self, forKey: .description)) ?? ""
         fcmHash      = (try? values.decode(String.self, forKey: .fcmHash)) ?? ""
         createdAt    = (try? values.decode(String.self, forKey: .createdAt)) ?? ""

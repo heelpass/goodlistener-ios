@@ -15,6 +15,6 @@ struct SignInModel: Codable {
     var ageRange: String = ""
     var job: String = ""
     var fcmHash: String = ""
-    var profileImg: String = ""
+    var profileImg: Int = 1
     var description: String = ""
 }
