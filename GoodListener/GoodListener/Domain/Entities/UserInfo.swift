@@ -22,6 +22,7 @@ struct UserInfo: Codable {
     var fcmHash: String
     var createdAt: String
     var updatedAt: String
+    var wantImg: Int
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -37,6 +38,7 @@ struct UserInfo: Codable {
         case fcmHash
         case createdAt
         case updatedAt
+        case wantImg
     }
     
     init(from decoder: Decoder) throws {
@@ -54,5 +56,6 @@ struct UserInfo: Codable {
         fcmHash      = (try? values.decode(String.self, forKey: .fcmHash)) ?? ""
         createdAt    = (try? values.decode(String.self, forKey: .createdAt)) ?? ""
         updatedAt    = (try? values.decode(String.self, forKey: .updatedAt)) ?? ""
+        wantImg      = (try? values.decode(Int.self, forKey: .wantImg)) ?? 1
     }
 }

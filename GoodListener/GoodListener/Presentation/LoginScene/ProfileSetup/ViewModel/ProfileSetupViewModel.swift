@@ -56,20 +56,14 @@ class ProfileSetupViewModel: ViewModelType {
             .subscribe(onNext: { [weak self] (text) in
                 guard let self = self else { return }
                 
-                let provider = MoyaProvider<UserAPI>()
-                provider.rx.request(.nicknameCheck(text))
-                    .subscribe { result in
-                        switch result {
-                        case .success(let response):
-                            let jsonData = JSON(response.data)
-                            Log.d(jsonData)
-                            nicknameDuplicateResult.accept((text, jsonData["isExist"].boolValue))
-                        case .failure(let error):
-                            Log.e(error)
-                            nicknameDuplicateResult.accept((text, true))
-                        }
+                UserAPI.requestNicknameCheck(request: text, completion: { response, error in
+                    guard let response = response else {
+                        Log.e(error ?? #function)
+                        return
                     }
-                    .disposed(by: self.disposeBag)
+                    nicknameDuplicateResult.accept((text,response))
+
+                })
             })
             .disposed(by: disposeBag)
         
@@ -81,40 +75,24 @@ class ProfileSetupViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         input.signIn
-            .subscribe(onNext: { [weak self] model in
-                guard let self = self else { return }
+            .subscribe(onNext: { model in
                 var data = model
                 data.snsKind = UserDefaultsManager.shared.snsKind
                 data.fcmHash = UserDefaultsManager.shared.fcmToken
-                Log.d(data)
-                let loginProvider = MoyaProvider<UserAPI>()
-                loginProvider.rx.request(.signIn(model))
-                    .observe(on: MainScheduler.instance)
-                    .subscribe { result in
-                        switch result {
-                        case .success(let response):
-                            // 회원가입 성공 시 유저정보를 리턴해준다
-                            do {
-                                try response.filterSuccessfulStatusCodes()
-                                let model = try JSONDecoder().decode(UserInfo.self, from: response.data)
-                                UserDefaultsManager.shared.nickname = model.nickname
-                                UserDefaultsManager.shared.age = model.ageRange
-                                UserDefaultsManager.shared.gender = model.gender
-                                UserDefaultsManager.shared.job = model.job
-                                UserDefaultsManager.shared.profileImg = model.profileImg
-                                UserDefaultsManager.shared.description = model.description
-                                signInSuccess.accept(true)
-                            } catch {
-                                signInSuccess.accept(false)
-                                Log.d("UserInfo Decoding Error")
-                            }
-                            Log.d("SignInSuccess : \(JSON(response.data))")
-                        case .failure(let error):
-                            signInSuccess.accept(false)
-                            Log.e("SignInError : \(error)")
-                        }
+                
+                UserAPI.requestSignIn(request: data, completion: { response, error in
+                    guard let model = response else {
+                        Log.e(error ?? #function)
+                        return
                     }
-                    .disposed(by: self.disposeBag)
+                    UserDefaultsManager.shared.nickname    = model.nickname
+                    UserDefaultsManager.shared.age         = model.ageRange
+                    UserDefaultsManager.shared.gender      = model.gender
+                    UserDefaultsManager.shared.job         = model.job
+                    UserDefaultsManager.shared.profileImg  = model.profileImg
+                    UserDefaultsManager.shared.description = model.description
+                    signInSuccess.accept(true)
+                })
             })
             .disposed(by: disposeBag)
         
@@ -134,31 +112,6 @@ class ProfileSetupViewModel: ViewModelType {
         } else {
             return false
         }
-    }
-    
-    private func getUserInfo(_ completion: ((Bool)->Void)? = nil) {
-        let moyaProvider = MoyaProvider<UserAPI>()
-        moyaProvider.rx.request(.getUserInfo)
-            .subscribe { result in
-                switch result {
-                case .success(let response):
-                    do {
-                        let model = try JSONDecoder().decode(UserInfo.self, from: response.data)
-                        UserDefaultsManager.shared.nickname = model.nickname
-                        UserDefaultsManager.shared.age = model.ageRange
-                        UserDefaultsManager.shared.gender = model.gender
-                        UserDefaultsManager.shared.job = model.job
-                        UserDefaultsManager.shared.profileImg = model.profileImg
-                        completion?(true)
-                    } catch {
-                        Log.d("UserInfo Decoding Error")
-                    }
-                case .failure(let error):
-                    Log.d("GetUserInfo Error: \(error)")
-                    completion?(false)
-                }
-            }
-            .disposed(by: disposeBag)
     }
 }
 

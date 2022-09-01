@@ -49,23 +49,15 @@ class MyPageModifyViewModel: ViewModelType {
         // 닉네임 중복확인
         input.checkDuplicate
             .withLatestFrom(input.nickname)
-            .subscribe(onNext: { [weak self] (text) in
-                guard let self = self else { return }
-                
-                let provider = MoyaProvider<UserAPI>()
-                provider.rx.request(.nicknameCheck(text))
-                    .subscribe { result in
-                        switch result {
-                        case .success(let response):
-                            let jsonData = JSON(response.data)
-                            Log.d(jsonData)
-                            nicknameDuplicateResult.accept((text, jsonData["isExist"].boolValue))
-                        case .failure(let error):
-                            Log.e(error)
-                            nicknameDuplicateResult.accept((text, true))
-                        }
+            .subscribe(onNext: { (text) in
+                UserAPI.requestNicknameCheck(request: text, completion: { response, error in
+                    guard let response = response else {
+                        Log.e(error ?? "checkDuplicate")
+                        return
                     }
-                    .disposed(by: self.disposeBag)
+                    nicknameDuplicateResult.accept((text,response))
+
+                })
             })
             .disposed(by: disposeBag)
         
@@ -78,14 +70,29 @@ class MyPageModifyViewModel: ViewModelType {
                         // 중복체크 안됨 팝업 띄워줄 예정
                         popupMessage.accept("닉네임 중복확인을 해주세요")
                     } else {
-                        self?.saveUserInfo(nickname: nickname, job: job, description: introduce) {
+                        UserAPI.updateUserInfo(request: (nickname, job, introduce), completion: { response, error in
+                            guard let model = response else {
+                                Log.e(error ?? #function)
+                                return
+                            }
+                            UserDefaultsManager.shared.nickname = model.nickname
+                            UserDefaultsManager.shared.job = model.job
+                            UserDefaultsManager.shared.description = model.description
                             popupMessage.accept("회원 정보가 수정되었습니다")
-                        }
+                        })
                     }
+
                 } else if job != UserDefaultsManager.shared.job || introduce != UserDefaultsManager.shared.description {
-                    self?.saveUserInfo(nickname: nickname, job: job, description: introduce) {
+                    UserAPI.updateUserInfo(request: (nickname, job, introduce), completion: { response, error in
+                        guard let model = response else {
+                            Log.e(error ?? #function)
+                            return
+                        }
+                        UserDefaultsManager.shared.nickname = model.nickname
+                        UserDefaultsManager.shared.job = model.job
+                        UserDefaultsManager.shared.description = model.description
                         popupMessage.accept("회원 정보가 수정되었습니다")
-                    }
+                    })
                 } else {
                     popupMessage.accept("수정된 회원 정보가 없습니다")
                 }
@@ -107,31 +114,5 @@ class MyPageModifyViewModel: ViewModelType {
         } else {
             return false
         }
-    }
-    
-    func saveUserInfo(nickname: String, job: String, description: String, completion: (()->Void)? = nil) {
-        let provider = MoyaProvider<UserAPI>()
-        provider.rx.request(.userModify((nickname, job, description)))
-            .subscribe { result in
-                switch result {
-                case .success(let response):
-                    do {
-                        let decoder = JSONDecoder()
-                        let model = try decoder.decode(UserInfo.self, from: response.data)
-                        Log.d(model)
-                        
-                        UserDefaultsManager.shared.nickname = model.nickname
-                        UserDefaultsManager.shared.job = model.job
-                        UserDefaultsManager.shared.description = model.description
-                        completion?()
-                    } catch {
-                        Log.e("UserInfo Decoding Error")
-                    }
-                    
-                case .failure(let error):
-                    Log.e(error)
-                }
-            }
-            .disposed(by: disposeBag)
     }
 }

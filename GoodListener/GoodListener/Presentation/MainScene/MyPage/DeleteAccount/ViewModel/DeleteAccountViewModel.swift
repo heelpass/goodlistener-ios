@@ -43,31 +43,19 @@ class DeleteAccountViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         input.deleteAccount
-            .subscribe(onNext: { [weak self] in
-                self?.deleteAccount {
+            .subscribe(onNext: {
+                UserAPI.reqeustDeleteAccount(completion: { response, error in
+                    guard let _ = response else {
+                        Log.e(error ?? #function)
+                        return
+                    }
                     deleteAccountResult.accept(true)
-                }
+                })
             })
             .disposed(by: disposeBag)
         
         return Output(popupMessage: popupMessage.asSignal(onErrorJustReturn: ""),
                       deleteAccountResult: deleteAccountResult.asSignal(onErrorJustReturn: false))
-    }
-    
-    private func deleteAccount(completion: (()->Void)? = nil) {
-        let provider = MoyaProvider<UserAPI>()
-        provider.rx.request(.signOut)
-            .subscribe { [weak self] result in
-                
-                switch result {
-                case .success(_):
-                    completion?()
-                case .failure(let error):
-                    Log.d(error)
-                }
-                
-            }
-            .disposed(by: disposeBag)
     }
     
 }
