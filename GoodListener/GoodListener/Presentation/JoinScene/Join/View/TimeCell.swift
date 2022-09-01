@@ -13,7 +13,6 @@ enum TimeState {
     case unselected
 }
 
-
 class TimeCell: UICollectionViewCell {
     
     static let identifier = "TimeCell"

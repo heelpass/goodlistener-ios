@@ -29,9 +29,9 @@ enum Image: String {
     case profile5
     case profile6
     
-    case emoji1
-    case emoji2
-    case emoji3
-    case emoji4
-    case emoji5
+    case emoji1 = "ic_mood_fond"
+    case emoji2 = "ic_mood_warm"
+    case emoji3 = "ic_mood_trust"
+    case emoji4 = "ic_mood_happy"
+    case emoji5 = "ic_mood_understand"
 }
