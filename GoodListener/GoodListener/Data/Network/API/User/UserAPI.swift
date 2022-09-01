@@ -13,10 +13,12 @@ import Moya
 //ex) 만일 'ABC/DEF'에 token을 post로 보내야 한다고 가정
 // case signIn(path: String, token: String)
 enum UserAPI {
-    case signIn(SignInModel)    // 회원가입
-    case nicknameCheck(String)  // 닉네임 중복 확인
-    case getUserInfo            // 유저정보 얻어오기
-    case signOut                // 회원 탈퇴
+    case signIn(SignInModel)        // 회원가입
+    case nicknameCheck(String)      // 닉네임 중복 확인
+    case getUserInfo                // 유저정보 얻어오기
+    case signOut                    // 회원 탈퇴
+    case userModify((String, String, String))   // 편집페이지 회원 정보 수정 -> 닉네임, 하는일, 소개글
+    case profileImgModify(Int)   // 프로필 이미지 수정
 }
 
 
@@ -39,7 +41,7 @@ extension UserAPI: TargetType {
         case .nicknameCheck(_):
             return "/user/valid"
             
-        case .getUserInfo, .signOut:
+        case .getUserInfo, .signOut, .userModify(_), .profileImgModify(_):
             return "/user"
         }
     }
@@ -56,6 +58,9 @@ extension UserAPI: TargetType {
             
         case .signOut:
             return .delete
+            
+        case .userModify(_), .profileImgModify(_):
+            return .patch
         }
 
     }
@@ -82,6 +87,23 @@ extension UserAPI: TargetType {
             
         case .getUserInfo, .signOut:
             return .requestPlain
+            
+        case .userModify((let nickname, let job, let description)):
+            let params: [String: String] = [
+                "nickname" : nickname,
+                "job" : job,
+                "description" : description
+            ]
+            
+            return .requestJSONEncodable(params)
+//            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+            
+        case .profileImgModify(let image):
+            let params: [String: Int] = [
+                "profileImg": image
+            ]
+            
+            return .requestJSONEncodable(params)
         }
     }
     

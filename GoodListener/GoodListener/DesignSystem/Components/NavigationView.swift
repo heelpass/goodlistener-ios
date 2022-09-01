@@ -18,14 +18,9 @@ enum NaviButtonCase: String {
 
 class NavigationView: UIView {
     
-    let stackView = UIStackView().then {
-        $0.axis = .horizontal
-        $0.backgroundColor = .clear
-        $0.spacing = 13
-    }
-    
     let backBtn = UIButton().then {
         $0.setImage(UIImage(named: "ic_navi_back_btn"), for: .normal)
+        $0.isHidden = true
     }
     
     let logo = UILabel().then {
@@ -38,25 +33,23 @@ class NavigationView: UIView {
         $0.text = "title"
         $0.font = FontManager.shared.notoSansKR(.regular, 18)
         $0.textColor = .f2
+        $0.isHidden = true
     }
     
     let rightBtn = UIButton()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        [stackView, logo, rightBtn].forEach { addSubview($0) }
-        [backBtn, title].forEach {
-            stackView.addArrangedSubview($0)
-            $0.isHidden = true
-        }
+        [backBtn, title, logo, rightBtn].forEach { addSubview($0) }
         
-        stackView.snp.makeConstraints {
+        backBtn.snp.makeConstraints {
             $0.left.equalToSuperview().inset(6)
             $0.centerY.equalToSuperview()
+            $0.size.equalTo(36)
         }
         
         title.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.center.equalToSuperview()
         }
         
         logo.snp.makeConstraints {
@@ -79,14 +72,13 @@ class NavigationView: UIView {
         case .setting:
             rightBtn.setImage(UIImage(named: type.rawValue), for: .normal)
         case .save:
-            rightBtn.layer.cornerRadius = 10
             rightBtn.setTitle("저장", for: .normal)
-            rightBtn.backgroundColor = .m1
-            rightBtn.setTitleColor(.white, for: .normal)
-            rightBtn.titleLabel?.font = FontManager.shared.notoSansKR(.bold, 13)
+            rightBtn.backgroundColor = .clear
+            rightBtn.setTitleColor(.f3, for: .normal)
+            rightBtn.titleLabel?.font = FontManager.shared.notoSansKR(.bold, 16)
             rightBtn.snp.remakeConstraints {
                 $0.centerY.equalToSuperview()
-                $0.right.equalToSuperview().inset(16)
+                $0.right.equalToSuperview().inset(6)
                 $0.height.equalTo(44)
                 $0.width.equalTo(50)
             }

@@ -99,6 +99,7 @@ class GLPopup: UIView, SnapKitType {
         $0.text = "타이틀"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
         $0.textColor = .f2
+        $0.textAlignment = .center
     }
     
     private let contentsLbl = UILabel().then {
@@ -106,6 +107,7 @@ class GLPopup: UIView, SnapKitType {
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f2
         $0.numberOfLines = 0
+        $0.textAlignment = .center
     }
     
     private let buttonStackView = UIStackView().then {

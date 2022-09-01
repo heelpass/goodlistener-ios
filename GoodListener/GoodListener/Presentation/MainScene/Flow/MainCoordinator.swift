@@ -38,7 +38,7 @@ class MainCoordinator: CoordinatorType {
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.navigationController.isNavigationBarHidden = true
-        self.tabBarController = UITabBarController()
+        self.tabBarController = CustomTabBarController()
     }
     
     func start() {

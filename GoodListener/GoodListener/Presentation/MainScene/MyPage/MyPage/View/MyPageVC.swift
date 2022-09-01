@@ -56,10 +56,21 @@ class MyPageVC: UIViewController, SnapKitType {
         $0.line.isHidden = true
     }
     
+    let editBtn = UIButton().then {
+        $0.backgroundColor = .clear
+        $0.title = "편집"
+        $0.font = FontManager.shared.notoSansKR(.bold, 12)
+        $0.titleColor = .f3
+        $0.setImage(UIImage(named: "ico_arrow"), for: .normal)
+        $0.semanticContentAttribute = .forceRightToLeft
+        $0.imageEdgeInsets = UIEdgeInsets(top: 1.5, left: 6, bottom: 0, right: 0)
+    }
+    
     let introduceView = GLTextView(maxCount: 30).then {
         $0.title = "소개글"
-        $0.contents = "일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사"
+        $0.contents = ""
         $0.isEditable = false
+        $0.isDescriptionHidden = true
     }
 
     override func viewDidLoad() {
@@ -71,11 +82,16 @@ class MyPageVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         configUI()
     }
     
     func addComponents() {
         [navigationView, profileImage, profileImageEditView, nicknameContainer, tagView, introduceView].forEach { view.addSubview($0) }
+        tagView.addSubview(editBtn)
         [nicknameTitleLbl, nicknameLbl].forEach { nicknameContainer.addSubview($0) }
         profileImageEditView.addSubview(pencilIco)
     }
@@ -130,6 +146,13 @@ class MyPageVC: UIViewController, SnapKitType {
             $0.left.right.equalToSuperview()
             $0.height.equalTo(introduceView.glTextViewHeight(textViewHeight: 62))
         }
+        
+        editBtn.snp.makeConstraints {
+            $0.centerY.equalTo(tagView.title)
+            $0.right.equalToSuperview().inset(Const.padding)
+            $0.width.equalTo(35)
+            $0.height.equalTo(20)
+        }
     }
     
     func bind() {
@@ -152,10 +175,16 @@ class MyPageVC: UIViewController, SnapKitType {
                 view.selectedImage
                     .subscribe(onNext: { [weak self] image in
                         guard let self = self, let image = image else { return }
-                        self.profileImage.image = UIImage(named: image)
+                        self.profileImage.image = UIImage(named: "profile\(image)")
                     })
                     .disposed(by: view.disposeBag)
                 
+            })
+            .disposed(by: disposeBag)
+        
+        editBtn.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.moveToModifyPage()
             })
             .disposed(by: disposeBag)
     }
@@ -163,8 +192,9 @@ class MyPageVC: UIViewController, SnapKitType {
     func configUI() {
         nicknameLbl.text = UserDefaultsManager.shared.nickname?.localized
         tagView.tagData = [UserDefaultsManager.shared.age!, UserDefaultsManager.shared.gender!, UserDefaultsManager.shared.job!]
+        tagView.collectionView.reloadData()
         introduceView.contents = UserDefaultsManager.shared.description!
-        profileImage.image = UIImage(named: UserDefaultsManager.shared.profileImg)
+        profileImage.image = UIImage(named: "profile\(UserDefaultsManager.shared.profileImg)")
     }
 
 }
