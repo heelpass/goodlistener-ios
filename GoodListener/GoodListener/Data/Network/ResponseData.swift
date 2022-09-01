@@ -7,6 +7,7 @@
 
 import Foundation
 import Moya
+import SwiftyJSON
 
 struct ResponseData<Model: Codable> {
     
@@ -14,6 +15,7 @@ struct ResponseData<Model: Codable> {
         switch result {
         case .success(let response):
             do {
+                Log.d(JSON(response.data))
                 // status code가 200...299인 경우만 success로 체크 (아니면 예외발생)
                 _ = try response.filterSuccessfulStatusCodes()
                 
