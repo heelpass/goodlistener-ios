@@ -15,7 +15,7 @@ struct UserAPI: Networkable {
     /// - Returns: Success: UserInfo, Fail: Error
     static func requestUserInfo(completion: @escaping (_ succeed: UserInfo?, _ failed: Error?) -> Void) {
         makeProvider().request(.getUserInfo, completion: { result in
-            switch ResponseData<UserInfo>.processJSONResponse(result) {
+            switch ResponseData<UserInfo>.processModelResponse(result) {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):
@@ -29,7 +29,7 @@ struct UserAPI: Networkable {
     /// - Returns: Success: UserInfo, Fail: Error
     static func requestSignIn(request: SignInModel, completion: @escaping (_ succeed: UserInfo?, _ failed: Error?) -> Void) {
         makeProvider().request(.signIn(request), completion: { result in
-            switch ResponseData<UserInfo>.processJSONResponse(result) {
+            switch ResponseData<UserInfo>.processModelResponse(result) {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):
@@ -56,7 +56,7 @@ struct UserAPI: Networkable {
     /// - Returns: Success: Bool, Fail: Error
     static func requestNicknameCheck(request: String, completion: @escaping (_ succeed: Bool?, _ failed: Error?) -> Void) {
         makeProvider().request(.nicknameCheck(request), completion: { result in
-            switch ResponseData<JSON>.processSwiftyJSONResponse(result) {
+            switch ResponseData<JSON>.processJSONResponse(result) {
             case .success(let model):
                 return completion(model["isExist"].bool, nil)
             case .failure(let error):
@@ -70,7 +70,7 @@ struct UserAPI: Networkable {
     /// - Returns: Success: UserInfo, Fail: Error
     static func updateUserInfo(request: (String, String, String), completion: @escaping (_ succeed: UserInfo?, _ failed: Error?) -> Void) {
         makeProvider().request(.userModify(request), completion: { result in
-            switch ResponseData<UserInfo>.processJSONResponse(result) {
+            switch ResponseData<UserInfo>.processModelResponse(result) {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):

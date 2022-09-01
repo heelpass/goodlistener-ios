@@ -11,7 +11,7 @@ import SwiftyJSON
 
 struct ResponseData<Model: Codable> {
     
-    static func processJSONResponse(_ result: Result<Response, MoyaError>) -> Result<Model?, Error> {
+    static func processModelResponse(_ result: Result<Response, MoyaError>) -> Result<Model?, Error> {
         switch result {
         case .success(let response):
             do {
@@ -30,7 +30,7 @@ struct ResponseData<Model: Codable> {
         }
     }
     
-    static func processSwiftyJSONResponse(_ result: Result<Response, MoyaError>) -> Result<JSON, Error> {
+    static func processJSONResponse(_ result: Result<Response, MoyaError>) -> Result<JSON, Error> {
         switch result {
         case .success(let response):
             do {

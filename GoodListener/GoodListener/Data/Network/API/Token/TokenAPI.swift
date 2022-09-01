@@ -13,7 +13,7 @@ struct TokenAPI: Networkable {
     static func requestAppleToken(request: String, completion: @escaping (_ succeed: AppleToken?, _ failed: Error?) -> Void) {
         makeProvider().request(.requestAppleToken(request)) { result in
             // ResponseData<❗️success시 디코딩할 데이터 모델: Codable형식 이여야 함❗️>
-            switch ResponseData<AppleToken>.processJSONResponse(result) {
+            switch ResponseData<AppleToken>.processModelResponse(result) {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):
