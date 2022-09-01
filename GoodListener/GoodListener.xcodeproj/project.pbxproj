@@ -1154,7 +1154,7 @@
 				0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */,
 				ECBA27B128A4DD0E0034A751 /* MyPageModifyVC.swift in Sources */,
 				0A350B8728BCA56C00EC83DA /* RecordContenttCell.swift in Sources */,
-				ECBA27B128A4DD0E0034A751 /* MyPageTagVC.swift in Sources */,
+				ECBA27B128A4DD0E0034A751 /* MyPageModifyVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1316,10 +1316,11 @@
 				CODE_SIGN_ENTITLEMENTS = GoodListener/GoodListener.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = XQ24HP64B3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GoodListener/Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근을 허용해 주세요";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone required";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 앨범에 접근하도록 허용 버튼을 눌러주세요";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1351,10 +1352,11 @@
 				CODE_SIGN_ENTITLEMENTS = GoodListener/GoodListenerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = XQ24HP64B3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GoodListener/Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근을 허용해 주세요";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone required";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 앨범에 접근하도록 허용 버튼을 눌러주세요";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
