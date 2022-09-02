@@ -290,6 +290,12 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     func bind() {
+        navigationView.rightBtn.rx.tap
+            .bind(onNext: {[weak self] in
+                self?.coordinator?.moveToNotice()
+            })
+            .disposed(by: disposeBag)
+    
         joinBtn.rx.tap
             .bind(onNext: { [weak self] in
                 self?.coordinator?.join()
@@ -318,7 +324,7 @@ class HomeVC: UIViewController, SnapKitType {
                 self.popup.isHidden = true
             })
             .disposed(by: disposeBag)
-        
+    
     }
     
     func changeUI(_ type: homeState) {

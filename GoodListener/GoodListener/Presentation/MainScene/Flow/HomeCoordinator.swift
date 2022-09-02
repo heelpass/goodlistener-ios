@@ -11,6 +11,7 @@ import UIKit
 protocol HomeCoordinating: AnyObject {
     func call()
     func join()
+    func moveToNotice()
 }
 
 class HomeCoordinator: CoordinatorType {
@@ -39,5 +40,11 @@ extension HomeCoordinator: HomeCoordinating {
     
     func join() {
         parentCoordinator?.join()
+    }
+    
+    func moveToNotice() {
+        let vc = NoticeVC()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
     }
 }
