@@ -50,7 +50,7 @@ class NoticeVC: UIViewController, SnapKitType {
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
     }
     
-    //알림 있을 때 
+    //알림 있을 때
     let RecordBgView : UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.backgroundColor = .m5
@@ -150,8 +150,6 @@ extension NoticeVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeCell.identifier, for: indexPath) as? NoticeCell else { fatalError() }
-        cell.backgroundColor = UIColor(hex: "F7FFF2")
-        cell.layer.cornerRadius = 10
         return cell
     }
 }
