@@ -68,7 +68,9 @@ class RecordVC: UIViewController, SnapKitType{
     
     func setConstraints() {
         navigationView.snp.makeConstraints {
-            $0.top.left.right.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            $0.left.equalToSuperview().offset(15)
+            $0.right.equalToSuperview().offset(-15)
             $0.height.equalTo(35)
         }
         
