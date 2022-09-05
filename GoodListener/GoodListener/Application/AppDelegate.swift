@@ -10,6 +10,7 @@ import RxKakaoSDKCommon
 import FirebaseCore
 import FirebaseMessaging
 import AuthenticationServices
+import SwiftyJSON
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerRemoteNotification()
         // 현재 등록된 Fcm토큰값 불러오는 함수
         getFCMToken()
+        
+        // 앱이 실행되지않은 상태에서 푸쉬를 타고 들어왔을 시 처리
+        if let options = launchOptions, let remoteNotification = options[UIApplication.LaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
+            Log.d(JSON(remoteNotification))
+            Log.d("++++++++++++++++++++++++")
+            if let etcData =  remoteNotification["data"] as? String {
+                let data = JSON(parseJSON: etcData)
+                Log.d(data)
+            }
+            
+            if let etcData =  remoteNotification["notification"] as? String {
+                let data = JSON(parseJSON: etcData)
+                Log.d(data)
+            }
+            
+            if let etcData =  remoteNotification["message"] as? String {
+                let data = JSON(parseJSON: etcData)
+                Log.d(data)
+            }
+        }
         
         return true
     }
@@ -81,20 +102,29 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             completionHandler([.badge, .sound])
         }
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // Push데이터를 받는곳!!
+        if let userInfo = response.notification.request.content.userInfo as? [String: Any] {
+            Log.d(userInfo)
+        }
+        
+        completionHandler()
+    }
 }
 
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("FCM 토큰 갱신: \(String(describing: fcmToken))")
-
+        
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
         NotificationCenter.default.post(
-          name: Notification.Name("FCMToken"),
-          object: nil,
-          userInfo: dataDict
+            name: Notification.Name("FCMToken"),
+            object: nil,
+            userInfo: dataDict
         )
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
         UserDefaultsManager.shared.fcmToken = fcmToken!
-      }
+    }
 }
