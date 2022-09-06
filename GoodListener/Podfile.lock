@@ -194,6 +194,7 @@ PODS:
   - Starscream (3.1.1)
   - SwiftyJSON (5.0.1)
   - Then (3.0.0)
+  - Toaster (2.3.0)
 
 DEPENDENCIES:
   - AgoraRtcEngine_iOS (= 3.7.0.2)
@@ -213,6 +214,7 @@ DEPENDENCIES:
   - Socket.IO-Client-Swift (~> 15.2.0)
   - SwiftyJSON
   - Then
+  - Toaster
 
 SPEC REPOS:
   trunk:
@@ -249,6 +251,7 @@ SPEC REPOS:
     - Starscream
     - SwiftyJSON
     - Then
+    - Toaster
 
 SPEC CHECKSUMS:
   AgoraRtcEngine_iOS: e39e5b31eab3eadaae6316a042b0edf71a30f894
@@ -284,7 +287,8 @@ SPEC CHECKSUMS:
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
+  Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 4c42088c04c1495c26e1cec7e6af35ce2ff43895
+PODFILE CHECKSUM: de2425a8819f68f5692548015531025b43790b77
 
 COCOAPODS: 1.11.3

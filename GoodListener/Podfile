@@ -11,6 +11,7 @@ target 'GoodListener' do
   pod 'SnapKit'
   pod 'Then'
   pod 'SDWebImage', '~> 5.0'
+  pod 'Toaster'
 
 # ReactiveX
   pod 'RxSwift', '6.5.0'

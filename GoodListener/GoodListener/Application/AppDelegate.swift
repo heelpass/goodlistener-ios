@@ -11,6 +11,7 @@ import FirebaseCore
 import FirebaseMessaging
 import AuthenticationServices
 import SwiftyJSON
+import Toaster
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -101,12 +102,18 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             // Fallback on earlier versions
             completionHandler([.badge, .sound])
         }
+        
+        if let userInfo = notification.request.content.userInfo as? [String: Any] {
+            Log.d(userInfo)
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // Push데이터를 받는곳!!
         if let userInfo = response.notification.request.content.userInfo as? [String: Any] {
             Log.d(userInfo)
+            // TODO: FCM 테스트용
+            Toast(text: userInfo.description, duration: Delay.long).show()
         }
         
         completionHandler()
