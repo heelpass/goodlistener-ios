@@ -20,7 +20,15 @@ class NotificationService: UNNotificationServiceExtension {
             // Modify the notification content here...
             if let userInfo = request.content.userInfo as? [String: Any] {
                 if let userDefault = UserDefaults(suiteName: "group.com.heelpass.good-listener"){
-                    userDefault.set(userInfo["flag"], forKey: "pushType")
+                    
+                    // 앱이 실행되기 전까지 푸쉬를 배열로 저장한다
+                    // SceneDelegate에서 저장된 데이터를 기반으로 구현
+                    var pushData = (userDefault.value(forKey: "pushData") as? [String]) ?? []
+                    
+                    pushData.append(userInfo["flag"] as! String)
+                    
+                    
+                    userDefault.set(pushData, forKey: "pushData")
                     userDefault.synchronize()
                 }
             }

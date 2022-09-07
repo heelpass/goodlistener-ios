@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RealmSwift
 
 enum noticeState {
     case none
@@ -19,6 +20,8 @@ class NoticeVC: UIViewController, SnapKitType {
     let disposeBag = DisposeBag()
     
     var noticeState: noticeState = .notice
+    
+    var noticeData: [PushModel] = []
     
     let navigationView = NavigationView(frame: .zero, type: .none).then {
         $0.logo.isHidden = true
@@ -61,6 +64,7 @@ class NoticeVC: UIViewController, SnapKitType {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        noticeData = fetchNoticeData()
         addComponents()
         setConstraints()
         bind()
@@ -139,6 +143,16 @@ class NoticeVC: UIViewController, SnapKitType {
             RecordBgView.isHidden = false
             break
         }
+    }
+    
+    func fetchNoticeData()-> [PushModel] {
+        let realm = try! Realm()
+        let pushData: [PushModel] = []
+        
+        let savedPushData = realm.objects(PushModel.self)
+        Log.d(savedPushData)
+        
+        return pushData
     }
 }
 
