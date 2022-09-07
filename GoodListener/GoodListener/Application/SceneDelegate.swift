@@ -53,6 +53,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if UIApplication.shared.applicationIconBadgeNumber != 0 {
             UIApplication.shared.applicationIconBadgeNumber = 0
         }
+        
+        if let userDefault = UserDefaults(suiteName: "group.com.heelpass.good-listener") {
+            guard let pushType = userDefault.value(forKey: "pushType") as? String else { return }
+            let pushModel = PushModel()
+            switch pushType {
+            case "call":
+                pushModel.title = "굿리스너 통화 안내"
+                pushModel.body = "[스피커닉네임]님이 통화가 걸었어요~"
+                pushModel.date = dateConverter()
+            case "cancel":
+                pushModel.title = "굿리스너 취소 안내"
+                pushModel.body = "[스피커닉네임]님이 통화가 취소됐어요"
+                pushModel.date = dateConverter()
+            case "remain5":
+                pushModel.title = "굿리스너 통화 안내"
+                pushModel.body = "5분뒤 [스피커닉네임]과 통화 예정이에요"
+                pushModel.date = dateConverter()
+            default:
+                break
+            }
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -69,6 +90,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+    }
+    
+    func dateConverter()-> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        return dateFormatter.string(from: Date())
     }
 
 }

@@ -21,7 +21,6 @@
 		0A558A4828B61F36001949D6 /* GLTwoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A4728B61F36001949D6 /* GLTwoButton.swift */; };
 		0A703B532896AB8300A05124 /* UserTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B522896AB8300A05124 /* UserTargetType.swift */; };
 		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
-		0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B582896BC5E00A05124 /* WeatherInfo.swift */; };
 		0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2820288D5B55000D889B /* AppDelegate.swift */; };
 		0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2822288D5B55000D889B /* SceneDelegate.swift */; };
 		0ABA2825288D5B55000D889B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2824288D5B55000D889B /* LoginVC.swift */; };
@@ -108,6 +107,7 @@
 		E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D09853289A6C4D008AD55F /* SocketManager.swift */; };
 		E8EF860328C81D60001C504F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF860228C81D60001C504F /* NotificationService.swift */; };
 		E8EF860728C81D60001C504F /* NotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E8EF860028C81D60001C504F /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E8EF860E28C82670001C504F /* PushModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8EF860D28C82670001C504F /* PushModel.swift */; };
 		ECBA27B528A4DF970034A751 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B428A4DF970034A751 /* TagView.swift */; };
 		ECBA27B728A4E0B60034A751 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B628A4E0B60034A751 /* TagCell.swift */; };
 		ECBA27B928A4FCEE0034A751 /* TagCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */; };
@@ -152,7 +152,6 @@
 		0A558A4728B61F36001949D6 /* GLTwoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTwoButton.swift; sourceTree = "<group>"; };
 		0A703B522896AB8300A05124 /* UserTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserTargetType.swift; path = GoodListener/Data/Network/API/User/UserTargetType.swift; sourceTree = SOURCE_ROOT; };
 		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
-		0A703B582896BC5E00A05124 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherInfo.swift; path = GoodListener/Domain/Entities/WeatherInfo.swift; sourceTree = SOURCE_ROOT; };
 		0ABA281D288D5B55000D889B /* GoodListener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodListener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ABA2820288D5B55000D889B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0ABA2822288D5B55000D889B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -250,6 +249,7 @@
 		E8EF860228C81D60001C504F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		E8EF860428C81D60001C504F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8EF860C28C820C9001C504F /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
+		E8EF860D28C82670001C504F /* PushModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushModel.swift; sourceTree = "<group>"; };
 		ECBA27B028A4DD0E0034A751 /* MyPageModifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageModifyVC.swift; sourceTree = "<group>"; };
 		ECBA27B428A4DF970034A751 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		ECBA27B628A4E0B60034A751 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
@@ -793,12 +793,13 @@
 		E8CB656E288E66C30076E254 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				E8EF860F28C82674001C504F /* New Group */,
 				E8CB656B288E36420076E254 /* Interface */,
-				0A703B582896BC5E00A05124 /* WeatherInfo.swift */,
 				0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */,
 				E8B4449928ADC8620003815B /* UserInfo.swift */,
 				E845495328BC7F0100DAD6EE /* SignInModel.swift */,
 				E81E41F228BF24330094CFD9 /* AppleToken.swift */,
+				E8EF860D28C82670001C504F /* PushModel.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -991,6 +992,13 @@
 				E8EF860428C81D60001C504F /* Info.plist */,
 			);
 			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		E8EF860F28C82674001C504F /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		ECBA27AD28A4DCF10034A751 /* MyPageModify */ = {
@@ -1213,10 +1221,10 @@
 				E8B444AF28B316FE0003815B /* UIColor+.swift in Sources */,
 				E8B443FF28A255D30003815B /* CALayer+.swift in Sources */,
 				E8B4449C28ADF20B0003815B /* ProfileImageSelectView.swift in Sources */,
-				0A703B592896BC5E00A05124 /* WeatherInfo.swift in Sources */,
 				E8CFBCDC288F7D0900D63B07 /* MainCoordinator.swift in Sources */,
 				0A558A3728B61DCE001949D6 /* JoinCoordinator.swift in Sources */,
 				E8C3320928925F3400ECE59C /* CallVC.swift in Sources */,
+				E8EF860E28C82670001C504F /* PushModel.swift in Sources */,
 				0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */,
 				E8CE19E4289CE15E007A56FE /* Const.swift in Sources */,
 				0AF43093288FDC850078B2D5 /* RecordVC.swift in Sources */,

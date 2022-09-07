@@ -8,19 +8,22 @@
 import UserNotifications
 
 class NotificationService: UNNotificationServiceExtension {
-
+    
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
-
+    
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
         if let bestAttemptContent = bestAttemptContent {
             // Modify the notification content here...
-            bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
-            
-            
+            if let userInfo = request.content.userInfo as? [String: Any] {
+                if let userDefault = UserDefaults(suiteName: "group.com.heelpass.good-listener"){
+                    userDefault.set(userInfo["flag"], forKey: "pushType")
+                    userDefault.synchronize()
+                }
+            }
             
             contentHandler(bestAttemptContent)
         }
@@ -33,5 +36,5 @@ class NotificationService: UNNotificationServiceExtension {
             contentHandler(bestAttemptContent)
         }
     }
-
+    
 }
