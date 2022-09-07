@@ -30,26 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 현재 등록된 Fcm토큰값 불러오는 함수
         getFCMToken()
         
-        // 앱이 실행되지않은 상태에서 푸쉬를 타고 들어왔을 시 처리
-        if let options = launchOptions, let remoteNotification = options[UIApplication.LaunchOptionsKey.remoteNotification] as? [AnyHashable: Any] {
-            Log.d(JSON(remoteNotification))
-            Log.d("++++++++++++++++++++++++")
-            if let etcData =  remoteNotification["data"] as? String {
-                let data = JSON(parseJSON: etcData)
-                Log.d(data)
-            }
-            
-            if let etcData =  remoteNotification["notification"] as? String {
-                let data = JSON(parseJSON: etcData)
-                Log.d(data)
-            }
-            
-            if let etcData =  remoteNotification["message"] as? String {
-                let data = JSON(parseJSON: etcData)
-                Log.d(data)
-            }
-        }
-        
         return true
     }
     
@@ -97,14 +77,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         if #available(iOS 14.0, *) {
-            completionHandler([.banner, .badge, .sound])
+            completionHandler([])
         } else {
             // Fallback on earlier versions
-            completionHandler([.badge, .sound])
+            completionHandler([])
         }
+        DBManager.shared.savePushData()
         
+        // Foreground 상태에서 전화가 왔는데 플래그가 call 이면 바로 전화를 띄워준다
         if let userInfo = notification.request.content.userInfo as? [String: Any] {
-            Toast(text: userInfo.description, duration: 10).show()
+            if userInfo["flag"] as! String == "call" {
+                if let vc = UIApplication.getMostTopViewController()?.tabBarController as? CustomTabBarController {
+                    vc.coordinator?.call()
+                }
+                
+            }
         }
     }
     

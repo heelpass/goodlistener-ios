@@ -30,7 +30,7 @@ class MainCoordinator: CoordinatorType {
     weak var parentCoordinator: CoordinatorType?
     
     var navigationController: UINavigationController
-    var tabBarController: UITabBarController
+    var tabBarController: CustomTabBarController
     
     // 유저 타입도 AppCoordinator에서 주입해줘야 합니다
     var userType: UserType = .speaker
@@ -39,6 +39,7 @@ class MainCoordinator: CoordinatorType {
         self.navigationController = navigationController
         self.navigationController.isNavigationBarHidden = true
         self.tabBarController = CustomTabBarController()
+        self.tabBarController.coordinator = self
     }
     
     func start() {
