@@ -29,6 +29,12 @@ class DBManager {
         }
     }
     
+    func deleteAll() {
+        try! realm.write {
+            realm.deleteAll()
+        }
+    }
+    
     /// PushData를 저장해주는 함수
     func savePushData() {
         if let userDefault = UserDefaults(suiteName: "group.com.heelpass.good-listener") {
