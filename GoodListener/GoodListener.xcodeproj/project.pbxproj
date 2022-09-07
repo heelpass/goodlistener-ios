@@ -21,12 +21,14 @@
 		0A558A4828B61F36001949D6 /* GLTwoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A4728B61F36001949D6 /* GLTwoButton.swift */; };
 		0A703B532896AB8300A05124 /* UserTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B522896AB8300A05124 /* UserTargetType.swift */; };
 		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
+		0AA2BA9F28C1BE6B001AB4BD /* NoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA9E28C1BE6B001AB4BD /* NoticeVC.swift */; };
 		0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2820288D5B55000D889B /* AppDelegate.swift */; };
 		0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2822288D5B55000D889B /* SceneDelegate.swift */; };
 		0ABA2825288D5B55000D889B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2824288D5B55000D889B /* LoginVC.swift */; };
 		0ABA2828288D5B55000D889B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA2826288D5B55000D889B /* Main.storyboard */; };
 		0ABA282A288D5B56000D889B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA2829288D5B56000D889B /* Assets.xcassets */; };
 		0ABA282D288D5B56000D889B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ABA282B288D5B56000D889B /* LaunchScreen.storyboard */; };
+		0AEC961C28C37A32007322B1 /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEC961B28C37A32007322B1 /* NoticeCell.swift */; };
 		0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF43089288FD8800078B2D5 /* ApplicantCoordinator.swift */; };
 		0AF4308C288FD8E90078B2D5 /* ApplicantVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */; };
 		0AF4308E288FDC230078B2D5 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */; };
@@ -152,6 +154,7 @@
 		0A558A4728B61F36001949D6 /* GLTwoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTwoButton.swift; sourceTree = "<group>"; };
 		0A703B522896AB8300A05124 /* UserTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserTargetType.swift; path = GoodListener/Data/Network/API/User/UserTargetType.swift; sourceTree = SOURCE_ROOT; };
 		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
+		0AA2BA9E28C1BE6B001AB4BD /* NoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC.swift; sourceTree = "<group>"; };
 		0ABA281D288D5B55000D889B /* GoodListener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodListener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ABA2820288D5B55000D889B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0ABA2822288D5B55000D889B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -160,6 +163,7 @@
 		0ABA2829288D5B56000D889B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0ABA282C288D5B56000D889B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AD4186528B75BB9008AE8AA /* GoodListenerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoodListenerRelease.entitlements; sourceTree = "<group>"; };
+		0AEC961B28C37A32007322B1 /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
 		0AF43089288FD8800078B2D5 /* ApplicantCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantCoordinator.swift; sourceTree = "<group>"; };
 		0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicantVC.swift; sourceTree = "<group>"; };
 		0AF4308D288FDC230078B2D5 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
@@ -929,6 +933,8 @@
 			isa = PBXGroup;
 			children = (
 				E8CFBCD9288F7B4800D63B07 /* HomeVC.swift */,
+				0AA2BA9E28C1BE6B001AB4BD /* NoticeVC.swift */,
+				0AEC961B28C37A32007322B1 /* NoticeCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1250,6 +1256,7 @@
 				E8A7954D289CCC4700EF9E1B /* Colors.swift in Sources */,
 				0A558A3C28B61E28001949D6 /* JoinVC.swift in Sources */,
 				E81E41EB28BF1F060094CFD9 /* BaseTargetType.swift in Sources */,
+				0AA2BA9F28C1BE6B001AB4BD /* NoticeVC.swift in Sources */,
 				E845494E28BC553500DAD6EE /* TermsOfServicePopup.swift in Sources */,
 				E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */,
 				0A558A4228B61ED6001949D6 /* EmojiTagCell.swift in Sources */,
@@ -1272,6 +1279,7 @@
 				E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */,
 				E8B444B928B4A2680003815B /* CallViewModel.swift in Sources */,
 				0A558A3E28B61E44001949D6 /* TimeCell.swift in Sources */,
+				0AEC961C28C37A32007322B1 /* NoticeCell.swift in Sources */,
 				E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */,
 				E8B4435A28A103570003815B /* UILabel+.swift in Sources */,
 				E845495428BC7F0100DAD6EE /* SignInModel.swift in Sources */,
@@ -1457,7 +1465,7 @@
 				CODE_SIGN_ENTITLEMENTS = GoodListener/GoodListener.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = XQ24HP64B3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GoodListener/Resources/Info.plist;
@@ -1494,7 +1502,7 @@
 				CODE_SIGN_ENTITLEMENTS = GoodListener/GoodListenerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = XQ24HP64B3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GoodListener/Resources/Info.plist;
