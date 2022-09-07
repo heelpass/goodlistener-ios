@@ -224,3 +224,4 @@ GoodListener/Pods/AgoraRtcEngine_iOS/AgoraSpatialAudioExtension.xcframework/ios-
 GoodListener/Pods/AgoraRtcEngine_iOS/AgoraVideoProcessExtension.xcframework/ios-arm64_x86_64-simulator/AgoraVideoProcessExtension.framework/AgoraVideoProcessExtension filter=lfs diff=lfs merge=lfs -text
 GoodListener/Pods/AgoraRtcEngine_iOS/AgoraReplayKitExtension.xcframework/ios-arm64_x86_64-simulator/AgoraReplayKitExtension.framework/Headers/AgoraReplayKitExt.h filter=lfs diff=lfs merge=lfs -text
 GoodListener/Pods/AgoraRtcEngine_iOS/AgoraRtcKit.xcframework/ios-arm64_armv7/AgoraRtcKit.framework/Headers/IAgoraService.h filter=lfs diff=lfs merge=lfs -text
+GoodListener/Pods/Realm/core/realm-monorepo.xcframework/watchos-arm64_i386_x86_64-simulator/librealm-monorepo.a filter=lfs diff=lfs merge=lfs -text
