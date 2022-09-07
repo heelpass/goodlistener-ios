@@ -19,7 +19,7 @@ class DBManager {
     
     private init() {}
     
-    private let realm = try! Realm()
+    let realm = try! Realm()
     
     /// DB에 데이터를 추가하는 함수
     ///  - Parameter model: Realm Object를 채택한 모델
@@ -57,9 +57,7 @@ class DBManager {
                     }
                     
                     // realm DB에 저장
-                    try! realm.write {
-                        realm.add(pushModel)
-                    }
+                    add(model: pushModel)
                 }
 
                 userDefault.set(nil, forKey: "pushData")

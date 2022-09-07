@@ -200,4 +200,14 @@ class UserDefaultsManager {
             UserDefaults.standard.set(pushCnt, forKey:  UserDefaultKey.pushCnt.rawValue)
         }
     }
+    
+    // MARK: AppGroup을 통해 추가한 데이터라 복붙하시면 안됩니다!!
+    var pushData: [String] {
+        get {
+            guard let pushData = UserDefaults(suiteName: "group.com.heelpass.good-listener")?.value(forKey: "pushData") as? [String] else {
+                return []
+            }
+            return pushData
+        }
+    }
 }
