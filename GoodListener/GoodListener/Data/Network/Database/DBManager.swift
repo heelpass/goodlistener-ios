@@ -29,9 +29,30 @@ class DBManager {
         }
     }
     
+    /// DB에 데이터를 전부 삭제하는 함수
     func deleteAll() {
         try! realm.write {
             realm.deleteAll()
+        }
+    }
+    
+    /// 안읽은 알림 개수 리턴
+    func unreadfilter()-> Int {
+        let result = realm.objects(PushModel.self)
+        
+        let filter = result.filter("isRead == false")
+        return filter.count
+    }
+    
+    /// 모든 알림 읽기
+    func readAllData() {
+        let result = realm.objects(PushModel.self)
+        let filter = result.filter("isRead == false")
+        
+        filter.forEach { model in
+            try! realm.write {
+                model.isRead = true
+            }
         }
     }
     

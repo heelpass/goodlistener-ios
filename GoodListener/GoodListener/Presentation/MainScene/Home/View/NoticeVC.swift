@@ -65,10 +65,14 @@ class NoticeVC: UIViewController, SnapKitType {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         noticeData = fetchNoticeData()
+        noticeState = noticeData.isEmpty ? .none : .notice
+        
         addComponents()
         setConstraints()
         bind()
         changeUI(noticeState)
+        
+        DBManager.shared.readAllData()
     }
     
     func addComponents() {
@@ -183,6 +187,7 @@ extension NoticeVC: UICollectionViewDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
                 self.noticeData = self.fetchNoticeData()
                 self.RecordBgView.reloadData()
+                
             })
             
         }

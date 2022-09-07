@@ -156,6 +156,13 @@ class HomeVC: UIViewController, SnapKitType {
         addCallBtn()    // 전화 테스트용
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        let cnt = DBManager.shared.unreadfilter()
+        navigationView.remainNoticeView.isHidden = cnt == 0
+        navigationView.remainNoticeLbl.text = "+\(cnt)"
+    }
+    
     func addComponents() {
         [navigationView, scrollView, joinBtn, postponeBtn].forEach{
             view.addSubview($0)
