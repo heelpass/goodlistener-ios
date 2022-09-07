@@ -104,7 +104,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         }
         
         if let userInfo = notification.request.content.userInfo as? [String: Any] {
-            Log.d(userInfo)
+            Toast(text: userInfo.description, duration: 10).show()
         }
     }
     
@@ -113,7 +113,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if let userInfo = response.notification.request.content.userInfo as? [String: Any] {
             Log.d(userInfo)
             // TODO: FCM 테스트용
-            Toast(text: userInfo.description, duration: Delay.long).show()
         }
         
         completionHandler()

@@ -23,6 +23,9 @@ enum UserDefaultKey : String {
     // 로그인 관련 정보
     case appleID
     case isLogin
+    
+    // Push
+    case pushCnt
 }
 
 class UserDefaultsManager {
@@ -182,6 +185,19 @@ class UserDefaultsManager {
         
         set(isLogin) {
             UserDefaults.standard.set(isLogin, forKey:  UserDefaultKey.isLogin.rawValue)
+        }
+    }
+    
+    var pushCnt: Int {
+        get {
+            guard let pushCnt = UserDefaults.standard.value(forKey: UserDefaultKey.pushCnt.rawValue) as? Int else {
+                return 0
+            }
+            return pushCnt
+        }
+        
+        set(pushCnt) {
+            UserDefaults.standard.set(pushCnt, forKey:  UserDefaultKey.pushCnt.rawValue)
         }
     }
 }
