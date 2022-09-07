@@ -38,4 +38,7 @@ target 'GoodListener' do
 
 # Agora
   pod 'AgoraRtcEngine_iOS', '3.7.0.2'
+
+# Database
+  pod 'RealmSwift'
 end
