@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
+    /// Foreground 처리
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         if #available(iOS 14.0, *) {
             completionHandler([])
@@ -90,16 +91,21 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 if let vc = UIApplication.getMostTopViewController()?.tabBarController as? CustomTabBarController {
                     vc.coordinator?.call()
                 }
-                
             }
         }
     }
-    
+    /// Background 처리
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // Push데이터를 받는곳!!
+        Log.d("Notification didReceive")
         if let userInfo = response.notification.request.content.userInfo as? [String: Any] {
-            Log.d(userInfo)
-            // TODO: FCM 테스트용
+            if userInfo["flag"] as! String == "call" {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    if let vc = UIApplication.getMostTopViewController()?.tabBarController as? CustomTabBarController {
+                        vc.coordinator?.call()
+                    }
+                })
+            }
         }
         
         completionHandler()
