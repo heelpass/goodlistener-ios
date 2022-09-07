@@ -123,6 +123,13 @@ class LoginViewModel: NSObject, ViewModelType {
                     
                     self.loginResult.onNext(true)
                     UserDefaultsManager.shared.isLogin = true
+                    
+                    UserAPI.updateDeviceToken(request: UserDefaultsManager.shared.fcmToken, completion: { (result, error) in
+                        guard let model = result else {
+                            Log.e(error ?? #function)
+                            return
+                        }
+                    })
                 }
             } else {
                 // 유저가 가입하지 않은 경우
