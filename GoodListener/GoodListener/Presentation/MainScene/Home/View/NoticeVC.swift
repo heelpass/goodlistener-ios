@@ -73,6 +73,7 @@ class NoticeVC: UIViewController, SnapKitType {
         changeUI(noticeState)
         
         DBManager.shared.readAllData()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     func addComponents() {

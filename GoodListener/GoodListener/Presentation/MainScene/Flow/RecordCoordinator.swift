@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol RecordCoordinating: AnyObject {
-    
+    func moveToNotice()
 }
 
 class RecordCoordinator: CoordinatorType {
@@ -32,5 +32,8 @@ class RecordCoordinator: CoordinatorType {
 }
 
 extension RecordCoordinator: RecordCoordinating {
-    
+    func moveToNotice() {
+        let vc = NoticeVC()
+        navigationController.pushViewController(vc, animated: true)
+    }
 }
