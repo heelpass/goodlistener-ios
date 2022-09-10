@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 class CustomTabBarController: UITabBarController {
+    
+    weak var coordinator: MainCoordinating?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStyle()

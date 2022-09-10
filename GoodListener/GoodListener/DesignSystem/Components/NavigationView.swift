@@ -37,10 +37,25 @@ class NavigationView: UIView {
     }
     
     let rightBtn = UIButton()
+    
+    let remainNoticeView = UIView().then {
+        $0.backgroundColor = .red
+        $0.layer.cornerRadius = 10
+        $0.isHidden = true
+    }
+    
+    let remainNoticeLbl = UILabel().then {
+        $0.text = "+10"
+        $0.textColor = .white
+        $0.font = FontManager.shared.notoSansKR(.bold, 8)
+        $0.sizeToFit()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         [backBtn, title, logo, rightBtn].forEach { addSubview($0) }
+        rightBtn.addSubview(remainNoticeView)
+        remainNoticeView.addSubview(remainNoticeLbl)
         
         backBtn.snp.makeConstraints {
             $0.left.equalToSuperview().inset(6)
@@ -60,6 +75,16 @@ class NavigationView: UIView {
         rightBtn.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.right.equalToSuperview().inset(16)
+        }
+        
+        remainNoticeView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.right.equalToSuperview().inset(-5)
+            $0.size.equalTo(20)
+        }
+        
+        remainNoticeLbl.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
     

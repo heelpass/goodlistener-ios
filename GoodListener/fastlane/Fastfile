@@ -19,7 +19,8 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :testflight do |options|
     get_certificates
-    get_provisioning_profile()
+    get_provisioning_profile(app_identifier: “com.heelpass.good-listener”)
+    get_provisioning_profile(app_identifier: “com.heelpass.good-listener.NotificationService”)
     updateVersion(options)
     increment_build_number(
 	build_number: latest_testflight_build_number + 1

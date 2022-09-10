@@ -16,6 +16,7 @@ enum recordState{
 class RecordVC: UIViewController, SnapKitType{
     weak var coordinator: RecordCoordinating?
     var recordState: recordState = .progress
+    var disposeBag = DisposeBag()
     
     let navigationView = NavigationView(frame: .zero, type: .notice)
     
@@ -52,8 +53,15 @@ class RecordVC: UIViewController, SnapKitType{
         addComponents()
         setConstraints()
         changeUI(recordState)
+        bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let cnt = DBManager.shared.unreadfilter()
+        navigationView.remainNoticeView.isHidden = cnt == 0
+        navigationView.remainNoticeLbl.text = "+\(cnt)"
+    }
     
     func addComponents() {
         [navigationView, titleLbl, RecordBgView, nothingImg, nothingLbl].forEach{
@@ -68,9 +76,7 @@ class RecordVC: UIViewController, SnapKitType{
     
     func setConstraints() {
         navigationView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.left.equalToSuperview().offset(15)
-            $0.right.equalToSuperview().offset(-15)
+            $0.top.left.right.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(35)
         }
         
@@ -96,6 +102,14 @@ class RecordVC: UIViewController, SnapKitType{
             $0.right.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
+    }
+    
+    func bind() {
+        navigationView.rightBtn.rx.tap
+            .bind(onNext: {[weak self] in
+                self?.coordinator?.moveToNotice()
+            })
+            .disposed(by: disposeBag)
     }
     
     func changeUI(_ type: recordState) {

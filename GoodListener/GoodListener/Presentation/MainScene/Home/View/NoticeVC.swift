@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RealmSwift
 
 enum noticeState {
     case none
@@ -19,6 +20,8 @@ class NoticeVC: UIViewController, SnapKitType {
     let disposeBag = DisposeBag()
     
     var noticeState: noticeState = .notice
+    
+    var noticeData: [PushModel] = []
     
     let navigationView = NavigationView(frame: .zero, type: .none).then {
         $0.logo.isHidden = true
@@ -61,10 +64,16 @@ class NoticeVC: UIViewController, SnapKitType {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        noticeData = fetchNoticeData()
+        noticeState = noticeData.isEmpty ? .none : .notice
+        
         addComponents()
         setConstraints()
         bind()
         changeUI(noticeState)
+        
+        DBManager.shared.readAllData()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     func addComponents() {
@@ -140,17 +149,49 @@ class NoticeVC: UIViewController, SnapKitType {
             break
         }
     }
+    
+    // DB에서 푸쉬데이터 불러오기
+    func fetchNoticeData()-> [PushModel] {
+        let realm = try! Realm()
+        var pushData: [PushModel] = []
+        
+        let savedPushData = realm.objects(PushModel.self)
+        savedPushData.forEach {
+            pushData.append($0)
+        }
+        
+        return pushData.reversed()
+    }
 }
 
 
 extension NoticeVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return noticeData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoticeCell.identifier, for: indexPath) as? NoticeCell else { fatalError() }
+        cell.guideLbl.text = noticeData[indexPath.row].title
+        cell.noticeLbl.text = noticeData[indexPath.row].body
+        cell.dayLbl.text = noticeData[indexPath.row].date
+        
         return cell
+    }
+}
+
+extension NoticeVC: UICollectionViewDelegate {
+    
+    // 위로 스크롤했을때 데이터 리로드
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView.contentOffset.y < 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                self.noticeData = self.fetchNoticeData()
+                self.RecordBgView.reloadData()
+                
+            })
+            
+        }
     }
 }
 

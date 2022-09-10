@@ -18,7 +18,8 @@ enum UserTargetType {
     case getUserInfo                // 유저정보 얻어오기
     case deleteAccount                    // 회원 탈퇴
     case userModify((String, String, String))   // 편집페이지 회원 정보 수정 -> 닉네임, 하는일, 소개글
-    case profileImgModify(Int)   // 프로필 이미지 수정              // 회원 탈퇴
+    case profileImgModify(Int)   // 프로필 이미지 수정
+    case updateUserDeviceToken(String) // FCM 토큰 수정
 }
 
 
@@ -35,7 +36,7 @@ extension UserTargetType: BaseTargetType {
         case .nicknameCheck(_):
             return "/user/valid"
             
-        case .getUserInfo, .deleteAccount, .userModify(_), .profileImgModify(_):
+        case .getUserInfo, .deleteAccount, .userModify(_), .profileImgModify(_), .updateUserDeviceToken(_):
             return "/user"
         }
     }
@@ -53,7 +54,7 @@ extension UserTargetType: BaseTargetType {
         case .deleteAccount:
             return .delete
             
-        case .userModify(_), .profileImgModify(_):
+        case .userModify(_), .profileImgModify(_), .updateUserDeviceToken(_):
             return .patch
         }
 
@@ -95,6 +96,13 @@ extension UserTargetType: BaseTargetType {
         case .profileImgModify(let image):
             let params: [String: Int] = [
                 "profileImg": image
+            ]
+            
+            return .requestJSONEncodable(params)
+            
+        case .updateUserDeviceToken(let token):
+            let params: [String: String] = [
+                "fcmHash": token
             ]
             
             return .requestJSONEncodable(params)

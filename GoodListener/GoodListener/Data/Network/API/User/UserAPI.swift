@@ -65,11 +65,25 @@ struct UserAPI: Networkable {
         })
     }
     
-    /// 닉네임 중복 여부를 요청합니다.
+    /// 유저 정보를 업데이트합니다.
     /// - Parameter request: (nickname: String, job: String, description: String)
     /// - Returns: Success: UserInfo, Fail: Error
     static func updateUserInfo(request: (String, String, String), completion: @escaping (_ succeed: UserInfo?, _ failed: Error?) -> Void) {
         makeProvider().request(.userModify(request), completion: { result in
+            switch ResponseData<UserInfo>.processModelResponse(result) {
+            case .success(let model):
+                return completion(model, nil)
+            case .failure(let error):
+                return completion(nil, error)
+            }
+        })
+    }
+    
+    /// FCM 디바이스 토큰을 업데이트합니다.
+    /// - Parameter request: token: String
+    /// - Returns: Success: UserInfo, Fail: Error
+    static func updateDeviceToken(request: String, completion: @escaping (_ succeed: UserInfo?, _ failed: Error?) -> Void) {
+        makeProvider().request(.updateUserDeviceToken(request), completion: { result in
             switch ResponseData<UserInfo>.processModelResponse(result) {
             case .success(let model):
                 return completion(model, nil)

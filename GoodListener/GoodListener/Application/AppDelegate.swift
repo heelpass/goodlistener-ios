@@ -10,6 +10,8 @@ import RxKakaoSDKCommon
 import FirebaseCore
 import FirebaseMessaging
 import AuthenticationServices
+import SwiftyJSON
+import Toaster
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -73,28 +75,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
+    /// Foreground 처리
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         if #available(iOS 14.0, *) {
-            completionHandler([.banner, .badge, .sound])
+            completionHandler([])
         } else {
             // Fallback on earlier versions
-            completionHandler([.badge, .sound])
+            completionHandler([])
         }
+        DBManager.shared.savePushData()
+        
+        // Foreground 상태에서 전화가 왔는데 플래그가 call 이면 바로 전화를 띄워준다
+        if let userInfo = notification.request.content.userInfo as? [String: Any] {
+            if userInfo["flag"] as! String == "call" {
+                if let vc = UIApplication.getMostTopViewController()?.tabBarController as? CustomTabBarController {
+                    vc.coordinator?.call()
+                }
+            }
+        }
+    }
+    /// Background 처리
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // Push데이터를 받는곳!!
+        Log.d("Notification didReceive")
+        if let userInfo = response.notification.request.content.userInfo as? [String: Any] {
+            if userInfo["flag"] as! String == "call" {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    if let vc = UIApplication.getMostTopViewController()?.tabBarController as? CustomTabBarController {
+                        vc.coordinator?.call()
+                    }
+                })
+            }
+        }
+        
+        completionHandler()
     }
 }
 
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("FCM 토큰 갱신: \(String(describing: fcmToken))")
-
+        
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
         NotificationCenter.default.post(
-          name: Notification.Name("FCMToken"),
-          object: nil,
-          userInfo: dataDict
+            name: Notification.Name("FCMToken"),
+            object: nil,
+            userInfo: dataDict
         )
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
-        UserDefaultsManager.shared.fcmToken = fcmToken!
-      }
+        if UserDefaultsManager.shared.fcmToken != fcmToken! {
+            UserDefaultsManager.shared.fcmToken = fcmToken!
+            UserAPI.updateDeviceToken(request: fcmToken!, completion: { (result, error) in
+                guard let _ = result else {
+                    Log.e(error ?? #function)
+                    return
+                }
+            })
+        }
+    }
 }

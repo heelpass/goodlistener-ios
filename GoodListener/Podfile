@@ -11,6 +11,7 @@ target 'GoodListener' do
   pod 'SnapKit'
   pod 'Then'
   pod 'SDWebImage', '~> 5.0'
+  pod 'Toaster'
 
 # ReactiveX
   pod 'RxSwift', '6.5.0'
@@ -37,4 +38,7 @@ target 'GoodListener' do
 
 # Agora
   pod 'AgoraRtcEngine_iOS', '3.7.0.2'
+
+# Database
+  pod 'RealmSwift'
 end

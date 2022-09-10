@@ -156,6 +156,13 @@ class HomeVC: UIViewController, SnapKitType {
         addCallBtn()    // 전화 테스트용
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        let cnt = DBManager.shared.unreadfilter()
+        navigationView.remainNoticeView.isHidden = cnt == 0
+        navigationView.remainNoticeLbl.text = "+\(cnt)"
+    }
+    
     func addComponents() {
         [navigationView, scrollView, joinBtn, postponeBtn].forEach{
             view.addSubview($0)
@@ -177,9 +184,7 @@ class HomeVC: UIViewController, SnapKitType {
     
     func setConstraints() {
         navigationView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.left.equalToSuperview().offset(15)
-            $0.right.equalToSuperview().offset(-15)
+            $0.top.left.right.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(35)
         }
         
