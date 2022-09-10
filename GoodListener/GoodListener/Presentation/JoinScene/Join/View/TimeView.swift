@@ -26,6 +26,7 @@ class TimeView: UIView {
         view.delegate = self
         view.dataSource = self
         view.allowsMultipleSelection = true
+        
         return view
     }()
     
@@ -67,16 +68,17 @@ extension TimeView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //TODO: 3개 제한 필요함 - count 해 주기
         guard let cell = collectionView.cellForItem(at: indexPath) as? TimeCell else { return }
-        
-        cell.configUI(.selected)
-        
-        if self.selectedTime.value == [""] {
-            self.selectedTime.accept([timeData[indexPath.row]])
-        } else {
-            self.selectedTime.accept(selectedTime.value + [timeData[indexPath.row]])
-        }
 
-        Log.i(selectedTime.value)
+        if(selectedTime.value.count <= 2){
+            cell.configUI(.selected)
+            
+            if self.selectedTime.value == [""] {
+                self.selectedTime.accept([timeData[indexPath.row]])
+            } else {
+                self.selectedTime.accept(selectedTime.value + [timeData[indexPath.row]])
+            }
+        }
+        //Log.i(selectedTime.value)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -92,9 +94,8 @@ extension TimeView: UICollectionViewDelegate {
                 }
             }
         }
-        Log.i(selectedTime.value)
+        //Log.i(selectedTime.value)
     }
-
 }
 
 extension TimeView: UICollectionViewDelegateFlowLayout {
