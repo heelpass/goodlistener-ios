@@ -26,7 +26,7 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     // 현재 홈 화면 상태
-    var homeState: homeState = .matched
+    var homeState: homeState = .join
     
     let contentStackView = UIStackView().then {
         $0.axis = .vertical
