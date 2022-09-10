@@ -19,6 +19,7 @@
 		0A558A4428B61F25001949D6 /* EmojiTagFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A4328B61F25001949D6 /* EmojiTagFlowLayout.swift */; };
 		0A558A4628B61F2A001949D6 /* EmojiTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A4528B61F2A001949D6 /* EmojiTagView.swift */; };
 		0A558A4828B61F36001949D6 /* GLTwoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A4728B61F36001949D6 /* GLTwoButton.swift */; };
+		0A61B5A528CC5ACE00655E03 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61B5A428CC5ACE00655E03 /* HomeViewModel.swift */; };
 		0A703B532896AB8300A05124 /* UserTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B522896AB8300A05124 /* UserTargetType.swift */; };
 		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
 		0AA2BA9F28C1BE6B001AB4BD /* NoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA9E28C1BE6B001AB4BD /* NoticeVC.swift */; };
@@ -153,6 +154,7 @@
 		0A558A4328B61F25001949D6 /* EmojiTagFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTagFlowLayout.swift; sourceTree = "<group>"; };
 		0A558A4528B61F2A001949D6 /* EmojiTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTagView.swift; sourceTree = "<group>"; };
 		0A558A4728B61F36001949D6 /* GLTwoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTwoButton.swift; sourceTree = "<group>"; };
+		0A61B5A428CC5ACE00655E03 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = GoodListener/Presentation/MainScene/Home/View/HomeViewModel.swift; sourceTree = SOURCE_ROOT; };
 		0A703B522896AB8300A05124 /* UserTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserTargetType.swift; path = GoodListener/Data/Network/API/User/UserTargetType.swift; sourceTree = SOURCE_ROOT; };
 		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
 		0AA2BA9E28C1BE6B001AB4BD /* NoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC.swift; sourceTree = "<group>"; };
@@ -343,6 +345,23 @@
 				E8B444A428AE2AAD0003815B /* GLPopup.swift */,
 			);
 			path = Popup;
+			sourceTree = "<group>";
+		};
+		0A61B5A228CC5AAA00655E03 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				0A61B5A328CC5AB500655E03 /* View */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		0A61B5A328CC5AB500655E03 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0AA2BA9E28C1BE6B001AB4BD /* NoticeVC.swift */,
+				0AEC961B28C37A32007322B1 /* NoticeCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		0ABA2814288D5B55000D889B = {
@@ -900,6 +919,7 @@
 				0AF43086288FD82F0078B2D5 /* Applicant */,
 				0AF4308F288FDC5B0078B2D5 /* Record */,
 				E8CFBCDD288F873300D63B07 /* MyPage */,
+				0A61B5A228CC5AAA00655E03 /* Notice */,
 			);
 			path = MainScene;
 			sourceTree = "<group>";
@@ -928,6 +948,7 @@
 		E8CFBCD3288F79FD00D63B07 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0A61B5A428CC5ACE00655E03 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -936,8 +957,6 @@
 			isa = PBXGroup;
 			children = (
 				E8CFBCD9288F7B4800D63B07 /* HomeVC.swift */,
-				0AA2BA9E28C1BE6B001AB4BD /* NoticeVC.swift */,
-				0AEC961B28C37A32007322B1 /* NoticeCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1298,6 +1317,7 @@
 				0A558A4628B61F2A001949D6 /* EmojiTagView.swift in Sources */,
 				E8B4435828A0EADD0003815B /* ProfileSetupVC.swift in Sources */,
 				0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */,
+				0A61B5A528CC5ACE00655E03 /* HomeViewModel.swift in Sources */,
 				0A350B8728BCA56C00EC83DA /* RecordContenttCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
