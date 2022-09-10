@@ -19,6 +19,7 @@ class HomeVC: UIViewController, SnapKitType {
 
     weak var coordinator: HomeCoordinating?
     let disposeBag = DisposeBag()
+    let viewModel = HomeViewModel()
 
     let navigationView = NavigationView(frame: .zero, type: .notice)
     let scrollView = UIScrollView().then {
@@ -297,34 +298,42 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     func bind() {
-        navigationView.rightBtn.rx.tap
-            .bind(onNext: {[weak self] in
-                self?.coordinator?.moveToNotice()
+        let output = viewModel.transform(input: HomeViewModel.Input(naviRightBtnTap: navigationView.rightBtn.rx.tap.asObservable(),
+                                                                    joinBtnTap: joinBtn.rx.tap.asObservable(),
+                                                                    postponeBtnTap: postponeBtn.rx.tap.asObservable(),
+                                                                    delayBtnTap: delayBtn.rx.tap.asObservable()))
+        
+        //네비게이션 오른쪽 버튼
+        output.naviRightBtnResult
+            .emit(with: self, onNext: { strongself, _ in
+                strongself.coordinator?.moveToNotice()
             })
             .disposed(by: disposeBag)
     
-        joinBtn.rx.tap
-            .bind(onNext: { [weak self] in
-                self?.coordinator?.join()
+        //신청하기 화면 이동
+        output.joinBtnResult
+            .emit(with: self, onNext: { strongself, _ in
+                strongself.coordinator?.join()
             })
             .disposed(by: disposeBag)
         
-        postponeBtn.rx.tap
-            .bind(onNext: { [weak self] in
-                guard let self = self else { return }
-                self.popup.isHidden = false
+        //오늘 대화 미루기
+        output.postponeBtnResult
+            .emit(with: self, onNext: { strongself, _ in
+                strongself.popup.isHidden = false
             })
             .disposed(by: disposeBag)
-        
-        delayBtn.rx.tap
-            .bind(onNext: { [weak self] in
-                guard let self = self else {return}
-                self.popup.isHidden = true
-                self.postponeBtn.isEnabled = false
-                self.postponeBtn.backgroundColor = UIColor(hex: "#999999")
+                        
+        //대화 1회 미루기
+        output.delayBtnResult
+            .emit(with: self, onNext: { strongself, _ in
+                strongself.popup.isHidden = true
+                strongself.postponeBtn.isEnabled = false
+                strongself.postponeBtn.backgroundColor = UIColor(hex: "#999999")
             })
             .disposed(by: disposeBag)
-        
+
+        //취소
         cancelBtn.rx.tap
             .bind(onNext: { [weak self] in
                 guard let self = self else {return}
