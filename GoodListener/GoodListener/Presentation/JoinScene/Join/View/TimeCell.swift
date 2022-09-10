@@ -26,7 +26,7 @@ class TimeCell: UICollectionViewCell {
         $0.text = "오후 9:00"
         $0.textAlignment = .center
         $0.textColor = .f3
-        $0.font = FontManager.shared.notoSansKR(.regular, 16)
+        $0.font = FontManager.shared.notoSansKR(.regular, 14)
     }
     
     override init(frame: CGRect) {
