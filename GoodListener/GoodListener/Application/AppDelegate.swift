@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RxKakaoSDKCommon
 import FirebaseCore
 import FirebaseMessaging
 import AuthenticationServices
@@ -20,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        let KAKAO_APP_KEY: String = Bundle.main.infoDictionary?["KAKAO_APP_KEY"] as? String ?? "KAKAO_APP_KEY is nil"
-        RxKakaoSDK.initSDK(appKey: KAKAO_APP_KEY)
         
         FirebaseApp.configure()
         Messaging.messaging().delegate = self

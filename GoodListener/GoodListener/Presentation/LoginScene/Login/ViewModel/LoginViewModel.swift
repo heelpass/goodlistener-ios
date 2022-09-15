@@ -11,12 +11,6 @@ import RxCocoa
 import RxGesture
 import AuthenticationServices
 import Moya
-import KakaoSDKCommon
-import RxKakaoSDKCommon
-import KakaoSDKAuth
-import RxKakaoSDKAuth
-import KakaoSDKUser
-import RxKakaoSDKUser
 import SwiftyJSON
 
 
@@ -74,24 +68,6 @@ class LoginViewModel: NSObject, ViewModelType {
         controller.delegate = self
         controller.presentationContextProvider = self as? ASAuthorizationControllerPresentationContextProviding
         controller.performRequests()
-    }
-    
-    // Kakao 로그인 핸들러
-    private func kakaoLoginHandler() {
-        if (UserApi.isKakaoTalkLoginAvailable()) {
-
-            //성공, 실패 여부 판별
-            UserApi.shared.rx.loginWithKakaoTalk()
-                .subscribe(onNext:{ (oauthToken) in
-                    Log.i("KakaoLogin Succeed")
-                    Log.d("Token:: \(oauthToken)")
-                    self.loginResult.onNext(true)
-                }, onError: { [self] error in
-                    Log.e("\(error)")
-                    self.loginResult.onNext(false)
-                })
-            .disposed(by: disposeBag)
-        }
     }
     
     // Token을 서버사이드에 전달

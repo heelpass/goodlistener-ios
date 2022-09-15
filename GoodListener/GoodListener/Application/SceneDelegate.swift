@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import RxKakaoSDKAuth
-import KakaoSDKAuth
 import AuthenticationServices
 import RealmSwift
 
@@ -36,11 +34,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        if let url = URLContexts.first?.url {
-            if (AuthApi.isKakaoTalkLoginUrl(url)) {
-                _ = AuthController.rx.handleOpenUrl(url: url)
-            }
-        }
+//        if let url = URLContexts.first?.url {
+//            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+//                _ = AuthController.rx.handleOpenUrl(url: url)
+//            }
+//        }
     }
     
     
