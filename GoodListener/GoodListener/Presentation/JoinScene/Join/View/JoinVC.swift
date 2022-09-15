@@ -44,6 +44,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.textColor = .f3
     }
     
+    //TODO: 여기 바꾸기 -> mismatch frame
     let emojiTagView = EmojiTagView(frame: .zero, emojiImgdata: EmojiTagList.emojiImgList, emojiTextdata: EmojiTagList.emojiTextList)
     
     
@@ -107,7 +108,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     let questionFourSubLbl = UILabel().then {
-        $0.text = "(중복 선택 가능)"
+        $0.text = "(중복 선택 최대 3개 가능)"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f3
     }
@@ -158,7 +159,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(63, after: timeView)
         
         emojiTagView.snp.makeConstraints{
-            $0.height.equalTo(100) //TODO: 동적 높이 조절되도록
+            $0.height.equalTo(100)
         }
         
         answerTwoTV.snp.makeConstraints{
@@ -213,7 +214,6 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     // TextView Delegate
     func textViewDidChange(_ textView: UITextView) {
         if textView.text.count > 50 {
-            //TODO: 사용자에게 알림 줘야 하나?
             textView.deleteBackward()
         }
     }
@@ -225,6 +225,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     //DatePicker
+    //TODO: - VM에서 Validation Check필요
     func setDatePicker() {
         datePicker.addTarget(self, action: #selector(dateChange(datePicker:)), for: UIControl.Event.valueChanged)
         datePicker.frame.size = CGSize(width: 0, height: 300)

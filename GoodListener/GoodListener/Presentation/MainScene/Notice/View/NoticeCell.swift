@@ -11,7 +11,7 @@ class NoticeCell: UICollectionViewCell {
     static let identifier = "Noticecell"
     
     let markImg = UIImageView().then{
-        $0.image = #imageLiteral(resourceName: "ico_exclamation")
+        $0.image = #imageLiteral(resourceName: "ico_exclamation_green")
         $0.contentMode = .scaleAspectFill
     }
     
