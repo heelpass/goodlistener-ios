@@ -159,7 +159,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(63, after: timeView)
         
         emojiTagView.snp.makeConstraints{
-            $0.height.equalTo(100) //TODO: 동적 높이 조절되도록
+            $0.height.equalTo(100)
         }
         
         answerTwoTV.snp.makeConstraints{
@@ -214,7 +214,6 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     // TextView Delegate
     func textViewDidChange(_ textView: UITextView) {
         if textView.text.count > 50 {
-            //TODO: 사용자에게 알림 줘야 하나?
             textView.deleteBackward()
         }
     }
@@ -226,6 +225,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     //DatePicker
+    //TODO: - VM에서 Validation Check필요
     func setDatePicker() {
         datePicker.addTarget(self, action: #selector(dateChange(datePicker:)), for: UIControl.Event.valueChanged)
         datePicker.frame.size = CGSize(width: 0, height: 300)
