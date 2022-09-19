@@ -23,10 +23,14 @@ class NavigationView: UIView {
         $0.isHidden = true
     }
     
-    let logo = UILabel().then {
-        $0.text = "굿 리스너"
-        $0.font = FontManager.shared.notoSansKR(.bold, 20)
-        $0.textColor = .f2
+//    let logo = UILabel().then {
+//        $0.text = "굿 리스너"
+//        $0.font = FontManager.shared.notoSansKR(.bold, 20)
+//        $0.textColor = .f2
+//    }
+    let logo = UIImageView().then {
+        $0.image = #imageLiteral(resourceName: "logo")
+        $0.contentMode = .scaleAspectFill
     }
     
     let title = UILabel().then {
@@ -69,7 +73,8 @@ class NavigationView: UIView {
         
         logo.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.left.equalToSuperview().inset(16)
+            $0.left.equalToSuperview().inset(30)
+            $0.size.equalTo(CGSize(width: 74, height: 25))
         }
         
         rightBtn.snp.makeConstraints {
