@@ -9,6 +9,7 @@ import Foundation
 import Moya
 import SwiftyJSON
 import Toaster
+import NVActivityIndicatorView
 
 struct ResponseData<Model: Codable> {
     
@@ -21,13 +22,16 @@ struct ResponseData<Model: Codable> {
                 _ = try response.filterSuccessfulStatusCodes()
                 
                 let model = try JSONDecoder().decode(Model.self, from: response.data)
+                LoadingIndicator.stop()
                 return .success(model)
             } catch {
                 makeToast()
+                LoadingIndicator.stop()
                 return .failure(error)
             }
         case .failure(let error):
             makeToast()
+            LoadingIndicator.stop()
             return .failure(error)
         }
     }
@@ -41,13 +45,16 @@ struct ResponseData<Model: Codable> {
                 _ = try response.filterSuccessfulStatusCodes()
                 
                 let model = JSON(response.data)
+                LoadingIndicator.stop()
                 return .success(model)
             } catch {
                 makeToast()
+                LoadingIndicator.stop()
                 return .failure(error)
             }
         case .failure(let error):
             makeToast()
+            LoadingIndicator.stop()
             return .failure(error)
         }
     }
