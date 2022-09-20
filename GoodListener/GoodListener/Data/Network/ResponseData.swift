@@ -8,6 +8,7 @@
 import Foundation
 import Moya
 import SwiftyJSON
+import Toaster
 
 struct ResponseData<Model: Codable> {
     
@@ -22,10 +23,11 @@ struct ResponseData<Model: Codable> {
                 let model = try JSONDecoder().decode(Model.self, from: response.data)
                 return .success(model)
             } catch {
+                makeToast()
                 return .failure(error)
             }
         case .failure(let error):
-            
+            makeToast()
             return .failure(error)
         }
     }
@@ -41,11 +43,18 @@ struct ResponseData<Model: Codable> {
                 let model = JSON(response.data)
                 return .success(model)
             } catch {
+                makeToast()
                 return .failure(error)
             }
         case .failure(let error):
-            
+            makeToast()
             return .failure(error)
         }
+    }
+    
+    static func makeToast() {
+        let toast = Toast(text: "네트워크에 접속할 수 없습니다.\n네트워크 연결 상태를 확인해주세요.")
+        toast.view.font = FontManager.shared.notoSansKR(.regular, 13)
+        toast.show()
     }
 }
