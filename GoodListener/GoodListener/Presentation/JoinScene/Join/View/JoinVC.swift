@@ -44,7 +44,6 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.textColor = .f3
     }
     
-    //TODO: 여기 바꾸기 -> mismatch frame 여기 바꾸기 
     let emojiTagView = EmojiTagView(frame: .zero, emojiImgdata: EmojiTagList.emojiImgList, emojiTextdata: EmojiTagList.emojiTextList)
     
     
@@ -148,7 +147,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(20, after: titleLbl)
         contentStackView.setCustomSpacing(50, after: descriptionLbl)
         contentStackView.setCustomSpacing(20, after: questionOneLbl)
-        contentStackView.setCustomSpacing(50, after: emojiTagView)
+        contentStackView.setCustomSpacing(30, after: emojiTagView)
         contentStackView.setCustomSpacing(13, after: questionTwoLbl)
         contentStackView.setCustomSpacing(6, after: answerTwoTV)
         contentStackView.setCustomSpacing(50, after: answerTwoSubLbl)
@@ -159,7 +158,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(63, after: timeView)
         
         emojiTagView.snp.makeConstraints{
-            $0.height.equalTo(100)
+            $0.height.equalTo(50)
         }
         
         answerTwoTV.snp.makeConstraints{
