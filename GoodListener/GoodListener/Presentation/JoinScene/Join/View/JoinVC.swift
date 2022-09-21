@@ -44,7 +44,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.textColor = .f3
     }
     
-    //TODO: 여기 바꾸기 -> mismatch frame
+    //TODO: 여기 바꾸기 -> mismatch frame 여기 바꾸기 
     let emojiTagView = EmojiTagView(frame: .zero, emojiImgdata: EmojiTagList.emojiImgList, emojiTextdata: EmojiTagList.emojiTextList)
     
     
