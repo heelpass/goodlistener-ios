@@ -74,3 +74,17 @@ extension EmojiTagView: UICollectionViewDelegate {
         self.selectedemojiText.accept(emojiTextData[indexPath.row])
     }
 }
+
+extension EmojiTagView: UICollectionViewDelegateFlowLayout {
+     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+         
+         let collectionViewWidth = collectionView.frame.width
+         let totalCellWidth = 38 * 6
+         let totalSpacingWidth = 20 * 5
+         
+         let widthInset = (collectionViewWidth - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
+
+         return UIEdgeInsets(top: 0, left: widthInset, bottom: 0, right: widthInset)
+         
+     }
+}
