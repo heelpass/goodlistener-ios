@@ -13,6 +13,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
 
     weak var coordinator: JoinCoordinating?
     let disposeBag = DisposeBag()
+    let viewModel = JoinViewModel()
     
     let scrollView = UIScrollView().then {
         $0.backgroundColor = .m5
@@ -181,11 +182,15 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     func bind() {
-        btnView.okBtn.tapGesture
-            .subscribe(onNext: { [weak self] _ in
-                self?.coordinator?.moveToJoinMatch()
+        let output = viewModel.transform(input: JoinViewModel.Input(okBtnTap: btnView.okBtn.rx.tap.asObservable()))
+        
+        //확인 버튼
+        output.okBtnResult
+            .emit(with: self, onNext: { strongself, _ in
+                strongself.coordinator?.moveToJoinMatch()
             })
             .disposed(by: disposeBag)
+
         
         btnView.cancelBtn.tapGesture
             .subscribe(onNext: { [weak self] _ in

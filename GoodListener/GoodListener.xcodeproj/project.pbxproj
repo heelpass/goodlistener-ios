@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A09718A28DB709A00C6B675 /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09718928DB709A00C6B675 /* JoinViewModel.swift */; };
 		0A350B7D28BC5DD800EC83DA /* RecordBgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A350B7C28BC5DD800EC83DA /* RecordBgCell.swift */; };
 		0A350B8728BCA56C00EC83DA /* RecordContenttCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A350B8628BCA56C00EC83DA /* RecordContenttCell.swift */; };
 		0A350B8928BCA63500EC83DA /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A350B8828BCA63500EC83DA /* RecordCollectionView.swift */; };
@@ -142,6 +143,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A09718928DB709A00C6B675 /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
 		0A350B7C28BC5DD800EC83DA /* RecordBgCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordBgCell.swift; sourceTree = "<group>"; };
 		0A350B8628BCA56C00EC83DA /* RecordContenttCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContenttCell.swift; sourceTree = "<group>"; };
 		0A350B8828BCA63500EC83DA /* RecordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionView.swift; sourceTree = "<group>"; };
@@ -283,6 +285,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A09718828DB704500C6B675 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0A09718928DB709A00C6B675 /* JoinViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		0A558A3328B61D53001949D6 /* JoinScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				0A558A3828B61DF0001949D6 /* View */,
+				0A09718828DB704500C6B675 /* ViewModel */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -1264,6 +1275,7 @@
 				0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */,
 				E8CE19E4289CE15E007A56FE /* Const.swift in Sources */,
 				0AF43093288FDC850078B2D5 /* RecordVC.swift in Sources */,
+				0A09718A28DB709A00C6B675 /* JoinViewModel.swift in Sources */,
 				E81E41E728BEF5190094CFD9 /* PopupMessage.swift in Sources */,
 				E845494B28BC4CB600DAD6EE /* GLTextField.swift in Sources */,
 				E8B4449828ACDF890003815B /* PersonalInfoViewModel.swift in Sources */,
