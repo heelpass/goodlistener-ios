@@ -11,7 +11,7 @@ import RxSwift
 
 struct EmojiTagList {
     static let emojiImgList = ["emoji1", "emoji2", "emoji3", "emoji4", "emoji5"]
-    static let emojiTextList = ["1", "2", "3", "4", "5"] //API 로 보낼 데이터
+    static let emojiTextList = ["화남", "슬픔", "무기력", "긍정", "즐거움"]
 }
 
 class EmojiTagView: UIView {
@@ -24,7 +24,6 @@ class EmojiTagView: UIView {
     
     lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        view.backgroundColor = .clear
         view.register(EmojiTagCell.self, forCellWithReuseIdentifier: EmojiTagCell.identifier)
         view.delegate = self
         view.dataSource = self
@@ -61,6 +60,7 @@ extension EmojiTagView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmojiTagCell.identifier, for: indexPath) as? EmojiTagCell else {fatalError()}
         
         cell.emojiImgView.image = UIImage(named:emojiImgData[indexPath.row])
+        cell.emojiLbl.text = emojiTextData[indexPath.row]
         return cell
         
         

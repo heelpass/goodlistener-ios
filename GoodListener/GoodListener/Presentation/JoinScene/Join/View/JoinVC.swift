@@ -158,7 +158,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(63, after: timeView)
         
         emojiTagView.snp.makeConstraints{
-            $0.height.equalTo(50)
+            $0.height.equalTo(80)
         }
         
         answerTwoTV.snp.makeConstraints{

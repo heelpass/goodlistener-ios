@@ -16,7 +16,6 @@
 		0A558A3E28B61E44001949D6 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A3D28B61E44001949D6 /* TimeCell.swift */; };
 		0A558A4028B61E62001949D6 /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A3F28B61E62001949D6 /* TimeView.swift */; };
 		0A558A4228B61ED6001949D6 /* EmojiTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A4128B61ED6001949D6 /* EmojiTagCell.swift */; };
-		0A558A4428B61F25001949D6 /* EmojiTagFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A4328B61F25001949D6 /* EmojiTagFlowLayout.swift */; };
 		0A558A4628B61F2A001949D6 /* EmojiTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A4528B61F2A001949D6 /* EmojiTagView.swift */; };
 		0A558A4828B61F36001949D6 /* GLTwoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A558A4728B61F36001949D6 /* GLTwoButton.swift */; };
 		0A61B5A528CC5ACE00655E03 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61B5A428CC5ACE00655E03 /* HomeViewModel.swift */; };
@@ -152,7 +151,6 @@
 		0A558A3D28B61E44001949D6 /* TimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
 		0A558A3F28B61E62001949D6 /* TimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
 		0A558A4128B61ED6001949D6 /* EmojiTagCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmojiTagCell.swift; path = GoodListener/DesignSystem/Components/EmojiView/EmojiTagCell.swift; sourceTree = SOURCE_ROOT; };
-		0A558A4328B61F25001949D6 /* EmojiTagFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTagFlowLayout.swift; sourceTree = "<group>"; };
 		0A558A4528B61F2A001949D6 /* EmojiTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiTagView.swift; sourceTree = "<group>"; };
 		0A558A4728B61F36001949D6 /* GLTwoButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTwoButton.swift; sourceTree = "<group>"; };
 		0A61B5A428CC5ACE00655E03 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = GoodListener/Presentation/MainScene/Home/View/HomeViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -325,7 +323,6 @@
 			isa = PBXGroup;
 			children = (
 				0A558A4528B61F2A001949D6 /* EmojiTagView.swift */,
-				0A558A4328B61F25001949D6 /* EmojiTagFlowLayout.swift */,
 				0A558A4128B61ED6001949D6 /* EmojiTagCell.swift */,
 			);
 			path = EmojiView;
@@ -1267,7 +1264,6 @@
 				0AF4308A288FD8800078B2D5 /* ApplicantCoordinator.swift in Sources */,
 				E8CE19E4289CE15E007A56FE /* Const.swift in Sources */,
 				0AF43093288FDC850078B2D5 /* RecordVC.swift in Sources */,
-				0A558A4428B61F25001949D6 /* EmojiTagFlowLayout.swift in Sources */,
 				E81E41E728BEF5190094CFD9 /* PopupMessage.swift in Sources */,
 				E845494B28BC4CB600DAD6EE /* GLTextField.swift in Sources */,
 				E8B4449828ACDF890003815B /* PersonalInfoViewModel.swift in Sources */,
