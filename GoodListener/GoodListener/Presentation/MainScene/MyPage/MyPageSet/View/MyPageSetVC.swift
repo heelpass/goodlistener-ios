@@ -231,6 +231,13 @@ class MyPageSetVC: UIViewController, SnapKitType {
                 self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
+        
+        alarmSetBtn.rx.tap
+            .subscribe(onNext: {
+                //"prefs:root=NOTIFICATIONS_ID"
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            })
+            .disposed(by: disposeBag)
     }
 
 }
