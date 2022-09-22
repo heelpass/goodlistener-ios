@@ -106,6 +106,11 @@ class MyPageSetVC: UIViewController, SnapKitType {
         $0.textColor = .f5
     }
     
+    let isUpdateLbl = UILabel().then {
+        $0.font = FontManager.shared.notoSansKR(.regular, 14)
+        $0.textColor = .f5
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -118,6 +123,7 @@ class MyPageSetVC: UIViewController, SnapKitType {
         if let version = version {
             versionLbl.text = "앱 버전 \(version)"
         }
+        isUpdateLbl.text = UIApplication.isUpdateAvailable() ? "업데이트가 가능합니다." : "최신 버전입니다."
     }
     
     func addComponents() {
@@ -127,6 +133,7 @@ class MyPageSetVC: UIViewController, SnapKitType {
         logoutContainer.addSubview(logoutLabel)
         withdrawContainer.addSubview(withdrawLabel)
         versionContainer.addSubview(versionLbl)
+        versionContainer.addSubview(isUpdateLbl)
     }
     
     func setConstraints() {
@@ -205,6 +212,11 @@ class MyPageSetVC: UIViewController, SnapKitType {
             $0.top.equalToSuperview().inset(18)
             $0.centerX.equalToSuperview()
         }
+        
+        isUpdateLbl.snp.makeConstraints {
+            $0.top.equalTo(versionLbl.snp.bottom).offset(4)
+            $0.centerX.equalToSuperview()
+        }
     }
     
     func bind() {
@@ -243,5 +255,4 @@ class MyPageSetVC: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
     }
-
 }
