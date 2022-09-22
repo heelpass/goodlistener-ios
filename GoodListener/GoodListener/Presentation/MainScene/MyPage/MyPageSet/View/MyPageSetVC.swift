@@ -12,7 +12,7 @@ import RxSwift
 import Then
 
 class MyPageSetVC: UIViewController, SnapKitType {
-
+    
     weak var coordinator: MyPageCoordinating?
     var disposeBag = DisposeBag()
     static let borderColor = UIColor(red: 241/255, green: 243/255, blue: 244/255, alpha:1)
@@ -29,78 +29,25 @@ class MyPageSetVC: UIViewController, SnapKitType {
         $0.axis = .vertical
     }
     
-    let talkContainer = UIView().then {
-        $0.backgroundColor = .clear
-        $0.layer.addBorder([.bottom], color: borderColor, width: 0.5)
+    let alarmSetContainer = UIView().then {
+        $0.backgroundColor = .white
     }
     
-    let talkTitleLabel = UILabel().then {
+    let alarmSetTitle = UILabel().then {
         $0.text = "대화 알림"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
         $0.textColor = .f3
+        $0.sizeToFit()
     }
     
-    let talkSubtitle = UILabel().then {
-        if UIScreen.main.bounds.width > 375 {
-            $0.text = "알림을 해제하면 통화 알림을 받을 수 없어요"
-        } else {
-            $0.text = "알림을 해제하면 통화 알림을 받을 수\n없어요"
-        }
+    let alarmSetSubtitle = UILabel().then {
+        $0.text = "알림을 해제하면 통화 알림을 받을 수 없어요"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f5
-        $0.numberOfLines = 2
     }
     
-    let talkSwitch = UISwitch().then {
-        $0.tintColor = .m1
-    }
-    
-    let remindContainer = UIView().then {
-        $0.backgroundColor = .clear
-        $0.layer.addBorder([.top, .bottom], color: borderColor, width: 0.5)
-    }
-    
-    let remindTitleLabel = UILabel().then {
-        $0.text = "리마인드 알림"
-        $0.font = FontManager.shared.notoSansKR(.bold, 16)
-        $0.textColor = .f3
-    }
-    
-    let remindSubtitle = UILabel().then {
-        if UIScreen.main.bounds.width > 375 {
-            $0.text = "통화시간 관련 리마인드 알림을 받을 수 있어요"
-        } else {
-            $0.text = "통화시간 관련 리마인드 알림을 받을 수\n있어요"
-        }
-        $0.font = FontManager.shared.notoSansKR(.regular, 14)
-        $0.textColor = .f5
-        $0.numberOfLines = 2
-    }
-    
-    let remindSwitch = UISwitch().then {
-        $0.tintColor = .m1
-    }
-    
-    let marketingContainer = UIView().then {
-        $0.backgroundColor = .clear
-        $0.layer.addBorder([.top], color: borderColor, width: 0.5)
-    }
-    
-    let marketingTitleLabel = UILabel().then {
-        $0.text = "마케팅 푸시 알림"
-        $0.font = FontManager.shared.notoSansKR(.bold, 16)
-        $0.textColor = .f3
-    }
-    
-    let marketingSubtitle = UILabel().then {
-        $0.text = "혜택 소식 알림을 받을 수 있어요"
-        $0.font = FontManager.shared.notoSansKR(.regular, 14)
-        $0.textColor = .f5
-        $0.numberOfLines = 2
-    }
-    
-    let marketingSwitch = UISwitch().then {
-        $0.tintColor = .m1
+    let alarmSetBtn = GLButton(type: .round, reverse: false).then {
+        $0.title = "알림 해제하기"
     }
     
     let logoutContainer = UIView().then {
@@ -149,6 +96,16 @@ class MyPageSetVC: UIViewController, SnapKitType {
         $0.backgroundColor = borderColor
     }
     
+    let versionContainer = UIView().then {
+        $0.backgroundColor = UIColor(hex: "#F2F4F5")
+    }
+    
+    let versionLbl = UILabel().then {
+        $0.text = "앱 버전 1.0.0"
+        $0.font = FontManager.shared.notoSansKR(.bold, 16)
+        $0.textColor = .f5
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -160,13 +117,12 @@ class MyPageSetVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [navigationView, stackView].forEach { view.addSubview($0) }
-        [line, talkContainer, line3, remindContainer, line4, marketingContainer, line2, logoutContainer, line5, withdrawContainer].forEach( { stackView.addArrangedSubview($0) } )
-        [talkTitleLabel, talkSubtitle, talkSwitch].forEach { talkContainer.addSubview($0) }
-        [remindTitleLabel, remindSubtitle, remindSwitch].forEach { remindContainer.addSubview($0) }
-        [marketingTitleLabel, marketingSubtitle, marketingSwitch].forEach { marketingContainer.addSubview($0) }
+        [navigationView, stackView, versionContainer].forEach { view.addSubview($0) }
+        [line, alarmSetContainer, line2, logoutContainer, line5, withdrawContainer].forEach( { stackView.addArrangedSubview($0) } )
+        [alarmSetTitle, alarmSetSubtitle, alarmSetBtn].forEach { alarmSetContainer.addSubview($0) }
         logoutContainer.addSubview(logoutLabel)
         withdrawContainer.addSubview(withdrawLabel)
+        versionContainer.addSubview(versionLbl)
     }
     
     func setConstraints() {
@@ -181,66 +137,29 @@ class MyPageSetVC: UIViewController, SnapKitType {
             $0.left.right.equalToSuperview()
         }
         
+        alarmSetTitle.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(30)
+            $0.left.equalToSuperview().inset(Const.padding)
+        }
+        
+        alarmSetSubtitle.snp.makeConstraints {
+            $0.top.equalTo(alarmSetTitle.snp.bottom).offset(4)
+            $0.left.equalToSuperview().inset(Const.padding)
+        }
+        
+        alarmSetBtn.snp.makeConstraints {
+            $0.top.equalTo(alarmSetSubtitle.snp.bottom).offset(16)
+            $0.left.right.equalToSuperview().inset(Const.padding)
+            $0.height.equalTo(Const.glBtnHeight)
+            $0.bottom.equalToSuperview().inset(20)
+        }
+        
         line.snp.makeConstraints {
             $0.height.equalTo(8)
         }
         
         line2.snp.makeConstraints {
             $0.height.equalTo(8)
-        }
-        
-        talkTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
-            $0.left.equalToSuperview().inset(Const.padding)
-        }
-        
-        talkSubtitle.snp.makeConstraints {
-            $0.top.equalTo(talkTitleLabel.snp.bottom).offset(8)
-            $0.left.equalToSuperview().inset(Const.padding)
-            $0.bottom.equalToSuperview().inset(20)
-            $0.width.greaterThanOrEqualTo(250)
-        }
-        
-        talkSwitch.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.right.equalToSuperview().inset(Const.padding)
-            $0.left.equalTo(talkSubtitle.snp.right).offset(16)
-        }
-        
-        remindTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
-            $0.left.equalToSuperview().inset(Const.padding)
-        }
-        
-        remindSubtitle.snp.makeConstraints {
-            $0.top.equalTo(remindTitleLabel.snp.bottom).offset(8)
-            $0.left.equalToSuperview().inset(Const.padding)
-            $0.bottom.equalToSuperview().inset(20)
-            $0.width.greaterThanOrEqualTo(250)
-        }
-        
-        remindSwitch.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.right.equalToSuperview().inset(Const.padding)
-            $0.left.equalTo(remindSubtitle.snp.right).offset(16)
-        }
-        
-        marketingTitleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
-            $0.left.equalToSuperview().inset(Const.padding)
-        }
-        
-        marketingSubtitle.snp.makeConstraints {
-            $0.top.equalTo(marketingTitleLabel.snp.bottom).offset(8)
-            $0.left.equalToSuperview().inset(Const.padding)
-            $0.bottom.equalToSuperview().inset(20)
-            $0.width.greaterThanOrEqualTo(250)
-        }
-        
-        marketingSwitch.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.left.equalTo(marketingSubtitle.snp.right).offset(16)
-            $0.right.equalToSuperview().inset(Const.padding)
         }
         
         logoutContainer.snp.makeConstraints {
@@ -271,6 +190,16 @@ class MyPageSetVC: UIViewController, SnapKitType {
         
         line5.snp.makeConstraints {
             $0.height.equalTo(1)
+        }
+        
+        versionContainer.snp.makeConstraints {
+            $0.top.equalTo(stackView.snp.bottom)
+            $0.left.right.bottom.equalToSuperview()
+        }
+        
+        versionLbl.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(18)
+            $0.centerX.equalToSuperview()
         }
     }
     
