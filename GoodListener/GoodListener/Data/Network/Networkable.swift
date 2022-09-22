@@ -28,5 +28,27 @@ extension Networkable {
         LoadingIndicator.start()
         return MoyaProvider<Target>(plugins: [authPlugin])
     }
-
+    
+    static func makePopup(action: (()->Void)?) {
+        let popup = GLPopup()
+        popup.title = "네트워크 연결"
+        popup.contents = "네트워크에 접속할 수 없습니다.\n네트워크 연결상태를 확인해주세요."
+        popup.cancelIsHidden = false
+        popup.completeAction = action
+        popup.completeBtnTitle = "재시도"
+        
+        if let vc = UIApplication.getMostTopViewController() {
+            if let tab = vc.tabBarController {
+                tab.view.addSubview(popup)
+                popup.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+            } else if let navi = vc.navigationController {
+                navi.view.addSubview(popup)
+                popup.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+            }
+        }
+    }
 }

@@ -17,6 +17,9 @@ struct TokenAPI: Networkable {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):
+                self.makePopup {
+                    requestAppleToken(request: request, completion: completion)
+                }
                 return completion(nil, error)
             }
         }
