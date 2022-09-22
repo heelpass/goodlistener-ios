@@ -114,6 +114,10 @@ class MyPageSetVC: UIViewController, SnapKitType {
         bind()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         // Do any additional setup after loading the view.
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        if let version = version {
+            versionLbl.text = "앱 버전 \(version)"
+        }
     }
     
     func addComponents() {
