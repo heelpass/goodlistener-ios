@@ -36,4 +36,6 @@ target 'GoodListener' do
 
 # Database
   pod 'RealmSwift'
+# Loading Indicator
+  pod 'NVActivityIndicatorView'
 end

@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import NVActivityIndicatorView
 
 // 신청 전, 매칭 후 2가지 상태
 // TODO: 연장 버튼 눌렀을 때 추가 - 기획 답변

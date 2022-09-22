@@ -142,6 +142,9 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
   - PromisesObjC (2.1.1)
   - Realm (10.29.0):
     - Realm/Headers (= 10.29.0)
@@ -175,6 +178,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Moya (~> 15.0)
   - Moya/RxSwift (~> 15.0)
+  - NVActivityIndicatorView
   - RealmSwift
   - RxCocoa (= 6.5.0)
   - RxGesture
@@ -203,6 +207,7 @@ SPEC REPOS:
     - GoogleUtilities
     - Moya
     - nanopb
+    - NVActivityIndicatorView
     - PromisesObjC
     - Realm
     - RealmSwift
@@ -234,6 +239,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   Realm: 5596770daeff1ad76c8eb10d5947dc10472da779
   RealmSwift: 35d8d318b7e5a8dbc7096c2a243184e4d19abcc0
@@ -249,6 +255,6 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 90792ff1475cc0d707929fb90c7dab9e64650c71
+PODFILE CHECKSUM: 8e10a04343ea588249e81a984b38260c72fab258
 
 COCOAPODS: 1.11.3

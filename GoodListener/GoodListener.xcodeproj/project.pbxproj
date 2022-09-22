@@ -53,6 +53,7 @@
 		E845494E28BC553500DAD6EE /* TermsOfServicePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494C28BC553400DAD6EE /* TermsOfServicePopup.swift */; };
 		E845494F28BC553500DAD6EE /* TermsOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494D28BC553500DAD6EE /* TermsOfService.swift */; };
 		E845495428BC7F0100DAD6EE /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845495328BC7F0100DAD6EE /* SignInModel.swift */; };
+		E8821D5F28D95164004E9CEB /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8821D5E28D95164004E9CEB /* LoadingIndicator.swift */; };
 		E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A79539289CB28000EF9E1B /* FontManager.swift */; };
 		E8A79544289CC9CA00EF9E1B /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A7953D289CC9CA00EF9E1B /* NotoSansKR-Light.otf */; };
 		E8A79545289CC9CA00EF9E1B /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A7953E289CC9CA00EF9E1B /* NotoSansKR-Bold.otf */; };
@@ -194,6 +195,7 @@
 		E845494C28BC553400DAD6EE /* TermsOfServicePopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfServicePopup.swift; sourceTree = "<group>"; };
 		E845494D28BC553500DAD6EE /* TermsOfService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfService.swift; sourceTree = "<group>"; };
 		E845495328BC7F0100DAD6EE /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
+		E8821D5E28D95164004E9CEB /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		E8A79539289CB28000EF9E1B /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		E8A7953D289CC9CA00EF9E1B /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
 		E8A7953E289CC9CA00EF9E1B /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 		E845495128BC7CC100DAD6EE /* API */ = {
 			isa = PBXGroup;
 			children = (
+				E8821D5D28D95155004E9CEB /* LoadingIndicator */,
 				E81E41DA28BDC9B30094CFD9 /* Token */,
 				E81E41D928BDC9AA0094CFD9 /* User */,
 			);
@@ -536,6 +539,14 @@
 				E8D09853289A6C4D008AD55F /* SocketManager.swift */,
 			);
 			path = Socket;
+			sourceTree = "<group>";
+		};
+		E8821D5D28D95155004E9CEB /* LoadingIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				E8821D5E28D95164004E9CEB /* LoadingIndicator.swift */,
+			);
+			path = LoadingIndicator;
 			sourceTree = "<group>";
 		};
 		E8A7953B289CB2BC00EF9E1B /* Font */ = {
@@ -1246,6 +1257,7 @@
 				E8CFBCEA288FDB9C00D63B07 /* UIView+.swift in Sources */,
 				0A558A4828B61F36001949D6 /* GLTwoButton.swift in Sources */,
 				E8B443FB28A23E5B0003815B /* MyPageSetVC.swift in Sources */,
+				E8821D5F28D95164004E9CEB /* LoadingIndicator.swift in Sources */,
 				E8B444B228B338710003815B /* SwipeButton.swift in Sources */,
 				E8B444A928AF55E00003815B /* TokenTargetType.swift in Sources */,
 				E8B443F528A22ABD0003815B /* CallReviewVC.swift in Sources */,
