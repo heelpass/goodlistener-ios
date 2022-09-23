@@ -19,6 +19,9 @@ struct UserAPI: Networkable {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):
+                makePopup(action: {
+                    requestUserInfo(completion: completion)
+                })
                 return completion(nil, error)
             }
         })
@@ -33,6 +36,9 @@ struct UserAPI: Networkable {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):
+                makePopup(action: {
+                    requestSignIn(request: request, completion: completion)
+                })
                 return completion(nil, error)
             }
         })
@@ -46,6 +52,9 @@ struct UserAPI: Networkable {
             case .success(_):
                 return completion((), nil)
             case .failure(let error):
+                makePopup(action: {
+                    reqeustDeleteAccount(completion: completion)
+                })
                 return completion(nil, error)
             }
         })
@@ -60,6 +69,9 @@ struct UserAPI: Networkable {
             case .success(let model):
                 return completion(model["isExist"].bool, nil)
             case .failure(let error):
+                makePopup(action: {
+                    requestNicknameCheck(request: request, completion: completion)
+                })
                 return completion(nil, error)
             }
         })
@@ -74,6 +86,9 @@ struct UserAPI: Networkable {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):
+                makePopup(action: {
+                    updateUserInfo(request: request, completion: completion)
+                })
                 return completion(nil, error)
             }
         })
@@ -88,6 +103,9 @@ struct UserAPI: Networkable {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):
+                makePopup(action: {
+                    updateDeviceToken(request: request, completion: completion)
+                })
                 return completion(nil, error)
             }
         })
