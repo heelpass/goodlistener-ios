@@ -5,21 +5,14 @@
 //  Created by Jiyoung Park on 2022/08/22.
 //
 
+
 import UIKit
 
-enum EmojiTagState {
-    case selected
-    case unselected
-}
+
 
 class EmojiTagCell: UICollectionViewCell{
 
     static let identifier = "EmojiTagCell"
-    
-    let containerView = UIView().then {
-        $0.backgroundColor = .m3
-        $0.layer.cornerRadius = 20
-    }
 
     let emojiImgView = UIImageView().then{
         $0.contentMode = .scaleAspectFill
@@ -29,29 +22,25 @@ class EmojiTagCell: UICollectionViewCell{
     let emojiLbl = UILabel().then {
         $0.text = "감정"
         $0.textColor = .f3
-        $0.font = FontManager.shared.notoSansKR(.bold, 14)
+        $0.font = FontManager.shared.notoSansKR(.regular, 14)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.addSubview(containerView)
         [emojiImgView, emojiLbl].forEach{
-            containerView.addSubview($0)
+            addSubview($0)
         }
-        
-        containerView.snp.makeConstraints{
-            $0.edges.equalToSuperview()
-        }
-        
+
         emojiImgView.snp.makeConstraints{
-            $0.centerY.equalToSuperview()
-            $0.left.equalToSuperview().offset(8)
-            $0.size.equalTo(CGSize(width: 24, height: 24))
+            $0.top.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(38)
         }
         
         emojiLbl.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.left.equalTo(emojiImgView.snp.right).offset(5)
+            $0.top.equalTo(emojiImgView.snp.bottom).offset(8)
+            $0.centerX.equalToSuperview()
+
         }
    
     }
@@ -60,14 +49,4 @@ class EmojiTagCell: UICollectionViewCell{
         super.init(coder: coder)
     }
     
-    func configureUI(_ type: EmojiTagState){
-        switch type {
-        case .selected:
-            containerView.backgroundColor = .m1
-            emojiLbl.textColor = .m5
-        case .unselected:
-            containerView.backgroundColor = .m3
-            emojiLbl.textColor = .f2
-        }
-    }
 }

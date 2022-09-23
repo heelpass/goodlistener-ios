@@ -13,6 +13,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
 
     weak var coordinator: JoinCoordinating?
     let disposeBag = DisposeBag()
+    let viewModel = JoinViewModel()
     
     let scrollView = UIScrollView().then {
         $0.backgroundColor = .m5
@@ -44,7 +45,6 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.textColor = .f3
     }
     
-    //TODO: 여기 바꾸기 -> mismatch frame
     let emojiTagView = EmojiTagView(frame: .zero, emojiImgdata: EmojiTagList.emojiImgList, emojiTextdata: EmojiTagList.emojiTextList)
     
     
@@ -148,7 +148,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(20, after: titleLbl)
         contentStackView.setCustomSpacing(50, after: descriptionLbl)
         contentStackView.setCustomSpacing(20, after: questionOneLbl)
-        contentStackView.setCustomSpacing(50, after: emojiTagView)
+        contentStackView.setCustomSpacing(30, after: emojiTagView)
         contentStackView.setCustomSpacing(13, after: questionTwoLbl)
         contentStackView.setCustomSpacing(6, after: answerTwoTV)
         contentStackView.setCustomSpacing(50, after: answerTwoSubLbl)
@@ -159,7 +159,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         contentStackView.setCustomSpacing(63, after: timeView)
         
         emojiTagView.snp.makeConstraints{
-            $0.height.equalTo(100)
+            $0.height.equalTo(80)
         }
         
         answerTwoTV.snp.makeConstraints{
@@ -182,11 +182,15 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     func bind() {
-        btnView.okBtn.tapGesture
-            .subscribe(onNext: { [weak self] _ in
-                self?.coordinator?.moveToJoinMatch()
+        let output = viewModel.transform(input: JoinViewModel.Input(okBtnTap: btnView.okBtn.rx.tap.asObservable()))
+        
+        //확인 버튼
+        output.okBtnResult
+            .emit(with: self, onNext: { strongself, _ in
+                strongself.coordinator?.moveToJoinMatch()
             })
             .disposed(by: disposeBag)
+
         
         btnView.cancelBtn.tapGesture
             .subscribe(onNext: { [weak self] _ in
