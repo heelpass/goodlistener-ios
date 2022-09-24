@@ -70,7 +70,13 @@ extension EmojiTagView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         guard let cell = collectionView.cellForItem(at: indexPath) as? EmojiTagCell else { return }
+        cell.configUI(.selected)
         self.selectedemojiText.accept(indexPath.row + 1)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? EmojiTagCell else { return }
+        cell.configUI(.unselected)
     }
 }
 

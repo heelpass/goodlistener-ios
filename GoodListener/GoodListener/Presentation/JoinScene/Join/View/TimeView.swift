@@ -66,7 +66,6 @@ extension TimeView: UICollectionViewDataSource {
 
 extension TimeView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //TODO: 3개 제한 필요함 - count 해 주기
         guard let cell = collectionView.cellForItem(at: indexPath) as? TimeCell else { return }
 
         if(selectedTime.value.count <= 2){
