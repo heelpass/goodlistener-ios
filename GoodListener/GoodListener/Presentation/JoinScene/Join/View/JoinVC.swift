@@ -64,9 +64,10 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     let answerTwoSubLbl = UILabel().then {
-        $0.text = "* 최대 50글자까지 가능합니다"
+        $0.text = "자수/50"
         $0.font = FontManager.shared.notoSansKR(.regular, 12)
         $0.textColor = .f4
+        $0.textAlignment = .right
     }
     
     let questionThreeLbl = UILabel().then {
@@ -108,7 +109,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     let questionFourSubLbl = UILabel().then {
-        $0.text = "(중복 선택 최대 3개 가능)"
+        $0.text = "(최대 3개 가능)"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f3
     }
