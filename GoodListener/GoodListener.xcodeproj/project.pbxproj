@@ -24,6 +24,8 @@
 		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
 		0AA2BA9F28C1BE6B001AB4BD /* NoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA9E28C1BE6B001AB4BD /* NoticeVC.swift */; };
 		0AA8FF1A28DF408C00C506C6 /* MatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8FF1928DF408C00C506C6 /* MatchModel.swift */; };
+		0AA8FF1D28DF555500C506C6 /* MatchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8FF1C28DF555500C506C6 /* MatchAPI.swift */; };
+		0AA8FF1F28DF559600C506C6 /* MatchTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8FF1E28DF559600C506C6 /* MatchTargetType.swift */; };
 		0ABA2821288D5B55000D889B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2820288D5B55000D889B /* AppDelegate.swift */; };
 		0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2822288D5B55000D889B /* SceneDelegate.swift */; };
 		0ABA2825288D5B55000D889B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA2824288D5B55000D889B /* LoginVC.swift */; };
@@ -162,6 +164,8 @@
 		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
 		0AA2BA9E28C1BE6B001AB4BD /* NoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC.swift; sourceTree = "<group>"; };
 		0AA8FF1928DF408C00C506C6 /* MatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchModel.swift; sourceTree = "<group>"; };
+		0AA8FF1C28DF555500C506C6 /* MatchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchAPI.swift; sourceTree = "<group>"; };
+		0AA8FF1E28DF559600C506C6 /* MatchTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTargetType.swift; sourceTree = "<group>"; };
 		0ABA281D288D5B55000D889B /* GoodListener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodListener.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ABA2820288D5B55000D889B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0ABA2822288D5B55000D889B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -378,6 +382,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		0AA8FF1B28DF552300C506C6 /* Match */ = {
+			isa = PBXGroup;
+			children = (
+				0AA8FF1E28DF559600C506C6 /* MatchTargetType.swift */,
+				0AA8FF1C28DF555500C506C6 /* MatchAPI.swift */,
+			);
+			path = Match;
+			sourceTree = "<group>";
+		};
 		0ABA2814288D5B55000D889B = {
 			isa = PBXGroup;
 			children = (
@@ -539,6 +552,7 @@
 				E8821D5D28D95155004E9CEB /* LoadingIndicator */,
 				E81E41DA28BDC9B30094CFD9 /* Token */,
 				E81E41D928BDC9AA0094CFD9 /* User */,
+				0AA8FF1B28DF552300C506C6 /* Match */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1306,6 +1320,7 @@
 				0A558A3C28B61E28001949D6 /* JoinVC.swift in Sources */,
 				E81E41EB28BF1F060094CFD9 /* BaseTargetType.swift in Sources */,
 				0AA2BA9F28C1BE6B001AB4BD /* NoticeVC.swift in Sources */,
+				0AA8FF1D28DF555500C506C6 /* MatchAPI.swift in Sources */,
 				E845494E28BC553500DAD6EE /* TermsOfServicePopup.swift in Sources */,
 				E8CB6574288E6B130076E254 /* SnapKitType.swift in Sources */,
 				0A558A4228B61ED6001949D6 /* EmojiTagCell.swift in Sources */,
@@ -1336,6 +1351,7 @@
 				E8EF861428C855A9001C504F /* DBManager.swift in Sources */,
 				0A558A4628B61F2A001949D6 /* EmojiTagView.swift in Sources */,
 				E8B4435828A0EADD0003815B /* ProfileSetupVC.swift in Sources */,
+				0AA8FF1F28DF559600C506C6 /* MatchTargetType.swift in Sources */,
 				0ABA2823288D5B55000D889B /* SceneDelegate.swift in Sources */,
 				0A61B5A528CC5ACE00655E03 /* HomeViewModel.swift in Sources */,
 				0A350B8728BCA56C00EC83DA /* RecordContenttCell.swift in Sources */,
