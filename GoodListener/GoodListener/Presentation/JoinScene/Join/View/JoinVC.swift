@@ -63,7 +63,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.layer.borderColor = UIColor.f6.cgColor
     }
     
-    let answerTwoSubLbl = UILabel().then {
+    var answerTwoSubLbl = UILabel().then {
         $0.text = "자수/50"
         $0.font = FontManager.shared.notoSansKR(.regular, 12)
         $0.textColor = .f4
@@ -124,6 +124,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         bind()
         setDoneBtn()
         self.answerTwoTV.delegate = self
+        answerTwoSubLbl.text = "\(answerTwoTV.text.count)/50"
         setDatePicker()
     }
     
@@ -183,7 +184,8 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     func bind() {
-        let output = viewModel.transform(input: JoinViewModel.Input(okBtnTap: btnView.okBtn.rx.tap.asObservable()))
+        let output = viewModel.transform(input: JoinViewModel.Input(emojiwant: emojiTagView.selectedemojiText.asObservable(), reason: answerTwoTV.rx.text.orEmpty.asObservable(), okBtnTap: btnView.okBtn.rx.tap.asObservable()))
+        
         
         //확인 버튼
         output.okBtnResult
@@ -192,7 +194,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             })
             .disposed(by: disposeBag)
 
-        
+        //취소 버튼
         btnView.cancelBtn.tapGesture
             .subscribe(onNext: { [weak self] _ in
                 self?.coordinator?.moveToHome()
@@ -221,12 +223,8 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         if textView.text.count > 50 {
             textView.deleteBackward()
         }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if !textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            
-        }
+        answerTwoSubLbl.text = "\(answerTwoTV.text.count)/50"
+        //textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     //DatePicker
