@@ -15,6 +15,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     let disposeBag = DisposeBag()
     let viewModel = JoinViewModel()
     static var apiformateDate: String = ""
+    let id: BehaviorRelay<Int> = .init(value: UserDefaultsManager.shared.id)
     
     let scrollView = UIScrollView().then {
         $0.backgroundColor = .m5
@@ -188,9 +189,10 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     
     func bind() {
         let output = viewModel.transform(input: JoinViewModel.Input(
+            id: id.asObservable(),
             time: timeView.selectedTime.asObservable(),
             reason: answerTwoTV.rx.text.orEmpty.asObservable(),
-            wantImg: emojiTagView.selectedemojiText.asObservable(),
+            emojiImg: emojiTagView.selectedemojiText.asObservable(),
             okBtnTap: btnView.okBtn.rx.tap.asObservable()))
         
         

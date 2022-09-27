@@ -90,6 +90,8 @@ class LoginViewModel: NSObject, ViewModelType {
                         Log.e(error ?? #function)
                         return
                     }
+                   
+                    UserDefaultsManager.shared.id          = model.id
                     UserDefaultsManager.shared.nickname    = model.nickname
                     UserDefaultsManager.shared.age         = model.ageRange
                     UserDefaultsManager.shared.gender      = model.gender
