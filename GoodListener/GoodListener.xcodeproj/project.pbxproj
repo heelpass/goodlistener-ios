@@ -54,6 +54,7 @@
 		E845494F28BC553500DAD6EE /* TermsOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494D28BC553500DAD6EE /* TermsOfService.swift */; };
 		E845495428BC7F0100DAD6EE /* SignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845495328BC7F0100DAD6EE /* SignInModel.swift */; };
 		E8821D5F28D95164004E9CEB /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8821D5E28D95164004E9CEB /* LoadingIndicator.swift */; };
+		E8821D8828E28E10004E9CEB /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8821D8728E28E10004E9CEB /* WebSocketManager.swift */; };
 		E8A7953A289CB28000EF9E1B /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A79539289CB28000EF9E1B /* FontManager.swift */; };
 		E8A79544289CC9CA00EF9E1B /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A7953D289CC9CA00EF9E1B /* NotoSansKR-Light.otf */; };
 		E8A79545289CC9CA00EF9E1B /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E8A7953E289CC9CA00EF9E1B /* NotoSansKR-Bold.otf */; };
@@ -92,6 +93,8 @@
 		E8B444D128B759300003815B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E8B444D328B759300003815B /* Localizable.strings */; };
 		E8B444D828B759B20003815B /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B444D728B759B20003815B /* String+.swift */; };
 		E8B7A42528D2ED2200287EE0 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8B7A42428D2ED2200287EE0 /* UIApplication+.swift */; };
+		E8C25C9F28E2C2EF006A7DE5 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C25C9E28E2C2EF006A7DE5 /* UserInfoManager.swift */; };
+		E8C25CA128E2CC5B006A7DE5 /* Codable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C25CA028E2CC5B006A7DE5 /* Codable+.swift */; };
 		E8C3320928925F3400ECE59C /* CallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320828925F3400ECE59C /* CallVC.swift */; };
 		E8C3320B289265F400ECE59C /* CallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320A289265F400ECE59C /* CallManager.swift */; };
 		E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C3320C289366DF00ECE59C /* LoginViewModel.swift */; };
@@ -196,6 +199,7 @@
 		E845494D28BC553500DAD6EE /* TermsOfService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfService.swift; sourceTree = "<group>"; };
 		E845495328BC7F0100DAD6EE /* SignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInModel.swift; sourceTree = "<group>"; };
 		E8821D5E28D95164004E9CEB /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		E8821D8728E28E10004E9CEB /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
 		E8A79539289CB28000EF9E1B /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		E8A7953D289CC9CA00EF9E1B /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
 		E8A7953E289CC9CA00EF9E1B /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 		E8B444D628B759810003815B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E8B444D728B759B20003815B /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		E8B7A42428D2ED2200287EE0 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		E8C25C9E28E2C2EF006A7DE5 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
+		E8C25CA028E2CC5B006A7DE5 /* Codable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+.swift"; sourceTree = "<group>"; };
 		E8C3320828925F3400ECE59C /* CallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallVC.swift; sourceTree = "<group>"; };
 		E8C3320A289265F400ECE59C /* CallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallManager.swift; sourceTree = "<group>"; };
 		E8C3320C289366DF00ECE59C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -545,6 +551,7 @@
 			isa = PBXGroup;
 			children = (
 				E8D09853289A6C4D008AD55F /* SocketManager.swift */,
+				E8821D8728E28E10004E9CEB /* WebSocketManager.swift */,
 			);
 			path = Socket;
 			sourceTree = "<group>";
@@ -821,6 +828,7 @@
 			isa = PBXGroup;
 			children = (
 				E8CB656E288E66C30076E254 /* Entities */,
+				E8C25C9E28E2C2EF006A7DE5 /* UserInfoManager.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -1018,6 +1026,7 @@
 				E8B444AE28B316FE0003815B /* UIColor+.swift */,
 				E8B444D728B759B20003815B /* String+.swift */,
 				E8B7A42428D2ED2200287EE0 /* UIApplication+.swift */,
+				E8C25CA028E2CC5B006A7DE5 /* Codable+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1250,6 +1259,7 @@
 			files = (
 				E81E421C28C03BC60094CFD9 /* MyPageModifyVC.swift in Sources */,
 				E8C3320D289366DF00ECE59C /* LoginViewModel.swift in Sources */,
+				E8C25CA128E2CC5B006A7DE5 /* Codable+.swift in Sources */,
 				E8B444BC28B4B4990003815B /* CallReviewViewModel.swift in Sources */,
 				0A558A3A28B61E02001949D6 /* JoinMatchVC.swift in Sources */,
 				E81E421E28C03BE20094CFD9 /* TokenAPI.swift in Sources */,
@@ -1321,6 +1331,7 @@
 				E81E41E128BDF5840094CFD9 /* DeleteAccountVC.swift in Sources */,
 				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
 				E8B444B728B3723A0003815B /* MoodView.swift in Sources */,
+				E8C25C9F28E2C2EF006A7DE5 /* UserInfoManager.swift in Sources */,
 				E8B4449628ACC7AD0003815B /* UserDefaultsManager.swift in Sources */,
 				E81E422028C042400094CFD9 /* UserAPI.swift in Sources */,
 				0A350B8928BCA63500EC83DA /* RecordCollectionView.swift in Sources */,
@@ -1331,6 +1342,7 @@
 				E81E41E328BDF8540094CFD9 /* CheckBox.swift in Sources */,
 				E8B4449E28ADF4AD0003815B /* ProfileImageSelectCell.swift in Sources */,
 				E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */,
+				E8821D8828E28E10004E9CEB /* WebSocketManager.swift in Sources */,
 				E8B444B928B4A2680003815B /* CallViewModel.swift in Sources */,
 				0A558A3E28B61E44001949D6 /* TimeCell.swift in Sources */,
 				0AEC961C28C37A32007322B1 /* NoticeCell.swift in Sources */,

@@ -38,7 +38,7 @@ class CallViewModel: ViewModelType {
         input.acceptBtnTap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                //TODO: 대화 수락시 소켓 방 입장
+                // 스피커일 경우 전화
             })
             .disposed(by: disposeBag)
         

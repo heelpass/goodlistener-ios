@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SocketIO
 
 enum GLButtonState {
     case active

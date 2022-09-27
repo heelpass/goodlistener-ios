@@ -17,6 +17,7 @@ struct UserAPI: Networkable {
         makeProvider().request(.getUserInfo, completion: { result in
             switch ResponseData<UserInfo>.processModelResponse(result) {
             case .success(let model):
+                
                 return completion(model, nil)
             case .failure(let error):
                 makePopup(action: {

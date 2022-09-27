@@ -156,8 +156,6 @@ class HomeVC: UIViewController, SnapKitType {
         bind()
         changeUI(homeState)
         addCallBtn()    // 전화 테스트용
-        
-        Log.d(UserDefaultsManager.shared.userType)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -165,6 +163,10 @@ class HomeVC: UIViewController, SnapKitType {
         let cnt = DBManager.shared.unreadfilter()
         navigationView.remainNoticeView.isHidden = cnt == 0
         navigationView.remainNoticeLbl.text = "+\(cnt)"
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
     
     func addComponents() {
