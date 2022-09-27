@@ -192,7 +192,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             id: id.asObservable(),
             time: timeView.selectedTime.asObservable(),
             reason: answerTwoTV.rx.text.orEmpty.asObservable(),
-            emojiImg: emojiTagView.selectedemojiText.asObservable(),
+            moodImg: emojiTagView.selectedemojiText.asObservable(),
             okBtnTap: btnView.okBtn.rx.tap.asObservable()))
         
         

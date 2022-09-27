@@ -56,7 +56,8 @@ extension MatchTargetType: BaseTargetType {
                 "applyDesc": applyDesc,
                 "wantImg": wantImg
             ]
-            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+
         }
     }
 }

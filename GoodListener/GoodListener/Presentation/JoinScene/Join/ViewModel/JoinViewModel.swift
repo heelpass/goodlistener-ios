@@ -17,7 +17,7 @@ class JoinViewModel: ViewModelType {
         let id: Observable<Int> //아이디
         let time: Observable<[String]> //대화 날짜 + 시간
         let reason: Observable<String> //신청하게 된 계기
-        let emojiImg: Observable<Int> //이모지(원하는 대화 분위기)
+        let moodImg: Observable<Int> //이모지(원하는 대화 분위기)
         let okBtnTap: Observable<Void> //확인하기 버튼
     }
     
@@ -28,11 +28,19 @@ class JoinViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let okBtnResult = PublishRelay<Bool>()
         
-        //확인 버튼 클릭 시 tuple로 API 호출하기
-        //input.okBtnTap
-
-
-
+        //TODO: validationCheck필요함
+        
+        
+        input.okBtnTap
+            .withLatestFrom(Observable.combineLatest(input.id, input.time, input.reason, input.moodImg))
+            .subscribe(onNext: { [weak self] (id, time, reason, moodImg) in
+                MatchAPI.MatchUser(request: (id, time, reason, moodImg), completion: { response, error in
+                    guard let model = response else {
+                        Log.e(error ?? #function)
+                        return
+                    }
+                })
+            })
         return Output(okBtnResult: okBtnResult.asSignal(onErrorJustReturn: false))
     }
 }

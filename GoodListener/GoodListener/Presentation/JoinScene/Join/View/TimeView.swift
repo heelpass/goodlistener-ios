@@ -74,14 +74,12 @@ extension TimeView: UICollectionViewDelegate {
             cell.configUI(.selected)
             
             if self.selectedTime.value == [""] {
-                //self.selectedTime.accept([convertedtimeData[indexPath.row]])
                 self.selectedTime.accept([JoinVC.apiformateDate + convertedtimeData[indexPath.row]])
             } else {
-                //self.selectedTime.accept(selectedTime.value + [convertedtimeData[indexPath.row]])
                 self.selectedTime.accept(selectedTime.value + [JoinVC.apiformateDate + convertedtimeData[indexPath.row]])
             }
         }
-        Log.i(selectedTime.value)
+         //Log.i(selectedTime.value)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -91,13 +89,14 @@ extension TimeView: UICollectionViewDelegate {
 
         if self.selectedTime.value != [""] {
             for (index, value) in selectedTime.value.enumerated() {
-                if value == convertedtimeData[indexPath.row] {
+                if value == JoinVC.apiformateDate + convertedtimeData[indexPath.row]
+                    {
                     selectedTimeList.remove(at: index)
                     selectedTime.accept(selectedTimeList)
                 }
             }
         }
-        Log.i(selectedTime.value)
+        //Log.i(selectedTime.value)
     }
 }
 
