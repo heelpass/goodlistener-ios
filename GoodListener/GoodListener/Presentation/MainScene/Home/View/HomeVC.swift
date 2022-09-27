@@ -156,6 +156,8 @@ class HomeVC: UIViewController, SnapKitType {
         bind()
         changeUI(homeState)
         addCallBtn()    // 전화 테스트용
+        
+        Log.d(UserDefaultsManager.shared.userType)
     }
     
     override func viewWillAppear(_ animated: Bool) {

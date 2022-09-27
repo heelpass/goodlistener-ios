@@ -96,6 +96,7 @@ class LoginViewModel: NSObject, ViewModelType {
                     UserDefaultsManager.shared.job         = model.job
                     UserDefaultsManager.shared.profileImg  = model.profileImg
                     UserDefaultsManager.shared.description = model.description
+                    UserDefaultsManager.shared.userType    = model.kind.type
                     
                     self.loginResult.onNext(true)
                     UserDefaultsManager.shared.isLogin = true

@@ -23,6 +23,7 @@ struct UserInfo: Codable {
     var createdAt: String
     var updatedAt: String
     var wantImg: Int
+    var kind: Kind
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -39,23 +40,47 @@ struct UserInfo: Codable {
         case createdAt
         case updatedAt
         case wantImg
+        case kind
     }
     
     init(from decoder: Decoder) throws {
-        let values   = try decoder.container(keyedBy: CodingKeys.self)
-        id           = (try? values.decode(Int.self, forKey: .id)) ?? 0
-        snsHash      = (try? values.decode(String.self, forKey: .snsHash)) ?? ""
-        snsKind      = (try? values.decode(String.self, forKey: .snsKind)) ?? ""
-        email        = (try? values.decode(String.self, forKey: .email)) ?? ""
-        nickname     = (try? values.decode(String.self, forKey: .nickname)) ?? ""
-        gender       = (try? values.decode(String.self, forKey: .gender)) ?? ""
-        ageRange     = (try? values.decode(String.self, forKey: .ageRange)) ?? ""
-        job          = (try? values.decode(String.self, forKey: .job)) ?? ""
-        profileImg   = (try? values.decode(Int.self, forKey: .profileImg)) ?? 1
-        description  = (try? values.decode(String.self, forKey: .description)) ?? ""
-        fcmHash      = (try? values.decode(String.self, forKey: .fcmHash)) ?? ""
-        createdAt    = (try? values.decode(String.self, forKey: .createdAt)) ?? ""
-        updatedAt    = (try? values.decode(String.self, forKey: .updatedAt)) ?? ""
-        wantImg      = (try? values.decode(Int.self, forKey: .wantImg)) ?? 1
+        let container    = try decoder.container(keyedBy: CodingKeys.self)
+        self.id          = (try? container.decode(Int.self, forKey: .id)) ?? 1
+        self.snsHash     = (try? container.decode(String.self, forKey: .snsHash)) ?? ""
+        self.snsKind     = (try? container.decode(String.self, forKey: .snsKind)) ?? ""
+        self.email       = (try? container.decode(String.self, forKey: .email)) ?? ""
+        self.nickname    = (try? container.decode(String.self, forKey: .nickname)) ?? ""
+        self.gender      = (try? container.decode(String.self, forKey: .gender)) ?? ""
+        self.ageRange    = (try? container.decode(String.self, forKey: .ageRange)) ?? ""
+        self.job         = (try? container.decode(String.self, forKey: .job)) ?? ""
+        self.profileImg  = (try? container.decode(Int.self, forKey: .profileImg)) ?? 1
+        self.description = (try? container.decode(String.self, forKey: .description)) ?? ""
+        self.fcmHash     = (try? container.decode(String.self, forKey: .fcmHash)) ?? ""
+        self.createdAt   = (try? container.decode(String.self, forKey: .createdAt)) ?? ""
+        self.updatedAt   = (try? container.decode(String.self, forKey: .updatedAt)) ?? ""
+        self.wantImg     = (try? container.decode(Int.self, forKey: .wantImg)) ?? 1
+        self.kind        = try container.decode(Kind.self, forKey: .kind)
+    }
+}
+
+struct Kind: Codable {
+    var updatedAt: String
+    var type: String
+    var id: Int
+    var createAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case updatedAt
+        case type
+        case id
+        case createAt
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.updatedAt = (try? container.decode(String.self, forKey: .updatedAt)) ?? ""
+        self.type     = (try? container.decode(String.self, forKey: .type)) ?? "speaker"
+        self.id       = (try? container.decode(Int.self, forKey: .id)) ?? 1
+        self.createAt = (try? container.decode(String.self, forKey: .createAt)) ?? ""
     }
 }
