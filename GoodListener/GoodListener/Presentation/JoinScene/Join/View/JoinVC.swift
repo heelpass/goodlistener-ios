@@ -188,9 +188,9 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     
     func bind() {
         let output = viewModel.transform(input: JoinViewModel.Input(
-            emojiwant: emojiTagView.selectedemojiText.asObservable(),
-            reason: answerTwoTV.rx.text.orEmpty.asObservable(),
             time: timeView.selectedTime.asObservable(),
+            reason: answerTwoTV.rx.text.orEmpty.asObservable(),
+            wantImg: emojiTagView.selectedemojiText.asObservable(),
             okBtnTap: btnView.okBtn.rx.tap.asObservable()))
         
         
