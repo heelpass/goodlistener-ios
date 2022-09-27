@@ -8,7 +8,7 @@
 import Foundation
 
 struct MatchModel: Codable {
-    var id: Int //TODO: -token으로 바뀐다고 함
+    var id: Int 
     var matchDate: [String]
     var applyDesc: String
     var wantImg: Int

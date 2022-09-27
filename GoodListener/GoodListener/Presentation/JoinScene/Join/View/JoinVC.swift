@@ -14,6 +14,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     weak var coordinator: JoinCoordinating?
     let disposeBag = DisposeBag()
     let viewModel = JoinViewModel()
+    static var apiformateDate: String = ""
     
     let scrollView = UIScrollView().then {
         $0.backgroundColor = .m5
@@ -114,7 +115,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         $0.textColor = .f3
     }
     
-    let timeView = TimeView(frame: .zero, timeList: TimeList.timeList)
+    let timeView = TimeView(frame: .zero, timeList: TimeList.timeList, convertedTime: TimeList.convertedTime)
     let btnView = GLTwoButton(frame: .zero)
     
     override func viewDidLoad() {
@@ -135,6 +136,8 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         [titleLbl, descriptionLbl, questionOneLbl, emojiTagView, questionTwoLbl, answerTwoTV, answerTwoSubLbl, questionThreeLbl, datePickerTF, lineView, questionFourLbl, questionFourSubLbl, timeView, btnView].forEach {
             contentStackView.addArrangedSubview($0)
         }
+        
+        
     }
     
     func setConstraints() {
@@ -184,7 +187,11 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     }
     
     func bind() {
-        let output = viewModel.transform(input: JoinViewModel.Input(emojiwant: emojiTagView.selectedemojiText.asObservable(), reason: answerTwoTV.rx.text.orEmpty.asObservable(), okBtnTap: btnView.okBtn.rx.tap.asObservable()))
+        let output = viewModel.transform(input: JoinViewModel.Input(
+            emojiwant: emojiTagView.selectedemojiText.asObservable(),
+            reason: answerTwoTV.rx.text.orEmpty.asObservable(),
+            time: timeView.selectedTime.asObservable(),
+            okBtnTap: btnView.okBtn.rx.tap.asObservable()))
         
         
         //확인 버튼
@@ -238,10 +245,12 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         datePicker.locale = NSLocale(localeIdentifier: "ko_KO") as Locale
         datePickerTF.inputView = datePicker
         datePickerTF.text = formatDate(date: Date())
+        JoinVC.apiformateDate = apiformateDate(date: Date())
     }
     
     @objc func dateChange(datePicker: UIDatePicker) {
         datePickerTF.text = formatDate(date: datePicker.date)
+        JoinVC.apiformateDate = apiformateDate(date: datePicker.date)
     }
 
     func formatDate(date: Date) -> String {
@@ -250,4 +259,9 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         return formatter.string(from: date)
     }
     
+    func apiformateDate(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd "
+        return formatter.string(from: date)
+    }
 }
