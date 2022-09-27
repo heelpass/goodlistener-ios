@@ -11,7 +11,6 @@ enum UserDefaultKey : String {
     case accessToken
     
     // 유저 정보
-    case id
     case nickname
     case gender
     case age
@@ -37,7 +36,6 @@ class UserDefaultsManager {
     func logout() {
         self.isLogin = false
         self.accessToken = ""
-        self.id = 0
         self.nickname = ""
         self.gender = ""
         self.age = ""
@@ -60,21 +58,6 @@ class UserDefaultsManager {
             UserDefaults.standard.set(accessToken, forKey:  UserDefaultKey.accessToken.rawValue)
         }
     }
-    
-    var id: Int {
-        get {
-            guard let id = UserDefaults.standard.value(forKey: UserDefaultKey.id.rawValue) as? Int else {
-                return 0
-            }
-            return id
-        }
-        
-        set(id) {
-            UserDefaults.standard.set(id, forKey:  UserDefaultKey.id.rawValue)
-        }
-    }
-    
-    
     
     var nickname: String? {
         get {
