@@ -18,6 +18,7 @@ class JoinViewModel: ViewModelType {
         let reason: Observable<String> //신청하게 된 계기
         let moodImg: Observable<Int> //이모지(원하는 대화 분위기)
         let okBtnTap: Observable<Void> //확인하기 버튼
+        let match: Observable<MatchModel>
     }
     
     struct Output {
@@ -29,13 +30,10 @@ class JoinViewModel: ViewModelType {
         
         //TODO: validationCheck필요함
         
-        
-        
         input.okBtnTap
             .withLatestFrom(Observable.combineLatest(input.time, input.reason, input.moodImg))
             .subscribe(onNext: { [weak self] (time, reason, moodImg) in
-                Log.d((time, reason, moodImg))
-                MatchAPI.MatchUser(request: (time, reason, moodImg), completion: { response, error in
+                MatchAPI.MatchUser(request: MatchModel.init(matchDate: time, applyDesc: reason, wantImg: moodImg), completion: { response, error in
                     guard let model = response else {
                         Log.e(error ?? #function)
                         return

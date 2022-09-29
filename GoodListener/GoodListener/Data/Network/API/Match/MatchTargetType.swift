@@ -12,8 +12,8 @@ import Moya
 
 //ex) 만일 'ABC/DEF'에 token을 post로 보내야 한다고 가정
 // case signIn(path: String, token: String)
-public enum MatchTargetType {
-    case matchUser(([String], String, Int))
+enum MatchTargetType {
+    case matchUser(MatchModel)
     case myListener
 }
 
@@ -54,10 +54,8 @@ extension MatchTargetType: BaseTargetType {
     // case let .signIn(_, token): return .requestJSONEncodable(["accesstoken": token])
     public var task: Task {
         switch self {
-        case .matchUser((let matchDate, let applyDesc, let wantImg)):
-            let params : [String: Any] = ["matchDate": matchDate, "applyDesc": applyDesc, "wantImg": wantImg]
-            Log.d(params)
-            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .matchUser(let model):
+            return .requestJSONEncodable(model)
 
         case .myListener:
             return .requestPlain

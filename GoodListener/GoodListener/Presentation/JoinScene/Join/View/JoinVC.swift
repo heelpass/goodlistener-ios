@@ -16,6 +16,9 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     let viewModel = JoinViewModel()
     static var apiformateDate: String = ""
     
+    var matchObservable = PublishRelay<MatchModel>()
+    var matchModel: MatchModel?
+    
     let scrollView = UIScrollView().then {
         $0.backgroundColor = .m5
     }
@@ -191,13 +194,16 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             time: timeView.selectedTime.asObservable(),
             reason: answerTwoTV.rx.text.orEmpty.asObservable(),
             moodImg: emojiTagView.selectedemojiText.asObservable(),
-            okBtnTap: btnView.okBtn.rx.tap.asObservable()))
+            okBtnTap: btnView.okBtn.rx.tap.asObservable(),
+            match: matchObservable.asObservable()
+        ))
         
         
         //확인 버튼
         output.okBtnResult
             .emit(with: self, onNext: { strongself, _ in
                 strongself.coordinator?.moveToJoinMatch()
+                self.matchObservable.accept(self.matchModel!)
             })
             .disposed(by: disposeBag)
 

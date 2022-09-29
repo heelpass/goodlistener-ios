@@ -13,9 +13,9 @@ struct MatchAPI: Networkable {
     /// 유저 매칭을 진행합니다.
     /// - Parameter request: (id: Int, matchDate: [String], applyDesc: String, wantImg: Int)
     /// - Returns: Success: MatchModel, Fail: Error
-    static func MatchUser(request: ([String], String, Int), completion: @escaping (_ succeed: MatchModel?, _ failed: Error?) -> Void) {
+    static func MatchUser(request: MatchModel, completion: @escaping (_ succeed: MatchInfo?, _ failed: Error?) -> Void) {
         makeProvider().request(.matchUser(request), completion: { result in
-            switch ResponseData<MatchModel>.processModelResponse(result) {
+            switch ResponseData<MatchInfo>.processModelResponse(result) {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):

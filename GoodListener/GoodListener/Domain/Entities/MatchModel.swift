@@ -8,13 +8,8 @@
 import Foundation
 
 struct MatchModel: Codable {
-    var matchDate: [String]
-    var applyDesc: String
-    var wantImg: Int
+    var matchDate: [String] = [""]
+    var applyDesc: String = ""
+    var wantImg: Int = 0
 
-    enum Codingkeys: String, CodingKey {
-        case matchDate
-        case applyDesc
-        case wantImg
-    }
 }
