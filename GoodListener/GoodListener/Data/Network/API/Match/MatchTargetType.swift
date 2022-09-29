@@ -58,6 +58,7 @@ extension MatchTargetType: BaseTargetType {
             let params : [String: Any] = ["matchDate": matchDate, "applyDesc": applyDesc, "wantImg": wantImg]
             Log.d(params)
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
+
         case .myListener:
             return .requestPlain
         }
