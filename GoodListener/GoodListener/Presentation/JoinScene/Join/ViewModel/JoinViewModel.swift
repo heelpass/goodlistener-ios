@@ -28,10 +28,13 @@ class JoinViewModel: ViewModelType {
         let okBtnResult = PublishRelay<Bool>()
         
         //TODO: validationCheck필요함
+        
+        
+        
         input.okBtnTap
             .withLatestFrom(Observable.combineLatest(input.time, input.reason, input.moodImg))
             .subscribe(onNext: { [weak self] (time, reason, moodImg) in
-                //Log.d((time, reason, moodImg))
+                Log.d((time, reason, moodImg))
                 MatchAPI.MatchUser(request: (time, reason, moodImg), completion: { response, error in
                     guard let model = response else {
                         Log.e(error ?? #function)

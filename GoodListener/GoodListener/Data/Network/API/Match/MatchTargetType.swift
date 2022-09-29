@@ -14,6 +14,7 @@ import Moya
 // case signIn(path: String, token: String)
 public enum MatchTargetType {
     case matchUser(([String], String, Int))
+    case myListener
 }
 
 
@@ -26,6 +27,8 @@ extension MatchTargetType: BaseTargetType {
         switch self {
         case .matchUser(_):
             return "/match/user"
+        case .myListener:
+            return "/match/user/listener"
         }
     }
     
@@ -35,6 +38,8 @@ extension MatchTargetType: BaseTargetType {
         switch self {
         case .matchUser(_):
             return .post
+        case .myListener:
+            return .get
         }
 
     }
@@ -50,13 +55,11 @@ extension MatchTargetType: BaseTargetType {
     public var task: Task {
         switch self {
         case .matchUser((let matchDate, let applyDesc, let wantImg)):
-            let params : [String: Any] = [
-                "matchDate": matchDate,
-                "applyDesc": applyDesc,
-                "wantImg": wantImg
-            ]
-            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
-
+            let params : [String: Any] = ["matchDate": matchDate, "applyDesc": applyDesc, "wantImg": wantImg]
+            Log.d(params)
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+        case .myListener:
+            return .requestPlain
         }
     }
 }
