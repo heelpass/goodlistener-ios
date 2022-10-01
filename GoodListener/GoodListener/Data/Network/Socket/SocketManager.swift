@@ -95,6 +95,26 @@ final class GLSocketManager: NSObject {
     func disconnect() {
         socket.disconnect()
     }
+    
+    func setUserIn(_ data: SetUserInModel, _ callback: @escaping AckCallback) {
+        socket.emitWithAck(SocketEvents.setUserIn.rawValue, data.toJson ?? " ").timingOut(after: 1.0, callback: callback)
+    }
+    
+    func createChatRoom(_ callback: @escaping AckCallback) {
+        socket.emitWithAck(SocketEvents.createChatRoom.rawValue, " ").timingOut(after: 1.0, callback: callback)
+    }
+    
+    func enterChatRoom(_ callback: @escaping AckCallback) {
+        socket.emitWithAck(SocketEvents.enterChatRoom.rawValue, " ").timingOut(after: 1.0, callback: callback)
+    }
+    
+    func createAgoraToken(_ callback: @escaping AckCallback) {
+        socket.emitWithAck(SocketEvents.createAgoraToken.rawValue, " ").timingOut(after: 1.0, callback: callback)
+    }
+    
+    func disconnected(_ callback: @escaping AckCallback) {
+        socket.emitWithAck(SocketEvents.disconnected.rawValue, " ").timingOut(after: 1.0, callback: callback)
+    }
 }
 
 extension SocketIOClient {
@@ -102,6 +122,7 @@ extension SocketIOClient {
     func listen(event: String, relay: PublishRelay<[Any]>) {
         on(event) { items, _ in
             relay.accept(items)
+            Log.d("Socket \(event):: \(items)")
         }
     }
 

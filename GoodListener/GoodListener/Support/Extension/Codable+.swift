@@ -15,4 +15,13 @@ extension Encodable {
         guard let dictionary = try? JSONSerialization.jsonObject(with: object, options: []) as? [String:Any] else { return nil }
         return dictionary
     }
+    
+    // Object -> JSON
+    public var toJson: String? {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        guard let data = try? encoder.encode(self) else { return nil }
+        let json = String(data: data, encoding: String.Encoding.utf8)
+        return json
+    }
 }
