@@ -203,7 +203,6 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         output.okBtnResult
             .emit(with: self, onNext: { strongself, _ in
                 strongself.coordinator?.moveToJoinMatch()
-                self.matchObservable.accept(self.matchModel!)
             })
             .disposed(by: disposeBag)
 

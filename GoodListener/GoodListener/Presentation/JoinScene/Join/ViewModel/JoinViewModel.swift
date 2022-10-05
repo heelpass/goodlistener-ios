@@ -28,8 +28,7 @@ class JoinViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let okBtnResult = PublishRelay<Bool>()
         
-        //TODO: validationCheck필요함
-        
+        //TODO: validationCheck필요
         input.okBtnTap
             .withLatestFrom(Observable.combineLatest(input.time, input.reason, input.moodImg))
             .subscribe(onNext: { [weak self] (time, reason, moodImg) in
@@ -39,7 +38,9 @@ class JoinViewModel: ViewModelType {
                         return
                     }
                 })
+                okBtnResult.accept(true)
             })
+            .disposed(by: disposeBag)
         return Output(okBtnResult: okBtnResult.asSignal(onErrorJustReturn: false))
     }
 }
