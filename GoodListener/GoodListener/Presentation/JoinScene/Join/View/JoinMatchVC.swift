@@ -180,6 +180,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             self.changeUI(self.joinMatchState)
+            //self.fetchData()
         }
         
     }
@@ -374,4 +375,12 @@ class JoinMatchVC: UIViewController, SnapKitType {
             break
         }
     }
+    
+//    func fetchData() {
+//        self.changeUI(self.joinMatchState)
+//        MatchAPI.MatchedListener { succeed, failed in
+//            guard let model = succeed else {return}
+//            Log.w(model)
+//        }
+//    }
 }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+	
 struct MatchInfo: Codable {
     var matchDate: [String]
     var applyDesc: String
