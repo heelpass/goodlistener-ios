@@ -18,13 +18,11 @@ class CustomTabBarController: UITabBarController {
         setupStyle()
 //        WebSocketManager.shared.socket?.delegate = self
 //        WebSocketManager.shared.start()
-        GLSocketManager.shared.start()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 //        WebSocketManager.shared.disconnect()
-        GLSocketManager.shared.disconnect()
     }
     
     func setupStyle() {

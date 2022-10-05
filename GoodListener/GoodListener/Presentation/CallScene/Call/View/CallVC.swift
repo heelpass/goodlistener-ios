@@ -140,8 +140,13 @@ class CallVC: UIViewController, SnapKitType {
         $0.title = "종료"
     }
     
+    let getAgoraTokenButton = UIButton().then {
+        $0.setTitle("아고라", for: .normal)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        GLSocketManager.shared.start()
         
         view.backgroundColor = #colorLiteral(red: 0.1971904635, green: 0.2260227799, blue: 0.1979919374, alpha: 1)
         // Do any additional setup after loading the view.
@@ -149,12 +154,33 @@ class CallVC: UIViewController, SnapKitType {
         setConstraints()
         bind()
         changeUI(.ready)
+        
+        let model: SetUserInModel!
+        
+        if UserDefaultsManager.shared.userType == "listener" {
+            model = SetUserInModel(listenerId: 17,
+                                   channel: "57ceb043-236e-4854-a186-1fd233ebbfdb",
+                                   meetingTime: "2022-10-05T22:00:00.000Z",
+                                   speakerId: 18,
+                                   isListener: true)
+        } else {
+            model = SetUserInModel(listenerId: 17,
+                                   channel: "57ceb043-236e-4854-a186-1fd233ebbfdb",
+                                   meetingTime: "2022-10-05T22:00:00.000Z",
+                                   speakerId: 18,
+                                   isListener: false)
+        }
+        GLSocketManager.shared.setUserIn(model, { data in
+            Log.d("SetUserInSuccess")
+            Log.d(data)
+        })
     }
     
     func addComponents() {
         [titleStackView, profileImage, nickName, buttonStackView, stopBtn, okayBtn].forEach { view.addSubview($0) }
         [titleLabel, timeLabel, subTitleLabel].forEach { titleStackView.addArrangedSubview($0) }
         [refuseBtn, acceptBtn].forEach { buttonStackView.addArrangedSubview($0) }
+        view.addSubview(getAgoraTokenButton)
         
         // 팝업
         popup.addSubview(popupContainer)
@@ -163,6 +189,21 @@ class CallVC: UIViewController, SnapKitType {
     }
     
     func setConstraints() {
+        
+        getAgoraTokenButton.snp.makeConstraints {
+            $0.size.equalTo(100)
+            $0.top.equalTo(stopBtn.snp.bottom)
+            $0.centerX.equalToSuperview()
+        }
+        
+        getAgoraTokenButton.rx.tap
+            .subscribe(onNext: {
+                GLSocketManager.shared.createAgoraToken { data in
+                    Log.d(data)
+                }
+            })
+            .disposed(by: disposeBag)
+        
         titleStackView.snp.makeConstraints {
             $0.bottom.equalTo(profileImage.snp.top).offset(-90)
             $0.left.right.equalToSuperview().inset(Const.padding)
@@ -228,7 +269,7 @@ class CallVC: UIViewController, SnapKitType {
     func bind() {
         let output = viewModel.transform(input: CallViewModel.Input(acceptBtnTap: acceptBtn.rx.tap.asObservable(),
                                                                     refuseBtnTap: refuseBtn.rx.tap.asObservable(),
-                                                                    stopBtnTap: stopBtn.rx.tap.asObservable(),
+                                                                    stopBtnTap: stopBtn.swipeSuccessResult.asObservable(),
                                                                     delayBtnTap: delayBtn.rx.tap.asObservable()))
         
         // 통화 수락
@@ -248,8 +289,7 @@ class CallVC: UIViewController, SnapKitType {
         
         // 통화 중지
         stopBtn.swipeSuccessResult
-            .filter { $0 }
-            .bind(onNext: { [weak self] _ in
+            .bind(onNext: { [weak self] in
                 self?.coordinator?.moveToReview()
             })
             .disposed(by: disposeBag)

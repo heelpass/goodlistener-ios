@@ -39,6 +39,22 @@ class CallViewModel: ViewModelType {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 // 스피커일 경우 전화
+                if UserDefaultsManager.shared.userType == "listener" {
+                    GLSocketManager.shared.createChatRoom { data in
+                        Log.d("CreateChatRoomSuccess")
+                        Log.d(data)
+                        GLSocketManager.shared.enterChatRoom { data in
+                            Log.d("EnterChatRoom")
+                            Log.d(data)
+                        }
+                    }
+                } else {
+                    GLSocketManager.shared.enterChatRoom { data in
+                        Log.d("EnterChatRoom")
+                        Log.d(data)
+                    }
+                }
+                
             })
             .disposed(by: disposeBag)
         
@@ -55,6 +71,9 @@ class CallViewModel: ViewModelType {
                 guard let self = self else { return }
                 //TODO: 대화 종료 시 소켓으로 emit
                 // emit에 실패하지 않으면 후기 남기기로 가야할듯
+                GLSocketManager.shared.disconnected { data in
+                    Log.d(data)
+                }
             })
             .disposed(by: disposeBag)
         

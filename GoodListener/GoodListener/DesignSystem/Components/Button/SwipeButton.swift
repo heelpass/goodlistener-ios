@@ -18,7 +18,7 @@ class SwipeButton: UIButton, SnapKitType {
     private let successCnt: CGFloat = 176
     
     // 스와이프 성공여부
-    var swipeSuccessResult = PublishRelay<Bool>()
+    var swipeSuccessResult = PublishRelay<Void>()
     
     private let backgroundView = UIView().then {
         $0.backgroundColor = UIColor.white.withAlphaComponent(0.2)
@@ -118,7 +118,7 @@ class SwipeButton: UIButton, SnapKitType {
                     
                     // 종료 성공
                     if transX == self.successCnt {
-                        self.swipeSuccessResult.accept(true)
+                        self.swipeSuccessResult.accept(())
                         return
                     }
                     // 빠른속도로 스와이프 한 경우 종료됨
@@ -130,7 +130,7 @@ class SwipeButton: UIButton, SnapKitType {
                             }
                             self.layoutIfNeeded()
                         }, completion: { _ in
-                            self.swipeSuccessResult.accept(true)
+                            self.swipeSuccessResult.accept(())
                             return
                         })
                     }
