@@ -20,6 +20,9 @@ class EmojiTagCell: UICollectionViewCell{
     let emojiImgView = UIImageView().then{
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
+        $0.layer.cornerRadius = 19
+        $0.layer.borderWidth = 2
+        $0.layer.borderColor = UIColor.m5.cgColor
     }
     
     let emojiLbl: BasePaddingLabel = {
@@ -59,9 +62,15 @@ class EmojiTagCell: UICollectionViewCell{
     func configUI(_ type: EmojiState) {
         switch type {
         case .selected:
-            emojiLbl.backgroundColor = UIColor(hex: "#979797")
+            emojiImgView.layer.cornerRadius = 19
+            emojiImgView.layer.borderColor = UIColor.m1.cgColor
+            emojiLbl.backgroundColor = UIColor(hex: "#5EC75C")
+            emojiLbl.textColor = .m5
         case .unselected:
+            emojiImgView.layer.cornerRadius = 19
+            emojiImgView.layer.borderColor = UIColor.m5.cgColor
             emojiLbl.backgroundColor = UIColor(hex: "#F4F4F4")
+            emojiLbl.textColor = .f2
         }
     }
 }
