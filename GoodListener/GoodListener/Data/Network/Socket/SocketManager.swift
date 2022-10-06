@@ -46,9 +46,16 @@ final class GLSocketManager: NSObject {
     private var socketManager: SocketManager!
     public var socket: SocketIOClient!
     private let disposeBag = DisposeBag()
+    
+    var isConnected: Bool = false
 
     // 공개적으로 접근 가능한 relays
     let relays = Relays()
+    
+    private override init() {
+        super.init()
+        start()
+    }
 
     // 싱글톤으로 start메서드를 실행해주세요 소켓이 연결됩니다
     func start() {
@@ -67,10 +74,11 @@ final class GLSocketManager: NSObject {
         )
         socket = socketManager.defaultSocket
         addListeners()
-        connect()
+        
 //        socket.emit(SocketEvents.setUserIn.rawValue, [])
         relays.socketConnection.bind(onNext: {
             Log.d("SocketConnected:: \($0)")
+            self.isConnected = $0
         })
         .disposed(by: disposeBag)
     }
@@ -88,8 +96,8 @@ final class GLSocketManager: NSObject {
         socket.listen(event: SocketClientEvent.disconnect.rawValue, result: false, relay: relays.socketConnection)
     }
 
-    func connect() {
-        socket.connect()
+    func connect(completion: (()->Void)?) {
+        socket.connect(timeoutAfter: 5.0, withHandler: completion)
     }
 
     func disconnect() {
@@ -97,23 +105,24 @@ final class GLSocketManager: NSObject {
     }
     
     func setUserIn(_ data: SetUserInModel, _ callback: @escaping AckCallback) {
+        Log.d(data.toJson!)
         socket.emitWithAck(SocketEvents.setUserIn.rawValue, data.toJson ?? " ").timingOut(after: 1.0, callback: callback)
     }
     
     func createChatRoom(_ callback: @escaping AckCallback) {
-        socket.emitWithAck(SocketEvents.createChatRoom.rawValue, " ").timingOut(after: 1.0, callback: callback)
+        socket.emitWithAck(SocketEvents.createChatRoom.rawValue, "a").timingOut(after: 1.0, callback: callback)
     }
     
     func enterChatRoom(_ callback: @escaping AckCallback) {
-        socket.emitWithAck(SocketEvents.enterChatRoom.rawValue, " ").timingOut(after: 1.0, callback: callback)
+        socket.emitWithAck(SocketEvents.enterChatRoom.rawValue, "a").timingOut(after: 1.0, callback: callback)
     }
     
     func createAgoraToken(_ callback: @escaping AckCallback) {
-        socket.emitWithAck(SocketEvents.createAgoraToken.rawValue, " ").timingOut(after: 1.0, callback: callback)
+        socket.emitWithAck(SocketEvents.createAgoraToken.rawValue, "a").timingOut(after: 1.0, callback: callback)
     }
     
     func disconnected(_ callback: @escaping AckCallback) {
-        socket.emitWithAck(SocketEvents.disconnected.rawValue, " ").timingOut(after: 1.0, callback: callback)
+        socket.emitWithAck(SocketEvents.disconnected.rawValue, "a").timingOut(after: 1.0, callback: callback)
     }
 }
 

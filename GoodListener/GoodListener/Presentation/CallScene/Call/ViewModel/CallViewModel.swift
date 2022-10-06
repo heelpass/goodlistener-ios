@@ -28,6 +28,52 @@ class CallViewModel: ViewModelType {
         let delayAPIResult: Signal<Bool> // 대화 미루기 API 성공 여부
     }
     
+    init() {
+        let model: SetUserInModel!
+        
+        if UserDefaultsManager.shared.userType == "listener" {
+            model = SetUserInModel(listenerId: 17,
+                                   channel: "7dc5fcf8-4d20-48f0-af2a-51d8ff4b9eb9",
+                                   meetingTime: "2022-09-30 22:20",
+                                   speakerId: 18,
+                                   isListener: true)
+        } else {
+            model = SetUserInModel(listenerId: 17,
+                                   channel: "7dc5fcf8-4d20-48f0-af2a-51d8ff4b9eb9",
+                                   meetingTime: "2022-09-30 22:20",
+                                   speakerId: 18,
+                                   isListener: false)
+        }
+        
+        GLSocketManager.shared.connect{}
+        
+        GLSocketManager.shared.relays.socketConnection.bind(onNext: {
+            if $0 {
+                GLSocketManager.shared.setUserIn(model, { data in
+                    Log.d("SetUserInSuccess")
+                    Log.d(data)
+                    
+                    if UserDefaultsManager.shared.userType == "listener" {
+                        GLSocketManager.shared.createChatRoom { data in
+                            Log.d("CreateChatRoomSuccess")
+                            Log.d(data)
+                            GLSocketManager.shared.enterChatRoom { data in
+                                Log.d("EnterChatRoom")
+                                Log.d(data)
+                            }
+                        }
+                    } else {
+                        GLSocketManager.shared.enterChatRoom { data in
+                            Log.d("EnterChatRoom")
+                            Log.d(data)
+                        }
+                    }
+                })
+            }
+        })
+        .disposed(by: disposeBag)
+    }
+    
     func transform(input: Input) -> Output {
         let time = BehaviorRelay<String>(value: "0:00 / 3:00")
         let acceptSocketResult = BehaviorRelay<Bool>(value: false)
@@ -39,21 +85,6 @@ class CallViewModel: ViewModelType {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 // 스피커일 경우 전화
-                if UserDefaultsManager.shared.userType == "listener" {
-                    GLSocketManager.shared.createChatRoom { data in
-                        Log.d("CreateChatRoomSuccess")
-                        Log.d(data)
-                        GLSocketManager.shared.enterChatRoom { data in
-                            Log.d("EnterChatRoom")
-                            Log.d(data)
-                        }
-                    }
-                } else {
-                    GLSocketManager.shared.enterChatRoom { data in
-                        Log.d("EnterChatRoom")
-                        Log.d(data)
-                    }
-                }
                 
             })
             .disposed(by: disposeBag)

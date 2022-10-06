@@ -6,13 +6,28 @@
 //
 
 import Foundation
+import SocketIO
 
-struct SetUserInModel: Encodable {
-    var listenerId: Int
-    var channel: String
-    var meetingTime: String
-    var speakerId: Int
-    var isListener: Bool
+struct SetUserInModel: Codable, SocketData {
+    var listenerId  : Int
+    var channel     : String
+    var meetingTime : String
+    var speakerId   : Int
+    var isListener  : Bool
+    
+    func socketRepresentation() throws -> SocketData {
+        return [
+            "listenerId" : listenerId,
+            "channel" : channel,
+            "meetingTime" : meetingTime,
+            "speakerId" : speakerId,
+            "isListener" : isListener
+        ]
+    }
+    
+    var json: String {
+        return ""
+    }
     
     init(listenerId: Int, channel: String, meetingTime: String, speakerId: Int, isListener: Bool) {
         self.listenerId = listenerId

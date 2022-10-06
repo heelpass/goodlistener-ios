@@ -155,25 +155,6 @@ class CallVC: UIViewController, SnapKitType {
         bind()
         changeUI(.ready)
         
-        let model: SetUserInModel!
-        
-        if UserDefaultsManager.shared.userType == "listener" {
-            model = SetUserInModel(listenerId: 17,
-                                   channel: "57ceb043-236e-4854-a186-1fd233ebbfdb",
-                                   meetingTime: "2022-10-05T22:00:00.000Z",
-                                   speakerId: 18,
-                                   isListener: true)
-        } else {
-            model = SetUserInModel(listenerId: 17,
-                                   channel: "57ceb043-236e-4854-a186-1fd233ebbfdb",
-                                   meetingTime: "2022-10-05T22:00:00.000Z",
-                                   speakerId: 18,
-                                   isListener: false)
-        }
-        GLSocketManager.shared.setUserIn(model, { data in
-            Log.d("SetUserInSuccess")
-            Log.d(data)
-        })
     }
     
     func addComponents() {
