@@ -31,7 +31,7 @@ class CallVC: UIViewController, SnapKitType {
     let userType: UserType = UserType.init(rawValue: UserDefaultsManager.shared.userType) ?? .speaker //
     
     // 현재 전화 상태
-    var state: CallState = .ready
+    var state: BehaviorRelay<CallState> = BehaviorRelay(value: .ready)
     
     let titleStackView = UIStackView().then {
         $0.axis = .vertical
@@ -166,7 +166,12 @@ class CallVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
-        configUI()
+        
+        // 상태값이 바뀌면 UI도 알아서 바뀜
+        state.bind(onNext: { [weak self] state in
+            self?.configUI(state)
+        })
+        .disposed(by: disposeBag)
     }
     
     func addComponents() {
@@ -260,7 +265,7 @@ class CallVC: UIViewController, SnapKitType {
         // 통화 수락
         acceptBtn.rx.tap
             .bind(onNext: { [weak self] in
-                self?.speakerChangeUI(.call)
+                self?.state.accept(.call)
                 // 소켓
             })
             .disposed(by: disposeBag)
@@ -320,12 +325,12 @@ class CallVC: UIViewController, SnapKitType {
             .disposed(by: disposeBag)
     }
     
-    func configUI() {
+    func configUI(_ state: CallState) {
         switch userType {
         case .speaker:
-            speakerChangeUI(.ready)
+            speakerChangeUI(state)
         case .listener:
-            listenerChangeUI(.ready)
+            listenerChangeUI(state)
         }
     }
     
