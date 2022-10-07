@@ -136,10 +136,12 @@ class CallVC: UIViewController, SnapKitType {
     
     let delayBtn = GLButton(type: .rectangle, reverse: true).then {
         $0.title = "대화 1회 미루기"
+        $0.isHidden = true
     }
     
-    let cancelBtn = GLButton(type: .rectangle).then {
-        $0.title = "종료"
+    let popupOkbtn = GLButton(type: .rectangle).then {
+        $0.title = "확인"
+        $0.isHidden = true
     }
     
     override func viewDidLoad() {
@@ -161,7 +163,7 @@ class CallVC: UIViewController, SnapKitType {
         // 팝업
         popup.addSubview(popupContainer)
         [popupTitle, popupBtnStackView].forEach { popupContainer.addSubview($0) }
-        [delayBtn].forEach { popupBtnStackView.addArrangedSubview($0) }
+        [delayBtn, popupOkbtn].forEach { popupBtnStackView.addArrangedSubview($0) }
     }
     
     func setConstraints() {
@@ -250,6 +252,7 @@ class CallVC: UIViewController, SnapKitType {
                 self.popup.snp.makeConstraints {
                     $0.edges.equalToSuperview()
                 }
+                self.delayBtn.isHidden = false
             })
             .disposed(by: disposeBag)
         
@@ -261,13 +264,22 @@ class CallVC: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
         
+        okayBtn.rx.tap
+            .bind(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.popupTitle.text = "잠깐!\n오늘 대화를 진행하지 못한 관계로\n리스너와의 7일중 1회가 차감됩니다."
+                
+                
+            })
+            .disposed(by: disposeBag)
+        
         delayBtn.rx.tap
             .bind(onNext: {[weak self] _ in
                 self?.coordinator?.moveToMain()
             })
             .disposed(by: disposeBag)
         
-        cancelBtn.rx.tap
+        popupOkbtn.rx.tap
             .bind(onNext: { [weak self] in
                 self?.coordinator?.moveToMain()
             })
@@ -308,8 +320,8 @@ class CallVC: UIViewController, SnapKitType {
             
         case .fail:
             // Title
-            titleLabel.text = "리스너와 통화에 실패했어요 :("
-            titleLabel.font = FontManager.shared.notoSansKR(.bold, 20)
+            titleLabel.text = "리스너의 전화 시도가\n모두 실패하였습니다 :("
+            titleLabel.font = FontManager.shared.notoSansKR(.bold, 26)
             titleLabel.textAlignment = .center
             timeLabel.isHidden = true
             subTitleLabel.isHidden = false
