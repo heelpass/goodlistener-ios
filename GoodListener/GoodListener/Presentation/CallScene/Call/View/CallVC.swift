@@ -62,7 +62,7 @@ class CallVC: UIViewController, SnapKitType {
         $0.font = FontManager.shared.notoSansKR(.regular, 16)
         $0.textColor = .m5
         $0.numberOfLines = 0
-        $0.textAlignment = .center
+        $0.textAlignment = .left
         $0.isHidden = true
     }
     
@@ -148,13 +148,11 @@ class CallVC: UIViewController, SnapKitType {
     
     let callAgainBtn = GLButton(type: .rectangle).then {
         $0.title = "전화 다시걸기"
-        $0.configUI(.deactivate)
         $0.isHidden = true
     }
     
     let listenerOkBtn = GLButton(type: .rectangle).then {
         $0.title = "종료"
-        $0.configUI(.active)
         $0.isHidden = true
     }
     
@@ -177,7 +175,8 @@ class CallVC: UIViewController, SnapKitType {
     func addComponents() {
         [titleStackView, profileImage, nickName, buttonStackView, stopBtn, okayBtn].forEach { view.addSubview($0) }
         [titleLabel, timeLabel, subTitleLabel].forEach { titleStackView.addArrangedSubview($0) }
-        [refuseBtn, acceptBtn, callAgainBtn, listenerOkBtn].forEach { buttonStackView.addArrangedSubview($0) }
+        [refuseBtn, acceptBtn, callAgainBtn].forEach { buttonStackView.addArrangedSubview($0) }
+        view.addSubview(listenerOkBtn)
         
         // 팝업
         popup.addSubview(popupContainer)
@@ -204,7 +203,9 @@ class CallVC: UIViewController, SnapKitType {
         
         buttonStackView.snp.makeConstraints {
             $0.top.equalTo(nickName.snp.bottom).offset(90)
-            $0.left.right.equalToSuperview().inset(Const.padding)
+            $0.height.equalTo(Const.glBtnHeight)
+            $0.width.equalTo(Const.glBtnWidth)
+            $0.centerX.equalToSuperview()
         }
         
         acceptBtn.snp.makeConstraints {
@@ -220,7 +221,10 @@ class CallVC: UIViewController, SnapKitType {
         }
         
         listenerOkBtn.snp.makeConstraints {
+            $0.top.equalTo(nickName.snp.bottom).offset(90)
+            $0.width.equalTo(Const.glBtnWidth)
             $0.height.equalTo(Const.glBtnHeight)
+            $0.centerX.equalToSuperview()
         }
         
         okayBtn.snp.makeConstraints {
@@ -260,7 +264,9 @@ class CallVC: UIViewController, SnapKitType {
         let output = viewModel.transform(input: CallViewModel.Input(acceptBtnTap: acceptBtn.rx.tap.asObservable(),
                                                                     refuseBtnTap: refuseBtn.rx.tap.asObservable(),
                                                                     stopBtnTap: stopBtn.rx.tap.asObservable(),
-                                                                    delayBtnTap: popupDelayBtn.rx.tap.asObservable()))
+                                                                    delayBtnTap: popupDelayBtn.rx.tap.asObservable(),
+                                                                    state: state,
+                                                                    callAgainBtnTap: callAgainBtn.rx.tap.asObservable()))
         
         // 통화 수락
         acceptBtn.rx.tap
@@ -315,12 +321,35 @@ class CallVC: UIViewController, SnapKitType {
         callAgainBtn.rx.tap
             .bind(onNext: { [weak self] in
                 //TODO: 다시 전화거는 로직
+                self?.state.accept(.ready)
             })
             .disposed(by: disposeBag)
         
         listenerOkBtn.rx.tap
             .bind(onNext: { [weak self] in
                 self?.coordinator?.moveToMain()
+            })
+            .disposed(by: disposeBag)
+        
+        output.readyOneMin
+            .emit(onNext: { [weak self] in
+                self?.state.accept(.fail)
+            })
+            .disposed(by: disposeBag)
+        
+        output.time
+            .emit(to: timeLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.callEnd
+            .emit(onNext: { [weak self] in
+                self?.coordinator?.moveToMain()
+            })
+            .disposed(by: disposeBag)
+        
+        output.callFailThreeTime
+            .emit(onNext: { [weak self] in
+                self?.state.accept(.failThreeTime)
             })
             .disposed(by: disposeBag)
     }
@@ -349,6 +378,8 @@ class CallVC: UIViewController, SnapKitType {
             titleLabel.sizeToFit()
             
             callAgainBtn.isHidden = false
+            callAgainBtn.configUI(.deactivate)
+            listenerOkBtn.isHidden = true
             
             timeLabel.isHidden = true
             subTitleLabel.isHidden = true
@@ -358,6 +389,7 @@ class CallVC: UIViewController, SnapKitType {
             refuseBtn.isHidden = true
             okayBtn.isHidden = true
             stopBtn.isHidden = true
+            
         case .call:
             titleLabel.text = "스피커와 대화중이에요"
             titleLabel.font = FontManager.shared.notoSansKR(.regular, 20)
@@ -371,6 +403,8 @@ class CallVC: UIViewController, SnapKitType {
             titleStackView.spacing = 0
             
             // Btn
+            callAgainBtn.isHidden = true
+            listenerOkBtn.isHidden = true
             acceptBtn.isHidden = true
             refuseBtn.isHidden = true
             okayBtn.isHidden = true
@@ -401,9 +435,10 @@ class CallVC: UIViewController, SnapKitType {
                 $0.bottom.equalTo(profileImage.snp.top).offset(-57)
             }
             titleStackView.spacing = 20
+            acceptBtn.isHidden = true
+            refuseBtn.isHidden = true
             callAgainBtn.isHidden = true
             listenerOkBtn.isHidden = false
-            listenerOkBtn.configUI(.active)
         }
     }
     

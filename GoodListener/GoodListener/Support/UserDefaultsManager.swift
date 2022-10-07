@@ -27,6 +27,9 @@ enum UserDefaultKey : String {
     
     // Push
     case pushCnt
+    
+    // 전화
+    case callCount
 }
 
 class UserDefaultsManager {
@@ -223,6 +226,19 @@ class UserDefaultsManager {
                 return []
             }
             return pushData
+        }
+    }
+    
+    var callCount: Int {
+        get {
+            guard let callCount = UserDefaults.standard.value(forKey: UserDefaultKey.callCount.rawValue) as? Int else {
+                return 0
+            }
+            return callCount
+        }
+        
+        set(callCount) {
+            UserDefaults.standard.set(callCount, forKey:  UserDefaultKey.callCount.rawValue)
         }
     }
 }
