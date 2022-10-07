@@ -260,7 +260,7 @@ class CallVC: UIViewController, SnapKitType {
         stopBtn.swipeSuccessResult
             .filter { $0 }
             .bind(onNext: { [weak self] _ in
-                self?.coordinator?.moveToReview()
+                self?.coordinator?.moveToMain()
             })
             .disposed(by: disposeBag)
         
