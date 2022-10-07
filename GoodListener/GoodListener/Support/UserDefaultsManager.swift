@@ -50,7 +50,7 @@ class UserDefaultsManager {
     var accessToken : String? {
         get {
             guard let accessToken = UserDefaults.standard.value(forKey: UserDefaultKey.accessToken.rawValue) as? String else {
-                return ""
+                return nil
             }
             return accessToken
         }
