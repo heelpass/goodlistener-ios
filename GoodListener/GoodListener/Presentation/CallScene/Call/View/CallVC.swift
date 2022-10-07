@@ -17,6 +17,7 @@ enum CallState {
     case ready
     case call
     case fail
+    case failThreeTime
 }
 
 class CallVC: UIViewController, SnapKitType {
@@ -110,6 +111,7 @@ class CallVC: UIViewController, SnapKitType {
         $0.backgroundColor = .clear
     }
     
+    // Popup
     let popup = UIView().then {
         $0.backgroundColor = .black.withAlphaComponent(0.6)
     }
@@ -134,13 +136,25 @@ class CallVC: UIViewController, SnapKitType {
         $0.distribution = .fillEqually
     }
     
-    let delayBtn = GLButton(type: .rectangle, reverse: true).then {
+    let popupDelayBtn = GLButton(type: .rectangle, reverse: true).then {
         $0.title = "대화 1회 미루기"
         $0.isHidden = true
     }
     
     let popupOkbtn = GLButton(type: .rectangle).then {
         $0.title = "확인"
+        $0.isHidden = true
+    }
+    
+    let callAgainBtn = GLButton(type: .rectangle).then {
+        $0.title = "전화 다시걸기"
+        $0.configUI(.deactivate)
+        $0.isHidden = true
+    }
+    
+    let listenerOkBtn = GLButton(type: .rectangle).then {
+        $0.title = "종료"
+        $0.configUI(.active)
         $0.isHidden = true
     }
     
@@ -152,18 +166,18 @@ class CallVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
-        changeUI(.ready)
+        configUI()
     }
     
     func addComponents() {
         [titleStackView, profileImage, nickName, buttonStackView, stopBtn, okayBtn].forEach { view.addSubview($0) }
         [titleLabel, timeLabel, subTitleLabel].forEach { titleStackView.addArrangedSubview($0) }
-        [refuseBtn, acceptBtn].forEach { buttonStackView.addArrangedSubview($0) }
+        [refuseBtn, acceptBtn, callAgainBtn, listenerOkBtn].forEach { buttonStackView.addArrangedSubview($0) }
         
         // 팝업
         popup.addSubview(popupContainer)
         [popupTitle, popupBtnStackView].forEach { popupContainer.addSubview($0) }
-        [delayBtn, popupOkbtn].forEach { popupBtnStackView.addArrangedSubview($0) }
+        [popupDelayBtn, popupOkbtn].forEach { popupBtnStackView.addArrangedSubview($0) }
     }
     
     func setConstraints() {
@@ -193,6 +207,14 @@ class CallVC: UIViewController, SnapKitType {
         }
         
         refuseBtn.snp.makeConstraints {
+            $0.height.equalTo(Const.glBtnHeight)
+        }
+        
+        callAgainBtn.snp.makeConstraints {
+            $0.height.equalTo(Const.glBtnHeight)
+        }
+        
+        listenerOkBtn.snp.makeConstraints {
             $0.height.equalTo(Const.glBtnHeight)
         }
         
@@ -233,12 +255,12 @@ class CallVC: UIViewController, SnapKitType {
         let output = viewModel.transform(input: CallViewModel.Input(acceptBtnTap: acceptBtn.rx.tap.asObservable(),
                                                                     refuseBtnTap: refuseBtn.rx.tap.asObservable(),
                                                                     stopBtnTap: stopBtn.rx.tap.asObservable(),
-                                                                    delayBtnTap: delayBtn.rx.tap.asObservable()))
+                                                                    delayBtnTap: popupDelayBtn.rx.tap.asObservable()))
         
         // 통화 수락
         acceptBtn.rx.tap
             .bind(onNext: { [weak self] in
-                self?.changeUI(.call)
+                self?.speakerChangeUI(.call)
                 // 소켓
             })
             .disposed(by: disposeBag)
@@ -252,7 +274,7 @@ class CallVC: UIViewController, SnapKitType {
                 self.popup.snp.makeConstraints {
                     $0.edges.equalToSuperview()
                 }
-                self.delayBtn.isHidden = false
+                self.popupDelayBtn.isHidden = false
             })
             .disposed(by: disposeBag)
         
@@ -273,7 +295,7 @@ class CallVC: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
         
-        delayBtn.rx.tap
+        popupDelayBtn.rx.tap
             .bind(onNext: {[weak self] _ in
                 self?.coordinator?.moveToMain()
             })
@@ -284,9 +306,103 @@ class CallVC: UIViewController, SnapKitType {
                 self?.coordinator?.moveToMain()
             })
             .disposed(by: disposeBag)
+        
+        callAgainBtn.rx.tap
+            .bind(onNext: { [weak self] in
+                //TODO: 다시 전화거는 로직
+            })
+            .disposed(by: disposeBag)
+        
+        listenerOkBtn.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.coordinator?.moveToMain()
+            })
+            .disposed(by: disposeBag)
     }
     
-    func changeUI(_ type: CallState) {
+    func configUI() {
+        switch userType {
+        case .speaker:
+            speakerChangeUI(.ready)
+        case .listener:
+            listenerChangeUI(.ready)
+        }
+    }
+    
+    func listenerChangeUI(_ type: CallState) {
+        switch type {
+        case .ready:
+            titleLabel.text = "스피커에게\n전화를 걸고 있습니다   "
+            titleLabel.textAlignment = .left
+            
+            let attr = NSMutableAttributedString(string: titleLabel.text!)
+            let imageAttachment = NSTextAttachment()
+            imageAttachment.image = UIImage(named: "call_img_call")
+            attr.append(NSAttributedString(attachment: imageAttachment))
+            
+            titleLabel.attributedText = attr
+            titleLabel.sizeToFit()
+            
+            callAgainBtn.isHidden = false
+            
+            timeLabel.isHidden = true
+            subTitleLabel.isHidden = true
+            
+            // Btn
+            acceptBtn.isHidden = true
+            refuseBtn.isHidden = true
+            okayBtn.isHidden = true
+            stopBtn.isHidden = true
+        case .call:
+            titleLabel.text = "스피커와 대화중이에요"
+            titleLabel.font = FontManager.shared.notoSansKR(.regular, 20)
+            titleLabel.textAlignment = .center
+            timeLabel.isHidden = false
+            timeLabel.textAlignment = .center
+            subTitleLabel.isHidden = true
+            titleStackView.snp.updateConstraints {
+                $0.bottom.equalTo(profileImage.snp.top).offset(-90)
+            }
+            titleStackView.spacing = 0
+            
+            // Btn
+            acceptBtn.isHidden = true
+            refuseBtn.isHidden = true
+            okayBtn.isHidden = true
+            stopBtn.isHidden = false
+        case .fail:
+            titleLabel.text = "스피커와\n대화 연결에 실패하였습니다."
+            titleLabel.font = FontManager.shared.notoSansKR(.bold, 26)
+            titleLabel.textAlignment = .left
+            timeLabel.isHidden = true
+            subTitleLabel.isHidden = false
+            subTitleLabel.text = "3분 이내 3회까지 다시 통화를 시도해주세요."
+            titleStackView.snp.updateConstraints {
+                $0.bottom.equalTo(profileImage.snp.top).offset(-57)
+            }
+            titleStackView.spacing = 20
+            callAgainBtn.configUI(.active)
+            callAgainBtn.isHidden = false
+            listenerOkBtn.isHidden = true
+            
+        case .failThreeTime:
+            titleLabel.text = "스피커와\n대화 연결에 실패하였습니다."
+            titleLabel.font = FontManager.shared.notoSansKR(.bold, 26)
+            titleLabel.textAlignment = .left
+            timeLabel.isHidden = true
+            subTitleLabel.isHidden = false
+            subTitleLabel.text = "내일 다시 같은 시간에 전화해주세요!"
+            titleStackView.snp.updateConstraints {
+                $0.bottom.equalTo(profileImage.snp.top).offset(-57)
+            }
+            titleStackView.spacing = 20
+            callAgainBtn.isHidden = true
+            listenerOkBtn.isHidden = false
+            listenerOkBtn.configUI(.active)
+        }
+    }
+    
+    func speakerChangeUI(_ type: CallState) {
         switch type {
         case .ready:
             // Title
@@ -322,7 +438,7 @@ class CallVC: UIViewController, SnapKitType {
             // Title
             titleLabel.text = "리스너의 전화 시도가\n모두 실패하였습니다 :("
             titleLabel.font = FontManager.shared.notoSansKR(.bold, 26)
-            titleLabel.textAlignment = .center
+            titleLabel.textAlignment = .left
             timeLabel.isHidden = true
             subTitleLabel.isHidden = false
             titleStackView.snp.updateConstraints {
@@ -335,6 +451,9 @@ class CallVC: UIViewController, SnapKitType {
             acceptBtn.isHidden = true
             okayBtn.isHidden = false
             refuseBtn.isHidden = true
+            break
+            
+        default:
             break
         }
     }
