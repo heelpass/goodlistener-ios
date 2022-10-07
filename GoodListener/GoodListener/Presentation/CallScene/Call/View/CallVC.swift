@@ -27,6 +27,8 @@ class CallVC: UIViewController, SnapKitType {
     
     let viewModel = CallViewModel()
     
+    let userType: UserType = UserType.init(rawValue: UserDefaultsManager.shared.userType) ?? .speaker //
+    
     // 현재 전화 상태
     var state: CallState = .ready
     
@@ -159,7 +161,7 @@ class CallVC: UIViewController, SnapKitType {
         // 팝업
         popup.addSubview(popupContainer)
         [popupTitle, popupBtnStackView].forEach { popupContainer.addSubview($0) }
-        [delayBtn, cancelBtn].forEach { popupBtnStackView.addArrangedSubview($0) }
+        [delayBtn].forEach { popupBtnStackView.addArrangedSubview($0) }
     }
     
     func setConstraints() {
@@ -242,7 +244,12 @@ class CallVC: UIViewController, SnapKitType {
         // 통화 거절
         refuseBtn.rx.tap
             .bind(onNext: { [weak self] in
-                self?.changeUI(.fail)
+                guard let self = self else { return }
+//                self?.changeUI(.fail)
+                self.view.addSubview(self.popup)
+                self.popup.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
             })
             .disposed(by: disposeBag)
         
@@ -254,20 +261,9 @@ class CallVC: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
         
-        // 통화 연결 실패 시 오케이버튼
-        okayBtn.rx.tap
-            .bind(onNext: { [weak self] in
-                guard let self = self else { return }
-                self.view.addSubview(self.popup)
-                self.popup.snp.makeConstraints {
-                    $0.edges.equalToSuperview()
-                }
-            })
-            .disposed(by: disposeBag)
-        
         delayBtn.rx.tap
-            .bind(onNext: {
-                
+            .bind(onNext: {[weak self] _ in
+                self?.coordinator?.moveToMain()
             })
             .disposed(by: disposeBag)
         
