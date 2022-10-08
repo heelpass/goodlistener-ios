@@ -96,7 +96,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedNameLbl = UILabel().then {
-        $0.text = UserDefaultsManager.shared.listenerName
+        $0.text = "명랑한 지윤지"
         $0.font = FontManager.shared.notoSansKR(.bold, 18)
         $0.textColor = .f3
     }
@@ -107,7 +107,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedGenderLbl = UILabel().then {
-        $0.text = UserDefaultsManager.shared.listenerGender
+        $0.text = "여성"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f2
     }
@@ -117,7 +117,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedAgeLbl = UILabel().then {
-        $0.text = UserDefaultsManager.shared.listenerAge
+        $0.text = "20대"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f2
     }
@@ -127,7 +127,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedjobLbl = UILabel().then{
-        $0.text = UserDefaultsManager.shared.listenerJob
+        $0.text = "프리랜서"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f2
     }
@@ -139,7 +139,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedIntrolDescriptionLbl = UILabel().then {
-        $0.text = UserDefaultsManager.shared.listenerDescription
+        $0.text = "안녕하세요안녕하세요"
         $0.textAlignment = .left
         $0.numberOfLines = 3
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
@@ -154,13 +154,13 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedTimeLbl = UILabel().then{
-        $0.text = UserDefaultsManager.shared.meetingTime //TODO: 편집 필요
+        $0.text = "meetingTime"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f4
     }
     
     let matchedDateLbl = UILabel().then {
-        $0.text = UserDefaultsManager.shared.meetingTime //TODO: 편집 필요
+        $0.text = "meetingDate" //TODO: 편집 필요
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f4
     }
@@ -385,6 +385,15 @@ class JoinMatchVC: UIViewController, SnapKitType {
                 UserDefaultsManager.shared.listenerJob = model.listener.job.localized
                 UserDefaultsManager.shared.listenerDescription = model.listener.description
                 UserDefaultsManager.shared.meetingTime = model.meetingTime
+                
+                self.matchedNameLbl.text = UserDefaultsManager.shared.listenerName
+                self.matchedGenderLbl.text = UserDefaultsManager.shared.listenerGender
+                self.matchedAgeLbl.text = UserDefaultsManager.shared.listenerAge
+                self.matchedjobLbl.text = UserDefaultsManager.shared.listenerJob
+                self.matchedIntrolDescriptionLbl.text = UserDefaultsManager.shared.listenerDescription
+                self.matchedTimeLbl.text = UserDefaultsManager.shared.meetingTime
+                self.matchedDateLbl.text = self.formattedTime(UserDefaultsManager.shared.meetingTime)
+
                 self.changeUI(.matched)
             } else {
                 self.changeUI(.waiting)
