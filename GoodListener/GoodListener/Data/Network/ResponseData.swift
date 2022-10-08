@@ -25,12 +25,12 @@ struct ResponseData<Model: Codable> {
                 LoadingIndicator.stop()
                 return .success(model)
             } catch {
-                makeToast()
+                //makeToast()
                 LoadingIndicator.stop()
                 return .failure(error)
             }
         case .failure(let error):
-            makeToast()
+            //makeToast()
             LoadingIndicator.stop()
             return .failure(error)
         }
@@ -48,12 +48,12 @@ struct ResponseData<Model: Codable> {
                 LoadingIndicator.stop()
                 return .success(model)
             } catch {
-                makeToast()
+                //makeToast()
                 LoadingIndicator.stop()
                 return .failure(error)
             }
         case .failure(let error):
-            makeToast()
+            //makeToast()
             LoadingIndicator.stop()
             return .failure(error)
         }

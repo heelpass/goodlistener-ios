@@ -27,6 +27,8 @@ enum UserDefaultKey : String {
     
     // Push
     case pushCnt
+    
+    
 }
 
 class UserDefaultsManager {

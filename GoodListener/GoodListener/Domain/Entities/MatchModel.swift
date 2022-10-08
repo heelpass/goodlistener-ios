@@ -11,5 +11,4 @@ struct MatchModel: Codable {
     var matchDate: [String] = [""]
     var applyDesc: String = ""
     var wantImg: Int = 0
-
 }

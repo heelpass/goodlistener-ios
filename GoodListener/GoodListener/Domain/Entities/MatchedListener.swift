@@ -8,10 +8,21 @@
 import Foundation
 
 struct MatchedListener: Codable {
-    var nickname: String
-    var description: String
-    var speakerId: Int
-    var listenerId: Int
-    var channel: String
     var meetingTime: String
+    var nickname: String
+    var speakerId: Int
+    var channel: String
+    var listener : ListenerInfo
+    var description: String
+
+}
+
+struct ListenerInfo: Codable {
+    var profileImg: Int
+    var gender: String
+    var nickName: String
+    var ageRange: String
+    var description: String
+    var id : Int
+    var job: String
 }

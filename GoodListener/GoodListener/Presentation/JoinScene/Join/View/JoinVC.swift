@@ -210,6 +210,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             })
             .disposed(by: disposeBag)
         
+        //팝업 메시지
         output.poupMessage
             .emit(onNext: { [weak self] message in
                 guard let self = self else { return }
