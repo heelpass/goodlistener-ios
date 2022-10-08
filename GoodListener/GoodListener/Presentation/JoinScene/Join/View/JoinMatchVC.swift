@@ -96,7 +96,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedNameLbl = UILabel().then {
-        $0.text = "명랑한 지윤이"
+        $0.text = UserDefaultsManager.shared.listenerName
         $0.font = FontManager.shared.notoSansKR(.bold, 18)
         $0.textColor = .f3
     }
@@ -107,7 +107,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedGenderLbl = UILabel().then {
-        $0.text = "여성"
+        $0.text = UserDefaultsManager.shared.listenerGender
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f2
     }
@@ -117,7 +117,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedAgeLbl = UILabel().then {
-        $0.text = "20대"
+        $0.text = UserDefaultsManager.shared.listenerAge
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f2
     }
@@ -127,7 +127,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedjobLbl = UILabel().then{
-        $0.text = "프리랜서"
+        $0.text = UserDefaultsManager.shared.listenerJob
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f2
     }
@@ -139,7 +139,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedIntrolDescriptionLbl = UILabel().then {
-        $0.text = "안녕하세요? 스피커님과 즐거운 대화를 해나가고 싶어요 일주일동안 잘 부탁드려요 안녕하세요? 스피커님과 즐거운..."
+        $0.text = UserDefaultsManager.shared.listenerDescription
         $0.textAlignment = .left
         $0.numberOfLines = 3
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
@@ -154,13 +154,13 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedTimeLbl = UILabel().then{
-        $0.text = "매일 오후 10:20"
+        $0.text = UserDefaultsManager.shared.meetingTime //TODO: 편집 필요
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f4
     }
     
     let matchedDateLbl = UILabel().then {
-        $0.text = "2022.8.2 ~ 8.8 (7일간)"
+        $0.text = UserDefaultsManager.shared.meetingTime //TODO: 편집 필요
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f4
     }
@@ -179,7 +179,6 @@ class JoinMatchVC: UIViewController, SnapKitType {
         self.changeUI(JoinMatchState.waiting)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            self.changeUI(self.joinMatchState)
             self.fetchData()
         }
         
@@ -377,9 +376,19 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     func fetchData() {
-        self.changeUI(self.joinMatchState)
         MatchAPI.MatchedListener { succeed, failed in
-            guard let model = succeed else {return}
+            if (succeed != nil) {
+                guard let model = succeed else {return}
+                UserDefaultsManager.shared.listenerName = model.nickname
+                UserDefaultsManager.shared.listenerGender = model.listener.gender.localized
+                UserDefaultsManager.shared.listenerAge = model.listener.ageRange.localized
+                UserDefaultsManager.shared.listenerJob = model.listener.job.localized
+                UserDefaultsManager.shared.listenerDescription = model.listener.description
+                UserDefaultsManager.shared.meetingTime = model.meetingTime
+                self.changeUI(.matched)
+            } else {
+                self.changeUI(.waiting)
+            }
         }
     }
 }

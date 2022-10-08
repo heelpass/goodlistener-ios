@@ -28,6 +28,15 @@ enum UserDefaultKey : String {
     // Push
     case pushCnt
     
+    // 나의 리스너 정보
+    case listenerName
+    case listenerGender
+    case listenerAge
+    case listenerJob
+    case listenerDescription
+    
+    // 만남 시간
+    case meetingTime
     
 }
 
@@ -214,6 +223,73 @@ class UserDefaultsManager {
         
         set(pushCnt) {
             UserDefaults.standard.set(pushCnt, forKey:  UserDefaultKey.pushCnt.rawValue)
+        }
+    }
+    
+    //리스너
+    var listenerName: String {
+        get {
+            guard let listnerName = UserDefaults.standard.value(forKey: UserDefaultKey.listenerName.rawValue) as? String else {return ""}
+            return listnerName
+        }
+        
+        set(listenerName) {
+            UserDefaults.standard.set(listenerName, forKey: UserDefaultKey.listenerName.rawValue)
+        }
+    }
+    
+    var listenerGender: String {
+        get {
+            guard let listenerGender = UserDefaults.standard.value(forKey: UserDefaultKey.listenerGender.rawValue) as? String else {return ""}
+            return listenerGender
+        }
+        
+        set(listenerGender) {
+            UserDefaults.standard.set(listenerGender, forKey: UserDefaultKey.listenerGender.rawValue)
+        }
+    }
+    
+    var listenerAge: String {
+        get {
+            guard let listnerAge = UserDefaults.standard.value(forKey: UserDefaultKey.listenerAge.rawValue) as? String else {return ""}
+            return listnerAge
+        }
+        
+        set(listenerAge) {
+            UserDefaults.standard.set(listenerAge, forKey: UserDefaultKey.listenerAge.rawValue)
+        }
+    }
+    
+    var listenerJob: String {
+        get {
+            guard let listnerJob = UserDefaults.standard.value(forKey: UserDefaultKey.listenerJob.rawValue) as? String else {return ""}
+            return listnerJob
+        }
+        
+        set(listenerJob) {
+            UserDefaults.standard.set(listenerJob, forKey: UserDefaultKey.listenerJob.rawValue)
+        }
+    }
+    
+    var listenerDescription: String {
+        get {
+            guard let listenerDescription = UserDefaults.standard.value(forKey: UserDefaultKey.listenerDescription.rawValue) as? String else {return ""}
+            return listenerDescription
+        }
+        
+        set(listenerDescription) {
+            UserDefaults.standard.set(listenerDescription, forKey: UserDefaultKey.listenerDescription.rawValue)
+        }
+    }
+    
+    var meetingTime: String {
+        get {
+            guard let meetingTime = UserDefaults.standard.value(forKey: UserDefaultKey.meetingTime.rawValue) as? String else {return ""}
+            return meetingTime
+        }
+        
+        set(meetingTime) {
+            UserDefaults.standard.set(meetingTime, forKey: UserDefaultKey.meetingTime.rawValue)
         }
     }
     
