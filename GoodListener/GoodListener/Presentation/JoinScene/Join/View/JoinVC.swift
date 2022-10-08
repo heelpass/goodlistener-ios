@@ -15,10 +15,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
     let disposeBag = DisposeBag()
     let viewModel = JoinViewModel()
     static var apiformateDate: String = ""
-    
-    var matchObservable = PublishRelay<MatchModel>()
-    var matchModel: MatchModel?
-    
+
     let scrollView = UIScrollView().then {
         $0.backgroundColor = .m5
     }
@@ -127,6 +124,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
         setConstraints()
         bind()
         setDoneBtn()
+        self.answerTwoTV.text.trimmingCharacters(in: .whitespacesAndNewlines)
         self.answerTwoTV.delegate = self
         answerTwoSubLbl.text = "\(answerTwoTV.text.count)/50"
         setDatePicker()
@@ -194,8 +192,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             time: timeView.selectedTime.asObservable(),
             reason: answerTwoTV.rx.text.orEmpty.asObservable(),
             moodImg: emojiTagView.selectedemojiText.asObservable(),
-            okBtnTap: btnView.okBtn.rx.tap.asObservable(),
-            match: matchObservable.asObservable()
+            okBtnTap: btnView.okBtn.rx.tap.asObservable()
         ))
         
         
@@ -212,6 +209,26 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
                 self?.coordinator?.moveToHome()
             })
             .disposed(by: disposeBag)
+        
+        output.poupMessage
+            .emit(onNext: { [weak self] message in
+                guard let self = self else { return }
+                
+                let popup = GLPopup()
+                popup.title = "모든 항목을 채워주세요!"
+                popup.contents = message
+                popup.cancelIsHidden = true
+                popup.alignment = .center
+                
+                self.view.addSubview(popup)
+                popup.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+                
+                self.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+        
     }
     
     //키보드 상단 완료 버튼
@@ -236,11 +253,14 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             textView.deleteBackward()
         }
         answerTwoSubLbl.text = "\(answerTwoTV.text.count)/50"
-        //textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        answerTwoTV.text = answerTwoTV.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        answerTwoSubLbl.text = "\(answerTwoTV.text.count)/50"
     }
     
     //DatePicker
-    //TODO: - VM에서 Validation Check필요
     func setDatePicker() {
         datePicker.addTarget(self, action: #selector(dateChange(datePicker:)), for: UIControl.Event.valueChanged)
         datePicker.frame.size = CGSize(width: 0, height: 300)
