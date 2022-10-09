@@ -10,7 +10,6 @@ import RxSwift
 import NVActivityIndicatorView
 
 // 신청 전, 매칭 후 2가지 상태
-// TODO: 연장 버튼 눌렀을 때 추가 - 기획 답변
 enum homeState {
     case join
     case matched
@@ -24,11 +23,11 @@ class HomeVC: UIViewController, SnapKitType {
 
     let navigationView = NavigationView(frame: .zero, type: .notice)
     let scrollView = UIScrollView().then {
-        $0.backgroundColor = .m6
+        $0.backgroundColor = .m5
     }
     
     // 현재 홈 화면 상태
-    var homeState: homeState = .join
+    var homeState: homeState = .matched
     
     let contentStackView = UIStackView().then {
         $0.axis = .vertical
@@ -41,8 +40,9 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     let containerView = UIView().then {
-        $0.backgroundColor = .m5
         $0.layer.cornerRadius = 20
+        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor.f2.cgColor
     }
     
     //신청 전 화면 UI 요소
@@ -67,7 +67,7 @@ class HomeVC: UIViewController, SnapKitType {
         let dayformat = "7일 중 %d일차"
         $0.text = String(format: dayformat, 3) //api data
         $0.font = FontManager.shared.notoSansKR(.bold, 20)
-        $0.textColor = .f2
+        $0.textColor = .m1
         $0.textAlignment = .center
     }
     
@@ -76,42 +76,29 @@ class HomeVC: UIViewController, SnapKitType {
         $0.contentMode = .scaleAspectFill
     }
     
-    let nickNameLbl = UILabel().then {
-        $0.text = "행복해지고싶은지은이"
-        $0.font = FontManager.shared.notoSansKR(.bold, 18)
-        $0.textColor = .f2
-        $0.textAlignment = .center
-    }
-    
     let introLbl = UILabel().then {
-        $0.textAlignment = .left
-        $0.numberOfLines = 3
-        $0.text = "안녕하세요? 스피커님과 즐거운 대화를 해나가고 싶어요 일주일동안 잘 부탁드려요 안녕하세요? 스피커님과 즐거운 안녕하세요? 스피커님과 즐거운 대화를 해나가고 싶어요 일주일동안 잘 부탁드려요 안녕하세요? 스피커님과 즐거운"
-        $0.font = FontManager.shared.notoSansKR(.regular, 16)
+        $0.textAlignment = .center
+        $0.numberOfLines = 2
+        $0.text = "안녕하세요?\n저는 행복해 지고 싶은 지은이에요"
+        $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f4
         $0.lineBreakMode = .byTruncatingTail
     }
         
-    let scheduleLbl = UILabel().then {
-        $0.text = "대화시간"
-        $0.font = FontManager.shared.notoSansKR(.bold, 16)
-        $0.textColor = .f2
-    }
-    
     let timeLbl = UILabel().then {
         $0.text = "매일 오후 10:20"
-        $0.font = FontManager.shared.notoSansKR(.regular, 16)
+        $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f7
     }
     
     let dateLbl = UILabel().then {
-        $0.text = "2022.8.2 ~ 8.8 (7일간)" //나중에 API 호출 시 format 만들기
-        $0.font = FontManager.shared.notoSansKR(.regular, 16)
+        $0.text = "2022.8.2 ~ 8.8 (7일간)"
+        $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f7
     }
     
     let postponeBtn = GLButton().then {
-        $0.title = "오늘 대화 미루기"
+        $0.title = "대화 미루기"
     }
     
     //팝업
@@ -140,7 +127,7 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     let delayBtn = GLButton(type: .rectangle, reverse: true).then {
-        $0.title = "대화 1회 미루기"
+        $0.title = "대화 미루기"
     }
     
     let cancelBtn = GLButton(type: .rectangle).then {
@@ -150,14 +137,13 @@ class HomeVC: UIViewController, SnapKitType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .m6
+        view.backgroundColor = .m5
         addComponents()
         setConstraints()
         bind()
+        fetchData()
         changeUI(homeState)
         addCallBtn()    // 전화 테스트용
-        
-        Log.d(UserDefaultsManager.shared.userType)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -175,10 +161,10 @@ class HomeVC: UIViewController, SnapKitType {
         [titleLbl, containerView].forEach {
             contentStackView.addArrangedSubview($0)
         }
-        [joinImg, joinLbl, daycheckLbl, profileImg, nickNameLbl, introLbl, scheduleLbl, timeLbl, dateLbl].forEach {
+        [joinImg, joinLbl, daycheckLbl, profileImg, introLbl, timeLbl, dateLbl].forEach {
             containerView.addSubview($0)
         }
-        navigationView.backgroundColor = .m6
+        navigationView.backgroundColor = .m5
         
         // 팝업
         popup.addSubview(popupContainer)
@@ -240,31 +226,21 @@ class HomeVC: UIViewController, SnapKitType {
             //$0.layer.cornerRadius = self.frame.size.width/2 //일반 사진일 경우
         }
         
-        nickNameLbl.snp.makeConstraints {
-            $0.top.equalTo(profileImg.snp.bottom).offset(16)
-            $0.left.equalToSuperview().offset(30)
-            $0.right.equalToSuperview().offset(-30)
-        }
-        
-        
         introLbl.snp.makeConstraints{
-            $0.top.equalTo(nickNameLbl.snp.bottom).offset(28)
+            $0.top.equalTo(profileImg.snp.bottom).offset(18)
             $0.left.equalToSuperview().offset(30)
             $0.right.equalToSuperview().offset(-30)
         }
         
-        scheduleLbl.snp.makeConstraints{
-            $0.top.equalTo(introLbl.snp.bottom).offset(22)
-            $0.left.equalToSuperview().offset(30)
-        }
         
         timeLbl.snp.makeConstraints{
-            $0.top.equalTo(scheduleLbl.snp.bottom).offset(10)
-            $0.left.equalToSuperview().offset(30)
+            $0.top.equalTo(introLbl.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
         }
+        
         dateLbl.snp.makeConstraints{
             $0.top.equalTo(timeLbl.snp.bottom)
-            $0.left.equalToSuperview().offset(30)
+            $0.centerX.equalToSuperview()
         }
         
         postponeBtn.snp.makeConstraints {
@@ -354,9 +330,7 @@ class HomeVC: UIViewController, SnapKitType {
             joinBtn.isHidden = false
             daycheckLbl.isHidden = true
             profileImg.isHidden = true
-            nickNameLbl.isHidden = true
             introLbl.isHidden = true
-            scheduleLbl.isHidden = true
             timeLbl.isHidden = true
             dateLbl.isHidden = true
             postponeBtn.isHidden = true
@@ -368,9 +342,7 @@ class HomeVC: UIViewController, SnapKitType {
             joinBtn.isHidden = true
             daycheckLbl.isHidden = false
             profileImg.isHidden = false
-            nickNameLbl.isHidden = false
             introLbl.isHidden = false
-            scheduleLbl.isHidden = false
             timeLbl.isHidden = false
             dateLbl.isHidden = false
             postponeBtn.isHidden = false
@@ -396,4 +368,10 @@ class HomeVC: UIViewController, SnapKitType {
             .disposed(by: disposeBag)
     }
     
+    func fetchData(){
+        introLbl.textColorChange(text: introLbl.text!, color: .f2, range: ["행복해 지고 싶은 지은이"])
+        
+        introLbl.textFontChange(text: introLbl.text!, font: FontManager.shared.notoSansKR(.bold, 14), range: ["행복해 지고 싶은 지은이"])
+        
+    }
 }
