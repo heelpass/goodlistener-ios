@@ -181,7 +181,6 @@ class JoinMatchVC: UIViewController, SnapKitType {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             self.fetchData()
         }
-        
     }
     
     func addComponents() {
@@ -391,13 +390,22 @@ class JoinMatchVC: UIViewController, SnapKitType {
                 self.matchedAgeLbl.text = UserDefaultsManager.shared.listenerAge
                 self.matchedjobLbl.text = UserDefaultsManager.shared.listenerJob
                 self.matchedIntrolDescriptionLbl.text = UserDefaultsManager.shared.listenerDescription
-                self.matchedTimeLbl.text = UserDefaultsManager.shared.meetingTime
-                self.matchedDateLbl.text = self.formattedTime(UserDefaultsManager.shared.meetingTime)
+                self.matchedTimeLbl.text = self.formattedTime(UserDefaultsManager.shared.meetingTime)
+                self.matchedDateLbl.text = UserDefaultsManager.shared.meetingTime
 
                 self.changeUI(.matched)
             } else {
                 self.changeUI(.waiting)
             }
         }
+    }
+    
+    func formattedTime(_ time: String) -> String {
+        let endIdx = time.count - 1
+        var emptyString = ""
+        for num in 11 ... endIdx {
+            emptyString += String(time[time.index(time.startIndex, offsetBy: num)])
+        }
+        return emptyString.localized
     }
 }
