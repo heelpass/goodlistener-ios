@@ -141,7 +141,6 @@ class HomeVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
-        //fetchData()
         changeUI(homeState)
         addCallBtn()    // 전화 테스트용
     }
@@ -151,6 +150,7 @@ class HomeVC: UIViewController, SnapKitType {
         let cnt = DBManager.shared.unreadfilter()
         navigationView.remainNoticeView.isHidden = cnt == 0
         navigationView.remainNoticeLbl.text = "+\(cnt)"
+        //fetchData()
     }
     
     func addComponents() {
@@ -370,15 +370,17 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     func fetchData(){
-        if(UserDefaultsManager.shared.listenerName != "") { //TODO: API호출로 바꾸기
-            homeState = .matched
-            introLbl.text = "안녕하세요?\n저는 "+UserDefaultsManager.shared.listenerName+"에요"
-            introLbl.textColorAndFontChange(text: introLbl.text!, color: UIColor.f2, font: FontManager.shared.notoSansKR(.bold, 14) , range: [UserDefaultsManager.shared.listenerName])
-            
-            timeLbl.text = UserDefaultsManager.shared.meetingTime
-            dateLbl.text = UserDefaultsManager.shared.meetingDate
-        } else {
-            homeState = .join
+        MatchAPI.MatchedListener { succeed, failed in
+            if ((succeed) != nil){
+                self.homeState = .matched
+                self.introLbl.text = "안녕하세요?\n저는 "+UserDefaultsManager.shared.listenerName+"에요"
+                self.introLbl.textColorAndFontChange(text: self.introLbl.text!, color: UIColor.f2, font: FontManager.shared.notoSansKR(.bold, 14) , range: [UserDefaultsManager.shared.listenerName])
+    
+                self.timeLbl.text = UserDefaultsManager.shared.meetingTime
+                self.dateLbl.text = UserDefaultsManager.shared.meetingDate
+            } else {
+                self.homeState = .join
+            }
         }
     }
 }
