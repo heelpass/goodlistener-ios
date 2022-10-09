@@ -369,9 +369,7 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     func fetchData(){
-        introLbl.textColorChange(text: introLbl.text!, color: .f2, range: ["행복해 지고 싶은 지은이"])
-        
-        introLbl.textFontChange(text: introLbl.text!, font: FontManager.shared.notoSansKR(.bold, 14), range: ["행복해 지고 싶은 지은이"])
+        introLbl.textColorAndFontChange(text: introLbl.text!, color: UIColor.f2, font: FontManager.shared.notoSansKR(.bold, 14) , range: ["행복해 지고 싶은 지은이"])
         
     }
 }
