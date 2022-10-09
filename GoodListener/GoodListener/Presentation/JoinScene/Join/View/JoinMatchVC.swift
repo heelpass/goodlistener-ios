@@ -391,7 +391,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
                 self.matchedjobLbl.text = UserDefaultsManager.shared.listenerJob
                 self.matchedIntrolDescriptionLbl.text = UserDefaultsManager.shared.listenerDescription
                 self.matchedTimeLbl.text = self.formattedTime(UserDefaultsManager.shared.meetingTime)
-                self.matchedDateLbl.text = UserDefaultsManager.shared.meetingTime
+                self.matchedDateLbl.text = self.formattedDate(UserDefaultsManager.shared.meetingTime)
 
                 self.changeUI(.matched)
             } else {
@@ -407,5 +407,64 @@ class JoinMatchVC: UIViewController, SnapKitType {
             emptyString += String(time[time.index(time.startIndex, offsetBy: num)])
         }
         return emptyString.localized
+    }
+    
+    func formattedDate(_ date: String) -> String {
+        let periodFormat = "%@ ~ %@ (7일간)"
+        
+        //시작 날짜 구하기
+        let startdateFormat = "%@.%@.%@"
+        var startDate = "" //시작일
+        var startyear = "" //시작 년도
+        var startMon = "" //시작 월
+        var startDay = "" //시작 일
+        
+        for yearIdx in 0 ... 3 {
+            startyear += String(date[date.index(date.startIndex, offsetBy: yearIdx)])
+        }
+        
+        let fifthIdx = date.index(date.startIndex, offsetBy: 5)
+        let sixthIdx = date.index(date.startIndex, offsetBy: 6)
+        let eightIdx = date.index(date.startIndex, offsetBy: 8)
+        let ninthIdx = date.index(date.startIndex, offsetBy: 9)
+        
+        
+        if (String(date[fifthIdx]) == "1") {
+            startMon = "\(date[fifthIdx])" + "\(date[sixthIdx])"
+        } else {
+            startMon = "\(date[sixthIdx])"
+        }
+        
+        if (String(date[eightIdx]) == "1" || String(date[eightIdx]) == "2" || String(date[eightIdx]) == "3" ){
+            startDay = "\(date[eightIdx])" + "\(date[ninthIdx])"
+        } else {
+            startDay = "\(date[ninthIdx])"
+        }
+        
+        startDate = String(format: startdateFormat, startyear, startMon, startDay)
+        
+        
+        // 끝나는 날짜 구하기
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        var sevendays = DateComponents()
+        sevendays.day = 7
+        
+        var endDate = "" //끝나는 날
+    
+        if let calculate = Calendar.current.date(byAdding: sevendays, to: self.getStringToDate(strDate: String(format: startdateFormat, startyear, startMon, startDay), format: "yyyy.MM.dd")){
+            endDate = dateFormatter.string(from: calculate)
+        }
+
+        return String(format: periodFormat, startDate, endDate)
+    }
+    
+    // String ➡️ Date
+    func getStringToDate(strDate: String, format: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
+        return dateFormatter.date(from: strDate)!
     }
 }
