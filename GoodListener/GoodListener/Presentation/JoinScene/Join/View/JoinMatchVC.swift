@@ -215,7 +215,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
         }
         
         unableLbl.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(128)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             $0.centerX.equalToSuperview()
         }
         
@@ -404,8 +404,8 @@ class JoinMatchVC: UIViewController, SnapKitType {
                 self.matchedTimeLbl.text = UserDefaultsManager.shared.meetingTime
                 self.matchedDateLbl.text = UserDefaultsManager.shared.meetingDate
                 self.changeUI(.matched)
-            } else {
-                self.changeUI(.waiting)
+            } else { //네트워크 오류, 매칭 실패
+                self.changeUI(.unable)
             }
         }
     }
