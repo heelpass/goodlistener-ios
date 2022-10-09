@@ -27,7 +27,7 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     // 현재 홈 화면 상태
-    var homeState: homeState = .matched
+    var homeState: homeState = .join
     
     let contentStackView = UIStackView().then {
         $0.axis = .vertical
@@ -328,6 +328,7 @@ class HomeVC: UIViewController, SnapKitType {
             joinImg.isHidden = false
             joinLbl.isHidden = false
             joinBtn.isHidden = false
+            containerView.layer.borderColor = UIColor.m5.cgColor
             daycheckLbl.isHidden = true
             profileImg.isHidden = true
             introLbl.isHidden = true
@@ -369,7 +370,15 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     func fetchData(){
-        introLbl.textColorAndFontChange(text: introLbl.text!, color: UIColor.f2, font: FontManager.shared.notoSansKR(.bold, 14) , range: ["행복해 지고 싶은 지은이"])
-        
+        if(UserDefaultsManager.shared.listenerName != "") { //TODO: API호출로 바꾸기? 매칭 만료 후 확인 필요
+            homeState = .matched
+            introLbl.text = "안녕하세요?\n저는 "+UserDefaultsManager.shared.listenerName+"에요"
+            introLbl.textColorAndFontChange(text: introLbl.text!, color: UIColor.f2, font: FontManager.shared.notoSansKR(.bold, 14) , range: [UserDefaultsManager.shared.listenerName])
+            
+            timeLbl.text = UserDefaultsManager.shared.meetingTime
+            dateLbl.text = UserDefaultsManager.shared.meetingDate
+        } else {
+            homeState = .join
+        }
     }
 }

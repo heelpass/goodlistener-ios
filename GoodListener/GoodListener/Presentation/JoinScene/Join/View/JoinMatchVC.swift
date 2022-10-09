@@ -416,7 +416,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
         for num in 11 ... endIdx {
             emptyString += String(time[time.index(time.startIndex, offsetBy: num)])
         }
-        return emptyString.localized
+        return "매일 " + emptyString.localized
     }
     
     func formattedDate(_ date: String) -> String {
