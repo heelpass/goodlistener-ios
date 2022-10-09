@@ -35,7 +35,7 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     let titleLbl = UILabel().then {
-        $0.text = "나의 리스너"
+        $0.text = "당신의 리스너"
         $0.font = FontManager.shared.notoSansKR(.bold, 20)
     }
     
@@ -59,7 +59,7 @@ class HomeVC: UIViewController, SnapKitType {
     }
 
     let joinBtn = GLButton().then {
-        $0.title = "신청하기"
+        $0.title = "대화 신청하기"
     }
     
     //매칭 후 UI 요소
@@ -141,7 +141,7 @@ class HomeVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
-        fetchData()
+        //fetchData()
         changeUI(homeState)
         addCallBtn()    // 전화 테스트용
     }
@@ -195,7 +195,7 @@ class HomeVC: UIViewController, SnapKitType {
         
         // 신청 전 UI
         joinImg.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(139)
+            $0.top.equalToSuperview().offset(80)
             $0.centerX.equalToSuperview()
             $0.size.equalTo(100)
         }
@@ -370,7 +370,7 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     func fetchData(){
-        if(UserDefaultsManager.shared.listenerName != "") { //TODO: API호출로 바꾸기? 매칭 만료 후 확인 필요
+        if(UserDefaultsManager.shared.listenerName != "") { //TODO: API호출로 바꾸기
             homeState = .matched
             introLbl.text = "안녕하세요?\n저는 "+UserDefaultsManager.shared.listenerName+"에요"
             introLbl.textColorAndFontChange(text: introLbl.text!, color: UIColor.f2, font: FontManager.shared.notoSansKR(.bold, 14) , range: [UserDefaultsManager.shared.listenerName])
