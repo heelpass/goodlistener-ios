@@ -383,16 +383,17 @@ class JoinMatchVC: UIViewController, SnapKitType {
                 UserDefaultsManager.shared.listenerAge = model.listener.ageRange.localized
                 UserDefaultsManager.shared.listenerJob = model.listener.job.localized
                 UserDefaultsManager.shared.listenerDescription = model.listener.description
-                UserDefaultsManager.shared.meetingTime = model.meetingTime
+                UserDefaultsManager.shared.meetingTime = self.formattedTime(model.meetingTime)
+                UserDefaultsManager.shared.meetingDate = self.formattedDate(model.meetingTime)
                 
+
                 self.matchedNameLbl.text = UserDefaultsManager.shared.listenerName
                 self.matchedGenderLbl.text = UserDefaultsManager.shared.listenerGender
                 self.matchedAgeLbl.text = UserDefaultsManager.shared.listenerAge
                 self.matchedjobLbl.text = UserDefaultsManager.shared.listenerJob
                 self.matchedIntrolDescriptionLbl.text = UserDefaultsManager.shared.listenerDescription
-                self.matchedTimeLbl.text = self.formattedTime(UserDefaultsManager.shared.meetingTime)
-                self.matchedDateLbl.text = self.formattedDate(UserDefaultsManager.shared.meetingTime)
-
+                self.matchedTimeLbl.text = UserDefaultsManager.shared.meetingTime
+                self.matchedDateLbl.text = UserDefaultsManager.shared.meetingDate
                 self.changeUI(.matched)
             } else {
                 self.changeUI(.waiting)
