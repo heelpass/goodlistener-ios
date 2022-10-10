@@ -42,9 +42,8 @@ class HomeVC: UIViewController, SnapKitType {
     
     let containerView = UIView().then {
         $0.layer.cornerRadius = 20
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.f2.cgColor
     }
+
     
     //신청 전 화면 UI 요소
     let joinImg = UIImageView().then {
@@ -382,6 +381,10 @@ class HomeVC: UIViewController, SnapKitType {
                 self.introLbl.textColorAndFontChange(text: self.introLbl.text!, color: .f2, font: FontManager.shared.notoSansKR(.bold, 14), range: [UserDefaultsManager.shared.listenerName])
             }
 
+            containerView.backgroundColor = .white
+            containerView.layer.borderColor = UIColor(hex: "#CACCCF").cgColor
+            containerView.layer.applySketchShadow(color: UIColor(hex: "#CACCCF"), alpha: 0.5, x: 0, y: 0, blur: 12, spread: 0)
+            
             postponeBtn.isHidden = false
             popup.isHidden = true
             break
@@ -399,7 +402,7 @@ class HomeVC: UIViewController, SnapKitType {
         dateLbl.isHidden = true
         postponeBtn.isHidden = true
         popup.isHidden = true
-        containerView.layer.borderColor = UIColor.m5.cgColor
+        containerView.layer.borderColor = .none
     }
     
     func addCallBtn() {
