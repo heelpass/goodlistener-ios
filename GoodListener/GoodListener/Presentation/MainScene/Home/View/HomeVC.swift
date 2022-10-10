@@ -98,6 +98,9 @@ class HomeVC: UIViewController, SnapKitType {
         $0.textColor = .f7
     }
     
+    let sevendaysRecord = RecordCollectionView(frame: .zero, emojiData: ["check","check","none","none","check","check"])
+    
+    
     let postponeBtn = GLButton().then {
         $0.title = "대화 미루기"
     }
@@ -161,7 +164,7 @@ class HomeVC: UIViewController, SnapKitType {
         [titleLbl, containerView].forEach {
             contentStackView.addArrangedSubview($0)
         }
-        [joinImg, joinLbl, daycheckLbl, profileImg, introLbl, timeLbl, dateLbl].forEach {
+        [joinImg, joinLbl, daycheckLbl, profileImg, introLbl, timeLbl, dateLbl, sevendaysRecord].forEach {
             containerView.addSubview($0)
         }
         
@@ -243,6 +246,14 @@ class HomeVC: UIViewController, SnapKitType {
         dateLbl.snp.makeConstraints{
             $0.top.equalTo(timeLbl.snp.bottom)
             $0.centerX.equalToSuperview()
+        }
+        
+        sevendaysRecord.snp.makeConstraints{
+            $0.top.equalTo(dateLbl.snp.bottom).offset(30)
+            $0.left.equalToSuperview().offset(28)
+            $0.right.equalToSuperview().offset(-28)
+            $0.bottom.equalToSuperview().offset(-26)
+            
         }
         
         postponeBtn.snp.makeConstraints {
