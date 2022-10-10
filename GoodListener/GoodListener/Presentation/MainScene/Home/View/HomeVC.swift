@@ -352,6 +352,20 @@ class HomeVC: UIViewController, SnapKitType {
         }
     }
     
+    func initUI() {
+        joinImg.isHidden = true
+        joinLbl.isHidden = true
+        joinBtn.isHidden = true
+        daycheckLbl.isHidden = true
+        profileImg.isHidden = true
+        introLbl.isHidden = true
+        timeLbl.isHidden = true
+        dateLbl.isHidden = true
+        postponeBtn.isHidden = true
+        popup.isHidden = true
+        containerView.layer.borderColor = UIColor.m5.cgColor
+    }
+    
     func addCallBtn() {
         let button = GLButton()
         button.title = "통화"
@@ -370,6 +384,7 @@ class HomeVC: UIViewController, SnapKitType {
     }
     
     func fetchData(){
+        initUI()
         MatchAPI.MatchedListener { succeed, failed in
             if ((succeed) != nil){
                 self.homeState = .matched
