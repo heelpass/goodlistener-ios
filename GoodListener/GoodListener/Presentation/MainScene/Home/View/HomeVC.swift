@@ -382,8 +382,8 @@ class HomeVC: UIViewController, SnapKitType {
             }
 
             containerView.backgroundColor = .white
-            containerView.layer.borderColor = UIColor(hex: "#CACCCF").cgColor
-            containerView.layer.applySketchShadow(color: UIColor(hex: "#CACCCF"), alpha: 0.5, x: 0, y: 0, blur: 12, spread: 0)
+            containerView.layer.borderColor = UIColor(hex: "#B1B3B5").cgColor
+            containerView.layer.applySketchShadow(color: UIColor(hex: "#B1B3B5"), alpha: 0.7, x: 0, y: 0, blur: 15, spread: 0)
             
             postponeBtn.isHidden = false
             popup.isHidden = true
