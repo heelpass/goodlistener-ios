@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import NVActivityIndicatorView
+import SkeletonView
 
 // 신청 전, 매칭 후 2가지 상태
 enum homeState {
@@ -79,7 +80,6 @@ class HomeVC: UIViewController, SnapKitType {
     let introLbl = UILabel().then {
         $0.textAlignment = .center
         $0.numberOfLines = 2
-        $0.text = "안녕하세요?\n저는 행복해 지고 싶은 지은이에요"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f4
         $0.lineBreakMode = .byTruncatingTail
@@ -87,12 +87,14 @@ class HomeVC: UIViewController, SnapKitType {
         
     let timeLbl = UILabel().then {
         $0.text = "매일 오후 10:20"
+        $0.textAlignment = .center
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f7
     }
     
     let dateLbl = UILabel().then {
         $0.text = "2022.8.2 ~ 8.8 (7일간)"
+        $0.textAlignment = .center
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f7
     }
@@ -150,7 +152,6 @@ class HomeVC: UIViewController, SnapKitType {
         navigationView.remainNoticeView.isHidden = cnt == 0
         navigationView.remainNoticeLbl.text = "+\(cnt)"
         fetchData()
-
     }
     
     func addComponents() {
@@ -164,6 +165,8 @@ class HomeVC: UIViewController, SnapKitType {
         [joinImg, joinLbl, daycheckLbl, profileImg, introLbl, timeLbl, dateLbl].forEach {
             containerView.addSubview($0)
         }
+        
+        containerView.isSkeletonable = true
         navigationView.backgroundColor = .m5
         
         // 팝업
@@ -325,10 +328,6 @@ class HomeVC: UIViewController, SnapKitType {
     func changeUI(_ type: homeState) {
         switch type {
         case .join:
-            joinImg.isHidden = false
-            joinLbl.isHidden = false
-            joinBtn.isHidden = false
-            containerView.layer.borderColor = UIColor.m5.cgColor
             daycheckLbl.isHidden = true
             profileImg.isHidden = true
             introLbl.isHidden = true
@@ -336,16 +335,54 @@ class HomeVC: UIViewController, SnapKitType {
             dateLbl.isHidden = true
             postponeBtn.isHidden = true
             popup.isHidden = true
+            
+            joinImg.isHidden = false
+            joinLbl.isHidden = false
+            joinBtn.isHidden = false
+            
+            joinImg.showAnimatedGradientSkeleton()
+            joinLbl.showAnimatedGradientSkeleton()
+            joinBtn.showAnimatedGradientSkeleton()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.joinImg.hideSkeleton()
+                self.joinLbl.hideSkeleton()
+                self.joinBtn.hideSkeleton()
+            }
             break
         case .matched:
             joinImg.isHidden = true
             joinLbl.isHidden = true
             joinBtn.isHidden = true
+            
+            daycheckLbl.isSkeletonable = true
+            profileImg.isSkeletonable = true
+            introLbl.isSkeletonable = true
+            timeLbl.isSkeletonable = true
+            dateLbl.isSkeletonable = true
+            
+            introLbl.textColorAndFontChange(text: introLbl.text!, color: .f2, font: FontManager.shared.notoSansKR(.bold, 14), range: [UserDefaultsManager.shared.listenerName])//TODO: 색상 적용 확인
+
             daycheckLbl.isHidden = false
             profileImg.isHidden = false
             introLbl.isHidden = false
             timeLbl.isHidden = false
             dateLbl.isHidden = false
+            
+            daycheckLbl.showAnimatedGradientSkeleton()
+            profileImg.showAnimatedGradientSkeleton()
+            introLbl.showAnimatedGradientSkeleton()
+            timeLbl.showAnimatedGradientSkeleton()
+            dateLbl.showAnimatedGradientSkeleton()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.daycheckLbl.hideSkeleton()
+                self.profileImg.hideSkeleton()
+                self.introLbl.hideSkeleton()
+                self.timeLbl.hideSkeleton()
+                self.dateLbl.hideSkeleton()
+            }
+
             postponeBtn.isHidden = false
             popup.isHidden = true
             break
@@ -385,13 +422,12 @@ class HomeVC: UIViewController, SnapKitType {
     
     func fetchData(){
         initUI()
+        self.containerView.showAnimatedGradientSkeleton()
         MatchAPI.MatchedListener { succeed, failed in
+            self.containerView.hideSkeleton()
             if ((succeed) != nil){
                 self.homeState = .matched
-                print(self.homeState)
                 self.introLbl.text = "안녕하세요?\n저는 "+UserDefaultsManager.shared.listenerName+"에요"
-                self.introLbl.textColorAndFontChange(text: self.introLbl.text!, color: UIColor.f2, font: FontManager.shared.notoSansKR(.bold, 14) , range: [UserDefaultsManager.shared.listenerName])
-    
                 self.timeLbl.text = UserDefaultsManager.shared.meetingTime
                 self.dateLbl.text = UserDefaultsManager.shared.meetingDate
                 self.changeUI(self.homeState)
