@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import NVActivityIndicatorView
 import SkeletonView
 
@@ -26,6 +27,8 @@ class HomeVC: UIViewController, SnapKitType {
     let scrollView = UIScrollView().then {
         $0.backgroundColor = .m5
     }
+    
+    var emojiData: BehaviorRelay<[String]> = .init(value: ["check","check","none","check","none","check"])
     
     // 현재 홈 화면 상태
     var homeState: homeState = .join
@@ -98,8 +101,7 @@ class HomeVC: UIViewController, SnapKitType {
         $0.textColor = .f7
     }
     
-    let sevendaysRecord = RecordCollectionView(frame: .zero, emojiData: ["check","check","none","none","check","check"])
-    
+    lazy var sevendaysRecord = RecordCollectionView(frame: .zero, emojiData: emojiData.value)
     
     let postponeBtn = GLButton().then {
         $0.title = "대화 미루기"
@@ -338,13 +340,9 @@ class HomeVC: UIViewController, SnapKitType {
     func changeUI(_ type: homeState) {
         switch type {
         case .join:
-            daycheckLbl.isHidden = true
-            profileImg.isHidden = true
-            introLbl.isHidden = true
-            timeLbl.isHidden = true
-            dateLbl.isHidden = true
-            postponeBtn.isHidden = true
-            popup.isHidden = true
+            joinBtn.isSkeletonable = true
+            joinLbl.isSkeletonable = true
+            joinBtn.isSkeletonable = true
             
             joinImg.isHidden = false
             joinLbl.isHidden = false
@@ -361,27 +359,30 @@ class HomeVC: UIViewController, SnapKitType {
             }
             break
         case .matched:
-            joinImg.isHidden = true
-            joinLbl.isHidden = true
-            joinBtn.isHidden = true
             
             daycheckLbl.isSkeletonable = true
             profileImg.isSkeletonable = true
             introLbl.isSkeletonable = true
             timeLbl.isSkeletonable = true
             dateLbl.isSkeletonable = true
+            sevendaysRecord.isSkeletonable = true
+            postponeBtn.isSkeletonable = true
             
             daycheckLbl.isHidden = false
             profileImg.isHidden = false
             introLbl.isHidden = false
             timeLbl.isHidden = false
             dateLbl.isHidden = false
+            sevendaysRecord.isHidden = false
+            postponeBtn.isHidden = false
             
             daycheckLbl.showAnimatedGradientSkeleton()
             profileImg.showAnimatedGradientSkeleton()
             introLbl.showAnimatedGradientSkeleton()
             timeLbl.showAnimatedGradientSkeleton()
             dateLbl.showAnimatedGradientSkeleton()
+            sevendaysRecord.showAnimatedGradientSkeleton()//TODO: 나중에 API 수정되면 속도 확인
+            postponeBtn.showAnimatedGradientSkeleton()
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.daycheckLbl.hideSkeleton()
@@ -389,6 +390,9 @@ class HomeVC: UIViewController, SnapKitType {
                 self.introLbl.hideSkeleton()
                 self.timeLbl.hideSkeleton()
                 self.dateLbl.hideSkeleton()
+                self.sevendaysRecord.hideSkeleton()
+                self.postponeBtn.hideSkeleton()
+                
                 self.introLbl.textColorAndFontChange(text: self.introLbl.text!, color: .f2, font: FontManager.shared.notoSansKR(.bold, 14), range: [UserDefaultsManager.shared.listenerName])
             }
 
@@ -396,8 +400,6 @@ class HomeVC: UIViewController, SnapKitType {
             containerView.layer.borderColor = UIColor(hex: "#B1B3B5").cgColor
             containerView.layer.applySketchShadow(color: UIColor(hex: "#B1B3B5"), alpha: 0.7, x: 0, y: 0, blur: 15, spread: 0)
             
-            postponeBtn.isHidden = false
-            popup.isHidden = true
             break
         }
     }
@@ -411,6 +413,8 @@ class HomeVC: UIViewController, SnapKitType {
         introLbl.isHidden = true
         timeLbl.isHidden = true
         dateLbl.isHidden = true
+        sevendaysRecord.isHidden = true
+        joinBtn.isHidden = true
         postponeBtn.isHidden = true
         popup.isHidden = true
         containerView.layer.borderColor = .none
