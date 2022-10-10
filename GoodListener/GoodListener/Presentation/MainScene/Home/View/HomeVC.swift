@@ -361,8 +361,6 @@ class HomeVC: UIViewController, SnapKitType {
             timeLbl.isSkeletonable = true
             dateLbl.isSkeletonable = true
             
-            introLbl.textColorAndFontChange(text: introLbl.text!, color: .f2, font: FontManager.shared.notoSansKR(.bold, 14), range: [UserDefaultsManager.shared.listenerName])//TODO: 색상 적용 확인
-
             daycheckLbl.isHidden = false
             profileImg.isHidden = false
             introLbl.isHidden = false
@@ -374,13 +372,14 @@ class HomeVC: UIViewController, SnapKitType {
             introLbl.showAnimatedGradientSkeleton()
             timeLbl.showAnimatedGradientSkeleton()
             dateLbl.showAnimatedGradientSkeleton()
-            
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.daycheckLbl.hideSkeleton()
                 self.profileImg.hideSkeleton()
                 self.introLbl.hideSkeleton()
                 self.timeLbl.hideSkeleton()
                 self.dateLbl.hideSkeleton()
+                self.introLbl.textColorAndFontChange(text: self.introLbl.text!, color: .f2, font: FontManager.shared.notoSansKR(.bold, 14), range: [UserDefaultsManager.shared.listenerName])
             }
 
             postponeBtn.isHidden = false
