@@ -7,6 +7,8 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
+import SkeletonView
 
 enum applicantState{
     case join
@@ -22,7 +24,7 @@ class ApplicantVC: UIViewController, SnapKitType {
     let scrollView = UIScrollView()
     
     //현재 리스너 홈 화면 상태
-    var applicantState: applicantState = .join
+    var applicantState: applicantState = .matched
     
     let contentStackView = UIStackView().then {
         $0.axis = .vertical
@@ -50,7 +52,20 @@ class ApplicantVC: UIViewController, SnapKitType {
         $0.textAlignment = .center
         $0.textColor = .f4
     }
-
+    
+    //매칭 완료 후 UI 요소
+    let mySpeakerCollectionView : UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
+    let callBtn = GLButton().then {
+        $0.title = "전화 걸기"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .m5
@@ -59,18 +74,26 @@ class ApplicantVC: UIViewController, SnapKitType {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        initUI()
+        fetchData()
+    }
+    
 
     func addComponents() {
-        [navigationView, scrollView].forEach{
+        [navigationView, scrollView, callBtn].forEach{
             view.addSubview($0)
         }
         scrollView.addSubview(contentStackView)
         [titleLbl, containerView].forEach{
             contentStackView.addArrangedSubview($0)
         }
-        [joinImg, joinLbl].forEach{
+
+        [joinImg, joinLbl, mySpeakerCollectionView].forEach{
             containerView.addSubview($0)
         }
+
     }
     
     func setConstraints() {
@@ -104,6 +127,20 @@ class ApplicantVC: UIViewController, SnapKitType {
             $0.top.equalTo(joinImg.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
         }
+        
+        // 매칭 후 UI
+        mySpeakerCollectionView.snp.makeConstraints {
+            $0.top.left.right.bottom.equalToSuperview()
+        }
+        
+        callBtn.snp.makeConstraints {
+            $0.width.equalTo(Const.glBtnWidth)
+            $0.height.equalTo(Const.glBtnHeight)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
+        }
+        self.view.bringSubviewToFront(callBtn)
+        
     }
     
     func bind() {}
@@ -116,8 +153,25 @@ class ApplicantVC: UIViewController, SnapKitType {
             joinLbl.isHidden = false
             break
         case .matched:
+            mySpeakerCollectionView.isHidden = false
+            callBtn.isHidden = false
+            containerView.backgroundColor = .white
+            containerView.layer.borderColor = UIColor(hex: "#B1B3B5").cgColor
+            containerView.layer.applySketchShadow(color: UIColor(hex: "#B1B3B5"), alpha: 0.7, x: 0, y: 0, blur: 15, spread: 0)
             break
         }
+    }
+    
+    func initUI(){
+        joinImg.isHidden = true
+        joinLbl.isHidden = true
+        mySpeakerCollectionView.isHidden = true
+        callBtn.isHidden = true
+        containerView.layer.borderColor = .none
+    }
+    
+    func fetchData(){
+        self.changeUI(.matched)
     }
 
 }
