@@ -104,25 +104,29 @@ final class GLSocketManager: NSObject {
         socket.disconnect()
     }
     
-    func setUserIn(_ data: SetUserInModel, _ callback: @escaping AckCallback) {
-        Log.d(data.toJson!)
-        socket.emitWithAck(SocketEvents.setUserIn.rawValue, data.toJson ?? " ").timingOut(after: 1.0, callback: callback)
+    func setUserIn(_ data: SetUserInModel) {
+        do {
+            let model = try data.socketRepresentation()
+            socket.emit(SocketEvents.setUserIn.rawValue, model)
+        } catch {
+            return
+        }
     }
     
-    func createChatRoom(_ callback: @escaping AckCallback) {
-        socket.emitWithAck(SocketEvents.createChatRoom.rawValue, "a").timingOut(after: 1.0, callback: callback)
+    func createChatRoom() {
+        socket.emit(SocketEvents.createChatRoom.rawValue, "a")
     }
     
-    func enterChatRoom(_ callback: @escaping AckCallback) {
-        socket.emitWithAck(SocketEvents.enterChatRoom.rawValue, "a").timingOut(after: 1.0, callback: callback)
+    func enterChatRoom() {
+        socket.emit(SocketEvents.enterChatRoom.rawValue, "a")
     }
     
-    func createAgoraToken(_ callback: @escaping AckCallback) {
-        socket.emitWithAck(SocketEvents.createAgoraToken.rawValue, "a").timingOut(after: 1.0, callback: callback)
+    func createAgoraToken() {
+        socket.emit(SocketEvents.createAgoraToken.rawValue, "a")
     }
     
-    func disconnected(_ callback: @escaping AckCallback) {
-        socket.emitWithAck(SocketEvents.disconnected.rawValue, "a").timingOut(after: 1.0, callback: callback)
+    func disconnected() {
+        socket.emit(SocketEvents.disconnected.rawValue, "a")
     }
 }
 
