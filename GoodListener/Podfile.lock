@@ -157,9 +157,10 @@ PODS:
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
-  - SDWebImage (5.13.4):
-    - SDWebImage/Core (= 5.13.4)
-  - SDWebImage/Core (5.13.4)
+  - SDWebImage (5.13.2):
+    - SDWebImage/Core (= 5.13.2)
+  - SDWebImage/Core (5.13.2)
+  - SkeletonView (1.29.2)
   - SnapKit (5.6.0)
   - Socket.IO-Client-Swift (16.0.1):
     - Starscream (~> 4.0)
@@ -180,6 +181,7 @@ DEPENDENCIES:
   - RxGesture
   - RxSwift (= 6.5.0)
   - SDWebImage (~> 5.0)
+  - SkeletonView
   - SnapKit
   - Socket.IO-Client-Swift
   - SwiftyJSON
@@ -212,6 +214,7 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - SDWebImage
+    - SkeletonView
     - SnapKit
     - Socket.IO-Client-Swift
     - Starscream
@@ -243,7 +246,8 @@ SPEC CHECKSUMS:
   RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
-  SDWebImage: e5cc87bf736e60f49592f307bdf9e157189298a3
+  SDWebImage: 72f86271a6f3139cc7e4a89220946489d4b9a866
+  SkeletonView: 915a80ecc2b6421ab7ac0f0212321c0cc1406472
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
@@ -251,6 +255,6 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 658eca06b5f75649b01a631fa616d1b2127d2faa
+PODFILE CHECKSUM: 4302b5c2dda2e382e145372d785b3578891d6143
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2

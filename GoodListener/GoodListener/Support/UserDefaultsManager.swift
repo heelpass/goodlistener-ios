@@ -27,6 +27,21 @@ enum UserDefaultKey : String {
     
     // Push
     case pushCnt
+    
+    // 나의 리스너 정보
+    case listenerName
+    case listenerGender
+    case listenerAge
+    case listenerJob
+    case listenerDescription
+    
+    // 만남 시간
+    case schedule
+    case meetingTime
+    case meetingDate
+    
+    // 전화
+    case callCount
 }
 
 class UserDefaultsManager {
@@ -36,7 +51,6 @@ class UserDefaultsManager {
     func logout() {
         self.isLogin = false
         self.accessToken = ""
-        self.nickname = ""
         self.nickname = ""
         self.gender = ""
         self.age = ""
@@ -50,7 +64,7 @@ class UserDefaultsManager {
     var accessToken : String? {
         get {
             guard let accessToken = UserDefaults.standard.value(forKey: UserDefaultKey.accessToken.rawValue) as? String else {
-                return ""
+                return nil
             }
             return accessToken
         }
@@ -216,6 +230,96 @@ class UserDefaultsManager {
         }
     }
     
+    //리스너
+    var listenerName: String {
+        get {
+            guard let listnerName = UserDefaults.standard.value(forKey: UserDefaultKey.listenerName.rawValue) as? String else {return ""}
+            return listnerName
+        }
+        
+        set(listenerName) {
+            UserDefaults.standard.set(listenerName, forKey: UserDefaultKey.listenerName.rawValue)
+        }
+    }
+    
+    var listenerGender: String {
+        get {
+            guard let listenerGender = UserDefaults.standard.value(forKey: UserDefaultKey.listenerGender.rawValue) as? String else {return ""}
+            return listenerGender
+        }
+        
+        set(listenerGender) {
+            UserDefaults.standard.set(listenerGender, forKey: UserDefaultKey.listenerGender.rawValue)
+        }
+    }
+    
+    var listenerAge: String {
+        get {
+            guard let listnerAge = UserDefaults.standard.value(forKey: UserDefaultKey.listenerAge.rawValue) as? String else {return ""}
+            return listnerAge
+        }
+        
+        set(listenerAge) {
+            UserDefaults.standard.set(listenerAge, forKey: UserDefaultKey.listenerAge.rawValue)
+        }
+    }
+    
+    var listenerJob: String {
+        get {
+            guard let listnerJob = UserDefaults.standard.value(forKey: UserDefaultKey.listenerJob.rawValue) as? String else {return ""}
+            return listnerJob
+        }
+        
+        set(listenerJob) {
+            UserDefaults.standard.set(listenerJob, forKey: UserDefaultKey.listenerJob.rawValue)
+        }
+    }
+    
+    var listenerDescription: String {
+        get {
+            guard let listenerDescription = UserDefaults.standard.value(forKey: UserDefaultKey.listenerDescription.rawValue) as? String else {return ""}
+            return listenerDescription
+        }
+        
+        set(listenerDescription) {
+            UserDefaults.standard.set(listenerDescription, forKey: UserDefaultKey.listenerDescription.rawValue)
+        }
+    }
+    
+    var schedule: String {
+        get {
+            guard let schedule = UserDefaults.standard.value(forKey: UserDefaultKey.schedule.rawValue) as? String else {return ""}
+            return schedule
+        }
+        
+        set(schedule) {
+            UserDefaults.standard.set(schedule, forKey: UserDefaultKey.schedule.rawValue)
+        }
+    }
+    
+    
+    var meetingTime: String {
+        get {
+            guard let meetingTime = UserDefaults.standard.value(forKey: UserDefaultKey.meetingTime.rawValue) as? String else {return ""}
+            return meetingTime
+        }
+        
+        set(meetingTime) {
+            UserDefaults.standard.set(meetingTime, forKey: UserDefaultKey.meetingTime.rawValue)
+        }
+    }
+    
+    var meetingDate: String {
+        get {
+            guard let meetingDate = UserDefaults.standard.value(forKey: UserDefaultKey.meetingDate.rawValue) as? String else {return ""}
+            return meetingDate
+        }
+        
+        set(meetingDate) {
+            UserDefaults.standard.set(meetingDate, forKey: UserDefaultKey.meetingDate.rawValue)
+        }
+    }
+    
     // MARK: AppGroup을 통해 추가한 데이터라 복붙하시면 안됩니다!!
     var pushData: [String] {
         get {
@@ -223,6 +327,19 @@ class UserDefaultsManager {
                 return []
             }
             return pushData
+        }
+    }
+    
+    var callCount: Int {
+        get {
+            guard let callCount = UserDefaults.standard.value(forKey: UserDefaultKey.callCount.rawValue) as? Int else {
+                return 0
+            }
+            return callCount
+        }
+        
+        set(callCount) {
+            UserDefaults.standard.set(callCount, forKey:  UserDefaultKey.callCount.rawValue)
         }
     }
 }

@@ -17,7 +17,7 @@ protocol MainCoordinating: AnyObject {
     func join()
 }
 
-enum UserType {
+enum UserType: String {
     case speaker
     case listener
 }

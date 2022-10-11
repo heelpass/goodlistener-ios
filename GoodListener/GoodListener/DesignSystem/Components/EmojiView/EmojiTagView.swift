@@ -19,8 +19,7 @@ class EmojiTagView: UIView {
     var emojiImgData: [String] = []
     var emojiTextData: [String] = []
     
-    var selectedemojiImg: BehaviorRelay<String> = .init(value: "")
-    var selectedemojiText: BehaviorRelay<String> = .init(value: "")
+    var selectedemojiText: BehaviorRelay<Int> = .init(value: 0)
     
     lazy var collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -71,10 +70,17 @@ extension EmojiTagView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
         guard let cell = collectionView.cellForItem(at: indexPath) as? EmojiTagCell else { return }
-        self.selectedemojiText.accept(emojiTextData[indexPath.row])
+        cell.configUI(.selected)
+        self.selectedemojiText.accept(indexPath.row + 1)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? EmojiTagCell else { return }
+        cell.configUI(.unselected)
     }
 }
 
+//TODO: 작은 화면에서 대응 시 높이 조절
 extension EmojiTagView: UICollectionViewDelegateFlowLayout {
      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
          

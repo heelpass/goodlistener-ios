@@ -11,13 +11,22 @@ import RxCocoa
 
 class CallViewModel: ViewModelType {
     var disposeBag: DisposeBag = .init()
-    var timer: Timer?
+    var callingTimer: Timer?
+    var readyTimer: Timer?
+    
+    var readyTime = 0
+    var callingTime = 0
+    
+    // 리스너가 전화건 횟수
+    var callCount = UserDefaultsManager.shared.callCount
     
     struct Input {
         let acceptBtnTap: Observable<Void> // 통화 수락 Socket
         let refuseBtnTap: Observable<Void> // 통화 거절
         let stopBtnTap: Observable<Void> // 통화 종료 Socket
         let delayBtnTap: Observable<Void> // 대화 1회 미루기 Rest
+        let state: BehaviorRelay<CallState> // 현재 상태
+        let callAgainBtnTap: Observable<Void> // 전화 다시걸기
     }
     
     struct Output {
@@ -26,6 +35,9 @@ class CallViewModel: ViewModelType {
         let refuseAPIResult: Signal<Bool> // 통화 거절 API 성공 여부
         let stopSocketResult: Signal<Bool> // 통화 정상 종료 여부
         let delayAPIResult: Signal<Bool> // 대화 미루기 API 성공 여부
+        let readyOneMin: Signal<Void> // 전화걸고 1분 기다린경우
+        let callEnd: Signal<Void> // 전화 종료
+        let callFailThreeTime: Signal<Void> // 전화연결 3회 실패
     }
     
     init() {
@@ -38,6 +50,63 @@ class CallViewModel: ViewModelType {
         let refuseAPIResult = BehaviorRelay<Bool>(value: false)
         let stopSocketResult = BehaviorRelay<Bool>(value: false)
         let delayAPIResult = BehaviorRelay<Bool>(value: false)
+        let readyOneMin = PublishRelay<Void>()
+        let callEnd = PublishRelay<Void>()
+        let callFailThreeTime = PublishRelay<Void>()
+        
+        func setReadyTimer() {
+            self.readyTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] _ in
+                guard let self = self else { return }
+                if self.readyTime == 5 {
+                    if self.callCount == 3 {
+                        callFailThreeTime.accept(())
+                        UserDefaultsManager.shared.callCount = 0
+                    } else {
+                        readyOneMin.accept(())
+                    }
+                    self.readyTime = 0
+                    self.readyTimer?.invalidate()
+                    self.readyTimer = nil
+                    return
+                }
+                self.readyTime += 1
+                Log.d("readyTime :: \(self.readyTime)")
+            })
+        }
+        
+        func setCallingTimer() {
+            self.callingTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] _ in
+                guard let self = self else { return }
+                if self.callingTime == 180 {
+                    callEnd.accept(())
+                    self.callingTimer?.invalidate()
+                    self.callingTimer = nil
+                    return
+                }
+                self.callingTime += 1
+                
+                time.accept(self.converIntToTime(int: self.callingTime))
+            })
+        }
+        
+        input.state
+            .bind(onNext: { [weak self] state in
+                guard let self = self else { return }
+                Log.d(state)
+                switch state {
+                case .ready:
+                    if UserDefaultsManager.shared.userType == "listener" {
+                        UserDefaultsManager.shared.callCount += 1
+                        self.callCount += 1
+                        setReadyTimer()
+                    }
+                case .call:
+                    setCallingTimer()
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
         
         input.acceptBtnTap
             .subscribe(onNext: { [weak self] in
@@ -76,7 +145,10 @@ class CallViewModel: ViewModelType {
                       acceptSocketResult: acceptSocketResult.asSignal(onErrorJustReturn: false),
                       refuseAPIResult: refuseAPIResult.asSignal(onErrorJustReturn: false),
                       stopSocketResult: stopSocketResult.asSignal(onErrorJustReturn: false),
-                      delayAPIResult: delayAPIResult.asSignal(onErrorJustReturn: false)
+                      delayAPIResult: delayAPIResult.asSignal(onErrorJustReturn: false),
+                      readyOneMin: readyOneMin.asSignal(onErrorJustReturn: ()),
+                      callEnd: callEnd.asSignal(onErrorJustReturn: ()),
+                      callFailThreeTime: callFailThreeTime.asSignal(onErrorJustReturn: ())
         )
     }
     
@@ -121,5 +193,28 @@ class CallViewModel: ViewModelType {
             }
         })
         .disposed(by: disposeBag)
+    }
+    
+    func converIntToTime(int: Int)-> String {
+        var sec = "\(int % 60)"
+        let min = "\(int / 60)"
+        
+        if sec.count == 1 {
+            sec = "0" + sec
+        }
+        
+        let string = "\(min):\(sec) / 3:00"
+        
+        return string
+    }
+    
+    deinit {
+        readyTimer?.invalidate()
+        callingTimer?.invalidate()
+        
+        readyTimer = nil
+        callingTimer = nil
+        
+        Log.d("CallViewModel Deinit")
     }
 }
