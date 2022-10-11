@@ -29,49 +29,7 @@ class CallViewModel: ViewModelType {
     }
     
     init() {
-        let model: SetUserInModel!
-        
-        if UserDefaultsManager.shared.userType == "listener" {
-            model = SetUserInModel(listenerId: 17,
-                                   channel: "7dc5fcf8-4d20-48f0-af2a-51d8ff4b9eb9",
-                                   meetingTime: "2022-09-30 22:20",
-                                   speakerId: 18,
-                                   isListener: true)
-        } else {
-            model = SetUserInModel(listenerId: 17,
-                                   channel: "7dc5fcf8-4d20-48f0-af2a-51d8ff4b9eb9",
-                                   meetingTime: "2022-09-30 22:20",
-                                   speakerId: 18,
-                                   isListener: false)
-        }
-        
-        GLSocketManager.shared.connect{}
-        
-        GLSocketManager.shared.relays.socketConnection.bind(onNext: {
-            if $0 {
-                GLSocketManager.shared.setUserIn(model, { data in
-                    Log.d("SetUserInSuccess")
-                    Log.d(data)
-                    
-                    if UserDefaultsManager.shared.userType == "listener" {
-                        GLSocketManager.shared.createChatRoom { data in
-                            Log.d("CreateChatRoomSuccess")
-                            Log.d(data)
-                            GLSocketManager.shared.enterChatRoom { data in
-                                Log.d("EnterChatRoom")
-                                Log.d(data)
-                            }
-                        }
-                    } else {
-                        GLSocketManager.shared.enterChatRoom { data in
-                            Log.d("EnterChatRoom")
-                            Log.d(data)
-                        }
-                    }
-                })
-            }
-        })
-        .disposed(by: disposeBag)
+        socketBind()
     }
     
     func transform(input: Input) -> Output {
@@ -102,9 +60,7 @@ class CallViewModel: ViewModelType {
                 guard let self = self else { return }
                 //TODO: 대화 종료 시 소켓으로 emit
                 // emit에 실패하지 않으면 후기 남기기로 가야할듯
-                GLSocketManager.shared.disconnected { data in
-                    Log.d(data)
-                }
+                GLSocketManager.shared.disconnected()
             })
             .disposed(by: disposeBag)
         
@@ -122,5 +78,48 @@ class CallViewModel: ViewModelType {
                       stopSocketResult: stopSocketResult.asSignal(onErrorJustReturn: false),
                       delayAPIResult: delayAPIResult.asSignal(onErrorJustReturn: false)
         )
+    }
+    
+    func socketBind() {
+        let model: SetUserInModel!
+        
+        if UserDefaultsManager.shared.userType == "listener" {
+            model = SetUserInModel(listenerId: 17,
+                                   channel: "7dc5fcf8-4d20-48f0-af2a-51d8ff4b9eb9",
+                                   meetingTime: "2022-09-30 22:20",
+                                   speakerId: 18,
+                                   isListener: true)
+        } else {
+            model = SetUserInModel(listenerId: 17,
+                                   channel: "7dc5fcf8-4d20-48f0-af2a-51d8ff4b9eb9",
+                                   meetingTime: "2022-09-30 22:20",
+                                   speakerId: 18,
+                                   isListener: false)
+        }
+        
+        GLSocketManager.shared.connect{}
+        
+        GLSocketManager.shared.relays.socketConnection.bind(onNext: {
+            if $0 {
+                GLSocketManager.shared.setUserIn(model)
+            }
+        })
+        .disposed(by: disposeBag)
+        
+        GLSocketManager.shared.relays.setUserIn.bind(onNext: { _ in
+            if UserDefaultsManager.shared.userType == "listener" {
+                GLSocketManager.shared.createChatRoom()
+            } else {
+                GLSocketManager.shared.enterChatRoom()
+            }
+        })
+        .disposed(by: disposeBag)
+        
+        GLSocketManager.shared.relays.createChatRoom.bind(onNext: { _ in
+            if UserDefaultsManager.shared.userType == "listener" {
+                GLSocketManager.shared.enterChatRoom()
+            }
+        })
+        .disposed(by: disposeBag)
     }
 }

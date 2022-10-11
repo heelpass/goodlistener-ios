@@ -179,9 +179,7 @@ class CallVC: UIViewController, SnapKitType {
         
         getAgoraTokenButton.rx.tap
             .subscribe(onNext: {
-                GLSocketManager.shared.createAgoraToken { data in
-                    Log.d(data)
-                }
+                GLSocketManager.shared.createAgoraToken()
             })
             .disposed(by: disposeBag)
         
