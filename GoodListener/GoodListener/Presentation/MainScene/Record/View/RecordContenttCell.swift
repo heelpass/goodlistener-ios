@@ -27,7 +27,7 @@ class RecordContentCell: UICollectionViewCell, SnapKitType {
     }
     
     let emojiImg = UIImageView().then {
-        $0.image = #imageLiteral(resourceName: "ic_mood_warm")
+        $0.image = #imageLiteral(resourceName: "emoji4")
         $0.contentMode = .scaleAspectFill
     }
     

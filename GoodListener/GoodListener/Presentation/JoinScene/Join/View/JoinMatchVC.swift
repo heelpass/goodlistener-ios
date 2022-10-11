@@ -96,7 +96,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedNameLbl = UILabel().then {
-        $0.text = "명랑한 지윤이"
+        $0.text = "명랑한 지윤지"
         $0.font = FontManager.shared.notoSansKR(.bold, 18)
         $0.textColor = .f3
     }
@@ -139,7 +139,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedIntrolDescriptionLbl = UILabel().then {
-        $0.text = "안녕하세요? 스피커님과 즐거운 대화를 해나가고 싶어요 일주일동안 잘 부탁드려요 안녕하세요? 스피커님과 즐거운..."
+        $0.text = "안녕하세요안녕하세요"
         $0.textAlignment = .left
         $0.numberOfLines = 3
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
@@ -154,13 +154,13 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedTimeLbl = UILabel().then{
-        $0.text = "매일 오후 10:20"
+        $0.text = "meetingTime"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f4
     }
     
     let matchedDateLbl = UILabel().then {
-        $0.text = "2022.8.2 ~ 8.8 (7일간)"
+        $0.text = "meetingDate" //TODO: 편집 필요
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f4
     }
@@ -179,9 +179,8 @@ class JoinMatchVC: UIViewController, SnapKitType {
         self.changeUI(JoinMatchState.waiting)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
-            self.changeUI(self.joinMatchState)
+            self.fetchData()
         }
-        
     }
     
     func addComponents() {
@@ -373,5 +372,100 @@ class JoinMatchVC: UIViewController, SnapKitType {
             confirmBtn.isHidden = false
             break
         }
+    }
+    
+    func fetchData() {
+        MatchAPI.MatchedListener { succeed, failed in
+            if (succeed != nil) {
+                guard let model = succeed else {return}
+                UserDefaultsManager.shared.listenerName = model.nickname
+                UserDefaultsManager.shared.listenerGender = model.listener.gender.localized
+                UserDefaultsManager.shared.listenerAge = model.listener.ageRange.localized
+                UserDefaultsManager.shared.listenerJob = model.listener.job.localized
+                UserDefaultsManager.shared.listenerDescription = model.listener.description
+                UserDefaultsManager.shared.schedule = model.meetingTime
+                UserDefaultsManager.shared.meetingTime = self.formattedTime(model.meetingTime)
+                UserDefaultsManager.shared.meetingDate = self.formattedDate(model.meetingTime)
+
+                self.matchedNameLbl.text = UserDefaultsManager.shared.listenerName
+                self.matchedGenderLbl.text = UserDefaultsManager.shared.listenerGender
+                self.matchedAgeLbl.text = UserDefaultsManager.shared.listenerAge
+                self.matchedjobLbl.text = UserDefaultsManager.shared.listenerJob
+                self.matchedIntrolDescriptionLbl.text = UserDefaultsManager.shared.listenerDescription
+                self.matchedTimeLbl.text = UserDefaultsManager.shared.meetingTime
+                self.matchedDateLbl.text = UserDefaultsManager.shared.meetingDate
+                self.changeUI(.matched)
+            } else {
+                self.changeUI(.waiting)
+            }
+        }
+    }
+    
+    func formattedTime(_ time: String) -> String {
+        let endIdx = time.count - 1
+        var emptyString = ""
+        for num in 11 ... endIdx {
+            emptyString += String(time[time.index(time.startIndex, offsetBy: num)])
+        }
+        return emptyString.localized
+    }
+    
+    func formattedDate(_ date: String) -> String {
+        let periodFormat = "%@ ~ %@ (7일간)"
+        
+        //시작 날짜 구하기
+        let startdateFormat = "%@.%@.%@"
+        var startDate = "" //시작일
+        var startyear = "" //시작 년도
+        var startMon = "" //시작 월
+        var startDay = "" //시작 일
+        
+        for yearIdx in 0 ... 3 {
+            startyear += String(date[date.index(date.startIndex, offsetBy: yearIdx)])
+        }
+        
+        let fifthIdx = date.index(date.startIndex, offsetBy: 5)
+        let sixthIdx = date.index(date.startIndex, offsetBy: 6)
+        let eightIdx = date.index(date.startIndex, offsetBy: 8)
+        let ninthIdx = date.index(date.startIndex, offsetBy: 9)
+        
+        
+        if (String(date[fifthIdx]) == "1") {
+            startMon = "\(date[fifthIdx])" + "\(date[sixthIdx])"
+        } else {
+            startMon = "\(date[sixthIdx])"
+        }
+        
+        if (String(date[eightIdx]) == "1" || String(date[eightIdx]) == "2" || String(date[eightIdx]) == "3" ){
+            startDay = "\(date[eightIdx])" + "\(date[ninthIdx])"
+        } else {
+            startDay = "\(date[ninthIdx])"
+        }
+        
+        startDate = String(format: startdateFormat, startyear, startMon, startDay)
+        
+        
+        // 끝나는 날짜 구하기
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        var sevendays = DateComponents()
+        sevendays.day = 7
+        
+        var endDate = "" //끝나는 날
+    
+        if let calculate = Calendar.current.date(byAdding: sevendays, to: self.getStringToDate(strDate: String(format: startdateFormat, startyear, startMon, startDay), format: "yyyy.MM.dd")){
+            endDate = dateFormatter.string(from: calculate)
+        }
+
+        return String(format: periodFormat, startDate, endDate)
+    }
+    
+    // String ➡️ Date
+    func getStringToDate(strDate: String, format: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
+        return dateFormatter.date(from: strDate)!
     }
 }
