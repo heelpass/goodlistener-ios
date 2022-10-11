@@ -36,6 +36,7 @@ enum UserDefaultKey : String {
     case listenerDescription
     
     // 만남 시간
+    case schedule
     case meetingTime
     case meetingDate
     
@@ -282,6 +283,18 @@ class UserDefaultsManager {
             UserDefaults.standard.set(listenerDescription, forKey: UserDefaultKey.listenerDescription.rawValue)
         }
     }
+    
+    var schedule: String {
+        get {
+            guard let schedule = UserDefaults.standard.value(forKey: UserDefaultKey.schedule.rawValue) as? String else {return ""}
+            return schedule
+        }
+        
+        set(schedule) {
+            UserDefaults.standard.set(schedule, forKey: UserDefaultKey.schedule.rawValue)
+        }
+    }
+    
     
     var meetingTime: String {
         get {
