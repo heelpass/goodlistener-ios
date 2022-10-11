@@ -9,7 +9,7 @@ import UIKit
 
 struct RecordDataList {
     static let dayTextList = ["1일차", "2일차", "3일차", "4일차", "5일차", "6일차", "7일차"]
-    static let dayemojiList = ["ic_mood_fond", "ic_mood_warm"]
+    static let dayemojiList = ["check", "check"]
     static let dayScoreList = ["10.0", "8.5"]
 }
 
@@ -93,6 +93,22 @@ class RecordCollectionView: UIView {
             contentStack.addArrangedSubview($0)
         }
     }
+    
+    convenience init(frame: CGRect, emojiData: [String]) {
+        self.init(frame: frame)
+        self.emojiData = emojiData
+        addSubview(contentStack)
+        
+        contentStack.snp.makeConstraints{
+            $0.left.right.top.bottom.equalToSuperview()
+        }
+        
+        [emojiView].forEach{
+            contentStack.addArrangedSubview($0)
+        }
+    }
+    
+    
 }
 
 extension RecordCollectionView: UICollectionViewDataSource {

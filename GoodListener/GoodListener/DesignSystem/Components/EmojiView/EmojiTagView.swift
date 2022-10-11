@@ -80,6 +80,7 @@ extension EmojiTagView: UICollectionViewDelegate {
     }
 }
 
+//TODO: 작은 화면에서 대응 시 높이 조절
 extension EmojiTagView: UICollectionViewDelegateFlowLayout {
      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
          

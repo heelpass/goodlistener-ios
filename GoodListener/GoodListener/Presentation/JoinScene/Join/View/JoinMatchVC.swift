@@ -83,12 +83,6 @@ class JoinMatchVC: UIViewController, SnapKitType {
         $0.textColor = .f2
     }
     
-    let matchedListenerLbl = UILabel().then{
-        $0.text = "리스너"
-        $0.font = FontManager.shared.notoSansKR(.bold, 16)
-        $0.textColor = .f3
-    }
-
     let matchedImg = UIImageView().then{
         $0.image = #imageLiteral(resourceName: "person")
         $0.contentMode = .scaleAspectFill
@@ -132,6 +126,12 @@ class JoinMatchVC: UIViewController, SnapKitType {
         $0.textColor = .f2
     }
     
+    let matchedInfoView = UIView().then {
+        $0.layer.cornerRadius = 20
+        $0.layer.borderWidth = 2
+        $0.layer.borderColor = UIColor.f6.cgColor
+    }
+    
     let matchedIntroLbl = UILabel().then{
         $0.text = "한마디"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
@@ -160,7 +160,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     let matchedDateLbl = UILabel().then {
-        $0.text = "meetingDate" //TODO: 편집 필요
+        $0.text = "meetingDate"
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f4
     }
@@ -184,7 +184,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     }
     
     func addComponents() {
-        [waitingLbl, waitingImg, waitingdescriptionLbl, unableLbl, unableSubLbl, unableImg, unabledescriptionLbl, matchedTitle, matchedListenerLbl, matchedImg, matchedNameLbl, matchedListenerStackView, matchedIntroLbl, matchedIntrolDescriptionLbl, matchedScheduleLbl, matchedTimeLbl, matchedDateLbl, confirmBtn].forEach {
+        [waitingLbl, waitingImg, waitingdescriptionLbl, unableLbl, unableSubLbl, unableImg, unabledescriptionLbl, matchedTitle, matchedImg, matchedNameLbl, matchedListenerStackView, matchedInfoView, confirmBtn].forEach {
             view.addSubview($0)
         }
         
@@ -192,6 +192,10 @@ class JoinMatchVC: UIViewController, SnapKitType {
             .forEach{
                 matchedListenerStackView.addArrangedSubview($0)
             }
+        
+        [matchedIntroLbl, matchedIntrolDescriptionLbl, matchedScheduleLbl, matchedTimeLbl, matchedDateLbl].forEach{
+            matchedInfoView.addSubview($0)
+        }
     }
     
     func setConstraints() {
@@ -211,7 +215,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
         }
         
         unableLbl.snp.makeConstraints{
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(128)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             $0.centerX.equalToSuperview()
         }
         
@@ -236,25 +240,20 @@ class JoinMatchVC: UIViewController, SnapKitType {
             $0.centerX.equalToSuperview()
         }
         
-        matchedListenerLbl.snp.makeConstraints{
-            $0.top.equalTo(matchedTitle.snp.bottom).offset(35)
-            $0.left.equalToSuperview().offset(44)
-        }
-        
         matchedImg.snp.makeConstraints{
-            $0.top.equalTo(matchedListenerLbl.snp.bottom).offset(17)
-            $0.left.equalToSuperview().offset(44)
+            $0.top.equalTo(matchedTitle.snp.bottom).offset(40)
+            $0.centerX.equalToSuperview()
             $0.size.equalTo(72)
         }
         
         matchedNameLbl.snp.makeConstraints{
-            $0.top.equalTo(matchedListenerLbl.snp.bottom).offset(26)
-            $0.left.equalTo(matchedImg.snp.right).offset(12)
+            $0.top.equalTo(matchedImg.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
         }
         
         matchedListenerStackView.snp.makeConstraints{
-            $0.top.equalTo(matchedNameLbl.snp.bottom).offset(8)
-            $0.left.equalTo(matchedImg.snp.right).offset(12)
+            $0.top.equalTo(matchedNameLbl.snp.bottom).offset(4)
+            $0.centerX.equalToSuperview()
         }
         
         matchedListenerStackView.spacing = 5
@@ -267,32 +266,43 @@ class JoinMatchVC: UIViewController, SnapKitType {
             $0.size.equalTo(CGSize(width: 2, height: 15))
         }
         
+        matchedInfoView.snp.makeConstraints{
+            $0.top.equalTo(matchedListenerStackView.snp.bottom).offset(28)
+            $0.left.equalToSuperview().offset(30)
+            $0.right.equalToSuperview().offset(-30)
+            $0.bottom.equalTo(confirmBtn.snp.top).offset(-40)
+        }
+        
         matchedIntroLbl.snp.makeConstraints{
-            $0.top.equalTo(matchedImg.snp.bottom).offset(45)
-            $0.left.equalToSuperview().offset(44)
+            $0.top.equalTo(matchedInfoView.snp.top).offset(20)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(-20)
         }
         
         matchedIntrolDescriptionLbl.snp.makeConstraints{
-            $0.top.equalTo(matchedIntroLbl.snp.bottom).offset(10)
-            $0.left.equalToSuperview().offset(44)
-            $0.right.equalToSuperview().offset(-44)
+            $0.top.equalTo(matchedIntroLbl.snp.bottom).offset(4)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(-20)
         }
         
         matchedScheduleLbl.snp.makeConstraints{
-            $0.top.equalTo(matchedIntrolDescriptionLbl.snp.bottom).offset(44)
-            $0.left.equalToSuperview().offset(44)
+            $0.top.equalTo(matchedIntrolDescriptionLbl.snp.bottom).offset(20)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(-20)
         }
         
         matchedTimeLbl.snp.makeConstraints{
-            $0.top.equalTo(matchedScheduleLbl.snp.bottom).offset(10)
-            $0.left.equalToSuperview().offset(44)
+            $0.top.equalTo(matchedScheduleLbl.snp.bottom).offset(5)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(-20)
         }
         
         matchedDateLbl.snp.makeConstraints{
             $0.top.equalTo(matchedTimeLbl.snp.bottom)
-            $0.left.equalToSuperview().offset(44)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(-20)
         }
-        
+
         confirmBtn.snp.makeConstraints {
             $0.width.equalTo(Const.glBtnWidth)
             $0.height.equalTo(Const.glBtnHeight)
@@ -320,10 +330,10 @@ class JoinMatchVC: UIViewController, SnapKitType {
             unableImg.isHidden = true
             unabledescriptionLbl.isHidden = true
             matchedTitle.isHidden = true
-            matchedListenerLbl.isHidden = true
             matchedImg.isHidden = true
             matchedNameLbl.isHidden = true
             matchedListenerStackView.isHidden = true
+            matchedInfoView.isHidden = true
             matchedIntroLbl.isHidden = true
             matchedIntrolDescriptionLbl.isHidden = true
             matchedScheduleLbl.isHidden = true
@@ -340,10 +350,10 @@ class JoinMatchVC: UIViewController, SnapKitType {
             unableImg.isHidden = false
             unabledescriptionLbl.isHidden = false
             matchedTitle.isHidden = true
-            matchedListenerLbl.isHidden = true
             matchedImg.isHidden = true
             matchedNameLbl.isHidden = true
             matchedListenerStackView.isHidden = true
+            matchedInfoView.isHidden = true
             matchedIntroLbl.isHidden = true
             matchedIntrolDescriptionLbl.isHidden = true
             matchedScheduleLbl.isHidden = true
@@ -360,10 +370,10 @@ class JoinMatchVC: UIViewController, SnapKitType {
             unableImg.isHidden = true
             unabledescriptionLbl.isHidden = true
             matchedTitle.isHidden = false
-            matchedListenerLbl.isHidden = false
             matchedImg.isHidden = false
             matchedNameLbl.isHidden = false
             matchedListenerStackView.isHidden = false
+            matchedInfoView.isHidden = false
             matchedIntroLbl.isHidden = false
             matchedIntrolDescriptionLbl.isHidden = false
             matchedScheduleLbl.isHidden = false
@@ -387,6 +397,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
                 UserDefaultsManager.shared.meetingTime = self.formattedTime(model.meetingTime)
                 UserDefaultsManager.shared.meetingDate = self.formattedDate(model.meetingTime)
 
+                
                 self.matchedNameLbl.text = UserDefaultsManager.shared.listenerName
                 self.matchedGenderLbl.text = UserDefaultsManager.shared.listenerGender
                 self.matchedAgeLbl.text = UserDefaultsManager.shared.listenerAge
@@ -395,8 +406,8 @@ class JoinMatchVC: UIViewController, SnapKitType {
                 self.matchedTimeLbl.text = UserDefaultsManager.shared.meetingTime
                 self.matchedDateLbl.text = UserDefaultsManager.shared.meetingDate
                 self.changeUI(.matched)
-            } else {
-                self.changeUI(.waiting)
+            } else { //네트워크 오류, 매칭 실패
+                self.changeUI(.unable)
             }
         }
     }
@@ -407,7 +418,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
         for num in 11 ... endIdx {
             emptyString += String(time[time.index(time.startIndex, offsetBy: num)])
         }
-        return emptyString.localized
+        return "매일 " + emptyString.localized
     }
     
     func formattedDate(_ date: String) -> String {
