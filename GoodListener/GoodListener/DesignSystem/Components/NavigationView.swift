@@ -22,12 +22,7 @@ class NavigationView: UIView {
         $0.setImage(UIImage(named: "ic_navi_back_btn"), for: .normal)
         $0.isHidden = true
     }
-    
-//    let logo = UILabel().then {
-//        $0.text = "굿 리스너"
-//        $0.font = FontManager.shared.notoSansKR(.bold, 20)
-//        $0.textColor = .f2
-//    }
+
     let logo = UIImageView().then {
         $0.image = #imageLiteral(resourceName: "logo")
         $0.contentMode = .scaleAspectFill
