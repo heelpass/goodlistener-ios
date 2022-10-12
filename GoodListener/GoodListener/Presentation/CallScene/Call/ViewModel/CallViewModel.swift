@@ -112,7 +112,7 @@ class CallViewModel: ViewModelType {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 // 스피커일 경우 전화
-                
+                CallManager.shared.start(token: "", channelId: "")
             })
             .disposed(by: disposeBag)
         
@@ -127,9 +127,11 @@ class CallViewModel: ViewModelType {
         input.stopBtnTap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                //TODO: 대화 종료 시 소켓으로 emit
                 // emit에 실패하지 않으면 후기 남기기로 가야할듯
                 GLSocketManager.shared.disconnected()
+                CallManager.shared.stop()
+                // TODO: 채널ID로 채널 삭제
+                //CallAPI.deleteChannel(request: <#T##Int#>, completion: <#T##(Void?, Error?) -> Void##(Void?, Error?) -> Void##(_ succeed: Void?, _ failed: Error?) -> Void#>)
             })
             .disposed(by: disposeBag)
         
@@ -138,6 +140,13 @@ class CallViewModel: ViewModelType {
                 guard let self = self else { return }
                 //TODO: 대화 미루기 REST
                 
+            })
+            .disposed(by: disposeBag)
+        
+        GLSocketManager.shared.relays.createAgoraToken
+            .subscribe(onNext: { [weak self] data in
+                guard let token = data.first as? String else { return }
+                CallManager.shared.start(token: token, channelId: "")
             })
             .disposed(by: disposeBag)
         

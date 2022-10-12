@@ -14,7 +14,7 @@ struct AgoraConfiguration {
     static var customerkey    = "57ff1ee8000f46cfbdcc18734fe82c4e"
     static var secret         = "7e5b372a213640ea863729887d2fc6d8"
     static var rtmToken       = "0066329136586f34466b76909ff159b2c52IABeWag9AOeGvaoSE/HunwseyEhAuY/at1befAnigJluyQhF7jUAAAAAEACGukDPp3zjYgEAAQCnfONi"
-    static var channelName    = "goodlistener"
+    static var channelName    = "7dc5fcf8-4d20-48f0-af2a-51d8ff4b9eb9"
 }
 
 class CallManager: NSObject {
@@ -28,9 +28,9 @@ class CallManager: NSObject {
         agoraKit = AgoraRtcEngineKit.sharedEngine(withAppId: AgoraConfiguration.appID, delegate: self)
     }
     
-    func start() {
+    func start(token: String, channelId: String) {
         // Join the channel with a token. Pass in your token and channel name here
-        agoraKit?.joinChannel(byToken: AgoraConfiguration.rtmToken, channelId: AgoraConfiguration.channelName, info: nil, uid: 0, joinSuccess: { (channel, uid, elapsed) in
+        agoraKit?.joinChannel(byToken: "007eJxTYPCwUt+iv9xqy4JZ8nsD9zbelo/9/7ErtbLvnAdPVJuZxH0FBjNjI0tDYzNTC7M0YxMTM7MkczNLA8u0NENTyySjZFMjw21uyRvZPZI1rhSxMjJAIIivwmCekmyalpxmoWuSYmSga2KRZqCbmGaUqGtqmGKRlmaSZJmaZMnAAABhhSdd", channelId: AgoraConfiguration.channelName, info: nil, uid: 0, joinSuccess: { (channel, uid, elapsed) in
         })
     }
     

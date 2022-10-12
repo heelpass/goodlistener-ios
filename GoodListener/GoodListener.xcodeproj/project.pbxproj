@@ -126,6 +126,8 @@
 		ECBA27B528A4DF970034A751 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B428A4DF970034A751 /* TagView.swift */; };
 		ECBA27B728A4E0B60034A751 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B628A4E0B60034A751 /* TagCell.swift */; };
 		ECBA27B928A4FCEE0034A751 /* TagCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */; };
+		ECD31B2B28F6E5F900CB3F73 /* CallTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD31B2A28F6E5F900CB3F73 /* CallTargetType.swift */; };
+		ECD31B2D28F6E6AE00CB3F73 /* CallAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD31B2C28F6E6AE00CB3F73 /* CallAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -284,6 +286,8 @@
 		ECBA27B428A4DF970034A751 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		ECBA27B628A4E0B60034A751 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		ECBA27B828A4FCEE0034A751 /* TagCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewLayout.swift; sourceTree = "<group>"; };
+		ECD31B2A28F6E5F900CB3F73 /* CallTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallTargetType.swift; sourceTree = "<group>"; };
+		ECD31B2C28F6E6AE00CB3F73 /* CallAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -561,6 +565,7 @@
 		E845495128BC7CC100DAD6EE /* API */ = {
 			isa = PBXGroup;
 			children = (
+				ECD31B2928F6E5E600CB3F73 /* Call */,
 				E8821D5D28D95155004E9CEB /* LoadingIndicator */,
 				E81E41DA28BDC9B30094CFD9 /* Token */,
 				E81E41D928BDC9AA0094CFD9 /* User */,
@@ -870,7 +875,6 @@
 			isa = PBXGroup;
 			children = (
 				E8FD760F28E672F200186BFD /* Socket */,
-				E8EF860F28C82674001C504F /* New Group */,
 				E8CB656B288E36420076E254 /* Interface */,
 				0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */,
 				E8B4449928ADC8620003815B /* UserInfo.swift */,
@@ -1120,6 +1124,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		ECD31B2928F6E5E600CB3F73 /* Call */ = {
+			isa = PBXGroup;
+			children = (
+				ECD31B2A28F6E5F900CB3F73 /* CallTargetType.swift */,
+				ECD31B2C28F6E6AE00CB3F73 /* CallAPI.swift */,
+			);
+			path = Call;
+			sourceTree = "<group>";
+		};
 		EFE54EE7D3D04F3932FBA642 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1358,10 +1371,12 @@
 				E8B444B528B36D1A0003815B /* MoodCell.swift in Sources */,
 				E81E41E928BF1EA30094CFD9 /* Networkable.swift in Sources */,
 				ECBA27B928A4FCEE0034A751 /* TagCollectionViewLayout.swift in Sources */,
+				ECD31B2D28F6E6AE00CB3F73 /* CallAPI.swift in Sources */,
 				E81E41E128BDF5840094CFD9 /* DeleteAccountVC.swift in Sources */,
 				E8CFBCE3288F876400D63B07 /* MyPageCoordinator.swift in Sources */,
 				E8B444B728B3723A0003815B /* MoodView.swift in Sources */,
 				E8C25C9F28E2C2EF006A7DE5 /* UserInfoManager.swift in Sources */,
+				ECD31B2B28F6E5F900CB3F73 /* CallTargetType.swift in Sources */,
 				0AA8FF1A28DF408C00C506C6 /* MatchModel.swift in Sources */,
 				E8B4449628ACC7AD0003815B /* UserDefaultsManager.swift in Sources */,
 				E81E422028C042400094CFD9 /* UserAPI.swift in Sources */,
