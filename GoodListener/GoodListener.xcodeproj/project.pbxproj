@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A09718A28DB709A00C6B675 /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09718928DB709A00C6B675 /* JoinViewModel.swift */; };
+		0A1396F928F5B99C00755789 /* mySpeakerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1396F828F5B99C00755789 /* mySpeakerCell.swift */; };
 		0A350B7D28BC5DD800EC83DA /* RecordBgCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A350B7C28BC5DD800EC83DA /* RecordBgCell.swift */; };
 		0A350B8728BCA56C00EC83DA /* RecordContenttCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A350B8628BCA56C00EC83DA /* RecordContenttCell.swift */; };
 		0A350B8928BCA63500EC83DA /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A350B8828BCA63500EC83DA /* RecordCollectionView.swift */; };
@@ -151,6 +152,7 @@
 
 /* Begin PBXFileReference section */
 		0A09718928DB709A00C6B675 /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
+		0A1396F828F5B99C00755789 /* mySpeakerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mySpeakerCell.swift; sourceTree = "<group>"; };
 		0A350B7C28BC5DD800EC83DA /* RecordBgCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordBgCell.swift; sourceTree = "<group>"; };
 		0A350B8628BCA56C00EC83DA /* RecordContenttCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContenttCell.swift; sourceTree = "<group>"; };
 		0A350B8828BCA63500EC83DA /* RecordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionView.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 			isa = PBXGroup;
 			children = (
 				0AF4308B288FD8E90078B2D5 /* ApplicantVC.swift */,
+				0A1396F828F5B99C00755789 /* mySpeakerCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1351,6 +1354,7 @@
 				E8B444A228AE1BE40003815B /* ProfileSetupViewModel.swift in Sources */,
 				E8CFBCE1288F874C00D63B07 /* MyPageVC.swift in Sources */,
 				E81E41E328BDF8540094CFD9 /* CheckBox.swift in Sources */,
+				0A1396F928F5B99C00755789 /* mySpeakerCell.swift in Sources */,
 				E8B4449E28ADF4AD0003815B /* ProfileImageSelectCell.swift in Sources */,
 				E8CFBCDA288F7B4800D63B07 /* HomeVC.swift in Sources */,
 				E8B444B928B4A2680003815B /* CallViewModel.swift in Sources */,

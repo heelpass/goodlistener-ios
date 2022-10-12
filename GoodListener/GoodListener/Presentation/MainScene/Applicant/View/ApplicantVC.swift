@@ -54,11 +54,11 @@ class ApplicantVC: UIViewController, SnapKitType {
     }
     
     //매칭 완료 후 UI 요소
-    let mySpeakerCollectionView : UICollectionView = {
+    let mySpeakerView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.layer.cornerRadius = 20
+        view.showsHorizontalScrollIndicator = false
         return view
     }()
     
@@ -90,10 +90,14 @@ class ApplicantVC: UIViewController, SnapKitType {
             contentStackView.addArrangedSubview($0)
         }
 
-        [joinImg, joinLbl, mySpeakerCollectionView].forEach{
+        [joinImg, joinLbl, mySpeakerView].forEach{
             containerView.addSubview($0)
         }
-
+        
+        mySpeakerView.register(mySpeakerCell.self, forCellWithReuseIdentifier: mySpeakerCell.identifier)
+        mySpeakerView.dataSource = self
+        mySpeakerView.delegate = self
+   
     }
     
     func setConstraints() {
@@ -129,8 +133,9 @@ class ApplicantVC: UIViewController, SnapKitType {
         }
         
         // 매칭 후 UI
-        mySpeakerCollectionView.snp.makeConstraints {
-            $0.top.left.right.bottom.equalToSuperview()
+        mySpeakerView.snp.makeConstraints {
+            $0.top.left.equalToSuperview().offset(5)
+            $0.bottom.right.equalToSuperview().offset(-5)
         }
         
         callBtn.snp.makeConstraints {
@@ -153,11 +158,8 @@ class ApplicantVC: UIViewController, SnapKitType {
             joinLbl.isHidden = false
             break
         case .matched:
-            mySpeakerCollectionView.isHidden = false
+            mySpeakerView.isHidden = false
             callBtn.isHidden = false
-            containerView.backgroundColor = .white
-            containerView.layer.borderColor = UIColor(hex: "#B1B3B5").cgColor
-            containerView.layer.applySketchShadow(color: UIColor(hex: "#B1B3B5"), alpha: 0.7, x: 0, y: 0, blur: 15, spread: 0)
             break
         }
     }
@@ -165,7 +167,7 @@ class ApplicantVC: UIViewController, SnapKitType {
     func initUI(){
         joinImg.isHidden = true
         joinLbl.isHidden = true
-        mySpeakerCollectionView.isHidden = true
+        mySpeakerView.isHidden = true
         callBtn.isHidden = true
         containerView.layer.borderColor = .none
     }
@@ -174,4 +176,32 @@ class ApplicantVC: UIViewController, SnapKitType {
         self.changeUI(.matched)
     }
 
+}
+
+extension ApplicantVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: mySpeakerCell.identifier, for: indexPath) as? mySpeakerCell else {fatalError()}
+        return cell
+    }
+
+}
+
+extension ApplicantVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = mySpeakerView.frame.size.width
+        let height = mySpeakerView.frame.size.height
+        return CGSize(
+            width: width,
+            height: height
+        )
+    }
+    
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 5, left: 5, bottom:5, right: 5)
+//    }
 }
