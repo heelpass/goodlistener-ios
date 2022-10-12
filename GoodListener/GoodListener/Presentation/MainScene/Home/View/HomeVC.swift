@@ -340,7 +340,7 @@ class HomeVC: UIViewController, SnapKitType {
     func changeUI(_ type: homeState) {
         switch type {
         case .join:
-            joinBtn.isSkeletonable = true
+            joinImg.isSkeletonable = true
             joinLbl.isSkeletonable = true
             joinBtn.isSkeletonable = true
             

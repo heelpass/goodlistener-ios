@@ -393,11 +393,11 @@ class JoinMatchVC: UIViewController, SnapKitType {
                 UserDefaultsManager.shared.listenerAge = model.listener.ageRange.localized
                 UserDefaultsManager.shared.listenerJob = model.listener.job.localized
                 UserDefaultsManager.shared.listenerDescription = model.listener.description
+                UserDefaultsManager.shared.channel = model.channel
                 UserDefaultsManager.shared.schedule = model.meetingTime
                 UserDefaultsManager.shared.meetingTime = self.formattedTime(model.meetingTime)
                 UserDefaultsManager.shared.meetingDate = self.formattedDate(model.meetingTime)
 
-                
                 self.matchedNameLbl.text = UserDefaultsManager.shared.listenerName
                 self.matchedGenderLbl.text = UserDefaultsManager.shared.listenerGender
                 self.matchedAgeLbl.text = UserDefaultsManager.shared.listenerAge
