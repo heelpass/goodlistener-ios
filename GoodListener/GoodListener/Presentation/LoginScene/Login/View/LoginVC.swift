@@ -61,12 +61,43 @@ class LoginVC: UIViewController, SnapKitType {
         $0.imageEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 10) //<- 중요
     }
     
-    let termsOfServiceBtn = UIButton().then {
-        $0.setTitle("이용약관 및 개인정보 취급방침", for: .normal)
-        $0.titleColor = .white
-        $0.titleLabel?.font = FontManager.shared.notoSansKR(.regular, 12)
+    let termsOfServiceBtn = UILabel().then {
+        $0.text = "필수 약관은 각 항목을 클릭하면 확인하실 수 있습니다."
+        $0.textColor = .white
+        $0.font = FontManager.shared.notoSansKR(.regular, 12)
         $0.backgroundColor = .clear
-        $0.titleLabel?.textUnderLine(text: "이용약관 및 개인정보 취급방침", range: ["이용약관", "개인정보 취급방침"])
+        $0.numberOfLines = 0
+        $0.textAlignment = .center
+        $0.sizeToFit()
+    }
+    
+    let termsOfServiceStackView = UIStackView().then {
+        $0.backgroundColor = .clear
+        $0.spacing = 2
+        $0.axis = .horizontal
+    }
+    
+    let termsOfService = UILabel().then {
+        $0.text = "이용약관"
+        $0.textColor = .white
+        $0.font = FontManager.shared.notoSansKR(.regular, 12)
+        $0.backgroundColor = .clear
+        $0.textUnderLine(text: "이용약관", range: ["이용약관"])
+    }
+    
+    let termsOfService2 = UILabel().then {
+        $0.text = "및"
+        $0.textColor = .white
+        $0.font = FontManager.shared.notoSansKR(.regular, 12)
+        $0.backgroundColor = .clear
+    }
+    
+    let termsOfService3 = UILabel().then {
+        $0.text = "개인정보 취급 방침"
+        $0.textColor = .white
+        $0.font = FontManager.shared.notoSansKR(.regular, 12)
+        $0.backgroundColor = .clear
+        $0.textUnderLine(text: "개인정보 취급 방침", range: ["개인정보 취급 방침"])
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,8 +109,9 @@ class LoginVC: UIViewController, SnapKitType {
     }
 
     func addComponents() {
-        [titleLabel, subtitleLabel, buttonStackView, termsOfServiceBtn].forEach { view.addSubview($0) }
+        [titleLabel, subtitleLabel, buttonStackView, termsOfServiceBtn, termsOfServiceStackView].forEach { view.addSubview($0) }
         [appleLoginBtn, emailLoginBtn].forEach { buttonStackView.addArrangedSubview($0) }
+        [termsOfService, termsOfService2, termsOfService3].forEach { termsOfServiceStackView.addArrangedSubview($0) }
     }
     
     func setConstraints() {
@@ -107,10 +139,13 @@ class LoginVC: UIViewController, SnapKitType {
         }
         
         termsOfServiceBtn.snp.makeConstraints {
+            $0.bottom.equalTo(termsOfServiceStackView.snp.top)
+            $0.centerX.equalToSuperview()
+        }
+        
+        termsOfServiceStackView.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(32)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(170)
-            $0.height.equalTo(20)
         }
     }
     
@@ -131,18 +166,5 @@ class LoginVC: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
         
-        termsOfServiceBtn.rx.tap
-            .bind(onNext: { [weak self] in
-                guard let self = self else { return }
-                
-                let popup = TermsOfServicePopup()
-                
-                self.view.addSubview(popup)
-                popup.snp.makeConstraints {
-                    $0.edges.equalToSuperview()
-                }
-            })
-            .disposed(by: disposeBag)
     }
-    
 }

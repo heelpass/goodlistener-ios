@@ -55,6 +55,7 @@
 		E81E421C28C03BC60094CFD9 /* MyPageModifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBA27B028A4DD0E0034A751 /* MyPageModifyVC.swift */; };
 		E81E421E28C03BE20094CFD9 /* TokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E421D28C03BE20094CFD9 /* TokenAPI.swift */; };
 		E81E422028C042400094CFD9 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E421F28C042400094CFD9 /* UserAPI.swift */; };
+		E83CCAF028F81366005E5EB9 /* UITapGesturRecognizer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83CCAEF28F81366005E5EB9 /* UITapGesturRecognizer+.swift */; };
 		E845494B28BC4CB600DAD6EE /* GLTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494A28BC4CB600DAD6EE /* GLTextField.swift */; };
 		E845494E28BC553500DAD6EE /* TermsOfServicePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494C28BC553400DAD6EE /* TermsOfServicePopup.swift */; };
 		E845494F28BC553500DAD6EE /* TermsOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494D28BC553500DAD6EE /* TermsOfService.swift */; };
@@ -208,6 +209,7 @@
 		E81E421D28C03BE20094CFD9 /* TokenAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenAPI.swift; sourceTree = "<group>"; };
 		E81E421F28C042400094CFD9 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		E83BD7FD288E7165006B98B2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E83CCAEF28F81366005E5EB9 /* UITapGesturRecognizer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGesturRecognizer+.swift"; sourceTree = "<group>"; };
 		E845494A28BC4CB600DAD6EE /* GLTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTextField.swift; sourceTree = "<group>"; };
 		E845494C28BC553400DAD6EE /* TermsOfServicePopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfServicePopup.swift; sourceTree = "<group>"; };
 		E845494D28BC553500DAD6EE /* TermsOfService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfService.swift; sourceTree = "<group>"; };
@@ -1057,6 +1059,7 @@
 				E8B444D728B759B20003815B /* String+.swift */,
 				E8B7A42428D2ED2200287EE0 /* UIApplication+.swift */,
 				E8C25CA028E2CC5B006A7DE5 /* Codable+.swift */,
+				E83CCAEF28F81366005E5EB9 /* UITapGesturRecognizer+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1396,6 +1399,7 @@
 				E8B4435A28A103570003815B /* UILabel+.swift in Sources */,
 				E845495428BC7F0100DAD6EE /* SignInModel.swift in Sources */,
 				E8EF861428C855A9001C504F /* DBManager.swift in Sources */,
+				E83CCAF028F81366005E5EB9 /* UITapGesturRecognizer+.swift in Sources */,
 				0A558A4628B61F2A001949D6 /* EmojiTagView.swift in Sources */,
 				E8B4435828A0EADD0003815B /* ProfileSetupVC.swift in Sources */,
 				0AA8FF1F28DF559600C506C6 /* MatchTargetType.swift in Sources */,
