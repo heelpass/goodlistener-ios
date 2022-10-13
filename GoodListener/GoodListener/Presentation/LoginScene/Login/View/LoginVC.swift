@@ -166,5 +166,17 @@ class LoginVC: UIViewController, SnapKitType {
             })
             .disposed(by: disposeBag)
         
+        
+        termsOfService.tapGesture
+            .subscribe(onNext: { _ in
+                print("First Tap")
+            })
+            .disposed(by: disposeBag)
+        
+        termsOfService3.tapGesture
+            .subscribe(onNext: { _ in
+                print("Second Tap")
+            })
+            .disposed(by: disposeBag)
     }
 }
