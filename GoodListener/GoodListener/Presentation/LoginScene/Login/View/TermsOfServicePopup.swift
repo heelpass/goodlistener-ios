@@ -49,7 +49,7 @@ class TermsOfServicePopup: UIView, SnapKitType {
         if type == .termsOfService {
             $0.text = TermsOfService.full
         } else {
-            $0.text = PersonalInformation.html
+            $0.text = PersonalInformation.full
         }
         
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
