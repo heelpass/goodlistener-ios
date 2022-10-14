@@ -18,6 +18,8 @@ class TagCell: UICollectionViewCell {
     
     static let identifier = "TagCell"
     
+    var state: TagState = .deselected
+    
     let label = UILabel().then {
         $0.text = "TAG"
         $0.font = FontManager.shared.notoSansKR(.bold, 16)
@@ -48,6 +50,7 @@ class TagCell: UICollectionViewCell {
     }
     
     func configUI(_ type: TagState) {
+        self.state = type
         switch type {
         case .selected:
             label.textColor = .f3

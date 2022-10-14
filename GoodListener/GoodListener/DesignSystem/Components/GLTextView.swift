@@ -100,7 +100,7 @@ class GLTextView: UIView, SnapKitType {
         $0.layer.cornerRadius = 10
     }
     
-    private lazy var contentsTv = UITextView().then {
+    lazy var contentsTv = UITextView().then {
         $0.text = ""
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.backgroundColor = .clear

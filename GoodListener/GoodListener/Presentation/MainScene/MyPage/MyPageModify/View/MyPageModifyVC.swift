@@ -24,9 +24,28 @@ class MyPageModifyVC: UIViewController, SnapKitType {
         $0.title.text = "나의 정보 수정"
     }
     
+    let scrollView = UIScrollView().then {
+        $0.backgroundColor = .clear
+    }
+    
+    let stackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.backgroundColor = .clear
+    }
+    
     let nicknameView = GLTextField(tag: 1, isShowDescription: true).then {
         $0.title = "닉네임"
         $0.inputTf.text = UserDefaultsManager.shared.nickname
+    }
+    
+    let genderTagView = TagView(data: TagList.sexList, isEditable: false).then {
+        $0.title.text = "성별"
+        $0.selectedTag.accept(UserDefaultsManager.shared.gender!)
+    }
+    
+    let ageTagView = TagView(data: TagList.ageList, isEditable: false).then {
+        $0.title.text = "연령대"
+        $0.selectedTag.accept(UserDefaultsManager.shared.age!)
     }
     
     let jobTagView = TagView(data: TagList.jobList).then {
@@ -44,38 +63,79 @@ class MyPageModifyVC: UIViewController, SnapKitType {
         super.viewDidLoad()
         view.backgroundColor = .white
         addComponents()
+        setDoneBtn()
         setConstraints()
         bind()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // keyboardWillShow, keyboardWillHide observer 등록
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func addComponents() {
-        [navigationView, nicknameView, jobTagView, introduceView].forEach { view.addSubview($0) }
+        [navigationView, scrollView].forEach { view.addSubview($0) }
+        scrollView.addSubview(stackView)
+        [nicknameView, genderTagView, ageTagView, jobTagView, introduceView].forEach { stackView.addArrangedSubview($0) }
     }
     
     func setConstraints() {
+        let width = UIScreen.main.bounds.width
+        
         navigationView.snp.makeConstraints {
             $0.left.right.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(44)
         }
         
-        nicknameView.snp.makeConstraints {
+        scrollView.snp.makeConstraints {
             $0.left.right.equalToSuperview()
-            $0.top.equalTo(navigationView.snp.bottom).offset(64)
+            $0.top.equalTo(navigationView.snp.bottom).offset(40)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.width.equalTo(width)
+        }
+        
+        stackView.snp.makeConstraints {
+            $0.left.right.top.bottom.equalToSuperview()
+            $0.width.equalTo(width)
+        }
+        
+        nicknameView.snp.makeConstraints {
+            $0.width.equalTo(width)
             $0.height.equalTo(Const.glTfHeight)
         }
         
+        stackView.setCustomSpacing(11, after: nicknameView)
+        
+        genderTagView.snp.makeConstraints {
+            $0.width.equalTo(width)
+            $0.height.equalTo(genderTagView.tagCollectionViewHeight())
+        }
+        
+        ageTagView.snp.makeConstraints {
+            $0.width.equalTo(width)
+            $0.height.equalTo(ageTagView.tagCollectionViewHeight())
+        }
+        
         jobTagView.snp.makeConstraints {
-            $0.top.equalTo(nicknameView.snp.bottom).offset(11)
-            $0.left.right.equalToSuperview()
+            $0.width.equalTo(width)
             $0.height.equalTo(jobTagView.tagCollectionViewHeight())
         }
         
+        stackView.setCustomSpacing(19, after: jobTagView)
+        
         introduceView.snp.makeConstraints {
-            $0.top.equalTo(jobTagView.snp.bottom).offset(19)
-            $0.left.right.equalToSuperview()
             $0.height.equalTo(introduceView.glTextViewHeight(textViewHeight: 62))
+            $0.width.equalTo(width)
         }
     }
     
@@ -164,5 +224,49 @@ class MyPageModifyVC: UIViewController, SnapKitType {
         popup.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    //키보드 상단 완료 버튼
+    func setDoneBtn() {
+        let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0,  width: self.view.frame.size.width, height: 30))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneBtn: UIBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(dismissMyKeyboard))
+        toolbar.setItems([flexSpace, doneBtn], animated: false)
+        toolbar.sizeToFit()
+        self.nicknameView.inputTf.inputAccessoryView = toolbar
+        self.introduceView.contentsTv.inputAccessoryView = toolbar
+    }
+    
+    
+    @objc func dismissMyKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(_ notification:NSNotification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keyboardRectangle.height
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            [self.genderTagView,
+             self.ageTagView,
+             self.jobTagView].forEach { $0.isHidden = true }
+        })
+        
+    }
+
+
+    @objc func keyboardWillHide(_ notification:NSNotification) {
+        guard let _ = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            [self.genderTagView,
+             self.ageTagView,
+             self.jobTagView].forEach { $0.isHidden = false }
+        })
     }
 }
