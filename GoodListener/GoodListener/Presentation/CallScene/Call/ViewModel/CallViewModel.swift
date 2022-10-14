@@ -127,9 +127,8 @@ class CallViewModel: ViewModelType {
         input.stopBtnTap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                // emit에 실패하지 않으면 후기 남기기로 가야할듯
-                GLSocketManager.shared.disconnected()
                 CallManager.shared.stop()
+                GLSocketManager.shared.disconnected()
                 // TODO: 채널ID로 채널 삭제
                 //CallAPI.deleteChannel(request: <#T##Int#>, completion: <#T##(Void?, Error?) -> Void##(Void?, Error?) -> Void##(_ succeed: Void?, _ failed: Error?) -> Void#>)
             })

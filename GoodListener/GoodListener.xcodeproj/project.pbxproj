@@ -56,6 +56,7 @@
 		E81E421E28C03BE20094CFD9 /* TokenAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E421D28C03BE20094CFD9 /* TokenAPI.swift */; };
 		E81E422028C042400094CFD9 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81E421F28C042400094CFD9 /* UserAPI.swift */; };
 		E83CCAF028F81366005E5EB9 /* UITapGesturRecognizer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83CCAEF28F81366005E5EB9 /* UITapGesturRecognizer+.swift */; };
+		E83CCAF228F90D40005E5EB9 /* PersonalInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83CCAF128F90D40005E5EB9 /* PersonalInformation.swift */; };
 		E845494B28BC4CB600DAD6EE /* GLTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494A28BC4CB600DAD6EE /* GLTextField.swift */; };
 		E845494E28BC553500DAD6EE /* TermsOfServicePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494C28BC553400DAD6EE /* TermsOfServicePopup.swift */; };
 		E845494F28BC553500DAD6EE /* TermsOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845494D28BC553500DAD6EE /* TermsOfService.swift */; };
@@ -210,6 +211,7 @@
 		E81E421F28C042400094CFD9 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		E83BD7FD288E7165006B98B2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E83CCAEF28F81366005E5EB9 /* UITapGesturRecognizer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGesturRecognizer+.swift"; sourceTree = "<group>"; };
+		E83CCAF128F90D40005E5EB9 /* PersonalInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformation.swift; sourceTree = "<group>"; };
 		E845494A28BC4CB600DAD6EE /* GLTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTextField.swift; sourceTree = "<group>"; };
 		E845494C28BC553400DAD6EE /* TermsOfServicePopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfServicePopup.swift; sourceTree = "<group>"; };
 		E845494D28BC553500DAD6EE /* TermsOfService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfService.swift; sourceTree = "<group>"; };
@@ -919,6 +921,7 @@
 				0ABA2824288D5B55000D889B /* LoginVC.swift */,
 				E845494D28BC553500DAD6EE /* TermsOfService.swift */,
 				E845494C28BC553400DAD6EE /* TermsOfServicePopup.swift */,
+				E83CCAF128F90D40005E5EB9 /* PersonalInformation.swift */,
 				0ABA2826288D5B55000D889B /* Main.storyboard */,
 			);
 			path = View;
@@ -1346,6 +1349,7 @@
 				E81E41E728BEF5190094CFD9 /* PopupMessage.swift in Sources */,
 				E845494B28BC4CB600DAD6EE /* GLTextField.swift in Sources */,
 				E8B4449828ACDF890003815B /* PersonalInfoViewModel.swift in Sources */,
+				E83CCAF228F90D40005E5EB9 /* PersonalInformation.swift in Sources */,
 				E8D09854289A6C4D008AD55F /* SocketManager.swift in Sources */,
 				E8B444CD28B730CE0003815B /* GLTextView.swift in Sources */,
 				E81E41F328BF24330094CFD9 /* AppleToken.swift in Sources */,

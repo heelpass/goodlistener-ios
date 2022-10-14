@@ -12,9 +12,16 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
+enum ServicePopupType {
+    case termsOfService
+    case PersonalInformation
+}
+
 class TermsOfServicePopup: UIView, SnapKitType {
     
     let disposeBag = DisposeBag()
+    
+    var type: ServicePopupType = .PersonalInformation
     
     private let backgroundView = UIView().then {
         $0.backgroundColor = .black.withAlphaComponent(0.6)
@@ -38,11 +45,15 @@ class TermsOfServicePopup: UIView, SnapKitType {
         $0.sizeToFit()
     }
     
-    private let contentsLbl = UILabel().then {
-        $0.text = TermsOfService.full
+    lazy var contentsLbl = UILabel().then {
+        if type == .termsOfService {
+            $0.text = TermsOfService.full
+        } else {
+            $0.text = PersonalInformation.html
+        }
+        
         $0.font = FontManager.shared.notoSansKR(.regular, 14)
         $0.textColor = .f2
-        $0.textFontChange(text: $0.text!, font: FontManager.shared.notoSansKR(.bold, 15), range: ["제 1조 (목적)", "제 2조 (용어의 정의)", "제 3조 (예시)", "제 4조 (예시)","제 5조 (예시)","제 6조 (예시)","제 7조 (예시)"])
         $0.numberOfLines = 0
     }
     
@@ -121,5 +132,15 @@ class TermsOfServicePopup: UIView, SnapKitType {
                 self?.removeFromSuperview()
             })
             .disposed(by: disposeBag)
+    }
+    
+    func configUI() {
+        if type == .termsOfService {
+            contentsLbl.text = TermsOfService.full
+            titleLbl.text = "서비스이용약관"
+        } else {
+            contentsLbl.text = PersonalInformation.full
+            titleLbl.text = "개인정보 처리방침"
+        }
     }
 }

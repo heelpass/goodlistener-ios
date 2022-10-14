@@ -168,14 +168,28 @@ class LoginVC: UIViewController, SnapKitType {
         
         
         termsOfService.tapGesture
-            .subscribe(onNext: { _ in
-                print("First Tap")
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                let popup = TermsOfServicePopup()
+                popup.type = .termsOfService
+                popup.configUI()
+                self.view.addSubview(popup)
+                popup.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
             })
             .disposed(by: disposeBag)
         
         termsOfService3.tapGesture
-            .subscribe(onNext: { _ in
-                print("Second Tap")
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                let popup = TermsOfServicePopup()
+                popup.type = .PersonalInformation
+                popup.configUI()
+                self.view.addSubview(popup)
+                popup.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
             })
             .disposed(by: disposeBag)
     }
