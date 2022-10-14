@@ -111,5 +111,19 @@ struct UserAPI: Networkable {
             }
         })
     }
+    
+    static func updateProfileImage(request: Int, completion: @escaping (_ succeed: UserInfo?, _ failed: Error?) -> Void) {
+        makeProvider().request(.profileImgModify(request)) { result in
+            switch ResponseData<UserInfo>.processModelResponse(result) {
+            case .success(let model):
+                return completion(model, nil)
+            case .failure(let error):
+                makePopup(action: {
+                    updateProfileImage(request: request, completion: completion)
+                })
+                return completion(nil, error)
+            }
+        }
+    }
 
 }
