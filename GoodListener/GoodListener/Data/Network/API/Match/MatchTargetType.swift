@@ -15,6 +15,7 @@ import Moya
 enum MatchTargetType {
     case matchUser(MatchModel)
     case myListener
+    case mySpeaker
 }
 
 
@@ -29,6 +30,8 @@ extension MatchTargetType: BaseTargetType {
             return "/match/user"
         case .myListener:
             return "/match/user/listener"
+        case .mySpeaker:
+            return "/match/user/speaker"
         }
     }
     
@@ -38,7 +41,7 @@ extension MatchTargetType: BaseTargetType {
         switch self {
         case .matchUser(_):
             return .post
-        case .myListener:
+        case .myListener, .mySpeaker:
             return .get
         }
 
@@ -56,8 +59,9 @@ extension MatchTargetType: BaseTargetType {
         switch self {
         case .matchUser(let model):
             return .requestJSONEncodable(model)
-
         case .myListener:
+            return .requestPlain
+        case .mySpeaker:
             return .requestPlain
         }
     }

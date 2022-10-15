@@ -33,7 +33,7 @@ class MainCoordinator: CoordinatorType {
     var tabBarController: CustomTabBarController
     
     // 유저 타입도 AppCoordinator에서 주입해줘야 합니다
-    var userType: UserType = .speaker
+    var userType: UserType = .listener
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController

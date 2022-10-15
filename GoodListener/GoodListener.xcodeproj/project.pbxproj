@@ -23,6 +23,7 @@
 		0A61B5A528CC5ACE00655E03 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A61B5A428CC5ACE00655E03 /* HomeViewModel.swift */; };
 		0A703B532896AB8300A05124 /* UserTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B522896AB8300A05124 /* UserTargetType.swift */; };
 		0A703B572896B4DC00A05124 /* ErrorPayLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */; };
+		0A7AB12B28F8720B00BDEF3F /* MatchedSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7AB12A28F8720B00BDEF3F /* MatchedSpeaker.swift */; };
 		0AA2BA9F28C1BE6B001AB4BD /* NoticeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA2BA9E28C1BE6B001AB4BD /* NoticeVC.swift */; };
 		0AA8FF1A28DF408C00C506C6 /* MatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8FF1928DF408C00C506C6 /* MatchModel.swift */; };
 		0AA8FF1D28DF555500C506C6 /* MatchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA8FF1C28DF555500C506C6 /* MatchAPI.swift */; };
@@ -167,6 +168,7 @@
 		0A61B5A428CC5ACE00655E03 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = GoodListener/Presentation/MainScene/Home/View/HomeViewModel.swift; sourceTree = SOURCE_ROOT; };
 		0A703B522896AB8300A05124 /* UserTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserTargetType.swift; path = GoodListener/Data/Network/API/User/UserTargetType.swift; sourceTree = SOURCE_ROOT; };
 		0A703B562896B4DC00A05124 /* ErrorPayLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorPayLoad.swift; path = GoodListener/Domain/Entities/ErrorPayLoad.swift; sourceTree = SOURCE_ROOT; };
+		0A7AB12A28F8720B00BDEF3F /* MatchedSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchedSpeaker.swift; sourceTree = "<group>"; };
 		0AA2BA9E28C1BE6B001AB4BD /* NoticeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeVC.swift; sourceTree = "<group>"; };
 		0AA8FF1928DF408C00C506C6 /* MatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchModel.swift; sourceTree = "<group>"; };
 		0AA8FF1C28DF555500C506C6 /* MatchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchAPI.swift; sourceTree = "<group>"; };
@@ -874,6 +876,7 @@
 				0AA8FF1928DF408C00C506C6 /* MatchModel.swift */,
 				0ACE960F28E553C900C7DB28 /* MatchInfo.swift */,
 				0AC0590E28ED76C700706938 /* MatchedListener.swift */,
+				0A7AB12A28F8720B00BDEF3F /* MatchedSpeaker.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1319,6 +1322,7 @@
 				E81E41F328BF24330094CFD9 /* AppleToken.swift in Sources */,
 				E8CB6566288E35090076E254 /* Log.swift in Sources */,
 				0AF4308E288FDC230078B2D5 /* RecordCoordinator.swift in Sources */,
+				0A7AB12B28F8720B00BDEF3F /* MatchedSpeaker.swift in Sources */,
 				E81E41EF28BF225D0094CFD9 /* ServiceError.swift in Sources */,
 				E845494F28BC553500DAD6EE /* TermsOfService.swift in Sources */,
 				E8CFBCD8288F7A9C00D63B07 /* HomeCoordinator.swift in Sources */,
