@@ -440,6 +440,7 @@ class HomeVC: UIViewController, SnapKitType {
     func fetchData(){
         initUI()
         self.containerView.showAnimatedGradientSkeleton()
+        
         MatchAPI.MatchedListener { succeed, failed in
             self.containerView.hideSkeleton()
             if ((succeed) != nil){

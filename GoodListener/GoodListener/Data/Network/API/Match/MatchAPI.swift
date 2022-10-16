@@ -35,9 +35,7 @@ struct MatchAPI: Networkable {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):
-                makePopup(action: {
-                   MatchedListener(completion: completion)
-                })
+                //네트워크 에러, 데이터 없음
                 return completion(nil, error)
             }
             
