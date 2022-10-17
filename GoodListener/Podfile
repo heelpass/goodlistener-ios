@@ -26,8 +26,7 @@ target 'GoodListener' do
 
 # Networking
   pod 'Moya', '~> 15.0'
-  pod 'Moya/RxSwift', '~> 15.0'
-  pod 'Socket.IO-Client-Swift', '~> 15.2.0'
+  pod 'Socket.IO-Client-Swift'
 
 # Decoding
   pod 'SwiftyJSON'

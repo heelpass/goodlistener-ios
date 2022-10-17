@@ -19,6 +19,7 @@ class TagView: UIView {
     
     var tagData: [String] = []
     var isAllSelected: Bool = false
+    var isEditable: Bool = true
     
     var selectedTag: BehaviorRelay<String> = .init(value: "")
     
@@ -45,6 +46,13 @@ class TagView: UIView {
         $0.backgroundColor = .l2
     }
     
+    let uneditableLbl = UILabel().then {
+        $0.text = "수정이 불가능한 항목입니다"
+        $0.font = FontManager.shared.notoSansKR(.regular, 12)
+        $0.textColor = UIColor(hex: "#979797")
+        $0.sizeToFit()
+    }
+    
     private override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -53,10 +61,11 @@ class TagView: UIView {
         super.init(coder: coder)
     }
     
-    convenience init(data: [String], isAllSelcted: Bool = false) {
+    convenience init(data: [String], isAllSelcted: Bool = false, isEditable: Bool = true) {
         self.init(frame: .zero)
         self.tagData = data
         self.isAllSelected = isAllSelcted
+        self.isEditable = isEditable
         
         addSubview(title)
         addSubview(collectionView)
@@ -76,6 +85,16 @@ class TagView: UIView {
         line.snp.makeConstraints {
             $0.left.right.bottom.equalToSuperview()
             $0.height.equalTo(1)
+        }
+        
+        if !isEditable {
+            collectionView.isUserInteractionEnabled = false
+            
+            self.addSubview(uneditableLbl)
+            uneditableLbl.snp.makeConstraints {
+                $0.right.equalToSuperview().inset(Const.padding)
+                $0.centerY.equalTo(title)
+            }
         }
     }
     
@@ -138,8 +157,17 @@ extension TagView: UICollectionViewDataSource {
         if isAllSelected {
             cell.configUI(.selected)
         } else {
-            tagData[indexPath.row] == selectedTag.value ? cell.configUI(.selected) : cell.configUI(.deselected)
+            if tagData[indexPath.row] == selectedTag.value {
+                cell.configUI(.selected)
+                if !isEditable {
+                    cell.background.backgroundColor = .m3
+                    cell.background.layer.borderColor = UIColor.f5.cgColor
+                }
+            } else {
+                cell.configUI(.deselected)
+            }
         }
+        
         
         return cell
     }

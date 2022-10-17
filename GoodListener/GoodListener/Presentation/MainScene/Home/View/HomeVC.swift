@@ -158,6 +158,10 @@ class HomeVC: UIViewController, SnapKitType {
         fetchData()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
     func addComponents() {
         [navigationView, scrollView, joinBtn, postponeBtn].forEach{
             view.addSubview($0)

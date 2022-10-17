@@ -175,7 +175,11 @@ class MyPageVC: UIViewController, SnapKitType {
                 view.selectedImage
                     .subscribe(onNext: { [weak self] image in
                         guard let self = self, let image = image else { return }
-                        self.profileImage.image = UIImage(named: "profile\(image)")
+                        UserAPI.updateProfileImage(request: image) { succeed, failed in
+                            guard let model = succeed else { return }
+                            self.profileImage.image = UIImage(named: "profile\(model.profileImg)")
+                            UserDefaultsManager.shared.profileImg = model.profileImg
+                        }
                     })
                     .disposed(by: view.disposeBag)
                 

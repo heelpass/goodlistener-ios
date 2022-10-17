@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Starscream
 
 class CustomTabBarController: UITabBarController {
     
@@ -15,6 +16,13 @@ class CustomTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupStyle()
+//        WebSocketManager.shared.socket?.delegate = self
+//        WebSocketManager.shared.start()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+//        WebSocketManager.shared.disconnect()
     }
     
     func setupStyle() {

@@ -14,7 +14,7 @@ import Then
 
 class ProfileImageSelectView: UIView, SnapKitType {
     
-    var images = BehaviorRelay<[Int?]>(value: [1,2,3,4,5,6])
+    var images = BehaviorRelay<[Int?]>(value: [1,2,3,4,5,6,7,8,9])
     
     let cellSize = (UIScreen.main.bounds.width - (Const.padding * 4) - 26) / 3
     var disposeBag = DisposeBag()
@@ -91,7 +91,7 @@ class ProfileImageSelectView: UIView, SnapKitType {
         collectionView.snp.makeConstraints {
             $0.top.equalTo(titleLbl.snp.bottom).offset(49)
             $0.left.right.equalToSuperview().inset(Const.padding)
-            $0.height.equalTo(cellSize * 2 + 26)
+            $0.height.equalTo(cellSize * 3 + 26 * 2)
         }
         
         completeBtn.snp.makeConstraints {

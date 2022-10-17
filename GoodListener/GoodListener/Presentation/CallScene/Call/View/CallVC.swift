@@ -156,8 +156,13 @@ class CallVC: UIViewController, SnapKitType {
         $0.isHidden = true
     }
     
+    let getAgoraTokenButton = UIButton().then {
+        $0.setTitle("아고라", for: .normal)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        GLSocketManager.shared.start()
         
         view.backgroundColor = #colorLiteral(red: 0.1971904635, green: 0.2260227799, blue: 0.1979919374, alpha: 1)
         // Do any additional setup after loading the view.
@@ -182,9 +187,23 @@ class CallVC: UIViewController, SnapKitType {
         popup.addSubview(popupContainer)
         [popupTitle, popupBtnStackView].forEach { popupContainer.addSubview($0) }
         [popupDelayBtn, popupOkbtn].forEach { popupBtnStackView.addArrangedSubview($0) }
+//        view.addSubview(getAgoraTokenButton)
     }
     
     func setConstraints() {
+        
+//        getAgoraTokenButton.snp.makeConstraints {
+//            $0.size.equalTo(100)
+//            $0.top.equalTo(stopBtn.snp.bottom)
+//            $0.centerX.equalToSuperview()
+//        }
+//
+//        getAgoraTokenButton.rx.tap
+//            .subscribe(onNext: {
+//                GLSocketManager.shared.createAgoraToken()
+//            })
+//            .disposed(by: disposeBag)
+        
         titleStackView.snp.makeConstraints {
             $0.bottom.equalTo(profileImage.snp.top).offset(-90)
             $0.left.right.equalToSuperview().inset(Const.padding)
@@ -291,7 +310,6 @@ class CallVC: UIViewController, SnapKitType {
         
         // 통화 중지
         stopBtn.swipeSuccessResult
-            .filter { $0 }
             .bind(onNext: { [weak self] _ in
                 self?.coordinator?.moveToMain()
             })
