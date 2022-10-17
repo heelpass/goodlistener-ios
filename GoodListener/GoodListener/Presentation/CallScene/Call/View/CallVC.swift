@@ -187,22 +187,22 @@ class CallVC: UIViewController, SnapKitType {
         popup.addSubview(popupContainer)
         [popupTitle, popupBtnStackView].forEach { popupContainer.addSubview($0) }
         [popupDelayBtn, popupOkbtn].forEach { popupBtnStackView.addArrangedSubview($0) }
-        view.addSubview(getAgoraTokenButton)
+//        view.addSubview(getAgoraTokenButton)
     }
     
     func setConstraints() {
         
-        getAgoraTokenButton.snp.makeConstraints {
-            $0.size.equalTo(100)
-            $0.top.equalTo(stopBtn.snp.bottom)
-            $0.centerX.equalToSuperview()
-        }
-        
-        getAgoraTokenButton.rx.tap
-            .subscribe(onNext: {
-                GLSocketManager.shared.createAgoraToken()
-            })
-            .disposed(by: disposeBag)
+//        getAgoraTokenButton.snp.makeConstraints {
+//            $0.size.equalTo(100)
+//            $0.top.equalTo(stopBtn.snp.bottom)
+//            $0.centerX.equalToSuperview()
+//        }
+//
+//        getAgoraTokenButton.rx.tap
+//            .subscribe(onNext: {
+//                GLSocketManager.shared.createAgoraToken()
+//            })
+//            .disposed(by: disposeBag)
         
         titleStackView.snp.makeConstraints {
             $0.bottom.equalTo(profileImage.snp.top).offset(-90)
