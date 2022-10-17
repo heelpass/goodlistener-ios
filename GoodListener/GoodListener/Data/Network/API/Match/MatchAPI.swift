@@ -51,9 +51,9 @@ struct MatchAPI: Networkable {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):
-                makePopup(action: {
-                   MatchedSpeaker(completion: completion)
-                })
+//                makePopup(action: {
+//                   MatchedSpeaker(completion: completion)
+//                })
                 return completion(nil, error)
             }
         })

@@ -59,9 +59,7 @@ extension MatchTargetType: BaseTargetType {
         switch self {
         case .matchUser(let model):
             return .requestJSONEncodable(model)
-        case .myListener:
-            return .requestPlain
-        case .mySpeaker:
+        case .myListener, .mySpeaker:
             return .requestPlain
         }
     }
