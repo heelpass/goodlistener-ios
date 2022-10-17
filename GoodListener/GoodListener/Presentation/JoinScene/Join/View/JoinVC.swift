@@ -216,7 +216,7 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
                 guard let self = self else { return }
                 
                 let popup = GLPopup()
-                popup.title = "모든 항목을 채워주세요!"
+                popup.title = "모든 항목을 입력해주세요."
                 popup.contents = message
                 popup.cancelIsHidden = true
                 popup.alignment = .center

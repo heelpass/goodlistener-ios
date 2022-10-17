@@ -35,12 +35,27 @@ struct MatchAPI: Networkable {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):
-                makePopup(action: {
-                   MatchedListener(completion: completion)
-                })
+                //네트워크 에러, 데이터 없음
                 return completion(nil, error)
             }
             
+        })
+    }
+    
+    
+    //매칭 유저 정보를 불러옵니다.
+    /// - Returns:Success: MatchedListener, Fail: Error
+    static func MatchedSpeaker(completion: @escaping (_ succeed: MatchedSpeaker?, _ failed: Error?) -> Void) {
+        makeProvider().request(.mySpeaker, completion: { result in
+            switch ResponseData<MatchedSpeaker>.processModelResponse(result) {
+            case .success(let model):
+                return completion(model, nil)
+            case .failure(let error):
+//                makePopup(action: {
+//                   MatchedSpeaker(completion: completion)
+//                })
+                return completion(nil, error)
+            }
         })
     }
 }

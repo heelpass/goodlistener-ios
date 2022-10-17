@@ -76,7 +76,6 @@ class ApplicantVC: UIViewController, SnapKitType {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        initUI()
         fetchData()
     }
     
@@ -154,6 +153,8 @@ class ApplicantVC: UIViewController, SnapKitType {
     func changeUI(_ type: applicantState) {
         switch type {
         case .join:
+            joinImg.isSkeletonable = true
+            joinLbl.isSkeletonable = true
             joinImg.isHidden = false
             joinLbl.isHidden = false
             break
@@ -173,9 +174,19 @@ class ApplicantVC: UIViewController, SnapKitType {
     }
     
     func fetchData(){
-        self.changeUI(.matched)
+        initUI()
+        self.containerView.showAnimatedGradientSkeleton()
+        MatchAPI.MatchedSpeaker { data, error in
+            self.containerView.hideSkeleton()
+            if ((data) != nil) {
+                self.applicantState = .matched
+                self.changeUI(self.applicantState)
+            } else {
+                self.applicantState = .join
+                self.changeUI(self.applicantState)
+            }
+        }
     }
-
 }
 
 extension ApplicantVC: UICollectionViewDataSource {
@@ -200,8 +211,4 @@ extension ApplicantVC: UICollectionViewDelegateFlowLayout {
         )
     }
     
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 5, left: 5, bottom:5, right: 5)
-//    }
 }
