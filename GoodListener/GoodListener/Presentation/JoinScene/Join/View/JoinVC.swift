@@ -230,6 +230,25 @@ class JoinVC: UIViewController, SnapKitType, UITextViewDelegate {
             })
             .disposed(by: disposeBag)
         
+        output.guestMessage
+            .emit(onNext: { [weak self] message in
+                guard let self = self else { return }
+                
+                let popup = GLPopup()
+                popup.title = "알림"
+                popup.contents = message
+                popup.cancelIsHidden = true
+                popup.alignment = .center
+                
+                self.view.addSubview(popup)
+                popup.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+                
+                self.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+        
     }
     
     //키보드 상단 완료 버튼

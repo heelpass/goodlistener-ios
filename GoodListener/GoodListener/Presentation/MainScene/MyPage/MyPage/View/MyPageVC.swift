@@ -82,6 +82,11 @@ class MyPageVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
+        if UserDefaultsManager.shared.isGuest {
+            tagView.collectionView.isHidden = true
+            editBtn.isHidden = true
+            profileImageEditView.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

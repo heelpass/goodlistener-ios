@@ -54,11 +54,9 @@ class LoginVC: UIViewController, SnapKitType {
         $0.layer.cornerRadius = 24
     }
     
-    let emailLoginBtn = GLButton().then{
-        $0.title = "이메일로 로그인"
-        $0.setImage(UIImage(named: "ic_login_email"), for: .normal)
+    let guestLoginBtn = GLButton().then{
+        $0.title = "게스트로 둘러보기"
         $0.contentHorizontalAlignment = .center
-        $0.imageEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 10) //<- 중요
     }
     
     let termsOfServiceBtn = UILabel().then {
@@ -110,7 +108,7 @@ class LoginVC: UIViewController, SnapKitType {
 
     func addComponents() {
         [titleLabel, subtitleLabel, buttonStackView, termsOfServiceBtn, termsOfServiceStackView].forEach { view.addSubview($0) }
-        [appleLoginBtn, emailLoginBtn].forEach { buttonStackView.addArrangedSubview($0) }
+        [appleLoginBtn, guestLoginBtn].forEach { buttonStackView.addArrangedSubview($0) }
         [termsOfService, termsOfService2, termsOfService3].forEach { termsOfServiceStackView.addArrangedSubview($0) }
     }
     
@@ -134,7 +132,7 @@ class LoginVC: UIViewController, SnapKitType {
             $0.height.equalTo(Const.glBtnHeight)
         }
         
-        emailLoginBtn.snp.makeConstraints {
+        guestLoginBtn.snp.makeConstraints {
             $0.height.equalTo(Const.glBtnHeight)
         }
         
@@ -151,7 +149,7 @@ class LoginVC: UIViewController, SnapKitType {
     
     func bind() {
         let output = viewModel.transform(input: LoginViewModel.Input(appleLoginBtnTap: appleLoginBtn.tapGesture,
-                                                                     nonLoginBtnTap: emailLoginBtn.tapGesture,
+                                                                     nonLoginBtnTap: guestLoginBtn.tapGesture,
                                                                      termsOfServiceBtnTap: termsOfServiceBtn.tapGesture))
         
         output.loginResult

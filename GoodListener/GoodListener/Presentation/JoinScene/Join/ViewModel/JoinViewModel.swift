@@ -23,15 +23,22 @@ class JoinViewModel: ViewModelType {
     struct Output {
         let okBtnResult: Signal<Bool>
         var poupMessage: Signal<String>
+        var guestMessage: Signal<String>
     }
     
     func transform(input: Input) -> Output {
         let okBtnResult = PublishRelay<Bool>()
         var popupMessage = PublishRelay<String>()
+        var guestMessage = PublishRelay<String>()
         
         input.okBtnTap
             .withLatestFrom(Observable.combineLatest(input.time, input.reason, input.moodImg))
             .subscribe(onNext: { [weak self] (time, reason, moodImg) in
+                if UserDefaultsManager.shared.isGuest {
+                    guestMessage.accept("로그인 후 이용해주세요")
+                    return
+                }
+                
                 if(time == [""] || reason == "" || moodImg == 0) {
                     popupMessage.accept("간략하게 입력해 주시면 \n리스너와 더 좋은 대화를 나눌 수 있어요!")
                 } else {
@@ -45,6 +52,8 @@ class JoinViewModel: ViewModelType {
                 }
             })
             .disposed(by: disposeBag)
-        return Output(okBtnResult: okBtnResult.asSignal(onErrorJustReturn: false), poupMessage: popupMessage.asSignal(onErrorJustReturn: ""))
+        return Output(okBtnResult: okBtnResult.asSignal(onErrorJustReturn: false),
+                      poupMessage: popupMessage.asSignal(onErrorJustReturn: ""),
+                      guestMessage: guestMessage.asSignal(onErrorJustReturn: ""))
     }
 }

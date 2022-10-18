@@ -47,7 +47,16 @@ class LoginViewModel: NSObject, ViewModelType {
         input.nonLoginBtnTap
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
+                
                 loginResult.accept(true)
+                UserDefaultsManager.shared.isGuest = true
+                UserDefaultsManager.shared.nickname    = "Guest"
+                UserDefaultsManager.shared.age         = ""
+                UserDefaultsManager.shared.gender      = ""
+                UserDefaultsManager.shared.job         = ""
+                UserDefaultsManager.shared.profileImg  = 1
+                UserDefaultsManager.shared.description = "안녕하세요 굿 리스너입니다."
+                UserDefaultsManager.shared.userType    = "speaker"
             })
             .disposed(by: disposeBag)
         
