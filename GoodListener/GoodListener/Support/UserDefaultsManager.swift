@@ -24,6 +24,7 @@ enum UserDefaultKey : String {
     // 로그인 관련 정보
     case appleID
     case isLogin
+    case isGuest
     
     // Push
     case pushCnt
@@ -59,6 +60,7 @@ class UserDefaultsManager {
         self.description = "안녕하세요 굿 리스너입니다."
         self.snsKind = ""
         self.profileImg = 0
+        self.isGuest = false
     }
     
     // MARK: - authtoken from rest
@@ -215,6 +217,19 @@ class UserDefaultsManager {
         
         set(isLogin) {
             UserDefaults.standard.set(isLogin, forKey:  UserDefaultKey.isLogin.rawValue)
+        }
+    }
+    
+    var isGuest : Bool {
+        get {
+            guard let isGuest = UserDefaults.standard.value(forKey: UserDefaultKey.isGuest.rawValue) as? Bool else {
+                return false
+            }
+            return isGuest
+        }
+        
+        set(isGuest) {
+            UserDefaults.standard.set(isGuest, forKey:  UserDefaultKey.isGuest.rawValue)
         }
     }
     

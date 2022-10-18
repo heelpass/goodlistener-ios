@@ -72,6 +72,7 @@ class ApplicantVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
+        addCallBtn()    // 전화 테스트용
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -186,6 +187,23 @@ class ApplicantVC: UIViewController, SnapKitType {
                 self.changeUI(self.applicantState)
             }
         }
+    }
+    
+    func addCallBtn() {
+        let button = GLButton()
+        button.title = "통화"
+        view.addSubview(button)
+        button.snp.makeConstraints {
+            $0.size.equalTo(50)
+            $0.right.equalToSuperview().inset(10)
+            $0.top.equalTo(navigationView.snp.bottom).offset(20)
+        }
+        
+        button.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.coordinator?.call()
+            })
+            .disposed(by: disposeBag)
     }
 }
 

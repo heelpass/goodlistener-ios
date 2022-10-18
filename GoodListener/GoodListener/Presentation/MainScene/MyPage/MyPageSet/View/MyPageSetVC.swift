@@ -222,6 +222,11 @@ class MyPageSetVC: UIViewController, SnapKitType {
     func bind() {
         logoutContainer.tapGesture
             .subscribe(onNext: { [weak self] _ in
+                if UserDefaultsManager.shared.isGuest {
+                    self?.coordinator?.logout()
+                    UserDefaultsManager.shared.logout()
+                }
+                
                 let popup = GLPopup()
                 popup.title = "알림"
                 popup.contents = PopupMessage.logout
@@ -238,6 +243,20 @@ class MyPageSetVC: UIViewController, SnapKitType {
         
         withdrawContainer.tapGesture
             .subscribe(onNext: { [weak self] _ in
+                if UserDefaultsManager.shared.isGuest {
+                    let popup = GLPopup()
+                    popup.title = "알림"
+                    popup.contents = "로그인 후 이용해주세요"
+                    popup.cancelIsHidden = true
+                    popup.alignment = .center
+                    
+                    self?.view.addSubview(popup)
+                    popup.snp.makeConstraints {
+                        $0.edges.equalToSuperview()
+                    }
+                    
+                    return
+                }
                 self?.coordinator?.moveToDeleteAccountPage()
             })
             .disposed(by: disposeBag)

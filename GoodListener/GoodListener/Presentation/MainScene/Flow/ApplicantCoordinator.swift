@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol ApplicantCoordinating: AnyObject {
-    
+    func call()
 }
 
 class ApplicantCoordinator: CoordinatorType {
@@ -32,6 +32,8 @@ class ApplicantCoordinator: CoordinatorType {
 }
 
 extension ApplicantCoordinator: ApplicantCoordinating {
-    
+    func call() {
+        parentCoordinator?.call()
+    }
 }
 
