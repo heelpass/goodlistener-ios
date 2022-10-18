@@ -20,6 +20,9 @@ class CallViewModel: ViewModelType {
     // 리스너가 전화건 횟수
     var callCount = UserDefaultsManager.shared.callCount
     
+    var token = BehaviorRelay<String?>(value: nil)
+    var isAccepted = BehaviorRelay<Bool>(value: false)
+    
     struct Input {
         let acceptBtnTap: Observable<Void> // 통화 수락 Socket
         let refuseBtnTap: Observable<Void> // 통화 거절
@@ -38,6 +41,7 @@ class CallViewModel: ViewModelType {
         let readyOneMin: Signal<Void> // 전화걸고 1분 기다린경우
         let callEnd: Signal<Void> // 전화 종료
         let callFailThreeTime: Signal<Void> // 전화연결 3회 실패
+        let outputState: PublishRelay<CallState> // 현재 상태
     }
     
     init() {
@@ -53,11 +57,12 @@ class CallViewModel: ViewModelType {
         let readyOneMin = PublishRelay<Void>()
         let callEnd = PublishRelay<Void>()
         let callFailThreeTime = PublishRelay<Void>()
+        let outputState = PublishRelay<CallState>()
         
         func setReadyTimer() {
             self.readyTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] _ in
                 guard let self = self else { return }
-                if self.readyTime == 5 {
+                if self.readyTime == 60 {
                     if self.callCount == 3 {
                         callFailThreeTime.accept(())
                         UserDefaultsManager.shared.callCount = 0
@@ -101,10 +106,16 @@ class CallViewModel: ViewModelType {
                         setReadyTimer()
                     }
                 case .call:
-                    setCallingTimer()
+                    break
                 default:
                     break
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        CallManager.shared.enterSpeakerAndListener
+            .subscribe(onNext: {
+                setCallingTimer()
             })
             .disposed(by: disposeBag)
         
@@ -112,7 +123,12 @@ class CallViewModel: ViewModelType {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 // 스피커일 경우 전화
-                CallManager.shared.start(token: "", channelId: "")
+                self.isAccepted.accept(true)
+                if self.token.value != nil {
+                    CallManager.shared.start(token: self.token.value!, channelId: "") { _, _, _ in
+                        outputState.accept(.call)
+                    }
+                }
             })
             .disposed(by: disposeBag)
         
@@ -130,7 +146,9 @@ class CallViewModel: ViewModelType {
                 CallManager.shared.stop()
                 GLSocketManager.shared.disconnected()
                 // TODO: 채널ID로 채널 삭제
-                //CallAPI.deleteChannel(request: <#T##Int#>, completion: <#T##(Void?, Error?) -> Void##(Void?, Error?) -> Void##(_ succeed: Void?, _ failed: Error?) -> Void#>)
+                CallAPI.deleteChannel(request: 1198, completion: { succeed,failed in
+                    Log.d("채널 Delete 성공")
+                })
             })
             .disposed(by: disposeBag)
         
@@ -145,9 +163,29 @@ class CallViewModel: ViewModelType {
         GLSocketManager.shared.relays.createAgoraToken
             .subscribe(onNext: { [weak self] data in
                 guard let token = data.first as? String else { return }
-                CallManager.shared.start(token: token, channelId: "")
+                CallManager.shared.start(token: token, channelId: "") { _, _, _ in
+                    outputState.accept(.call)
+                }
+                
             })
             .disposed(by: disposeBag)
+        
+        AppState.speakerIn.subscribe(onNext: {
+            GLSocketManager.shared.createAgoraToken()
+        })
+        .disposed(by: disposeBag)
+        
+        AppState.agoraToken.subscribe(onNext: { [weak self] token in
+            guard let self = self else { return }
+            self.token.accept(token)
+            
+            if self.isAccepted.value {
+                CallManager.shared.start(token: self.token.value!, channelId: "") { _, _, _ in
+                    outputState.accept(.call)
+                }
+            }
+        })
+        .disposed(by: disposeBag)
         
         return Output(time: time.asSignal(onErrorJustReturn: "문제가 발생하였습니다."),
                       acceptSocketResult: acceptSocketResult.asSignal(onErrorJustReturn: false),
@@ -156,7 +194,8 @@ class CallViewModel: ViewModelType {
                       delayAPIResult: delayAPIResult.asSignal(onErrorJustReturn: false),
                       readyOneMin: readyOneMin.asSignal(onErrorJustReturn: ()),
                       callEnd: callEnd.asSignal(onErrorJustReturn: ()),
-                      callFailThreeTime: callFailThreeTime.asSignal(onErrorJustReturn: ())
+                      callFailThreeTime: callFailThreeTime.asSignal(onErrorJustReturn: ()),
+                      outputState: outputState
         )
     }
     
@@ -165,14 +204,14 @@ class CallViewModel: ViewModelType {
         
         if UserDefaultsManager.shared.userType == "listener" {
             model = SetUserInModel(listenerId: 17,
-                                   channel: "7dc5fcf8-4d20-48f0-af2a-51d8ff4b9eb9",
-                                   meetingTime: "2022-09-30 22:20",
+                                   channel: "a261528d-dd0a-4c62-aa28-ee6e9e945682",
+                                   meetingTime: "2022-10-18 21:40",
                                    speakerId: 18,
                                    isListener: true)
         } else {
             model = SetUserInModel(listenerId: 17,
-                                   channel: "7dc5fcf8-4d20-48f0-af2a-51d8ff4b9eb9",
-                                   meetingTime: "2022-09-30 22:20",
+                                   channel: "a261528d-dd0a-4c62-aa28-ee6e9e945682",
+                                   meetingTime: "2022-10-18 21:40",
                                    speakerId: 18,
                                    isListener: false)
         }

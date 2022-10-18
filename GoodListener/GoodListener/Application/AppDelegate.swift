@@ -11,6 +11,12 @@ import FirebaseMessaging
 import AuthenticationServices
 import SwiftyJSON
 import Toaster
+import RxSwift
+
+struct AppState {
+    static let agoraToken: PublishSubject<String> = .init()
+    static let speakerIn: PublishSubject<Void> = .init()
+}
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -84,10 +90,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         // Foreground 상태에서 전화가 왔는데 플래그가 call 이면 바로 전화를 띄워준다
         if let userInfo = notification.request.content.userInfo as? [String: Any] {
-            if userInfo["flag"] as! String == "call" {
+            if userInfo["flag"] as! String == "Call" {
                 if let vc = UIApplication.getMostTopViewController()?.tabBarController as? CustomTabBarController {
                     vc.coordinator?.call()
                 }
+            } else if userInfo["flag"] as! String == "SpeakerIn" {
+                AppState.speakerIn.onNext(())
+            } else if userInfo["flag"] as! String == "AgoraToken" {
+                AppState.agoraToken.onNext(userInfo["token"] as! String)
             }
         }
     }
@@ -96,7 +106,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // Push데이터를 받는곳!!
         Log.d("Notification didReceive")
         if let userInfo = response.notification.request.content.userInfo as? [String: Any] {
-            if userInfo["flag"] as! String == "call" {
+            if userInfo["flag"] as! String == "Call" {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                     if let vc = UIApplication.getMostTopViewController()?.tabBarController as? CustomTabBarController {
                         vc.coordinator?.call()

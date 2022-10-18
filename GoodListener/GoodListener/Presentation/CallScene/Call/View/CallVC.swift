@@ -282,7 +282,7 @@ class CallVC: UIViewController, SnapKitType {
     func bind() {
         let output = viewModel.transform(input: CallViewModel.Input(acceptBtnTap: acceptBtn.rx.tap.asObservable(),
                                                                     refuseBtnTap: refuseBtn.rx.tap.asObservable(),
-                                                                    stopBtnTap: stopBtn.rx.tap.asObservable(),
+                                                                    stopBtnTap: stopBtn.swipeSuccessResult.asObservable(),
                                                                     delayBtnTap: popupDelayBtn.rx.tap.asObservable(),
                                                                     state: state,
                                                                     callAgainBtnTap: callAgainBtn.rx.tap.asObservable()))
@@ -369,6 +369,10 @@ class CallVC: UIViewController, SnapKitType {
             .emit(onNext: { [weak self] in
                 self?.state.accept(.failThreeTime)
             })
+            .disposed(by: disposeBag)
+        
+        output.outputState
+            .bind(to: state)
             .disposed(by: disposeBag)
     }
     
