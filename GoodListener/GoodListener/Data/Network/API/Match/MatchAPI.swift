@@ -45,9 +45,9 @@ struct MatchAPI: Networkable {
     
     //매칭 유저 정보를 불러옵니다.
     /// - Returns:Success: MatchedListener, Fail: Error
-    static func MatchedSpeaker(completion: @escaping (_ succeed: MatchedSpeaker?, _ failed: Error?) -> Void) {
+    static func MatchedSpeaker(completion: @escaping (_ succeed: [MatchedSpeaker]?, _ failed: Error?) -> Void) {
         makeProvider().request(.mySpeaker, completion: { result in
-            switch ResponseData<MatchedSpeaker>.processModelResponse(result) {
+            switch ResponseData<[MatchedSpeaker]>.processModelResponse(result) {
             case .success(let model):
                 return completion(model, nil)
             case .failure(let error):
