@@ -35,8 +35,11 @@ enum UserDefaultKey : String {
     case listenerAge
     case listenerJob
     case listenerDescription
+    case listenerId
+    case speakerId
     
     // 만남 시간
+    case channelId
     case channel
     case schedule
     case meetingTime
@@ -369,6 +372,45 @@ class UserDefaultsManager {
         
         set(callCount) {
             UserDefaults.standard.set(callCount, forKey:  UserDefaultKey.callCount.rawValue)
+        }
+    }
+    
+    var listenerId: Int {
+        get {
+            guard let listenerId = UserDefaults.standard.value(forKey: UserDefaultKey.listenerId.rawValue) as? Int else {
+                return 0
+            }
+            return listenerId
+        }
+        
+        set(listenerId) {
+            UserDefaults.standard.set(listenerId, forKey:  UserDefaultKey.listenerId.rawValue)
+        }
+    }
+    
+    var speakerId: Int {
+        get {
+            guard let speakerId = UserDefaults.standard.value(forKey: UserDefaultKey.speakerId.rawValue) as? Int else {
+                return 0
+            }
+            return speakerId
+        }
+        
+        set(speakerId) {
+            UserDefaults.standard.set(speakerId, forKey:  UserDefaultKey.speakerId.rawValue)
+        }
+    }
+    
+    var channelId: Int {
+        get {
+            guard let channelId = UserDefaults.standard.value(forKey: UserDefaultKey.channelId.rawValue) as? Int else {
+                return 0
+            }
+            return channelId
+        }
+        
+        set(channelId) {
+            UserDefaults.standard.set(channelId, forKey:  UserDefaultKey.channelId.rawValue)
         }
     }
 }

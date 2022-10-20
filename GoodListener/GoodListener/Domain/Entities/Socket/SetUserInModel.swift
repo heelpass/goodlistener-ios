@@ -14,6 +14,7 @@ struct SetUserInModel: Codable, SocketData {
     var meetingTime : String
     var speakerId   : Int
     var isListener  : Bool
+    var channelId   : Int
     
     func socketRepresentation() throws -> SocketData {
         return [
@@ -21,7 +22,8 @@ struct SetUserInModel: Codable, SocketData {
             "channel" : channel,
             "meetingTime" : meetingTime,
             "speakerId" : speakerId,
-            "isListener" : isListener
+            "isListener" : isListener,
+            "channelId" : channelId
         ]
     }
     
@@ -29,11 +31,12 @@ struct SetUserInModel: Codable, SocketData {
         return ""
     }
     
-    init(listenerId: Int, channel: String, meetingTime: String, speakerId: Int, isListener: Bool) {
+    init(listenerId: Int, channel: String, meetingTime: String, speakerId: Int, isListener: Bool, channelId: Int) {
         self.listenerId = listenerId
         self.channel = channel
         self.meetingTime = meetingTime
         self.speakerId = speakerId
         self.isListener = isListener
+        self.channelId = channelId
     }
 }

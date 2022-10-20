@@ -428,9 +428,22 @@ class HomeVC: UIViewController, SnapKitType {
         initUI()
         self.containerView.showAnimatedGradientSkeleton()
         
-        MatchAPI.MatchedListener { succeed, failed in
+        MatchAPI.MatchedListener { model, failed in
             self.containerView.hideSkeleton()
-            if ((succeed) != nil){
+            if let model = model {
+                UserDefaultsManager.shared.listenerName = model.nickname
+                UserDefaultsManager.shared.listenerGender = model.listener.gender.localized
+                UserDefaultsManager.shared.listenerAge = model.listener.ageRange.localized
+                UserDefaultsManager.shared.listenerJob = model.listener.job.localized
+                UserDefaultsManager.shared.listenerDescription = model.listener.description
+                UserDefaultsManager.shared.channel = model.channel
+                UserDefaultsManager.shared.schedule = model.meetingTime
+                UserDefaultsManager.shared.meetingTime = self.formattedTime(model.meetingTime)
+                UserDefaultsManager.shared.meetingDate = self.formattedDate(model.meetingTime)
+                UserDefaultsManager.shared.listenerId = model.listener.id
+                UserDefaultsManager.shared.speakerId = model.speakerId
+                UserDefaultsManager.shared.channelId = model.channelId
+                
                 self.homeState = .matched
                 self.introLbl.text = "안녕하세요?\n저는 "+UserDefaultsManager.shared.listenerName+"에요"
                 self.timeLbl.text = UserDefaultsManager.shared.meetingTime
@@ -441,5 +454,73 @@ class HomeVC: UIViewController, SnapKitType {
                 self.changeUI(self.homeState)
             }
         }
+    }
+    
+    func formattedTime(_ time: String) -> String {
+        let endIdx = time.count - 1
+        var emptyString = ""
+        for num in 11 ... endIdx {
+            emptyString += String(time[time.index(time.startIndex, offsetBy: num)])
+        }
+        return "매일 " + emptyString.localized
+    }
+    
+    func formattedDate(_ date: String) -> String {
+        let periodFormat = "%@ ~ %@ (7일간)"
+        
+        //시작 날짜 구하기
+        let startdateFormat = "%@.%@.%@"
+        var startDate = "" //시작일
+        var startyear = "" //시작 년도
+        var startMon = "" //시작 월
+        var startDay = "" //시작 일
+        
+        for yearIdx in 0 ... 3 {
+            startyear += String(date[date.index(date.startIndex, offsetBy: yearIdx)])
+        }
+        
+        let fifthIdx = date.index(date.startIndex, offsetBy: 5)
+        let sixthIdx = date.index(date.startIndex, offsetBy: 6)
+        let eightIdx = date.index(date.startIndex, offsetBy: 8)
+        let ninthIdx = date.index(date.startIndex, offsetBy: 9)
+        
+        
+        if (String(date[fifthIdx]) == "1") {
+            startMon = "\(date[fifthIdx])" + "\(date[sixthIdx])"
+        } else {
+            startMon = "\(date[sixthIdx])"
+        }
+        
+        if (String(date[eightIdx]) == "1" || String(date[eightIdx]) == "2" || String(date[eightIdx]) == "3" ){
+            startDay = "\(date[eightIdx])" + "\(date[ninthIdx])"
+        } else {
+            startDay = "\(date[ninthIdx])"
+        }
+        
+        startDate = String(format: startdateFormat, startyear, startMon, startDay)
+        
+        
+        // 끝나는 날짜 구하기
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        
+        var sevendays = DateComponents()
+        sevendays.day = 7
+        
+        var endDate = "" //끝나는 날
+    
+        if let calculate = Calendar.current.date(byAdding: sevendays, to: self.getStringToDate(strDate: String(format: startdateFormat, startyear, startMon, startDay), format: "yyyy.MM.dd")){
+            endDate = dateFormatter.string(from: calculate)
+        }
+
+        return String(format: periodFormat, startDate, endDate)
+    }
+    
+    // String ➡️ Date
+    func getStringToDate(strDate: String, format: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
+        return dateFormatter.date(from: strDate)!
     }
 }

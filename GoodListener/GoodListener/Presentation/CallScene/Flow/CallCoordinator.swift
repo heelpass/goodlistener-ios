@@ -14,6 +14,10 @@ protocol CallCoordinating: AnyObject {
 }
 
 class CallCoordinator: CoordinatorType {
+    func start() {
+        
+    }
+    
     var childCoordinators: [CoordinatorType] = []
     
     var navigationController: UINavigationController
@@ -24,8 +28,9 @@ class CallCoordinator: CoordinatorType {
         self.navigationController.isNavigationBarHidden = true
     }
     
-    func start() {
+    func start(model: [MatchedSpeaker]? = nil) {
         let callVC = CallVC()
+        callVC.model = model
         callVC.coordinator = self
         navigationController.pushViewController(callVC, animated: false)
     }

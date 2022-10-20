@@ -90,9 +90,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         // Foreground 상태에서 전화가 왔는데 플래그가 call 이면 바로 전화를 띄워준다
         if let userInfo = notification.request.content.userInfo as? [String: Any] {
+            Log.d(userInfo)
             if userInfo["flag"] as! String == "Call" {
                 if let vc = UIApplication.getMostTopViewController()?.tabBarController as? CustomTabBarController {
-                    vc.coordinator?.call()
+                    vc.coordinator?.call(model: nil)
                 }
             } else if userInfo["flag"] as! String == "SpeakerIn" {
                 AppState.speakerIn.onNext(())
@@ -106,10 +107,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // Push데이터를 받는곳!!
         Log.d("Notification didReceive")
         if let userInfo = response.notification.request.content.userInfo as? [String: Any] {
+            Log.d(userInfo)
             if userInfo["flag"] as! String == "Call" {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                     if let vc = UIApplication.getMostTopViewController()?.tabBarController as? CustomTabBarController {
-                        vc.coordinator?.call()
+                        vc.coordinator?.call(model: nil)
                     }
                 })
             }

@@ -35,9 +35,9 @@ class CallManager: NSObject {
         agoraKit = AgoraRtcEngineKit.sharedEngine(with: config, delegate: self)
     }
     
-    func start(token: String, channelId: String, completion: ((String, UInt, Int) -> Void)? = nil) {
+    func start(token: String, channelId: String, uid: Int, completion: ((String, UInt, Int) -> Void)? = nil) {
         // Join the channel with a token. Pass in your token and channel name here
-        agoraKit?.joinChannel(byToken: AgoraConfiguration.rtmToken, channelId: "1198", info: nil, uid: 0, joinSuccess: completion)
+        agoraKit?.joinChannel(byToken: token, channelId: channelId, info: nil, uid: UInt(uid), joinSuccess: completion)
     }
     
     func stop() {

@@ -23,6 +23,8 @@ class ApplicantVC: UIViewController, SnapKitType {
     let navigationView = NavigationView(frame: .zero, type: .notice)
     let scrollView = UIScrollView()
     
+    var mySpeaker: [MatchedSpeaker]?
+    
     //현재 리스너 홈 화면 상태
     var applicantState: applicantState = .matched
     
@@ -72,7 +74,6 @@ class ApplicantVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
-        addCallBtn()    // 전화 테스트용
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,7 +149,13 @@ class ApplicantVC: UIViewController, SnapKitType {
         
     }
     
-    func bind() {}
+    func bind() {
+        callBtn.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.call(model: self?.mySpeaker)
+            })
+            .disposed(by: disposeBag)
+    }
     
  
     func changeUI(_ type: applicantState) {
@@ -180,36 +187,22 @@ class ApplicantVC: UIViewController, SnapKitType {
         MatchAPI.MatchedSpeaker { data, error in
             self.containerView.hideSkeleton()
             if ((data) != nil) {
+                self.mySpeaker = data
+                self.mySpeakerView.reloadData()
                 self.applicantState = .matched
                 self.changeUI(self.applicantState)
+                
             } else {
                 self.applicantState = .join
                 self.changeUI(self.applicantState)
             }
         }
     }
-    
-    func addCallBtn() {
-        let button = GLButton()
-        button.title = "통화"
-        view.addSubview(button)
-        button.snp.makeConstraints {
-            $0.size.equalTo(50)
-            $0.right.equalToSuperview().inset(10)
-            $0.top.equalTo(navigationView.snp.bottom).offset(20)
-        }
-        
-        button.rx.tap
-            .bind(onNext: { [weak self] in
-                self?.coordinator?.call()
-            })
-            .disposed(by: disposeBag)
-    }
 }
 
 extension ApplicantVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return mySpeaker?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

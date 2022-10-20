@@ -17,6 +17,8 @@ class CallViewModel: ViewModelType {
     var readyTime = 0
     var callingTime = 0
     
+    var model: [MatchedSpeaker]?
+    
     // 리스너가 전화건 횟수
     var callCount = UserDefaultsManager.shared.callCount
     
@@ -44,7 +46,8 @@ class CallViewModel: ViewModelType {
         let outputState: PublishRelay<CallState> // 현재 상태
     }
     
-    init() {
+    init(model: [MatchedSpeaker]?) {
+        self.model = model
         socketBind()
     }
     
@@ -84,6 +87,8 @@ class CallViewModel: ViewModelType {
                 guard let self = self else { return }
                 if self.callingTime == 180 {
                     callEnd.accept(())
+                    CallManager.shared.stop()
+                    GLSocketManager.shared.disconnected()
                     self.callingTimer?.invalidate()
                     self.callingTimer = nil
                     return
@@ -125,7 +130,9 @@ class CallViewModel: ViewModelType {
                 // 스피커일 경우 전화
                 self.isAccepted.accept(true)
                 if self.token.value != nil {
-                    CallManager.shared.start(token: self.token.value!, channelId: "") { _, _, _ in
+                    CallManager.shared.start(token: self.token.value!, channelId: "3418bef7-1343-4c05-a1fe-4dca0bab6c68", uid: 1226) { _, _, _ in
+                        self.readyTimer?.invalidate()
+                        self.readyTimer = nil
                         outputState.accept(.call)
                     }
                 }
@@ -160,27 +167,34 @@ class CallViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 리스너가 아고라토큰을 요청 후 토큰을 받았을 때
         GLSocketManager.shared.relays.createAgoraToken
             .subscribe(onNext: { [weak self] data in
                 guard let token = data.first as? String else { return }
-                CallManager.shared.start(token: token, channelId: "") { _, _, _ in
+                CallManager.shared.start(token: token, channelId: "3418bef7-1343-4c05-a1fe-4dca0bab6c68", uid: 1226) { _, _, _ in
+                    self?.readyTimer?.invalidate()
+                    self?.readyTimer = nil
                     outputState.accept(.call)
                 }
                 
             })
             .disposed(by: disposeBag)
         
+        // SpeakerIn FCM 도착 시 - 리스너만 실행됨
         AppState.speakerIn.subscribe(onNext: {
             GLSocketManager.shared.createAgoraToken()
         })
         .disposed(by: disposeBag)
         
+        // AgoraToken FCM 도착 시 - 스피커만 실행됨
         AppState.agoraToken.subscribe(onNext: { [weak self] token in
             guard let self = self else { return }
             self.token.accept(token)
             
             if self.isAccepted.value {
-                CallManager.shared.start(token: self.token.value!, channelId: "") { _, _, _ in
+                CallManager.shared.start(token: self.token.value!, channelId: "3418bef7-1343-4c05-a1fe-4dca0bab6c68", uid: 1226) { _, _, _ in
+                    self.readyTimer?.invalidate()
+                    self.readyTimer = nil
                     outputState.accept(.call)
                 }
             }
@@ -200,20 +214,25 @@ class CallViewModel: ViewModelType {
     }
     
     func socketBind() {
-        let model: SetUserInModel!
+        var model: SetUserInModel!
         
         if UserDefaultsManager.shared.userType == "listener" {
-            model = SetUserInModel(listenerId: 17,
-                                   channel: "a261528d-dd0a-4c62-aa28-ee6e9e945682",
-                                   meetingTime: "2022-10-18 21:40",
-                                   speakerId: 18,
-                                   isListener: true)
+            guard let matchedSpeaker = self.model?.first else { return }
+            
+            model = SetUserInModel(listenerId: matchedSpeaker.listenerId,
+                                   channel: matchedSpeaker.channel,
+                                   meetingTime: matchedSpeaker.meetingTime,
+                                   speakerId: matchedSpeaker.speaker.id,
+                                   isListener: true,
+                                   channelId: matchedSpeaker.channelId)
         } else {
-            model = SetUserInModel(listenerId: 17,
-                                   channel: "a261528d-dd0a-4c62-aa28-ee6e9e945682",
-                                   meetingTime: "2022-10-18 21:40",
-                                   speakerId: 18,
-                                   isListener: false)
+            model = SetUserInModel(listenerId: UserDefaultsManager.shared.listenerId,
+                                   channel: UserDefaultsManager.shared.channel,
+                                   meetingTime: UserDefaultsManager.shared.schedule,
+                                   speakerId: UserDefaultsManager.shared.speakerId,
+                                   isListener: false,
+                                   channelId: UserDefaultsManager.shared.channelId)
+            Log.d(model)
         }
         
         GLSocketManager.shared.connect{}

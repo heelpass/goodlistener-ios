@@ -14,7 +14,7 @@ struct MatchedListener: Codable {
     var channel: String
     var listener : ListenerInfo
     var description: String
-
+    var channelId: Int
 }
 
 struct ListenerInfo: Codable {
