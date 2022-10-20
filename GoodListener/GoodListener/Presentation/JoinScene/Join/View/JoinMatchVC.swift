@@ -18,6 +18,7 @@ class JoinMatchVC: UIViewController, SnapKitType {
     
     weak var coordinator: JoinCoordinating?
     let disposeBag = DisposeBag()
+    static let shared = JoinMatchVC()
     
     // 현재 매칭 화면 상태
     var joinMatchState: JoinMatchState = .matched
