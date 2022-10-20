@@ -37,6 +37,7 @@ enum UserDefaultKey : String {
     case listenerDescription
     case listenerId
     case speakerId
+    case listenerProfileImage
     
     // 만남 시간
     case channelId
@@ -411,6 +412,19 @@ class UserDefaultsManager {
         
         set(channelId) {
             UserDefaults.standard.set(channelId, forKey:  UserDefaultKey.channelId.rawValue)
+        }
+    }
+    
+    var listenerProfileImage: Int {
+        get {
+            guard let listenerProfileImage = UserDefaults.standard.value(forKey: UserDefaultKey.listenerProfileImage.rawValue) as? Int else {
+                return 0
+            }
+            return listenerProfileImage
+        }
+        
+        set(listenerProfileImage) {
+            UserDefaults.standard.set(listenerProfileImage, forKey:  UserDefaultKey.listenerProfileImage.rawValue)
         }
     }
 }

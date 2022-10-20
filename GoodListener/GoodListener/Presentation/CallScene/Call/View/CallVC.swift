@@ -383,8 +383,18 @@ class CallVC: UIViewController, SnapKitType {
     func configUI(_ state: CallState) {
         switch userType {
         case .speaker:
+            profileImage.image = UIImage(named: "profile1")
+            self.nickName.text = UserDefaultsManager.shared.listenerName
             speakerChangeUI(state)
         case .listener:
+            if let model = model?.first {
+                profileImage.image = UIImage(named: "profile\(model.speaker.profileImg)")
+                nickName.text = model.speaker.nickName
+            } else {
+                profileImage.image = UIImage(named: "profile1")
+                nickName.text = "스피커"
+            }
+            
             listenerChangeUI(state)
         }
     }

@@ -443,6 +443,7 @@ class HomeVC: UIViewController, SnapKitType {
                 UserDefaultsManager.shared.listenerId = model.listener.id
                 UserDefaultsManager.shared.speakerId = model.speakerId
                 UserDefaultsManager.shared.channelId = model.channelId
+                UserDefaultsManager.shared.listenerProfileImage = model.listener.profileImg
                 
                 self.homeState = .matched
                 self.introLbl.text = "안녕하세요?\n저는 "+UserDefaultsManager.shared.listenerName+"에요"
