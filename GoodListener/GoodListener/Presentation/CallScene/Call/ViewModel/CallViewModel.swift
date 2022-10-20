@@ -130,7 +130,7 @@ class CallViewModel: ViewModelType {
                 // 스피커일 경우 전화
                 self.isAccepted.accept(true)
                 if self.token.value != nil {
-                    CallManager.shared.start(token: self.token.value!, channelId: "3418bef7-1343-4c05-a1fe-4dca0bab6c68", uid: 1226) { _, _, _ in
+                    CallManager.shared.start(token: self.token.value!, channelId: UserDefaultsManager.shared.channel, uid: UserDefaultsManager.shared.speakerId) { _, _, _ in
                         self.readyTimer?.invalidate()
                         self.readyTimer = nil
                         outputState.accept(.call)
@@ -170,10 +170,11 @@ class CallViewModel: ViewModelType {
         // 리스너가 아고라토큰을 요청 후 토큰을 받았을 때
         GLSocketManager.shared.relays.createAgoraToken
             .subscribe(onNext: { [weak self] data in
+                guard let self = self else { return }
                 guard let token = data.first as? String else { return }
-                CallManager.shared.start(token: token, channelId: "3418bef7-1343-4c05-a1fe-4dca0bab6c68", uid: 1226) { _, _, _ in
-                    self?.readyTimer?.invalidate()
-                    self?.readyTimer = nil
+                CallManager.shared.start(token: token, channelId: self.model?.first?.channel ?? "", uid: self.model?.first?.listenerId ?? 0) { _, _, _ in
+                    self.readyTimer?.invalidate()
+                    self.readyTimer = nil
                     outputState.accept(.call)
                 }
                 
@@ -192,7 +193,7 @@ class CallViewModel: ViewModelType {
             self.token.accept(token)
             
             if self.isAccepted.value {
-                CallManager.shared.start(token: self.token.value!, channelId: "3418bef7-1343-4c05-a1fe-4dca0bab6c68", uid: 1226) { _, _, _ in
+                CallManager.shared.start(token: token, channelId: UserDefaultsManager.shared.channel , uid: UserDefaultsManager.shared.speakerId) { _, _, _ in
                     self.readyTimer?.invalidate()
                     self.readyTimer = nil
                     outputState.accept(.call)

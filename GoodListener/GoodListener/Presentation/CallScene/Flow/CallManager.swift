@@ -57,7 +57,7 @@ extension CallManager: AgoraRtcEngineDelegate {
         Log.d("agora :: warning: \(warningCode.rawValue)")
     }
     
-    func rtcEngine(_ engine: AgoraRtcEngineKit, connectionChangedTo state: AgoraConnectionStateType, reason: AgoraConnectionChangedReason) {
+    internal func rtcEngine(_ engine: AgoraRtcEngineKit, connectionChangedTo state: AgoraConnectionState, reason: AgoraConnectionChangedReason) {
         switch state {
         case .disconnected:
             Log.d("Agora state changed:: disconnected")

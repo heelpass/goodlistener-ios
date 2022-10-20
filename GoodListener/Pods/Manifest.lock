@@ -1,27 +1,25 @@
 PODS:
-  - AgoraRtcEngine_iOS (3.7.0.2):
-    - AgoraRtcEngine_iOS/AINS (= 3.7.0.2)
-    - AgoraRtcEngine_iOS/AV1Dec (= 3.7.0.2)
-    - AgoraRtcEngine_iOS/ContentInspect (= 3.7.0.2)
-    - AgoraRtcEngine_iOS/FullAudioFormat (= 3.7.0.2)
-    - AgoraRtcEngine_iOS/ReplayKit (= 3.7.0.2)
-    - AgoraRtcEngine_iOS/ROIEnc (= 3.7.0.2)
-    - AgoraRtcEngine_iOS/RtcBasic (= 3.7.0.2)
-    - AgoraRtcEngine_iOS/SpatialAudio (= 3.7.0.2)
-    - AgoraRtcEngine_iOS/SuperResolution (= 3.7.0.2)
-    - AgoraRtcEngine_iOS/VideoPreprocess (= 3.7.0.2)
-    - AgoraRtcEngine_iOS/VirtualBackground (= 3.7.0.2)
-  - AgoraRtcEngine_iOS/AINS (3.7.0.2)
-  - AgoraRtcEngine_iOS/AV1Dec (3.7.0.2)
-  - AgoraRtcEngine_iOS/ContentInspect (3.7.0.2)
-  - AgoraRtcEngine_iOS/FullAudioFormat (3.7.0.2)
-  - AgoraRtcEngine_iOS/ReplayKit (3.7.0.2)
-  - AgoraRtcEngine_iOS/ROIEnc (3.7.0.2)
-  - AgoraRtcEngine_iOS/RtcBasic (3.7.0.2)
-  - AgoraRtcEngine_iOS/SpatialAudio (3.7.0.2)
-  - AgoraRtcEngine_iOS/SuperResolution (3.7.0.2)
-  - AgoraRtcEngine_iOS/VideoPreprocess (3.7.0.2)
-  - AgoraRtcEngine_iOS/VirtualBackground (3.7.0.2)
+  - AgoraRtcEngine_iOS (4.0.1):
+    - AgoraRtcEngine_iOS/AINS (= 4.0.1)
+    - AgoraRtcEngine_iOS/AudioBeauty (= 4.0.1)
+    - AgoraRtcEngine_iOS/ClearVision (= 4.0.1)
+    - AgoraRtcEngine_iOS/ContentInspect (= 4.0.1)
+    - AgoraRtcEngine_iOS/PVC (= 4.0.1)
+    - AgoraRtcEngine_iOS/ReplayKit (= 4.0.1)
+    - AgoraRtcEngine_iOS/RtcBasic (= 4.0.1)
+    - AgoraRtcEngine_iOS/SpatialAudio (= 4.0.1)
+    - AgoraRtcEngine_iOS/SuperResolution (= 4.0.1)
+    - AgoraRtcEngine_iOS/VirtualBackground (= 4.0.1)
+  - AgoraRtcEngine_iOS/AINS (4.0.1)
+  - AgoraRtcEngine_iOS/AudioBeauty (4.0.1)
+  - AgoraRtcEngine_iOS/ClearVision (4.0.1)
+  - AgoraRtcEngine_iOS/ContentInspect (4.0.1)
+  - AgoraRtcEngine_iOS/PVC (4.0.1)
+  - AgoraRtcEngine_iOS/ReplayKit (4.0.1)
+  - AgoraRtcEngine_iOS/RtcBasic (4.0.1)
+  - AgoraRtcEngine_iOS/SpatialAudio (4.0.1)
+  - AgoraRtcEngine_iOS/SuperResolution (4.0.1)
+  - AgoraRtcEngine_iOS/VirtualBackground (4.0.1)
   - Alamofire (5.6.2)
   - Firebase/Analytics (9.6.0):
     - Firebase/Core
@@ -170,7 +168,7 @@ PODS:
   - Toaster (2.3.0)
 
 DEPENDENCIES:
-  - AgoraRtcEngine_iOS (= 3.7.0.2)
+  - AgoraRtcEngine_iOS (= 4.0.1)
   - Firebase/Analytics
   - Firebase/Crashlytics
   - Firebase/Messaging
@@ -223,7 +221,7 @@ SPEC REPOS:
     - Toaster
 
 SPEC CHECKSUMS:
-  AgoraRtcEngine_iOS: e39e5b31eab3eadaae6316a042b0edf71a30f894
+  AgoraRtcEngine_iOS: 0b293c63fbd60c882a0358d78522f38bf0d0bbd9
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   Firebase: 5ae8b7cf8efce559a653aef0ad95bab3f427c351
   FirebaseAnalytics: 89ad762c6c3852a685794174757e2c60a36b6a82
@@ -255,6 +253,6 @@ SPEC CHECKSUMS:
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
   Toaster: c3473963c78e8cabbf6ea6f11ad0fdaae6f54987
 
-PODFILE CHECKSUM: 4302b5c2dda2e382e145372d785b3578891d6143
+PODFILE CHECKSUM: fd86d145c1967e9a1b19d4b6a0d87eb8a44b29b7
 
 COCOAPODS: 1.11.2
