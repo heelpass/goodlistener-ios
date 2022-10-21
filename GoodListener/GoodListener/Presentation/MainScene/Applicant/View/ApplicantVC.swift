@@ -20,6 +20,7 @@ class ApplicantVC: UIViewController, SnapKitType {
     weak var coordinator: ApplicantCoordinating?
     let disposeBag = DisposeBag()
     var collectionData: [MatchedSpeaker] = []
+    let viewModel = ApplicantViewModel()
     
     let navigationView = NavigationView(frame: .zero, type: .notice)
     let scrollView = UIScrollView()
@@ -146,17 +147,22 @@ class ApplicantVC: UIViewController, SnapKitType {
     }
     
     func bind() {
-        navigationView.rightBtn.rx.tap
-            .bind(onNext: {[weak self] in
-                self?.coordinator?.moveToNotice()
+        let output = viewModel.transform(input: ApplicantViewModel.Input(naviRightBtnTap: navigationView.rightBtn.rx.tap.asObservable(), callBtnTap: callBtn.rx.tap.asObservable()))
+        
+        // 네비게이션 오른쪽 버튼
+        output.naviRightBtnResult
+            .emit(with: self, onNext: {weakself, _ in
+                weakself.coordinator?.moveToNotice()
             })
             .disposed(by: disposeBag)
         
-        callBtn.rx.tap
-            .bind(onNext: {[weak self] in
-                self?.coordinator?.call()
+        // 통화하기 버튼
+        output.callBtnResult
+            .emit(with: self, onNext: {weakself, _ in
+                weakself.coordinator?.call()
             })
             .disposed(by: disposeBag)
+        
     }
     
  
@@ -199,23 +205,6 @@ class ApplicantVC: UIViewController, SnapKitType {
             }
         }
     }
-    
-//    func addCallBtn() {
-//        let button = GLButton()
-//        button.title = "통화"
-//        view.addSubview(button)
-//        button.snp.makeConstraints {
-//            $0.size.equalTo(50)
-//            $0.right.equalToSuperview().inset(10)
-//            $0.top.equalTo(navigationView.snp.bottom).offset(20)
-//        }
-//
-//        button.rx.tap
-//            .bind(onNext: { [weak self] in
-//                self?.coordinator?.call()
-//            })
-//            .disposed(by: disposeBag)
-//    }
 }
 
 extension ApplicantVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
