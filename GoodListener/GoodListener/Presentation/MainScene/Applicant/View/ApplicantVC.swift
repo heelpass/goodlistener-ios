@@ -70,7 +70,6 @@ class ApplicantVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
-        addCallBtn()    // 전화 테스트용
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,7 +145,19 @@ class ApplicantVC: UIViewController, SnapKitType {
         
     }
     
-    func bind() {}
+    func bind() {
+        navigationView.rightBtn.rx.tap
+            .bind(onNext: {[weak self] in
+                self?.coordinator?.moveToNotice()
+            })
+            .disposed(by: disposeBag)
+        
+        callBtn.rx.tap
+            .bind(onNext: {[weak self] in
+                self?.coordinator?.call()
+            })
+            .disposed(by: disposeBag)
+    }
     
  
     func changeUI(_ type: applicantState) {
@@ -189,22 +200,22 @@ class ApplicantVC: UIViewController, SnapKitType {
         }
     }
     
-    func addCallBtn() {
-        let button = GLButton()
-        button.title = "통화"
-        view.addSubview(button)
-        button.snp.makeConstraints {
-            $0.size.equalTo(50)
-            $0.right.equalToSuperview().inset(10)
-            $0.top.equalTo(navigationView.snp.bottom).offset(20)
-        }
-        
-        button.rx.tap
-            .bind(onNext: { [weak self] in
-                self?.coordinator?.call()
-            })
-            .disposed(by: disposeBag)
-    }
+//    func addCallBtn() {
+//        let button = GLButton()
+//        button.title = "통화"
+//        view.addSubview(button)
+//        button.snp.makeConstraints {
+//            $0.size.equalTo(50)
+//            $0.right.equalToSuperview().inset(10)
+//            $0.top.equalTo(navigationView.snp.bottom).offset(20)
+//        }
+//
+//        button.rx.tap
+//            .bind(onNext: { [weak self] in
+//                self?.coordinator?.call()
+//            })
+//            .disposed(by: disposeBag)
+//    }
 }
 
 extension ApplicantVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
