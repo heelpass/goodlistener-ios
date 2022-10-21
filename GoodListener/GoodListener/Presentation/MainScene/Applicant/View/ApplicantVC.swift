@@ -19,12 +19,11 @@ class ApplicantVC: UIViewController, SnapKitType {
 
     weak var coordinator: ApplicantCoordinating?
     let disposeBag = DisposeBag()
+    var collectionData: [MatchedSpeaker] = []
+    let viewModel = ApplicantViewModel()
     
     let navigationView = NavigationView(frame: .zero, type: .notice)
     let scrollView = UIScrollView()
-    
-    //현재 리스너 홈 화면 상태
-    var applicantState: applicantState = .matched
     
     let contentStackView = UIStackView().then {
         $0.axis = .vertical
@@ -72,7 +71,6 @@ class ApplicantVC: UIViewController, SnapKitType {
         addComponents()
         setConstraints()
         bind()
-        addCallBtn()    // 전화 테스트용
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,7 +146,24 @@ class ApplicantVC: UIViewController, SnapKitType {
         
     }
     
-    func bind() {}
+    func bind() {
+        let output = viewModel.transform(input: ApplicantViewModel.Input(naviRightBtnTap: navigationView.rightBtn.rx.tap.asObservable(), callBtnTap: callBtn.rx.tap.asObservable()))
+        
+        // 네비게이션 오른쪽 버튼
+        output.naviRightBtnResult
+            .emit(with: self, onNext: {weakself, _ in
+                weakself.coordinator?.moveToNotice()
+            })
+            .disposed(by: disposeBag)
+        
+        // 통화하기 버튼
+        output.callBtnResult
+            .emit(with: self, onNext: {weakself, _ in
+                weakself.coordinator?.call()
+            })
+            .disposed(by: disposeBag)
+        
+    }
     
  
     func changeUI(_ type: applicantState) {
@@ -172,6 +187,7 @@ class ApplicantVC: UIViewController, SnapKitType {
         mySpeakerView.isHidden = true
         callBtn.isHidden = true
         containerView.layer.borderColor = .none
+    
     }
     
     func fetchData(){
@@ -180,46 +196,34 @@ class ApplicantVC: UIViewController, SnapKitType {
         MatchAPI.MatchedSpeaker { data, error in
             self.containerView.hideSkeleton()
             if ((data) != nil) {
-                self.applicantState = .matched
-                self.changeUI(self.applicantState)
+                guard let item = data else {return}
+                self.collectionData = item
+                self.mySpeakerView.reloadData()
+                self.changeUI(.matched)
             } else {
-                self.applicantState = .join
-                self.changeUI(self.applicantState)
+                self.changeUI(.join)
             }
         }
     }
-    
-    func addCallBtn() {
-        let button = GLButton()
-        button.title = "통화"
-        view.addSubview(button)
-        button.snp.makeConstraints {
-            $0.size.equalTo(50)
-            $0.right.equalToSuperview().inset(10)
-            $0.top.equalTo(navigationView.snp.bottom).offset(20)
-        }
-        
-        button.rx.tap
-            .bind(onNext: { [weak self] in
-                self?.coordinator?.call()
-            })
-            .disposed(by: disposeBag)
-    }
 }
 
-extension ApplicantVC: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
+extension ApplicantVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return collectionData.count
+    }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: mySpeakerCell.identifier, for: indexPath) as? mySpeakerCell else {fatalError()}
+        cell.introLbl.text = "안녕하세요?\n저는" + collectionData[indexPath.row].nickname + "이에요"
+        cell.introLbl.textColorAndFontChange(text: cell.introLbl.text!, color: .f2, font:FontManager.shared.notoSansKR(.bold, 14) , range: [collectionData[indexPath.row].nickname])
+        cell.profileImg.image = UIImage(named: "profile"+String(collectionData[indexPath.row].speaker.profileImg))
+        cell.timeLbl.text = JoinMatchVC.shared.formattedTime(collectionData[indexPath.row].meetingTime)
+        cell.dateLbl.text = JoinMatchVC.shared.formattedDate(collectionData[indexPath.row].meetingTime)
+        
         return cell
     }
-
-}
-
-extension ApplicantVC: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = mySpeakerView.frame.size.width
         let height = mySpeakerView.frame.size.height
@@ -228,5 +232,4 @@ extension ApplicantVC: UICollectionViewDelegateFlowLayout {
             height: height
         )
     }
-    
 }
