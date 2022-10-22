@@ -17,8 +17,13 @@ class CallViewModel: ViewModelType {
     var readyTime = 0
     var callingTime = 0
     
+    var model: [MatchedSpeaker]?
+    
     // 리스너가 전화건 횟수
     var callCount = UserDefaultsManager.shared.callCount
+    
+    var token = BehaviorRelay<String?>(value: nil)
+    var isAccepted = BehaviorRelay<Bool>(value: false)
     
     struct Input {
         let acceptBtnTap: Observable<Void> // 통화 수락 Socket
@@ -38,9 +43,11 @@ class CallViewModel: ViewModelType {
         let readyOneMin: Signal<Void> // 전화걸고 1분 기다린경우
         let callEnd: Signal<Void> // 전화 종료
         let callFailThreeTime: Signal<Void> // 전화연결 3회 실패
+        let outputState: PublishRelay<CallState> // 현재 상태
     }
     
-    init() {
+    init(model: [MatchedSpeaker]?) {
+        self.model = model
         socketBind()
     }
     
@@ -53,11 +60,12 @@ class CallViewModel: ViewModelType {
         let readyOneMin = PublishRelay<Void>()
         let callEnd = PublishRelay<Void>()
         let callFailThreeTime = PublishRelay<Void>()
+        let outputState = PublishRelay<CallState>()
         
         func setReadyTimer() {
             self.readyTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] _ in
                 guard let self = self else { return }
-                if self.readyTime == 5 {
+                if self.readyTime == 60 {
                     if self.callCount == 3 {
                         callFailThreeTime.accept(())
                         UserDefaultsManager.shared.callCount = 0
@@ -79,6 +87,8 @@ class CallViewModel: ViewModelType {
                 guard let self = self else { return }
                 if self.callingTime == 180 {
                     callEnd.accept(())
+                    CallManager.shared.stop()
+                    GLSocketManager.shared.disconnected()
                     self.callingTimer?.invalidate()
                     self.callingTimer = nil
                     return
@@ -101,10 +111,16 @@ class CallViewModel: ViewModelType {
                         setReadyTimer()
                     }
                 case .call:
-                    setCallingTimer()
+                    break
                 default:
                     break
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        CallManager.shared.enterSpeakerAndListener
+            .subscribe(onNext: {
+                setCallingTimer()
             })
             .disposed(by: disposeBag)
         
@@ -112,7 +128,14 @@ class CallViewModel: ViewModelType {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 // 스피커일 경우 전화
-                CallManager.shared.start(token: "", channelId: "")
+                self.isAccepted.accept(true)
+                if self.token.value != nil {
+                    CallManager.shared.start(token: self.token.value!, channelId: UserDefaultsManager.shared.channel, uid: UserDefaultsManager.shared.speakerId) { _, _, _ in
+                        self.readyTimer?.invalidate()
+                        self.readyTimer = nil
+                        outputState.accept(.call)
+                    }
+                }
             })
             .disposed(by: disposeBag)
         
@@ -130,7 +153,9 @@ class CallViewModel: ViewModelType {
                 CallManager.shared.stop()
                 GLSocketManager.shared.disconnected()
                 // TODO: 채널ID로 채널 삭제
-                //CallAPI.deleteChannel(request: <#T##Int#>, completion: <#T##(Void?, Error?) -> Void##(Void?, Error?) -> Void##(_ succeed: Void?, _ failed: Error?) -> Void#>)
+                CallAPI.deleteChannel(request: self.model?.first?.channelId ?? 0, completion: { succeed,failed in
+                    Log.d("채널 Delete 성공")
+                })
             })
             .disposed(by: disposeBag)
         
@@ -142,12 +167,44 @@ class CallViewModel: ViewModelType {
             })
             .disposed(by: disposeBag)
         
+        // 리스너가 아고라토큰을 요청 후 토큰을 받았을 때
         GLSocketManager.shared.relays.createAgoraToken
             .subscribe(onNext: { [weak self] data in
+                guard let self = self else { return }
                 guard let token = data.first as? String else { return }
-                CallManager.shared.start(token: token, channelId: "")
+                CallManager.shared.start(token: token, channelId: self.model?.first?.channel ?? "", uid: self.model?.first?.listenerId ?? 0) {
+                    Log.d($0)
+                    Log.d($1)
+                    Log.d($2)
+                    self.readyTimer?.invalidate()
+                    self.readyTimer = nil
+                    outputState.accept(.call)
+                }
+                
             })
             .disposed(by: disposeBag)
+        
+        // SpeakerIn FCM 도착 시 - 리스너만 실행됨
+        AppState.speakerIn.subscribe(onNext: {
+            GLSocketManager.shared.createAgoraToken()
+//            CallManager.shared.start(token: "", channelId: "3418bef7-1343-4c05-a1fe-4dca0bab6c68", uid: 0)
+        })
+        .disposed(by: disposeBag)
+        
+        // AgoraToken FCM 도착 시 - 스피커만 실행됨
+        AppState.agoraToken.subscribe(onNext: { [weak self] token in
+            guard let self = self else { return }
+            self.token.accept(token)
+            
+            if self.isAccepted.value {
+                CallManager.shared.start(token: token, channelId: UserDefaultsManager.shared.channel , uid: UserDefaultsManager.shared.speakerId) { _, _, _ in
+                    self.readyTimer?.invalidate()
+                    self.readyTimer = nil
+                    outputState.accept(.call)
+                }
+            }
+        })
+        .disposed(by: disposeBag)
         
         return Output(time: time.asSignal(onErrorJustReturn: "문제가 발생하였습니다."),
                       acceptSocketResult: acceptSocketResult.asSignal(onErrorJustReturn: false),
@@ -156,25 +213,31 @@ class CallViewModel: ViewModelType {
                       delayAPIResult: delayAPIResult.asSignal(onErrorJustReturn: false),
                       readyOneMin: readyOneMin.asSignal(onErrorJustReturn: ()),
                       callEnd: callEnd.asSignal(onErrorJustReturn: ()),
-                      callFailThreeTime: callFailThreeTime.asSignal(onErrorJustReturn: ())
+                      callFailThreeTime: callFailThreeTime.asSignal(onErrorJustReturn: ()),
+                      outputState: outputState
         )
     }
     
     func socketBind() {
-        let model: SetUserInModel!
+        var model: SetUserInModel!
         
         if UserDefaultsManager.shared.userType == "listener" {
-            model = SetUserInModel(listenerId: 17,
-                                   channel: "7dc5fcf8-4d20-48f0-af2a-51d8ff4b9eb9",
-                                   meetingTime: "2022-09-30 22:20",
-                                   speakerId: 18,
-                                   isListener: true)
+            guard let matchedSpeaker = self.model?.first else { return }
+            
+            model = SetUserInModel(listenerId: matchedSpeaker.listenerId,
+                                   channel: matchedSpeaker.channel,
+                                   meetingTime: matchedSpeaker.meetingTime,
+                                   speakerId: matchedSpeaker.speaker.id,
+                                   isListener: true,
+                                   channelId: matchedSpeaker.channelId)
         } else {
-            model = SetUserInModel(listenerId: 17,
-                                   channel: "7dc5fcf8-4d20-48f0-af2a-51d8ff4b9eb9",
-                                   meetingTime: "2022-09-30 22:20",
-                                   speakerId: 18,
-                                   isListener: false)
+            model = SetUserInModel(listenerId: UserDefaultsManager.shared.listenerId,
+                                   channel: UserDefaultsManager.shared.channel,
+                                   meetingTime: UserDefaultsManager.shared.schedule,
+                                   speakerId: UserDefaultsManager.shared.speakerId,
+                                   isListener: false,
+                                   channelId: UserDefaultsManager.shared.channelId)
+            Log.d(model)
         }
         
         GLSocketManager.shared.connect{}

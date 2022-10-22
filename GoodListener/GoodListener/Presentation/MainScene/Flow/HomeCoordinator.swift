@@ -35,7 +35,7 @@ class HomeCoordinator: CoordinatorType {
 
 extension HomeCoordinator: HomeCoordinating {
     func call() {
-        parentCoordinator?.call()
+        parentCoordinator?.call(model: nil)
     }
     
     func join() {

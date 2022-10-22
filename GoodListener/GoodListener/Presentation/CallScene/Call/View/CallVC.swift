@@ -25,8 +25,8 @@ class CallVC: UIViewController, SnapKitType {
     weak var coordinator: CallCoordinating?
     let manager = CallManager.shared
     let disposeBag = DisposeBag()
-    
-    let viewModel = CallViewModel()
+    var model: [MatchedSpeaker]?
+    var viewModel: CallViewModel!
     
     let userType: UserType = UserType.init(rawValue: UserDefaultsManager.shared.userType) ?? .speaker //
     
@@ -160,10 +160,12 @@ class CallVC: UIViewController, SnapKitType {
         $0.setTitle("아고라", for: .normal)
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         GLSocketManager.shared.start()
-        
+        viewModel = CallViewModel(model: model)
         view.backgroundColor = #colorLiteral(red: 0.1971904635, green: 0.2260227799, blue: 0.1979919374, alpha: 1)
         // Do any additional setup after loading the view.
         addComponents()
@@ -175,6 +177,8 @@ class CallVC: UIViewController, SnapKitType {
             self?.configUI(state)
         })
         .disposed(by: disposeBag)
+        
+        viewModel.model = model
     }
     
     func addComponents() {
@@ -282,7 +286,7 @@ class CallVC: UIViewController, SnapKitType {
     func bind() {
         let output = viewModel.transform(input: CallViewModel.Input(acceptBtnTap: acceptBtn.rx.tap.asObservable(),
                                                                     refuseBtnTap: refuseBtn.rx.tap.asObservable(),
-                                                                    stopBtnTap: stopBtn.rx.tap.asObservable(),
+                                                                    stopBtnTap: stopBtn.swipeSuccessResult.asObservable(),
                                                                     delayBtnTap: popupDelayBtn.rx.tap.asObservable(),
                                                                     state: state,
                                                                     callAgainBtnTap: callAgainBtn.rx.tap.asObservable()))
@@ -370,13 +374,27 @@ class CallVC: UIViewController, SnapKitType {
                 self?.state.accept(.failThreeTime)
             })
             .disposed(by: disposeBag)
+        
+        output.outputState
+            .bind(to: state)
+            .disposed(by: disposeBag)
     }
     
     func configUI(_ state: CallState) {
         switch userType {
         case .speaker:
+            profileImage.image = UIImage(named: "profile1")
+            self.nickName.text = UserDefaultsManager.shared.listenerName
             speakerChangeUI(state)
         case .listener:
+            if let model = model?.first {
+                profileImage.image = UIImage(named: "profile\(model.speaker.profileImg)")
+                nickName.text = model.speaker.nickName
+            } else {
+                profileImage.image = UIImage(named: "profile1")
+                nickName.text = "스피커"
+            }
+            
             listenerChangeUI(state)
         }
     }

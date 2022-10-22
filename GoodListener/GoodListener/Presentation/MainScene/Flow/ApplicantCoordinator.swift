@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol ApplicantCoordinating: AnyObject {
-    func call()
+    func call(model: [MatchedSpeaker]?)
 }
 
 class ApplicantCoordinator: CoordinatorType {
@@ -32,8 +32,8 @@ class ApplicantCoordinator: CoordinatorType {
 }
 
 extension ApplicantCoordinator: ApplicantCoordinating {
-    func call() {
-        parentCoordinator?.call()
+    func call(model: [MatchedSpeaker]?) {
+        parentCoordinator?.call(model: model)
     }
 }
 

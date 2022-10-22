@@ -14,7 +14,7 @@ import UIKit
 // 뷰컨트롤러는 Coordinating을 통해 화면전환을 시도하게 되고, 뷰는 어떤식으로 화면전환이 일어나는지 알 수 없습니다!
 protocol MainCoordinating: AnyObject {
     func logout()
-    func call()
+    func call(model: [MatchedSpeaker]?)
     func join()
 }
 
@@ -169,7 +169,7 @@ extension MainCoordinator: MainCoordinating {
         tabBarController.dismiss(animated: true)
     }
     
-    func call() {
+    func call(model: [MatchedSpeaker]?) {
         let navigationController = UINavigationController()
         navigationController.modalPresentationStyle = .fullScreen
         
@@ -177,7 +177,7 @@ extension MainCoordinator: MainCoordinating {
         
         let callCoordinator = CallCoordinator(navigationController: navigationController)
         callCoordinator.parentCoordinator = self
-        callCoordinator.start()
+        callCoordinator.start(model: model)
         
         childCoordinators.append(callCoordinator)
     }

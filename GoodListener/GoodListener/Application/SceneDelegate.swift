@@ -56,10 +56,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             UIApplication.shared.applicationIconBadgeNumber = 0
         }
         
-        if UserDefaultsManager.shared.pushData.last == "call" {
+        if UserDefaultsManager.shared.pushData.last == "Call" {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 if let vc = UIApplication.getMostTopViewController()?.tabBarController as? CustomTabBarController {
-                    vc.coordinator?.call()
+                    vc.coordinator?.call(model: nil)
                 }
             })
         }

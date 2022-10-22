@@ -397,6 +397,9 @@ class JoinMatchVC: UIViewController, SnapKitType {
                 UserDefaultsManager.shared.schedule = model.meetingTime
                 UserDefaultsManager.shared.meetingTime = self.formattedTime(model.meetingTime)
                 UserDefaultsManager.shared.meetingDate = self.formattedDate(model.meetingTime)
+                UserDefaultsManager.shared.listenerId = model.listener.id
+                UserDefaultsManager.shared.speakerId = model.speakerId
+                UserDefaultsManager.shared.channelId = model.channelId
 
                 self.matchedNameLbl.text = UserDefaultsManager.shared.listenerName
                 self.matchedGenderLbl.text = UserDefaultsManager.shared.listenerGender
