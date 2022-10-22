@@ -153,7 +153,7 @@ class CallViewModel: ViewModelType {
                 CallManager.shared.stop()
                 GLSocketManager.shared.disconnected()
                 // TODO: 채널ID로 채널 삭제
-                CallAPI.deleteChannel(request: 1198, completion: { succeed,failed in
+                CallAPI.deleteChannel(request: self.model?.first?.channelId ?? 0, completion: { succeed,failed in
                     Log.d("채널 Delete 성공")
                 })
             })
@@ -172,7 +172,10 @@ class CallViewModel: ViewModelType {
             .subscribe(onNext: { [weak self] data in
                 guard let self = self else { return }
                 guard let token = data.first as? String else { return }
-                CallManager.shared.start(token: token, channelId: self.model?.first?.channel ?? "", uid: self.model?.first?.listenerId ?? 0) { _, _, _ in
+                CallManager.shared.start(token: token, channelId: self.model?.first?.channel ?? "", uid: self.model?.first?.listenerId ?? 0) {
+                    Log.d($0)
+                    Log.d($1)
+                    Log.d($2)
                     self.readyTimer?.invalidate()
                     self.readyTimer = nil
                     outputState.accept(.call)
@@ -184,6 +187,7 @@ class CallViewModel: ViewModelType {
         // SpeakerIn FCM 도착 시 - 리스너만 실행됨
         AppState.speakerIn.subscribe(onNext: {
             GLSocketManager.shared.createAgoraToken()
+//            CallManager.shared.start(token: "", channelId: "3418bef7-1343-4c05-a1fe-4dca0bab6c68", uid: 0)
         })
         .disposed(by: disposeBag)
         
